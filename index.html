@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuxx | Portfolio Showcase</title>
+    <meta name="description" content="Jorge Garcia - Design Director and Multidisciplinary Designer Portfolio">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Unbounded:wght@400;500;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css?v=cachebust30">
+</head>
+
+<body>
+    <div id="webgl-container"></div>
+    <div id="cursor-reticle"></div>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <button class="mobile-menu-close" aria-label="Close Mobile Menu" id="mobile-menu-close">
+            <div class="close-line line-1"></div>
+            <div class="close-line line-2"></div>
+        </button>
+        <nav class="mobile-nav-links">
+            <a href="#work" class="mobile-nav-item">
+                <svg class="nav-arrow" width="22" height="22" viewBox="0 0 22 22" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 16L16 6M16 6V15.4286M16 6H6.57143" stroke="#EEF0F3" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                Work
+            </a>
+            <div class="nav-divider"></div>
+            <a href="about.html" class="mobile-nav-item">
+                <svg class="nav-arrow" width="22" height="22" viewBox="0 0 22 22" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 16L16 6M16 6V15.4286M16 6H6.57143" stroke="#EEF0F3" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                About
+            </a>
+            <div class="nav-divider"></div>
+            <a href="#artifacts" class="mobile-nav-item">
+                <svg class="nav-arrow" width="22" height="22" viewBox="0 0 22 22" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 16L16 6M16 6V15.4286M16 6H6.57143" stroke="#EEF0F3" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                Artifacts
+            </a>
+            <div class="nav-divider"></div>
+        </nav>
+    </div>
+
+    <main class="main-container">
+        <!-- Navigation / Header Pill -->
+        <div class="header-wrapper">
+            <header class="header-pill">
+                <div class="brand">
+                    <img src="nuxx-logo.svg" alt="Nuxx Logo" class="nuxx-logo-img">
+                </div>
+
+                <!-- Desktop Nav -->
+                <nav class="header-nav-desktop">
+                    <a href="#work" class="nav-link">Work</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="#artifacts" class="nav-link">Artifacts</a>
+                </nav>
+
+                <!-- Mobile Nav Toggle -->
+                <button class="mobile-menu-toggle" aria-label="Open Mobile Menu" id="mobile-menu-toggle">
+                    <div class="menu-line"></div>
+                    <div class="menu-line"></div>
+                    <div class="menu-line"></div>
+                </button>
+            </header>
+        </div>
+
+        <!-- Main Hero Content -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-top-row">
+                    <div class="hero-text-group">
+                        <h1 class="hero-title">Jorge Garcia</h1>
+                        <h2 class="hero-subtitle">Interaction designer <br>& Design Director</h2>
+                        <div class="hero-description">
+                            <p>
+                                Amateur runner and <span class="strikethrough">elite video game player</span> converted
+                                interaction designer and product craftsman.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Interaction Indicator (Anchor to #work) -->
+                    <a href="#work" class="interaction-indicator">
+                        <!-- Desktop SVG (Node 52:635) -->
+                        <svg class="anchor-icon-desktop" width="55" height="63" viewBox="0 0 54.3306 62.0921"
+                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g>
+                                <rect width="54.3306" height="62.0921" rx="27.1653" fill="#1E1E1E" />
+                                <path class="anchor-arrow"
+                                    d="M28.5516 36.5333L34.5751 30.5099L36.4042 32.34L27.2577 41.4865L18.1102 32.34L19.9403 30.5099L25.9638 36.5333V20.6974H28.5516V36.5333Z"
+                                    fill="#F7FBF8" />
+                            </g>
+                        </svg>
+                        <!-- Mobile SVG (Node 52:634) -->
+                        <svg class="anchor-icon-mobile" width="42" height="48" viewBox="0 0 42 48" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <rect width="42" height="48" rx="21" fill="#1E1E1E" />
+                            <path class="anchor-arrow"
+                                d="M22.0713 28.2432L26.7285 23.5859L28.1426 25L21.0713 32.0713L14 25L15.4141 23.5859L20.0713 28.2432V16H22.0713V28.2432Z"
+                                fill="#F7FBF8" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- About Me Card (Node 26:333 -> 109:23) -->
+                <div class="about-card" id="about">
+                    <div class="about-card-content">
+                        <p class="about-location">Based in Bogotá, Colombia</p>
+                        <p class="about-description">
+                            Crafting human-centred, story-driven products and brands, and simply delightful artifacts
+                            that people love to interact with.
+                        </p>
+                        <a href="about.html" class="about-cta-pill">
+                            The human behind the designer
+                            <div class="cta-icon-wrapper">
+                                <svg width="15" height="16" viewBox="0 0 15 16" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.5 13.5V2.5M7.5 2.5L2.5 7.5M7.5 2.5L12.5 7.5" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Decorative Sellos Layer -->
+                    <div class="about-sellos" aria-hidden="true">
+                        <img src="assets/sellos/Sellos.svg" alt="" class="sello-single">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dark Section Wrapper (Work Highlights only now) -->
+        <div class="dark-section-wrapper">
+
+            <!-- Work Highlights Section -->
+            <section class="work-highlights" id="work">
+                <h3 class="work-section-title">Work – Highlights</h3>
+
+                <!-- Card 1: LaHaus -->
+                <article class="case-study-card">
+                    <img src="Cover 1.jpg" alt="LaHaus Case Study Cover" class="card-image">
+                    <div class="card-content-row">
+                        <div class="card-left-col">
+                            <h4 class="case-title">LaHaus</h4>
+                            <span class="case-subtitle">Product Design · WebApp</span>
+                        </div>
+                        <div class="card-right-col">
+                            <p class="case-description">
+                                I led product design strategy across Colombia, Mexico. My work focused on testing and
+                                scaling new products—learning from those that hit the mark and those that didn't. Along
+                                the way, I built and managed a centralized team of 28 experts across UX research,
+                                product design, and design systems.
+                            </p>
+                            <div class="case-actions">
+                                <a href="#" class="action-btn">
+                                    <div class="action-text-wrapper">
+                                        <span class="action-text-top">Project launch platform</span>
+                                        <span class="action-text-bottom">View project</span>
+                                    </div>
+                                    <div class="action-arrow">
+                                        <svg width="17" height="15" viewBox="0 0 17 15" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 7.5H16M16 7.5L9.5 1M16 7.5L9.5 14" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                </a>
+                                <a href="lahaus.html" class="action-btn">
+                                    <div class="action-text-wrapper">
+                                        <span class="action-text-top">Design operations</span>
+                                        <span class="action-text-bottom">Case study</span>
+                                    </div>
+                                    <div class="action-arrow">
+                                        <svg width="17" height="15" viewBox="0 0 17 15" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 7.5H16M16 7.5L9.5 1M16 7.5L9.5 14" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 2: Lulo Bank -->
+                <article class="case-study-card">
+                    <img src="Cover 2.jpg" alt="Lulo Bank Case Study Cover" class="card-image">
+                    <div class="card-content-row">
+                        <div class="card-left-col">
+                            <h4 class="case-title">Lulo Bank</h4>
+                            <span class="case-subtitle">Product Design · App</span>
+                        </div>
+                        <div class="card-right-col">
+                            <p class="case-description">
+                                In March 2019, GNB Sudameris, a leading financial group, decided to build the first
+                                fully digital neobank with a value proposition based on the principle of 'fair banking'.
+                                I was part of the McKinsey & Company consulting team that led the development of the
+                                Lulo Bank brand and app.
+                            </p>
+                            <div class="case-actions">
+                                <a href="#" class="action-btn" style="width: 276px;">
+                                    <div class="action-text-wrapper">
+                                        <span class="action-text-top">LuloBank from 0 to 1</span>
+                                        <span class="action-text-bottom">Case study</span>
+                                    </div>
+                                    <div class="action-arrow">
+                                        <svg width="17" height="15" viewBox="0 0 17 15" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 7.5H16M16 7.5L9.5 1M16 7.5L9.5 14" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 3: Fincas -->
+                <article class="case-study-card">
+                    <img src="Cover 3.jpg" alt="Fincas Case Study Cover" class="card-image">
+                    <div class="card-content-row">
+                        <div class="card-left-col">
+                            <h4 class="case-title">Fincas</h4>
+                            <span class="case-subtitle">Co Founder · WebApp · Product design</span>
+                        </div>
+                        <div class="card-right-col">
+                            <p class="case-description">
+                                Fincas helps companies invest in sustainable farming practices within their supply
+                                chains to reduce their carbon footprint. Our platform makes it easy to measure impact,
+                                manage investments, and analyze results all in one place.
+                            </p>
+                            <div class="case-actions">
+                                <a href="#" class="action-btn" style="width: 392px;">
+                                    <div class="action-text-wrapper">
+                                        <span class="action-text-top">Food value chain revolution</span>
+                                        <span class="action-text-bottom">View project</span>
+                                    </div>
+                                    <div class="action-arrow">
+                                        <svg width="17" height="15" viewBox="0 0 17 15" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 7.5H16M16 7.5L9.5 1M16 7.5L9.5 14" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+
+                <!-- Card 4: Early Warning Services -->
+                <article class="case-study-card">
+                    <img src="Cover 4.jpg" alt="Early Warning Services Case Study Cover" class="card-image">
+                    <div class="card-content-row">
+                        <div class="card-left-col">
+                            <h4 class="case-title">Early Warning Services</h4>
+                            <span class="case-subtitle">Product Design · App</span>
+                        </div>
+                        <div class="card-right-col">
+                            <p class="case-description">
+                                Early Warning Services, created Zelle. Early Warning is a financial technology company
+                                that
+                                designs and operates the Zelle network. Zelle is a peer-to-peer payment network that
+                                lets
+                                users send money to other people and businesses with a U.S. bank account
+                            </p>
+                            <div class="case-actions">
+                                <a href="#" class="action-btn" style="width: 276px;">
+                                    <div class="action-text-wrapper">
+                                        <span class="action-text-top">Peer-to-peer payment</span>
+                                        <span class="action-text-bottom">View project</span>
+                                    </div>
+                                    <div class="action-arrow">
+                                        <svg width="17" height="15" viewBox="0 0 17 15" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 7.5H16M16 7.5L9.5 1M16 7.5L9.5 14" stroke="currentColor"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-divider"></div>
+        <div class="footer-content">
+            <div class="footer-contact">
+                <span class="footer-name">Jorge Garcia</span>
+                <a href="mailto:colorburo@gmail.com" class="footer-email">colorburo@gmail.com</a>
+            </div>
+            <div class="footer-links">
+                <a href="#work" class="footer-link">
+                    <span class="link-arrow">
+                        <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 7.5H16M16 7.5L9.5 1M16 7.5L9.5 14" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    <span class="link-text">Work</span>
+                </a>
+                <a href="about.html" class="footer-link">
+                    <span class="link-arrow">
+                        <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 7.5H16M16 7.5L9.5 1M16 7.5L9.5 14" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    <span class="link-text">About</span>
+                </a>
+                <a href="#artifacts" class="footer-link">
+                    <span class="link-arrow">
+                        <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 7.5H16M16 7.5L9.5 1M16 7.5L9.5 14" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    <span class="link-text">Artifacts</span>
+                </a>
+                <a href="#" class="footer-link-social">
+                    <span class="link-arrow">
+                        <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 7.5H16M16 7.5L9.5 1M16 7.5L9.5 14" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    <span class="link-text">Linkedin</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="background.js?v=4"></script>
+    <script src="script.js?v=2"></script>
+</body>
+
+</html>
