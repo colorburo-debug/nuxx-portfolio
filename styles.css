@@ -35,12 +35,7 @@
     .site-footer {
         background-color: #1e1e1e !important;
         /* var(--color-dark-section) */
-        width: 100vw !important;
-        position: relative !important;
-        left: 50% !important;
-        right: 50% !important;
-        margin-left: -50vw !important;
-        margin-right: -50vw !important;
+        width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
@@ -180,15 +175,14 @@ body.home-page {
     background-color: #c3fe0c;
 }
 
-/* Main container green background */
+/* Main container */
 .main-container {
     background-color: transparent !important;
-    /* #c3fe0c (Moved to Header/Hero to avoid footer bleed) */
     position: relative;
     z-index: 1;
     width: 100%;
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
+    margin: 0;
+    padding: 0;
     overflow-x: hidden;
 }
 
@@ -264,14 +258,13 @@ a {
     pointer-events: auto;
 }
 
-/* Layout Container */
+/* Consistently define .main-container as full width */
 .main-container {
     position: relative;
     width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
+    /* max-width: 1440px moved to individual sections to allow full-width backgrounds */
+    margin: 0;
     padding: 0;
-    /* Reset padding to allow per-section precision */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -769,14 +762,8 @@ a {
     position: relative;
     z-index: 2;
     /* Ensure it covers body */
-    background-color: var(--color-dark-section);
-    /* Full bleed breakout */
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    width: 100%;
+    /* Spans full width of .main-container (which is now 100%) */
     padding: 0;
     /* Reset padding, inner containers handle it */
     display: flex;
@@ -785,8 +772,6 @@ a {
     /* Center the cards container */
     padding-bottom: 100px;
     z-index: 10;
-    overflow-x: hidden;
-    /* Prevent horizontal scroll */
 }
 
 /* Section Title */
@@ -2659,7 +2644,7 @@ a {
     max-width: 1440px;
     margin: 0 auto;
     width: 100%;
-    padding: 0 96px;
+    padding: 0 94px;
     /* Desktop side padding */
 }
 
