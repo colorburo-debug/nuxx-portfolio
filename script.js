@@ -32,7 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const reticle = document.getElementById('cursor-reticle');
     const hasWebGL = document.getElementById('webgl-container');
 
-    if (reticle && !hasWebGL) {
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    if (reticle && !hasWebGL && !isTouchDevice) {
         document.addEventListener('mousemove', (e) => {
             reticle.style.left = `${e.clientX}px`;
             reticle.style.top = `${e.clientY}px`;

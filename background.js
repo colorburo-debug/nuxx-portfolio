@@ -322,7 +322,10 @@ window.addEventListener('resize', () => {
 });
 
 // Mouse Movement
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
 document.addEventListener('mousemove', (e) => {
+    if (isTouchDevice) return;
     mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
     reticle.style.left = `${e.clientX}px`;
