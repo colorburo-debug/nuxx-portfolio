@@ -143,13 +143,37 @@
 
 html {
     scroll-behavior: smooth;
-    background-color: #1e1e1e !important;
     overflow-x: hidden;
-    /* Prevent horizontal scroll */
+    background-color: #1e1e1e;
+    /* Default dark overscroll */
+}
+
+/* 
+   Home Page: Top overscroll is chartreuse, bottom is dark green 
+   This handles both ends of the rubber-band effect.
+*/
+html:has(.home-page) {
+    background: linear-gradient(#c3fe0c 50%, #1e1e1e 50%) no-repeat;
+    background-color: #1e1e1e;
+}
+
+/* LaHaus Page: All-white overscroll */
+html:has(.designops-page) {
+    background-color: #f7fbf8 !important;
 }
 
 body {
     overflow-x: hidden;
+    margin: 0;
+    min-height: 100vh;
+}
+
+body.designops-page {
+    background-color: #f7fbf8 !important;
+}
+
+body.home-page {
+    background-color: #c3fe0c;
 }
 
 /* Main container green background */
@@ -2014,16 +2038,23 @@ a {
         right: 50%;
         margin-left: -50vw;
         margin-right: -50vw;
-        padding: 0 0 48px 0;
-        /* Vertical padding only, logical content padding handled by inner? */
-        /* Wait, the current padding 0 94px 88px 94px was for content. */
-        /* If we make it full width, we need an inner container for the content or usage of padding calc */
-        /* Let's use a simple approach: Flex center a max-width container? */
-        /* Current footer has content inside. */
+        padding: 0 0 calc(48px + env(safe-area-inset-bottom)) 0;
         display: flex;
         flex-direction: column;
         align-items: center;
         box-sizing: border-box;
+    }
+
+    /* Extension filler for overscroll - "The Foot Fill" */
+    .site-footer::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 500px;
+        background-color: inherit;
+        /* Matches footer background */
     }
 
     .site-footer .footer-content,
@@ -2971,6 +3002,18 @@ a {
 .designops-footer {
     background-color: #f7fbf8 !important;
     /* Footer bg matches page */
+    position: relative;
+}
+
+/* Ensure white filler for overscroll on LaHaus */
+.designops-footer::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 500px;
+    background-color: #f7fbf8;
 }
 
 /* text-dark classes for footer */
