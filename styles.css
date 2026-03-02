@@ -35,6 +35,8 @@
     .site-footer {
         background-color: #1e1e1e !important;
         /* var(--color-dark-section) */
+        position: relative !important;
+        z-index: 99 !important;
         width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
@@ -87,7 +89,8 @@
     }
 
     .footer-link,
-    .footer-link-social {
+    .footer-link-social,
+    .footer-email {
         display: inline-block !important;
         padding-left: 0 !important;
         width: auto !important;
@@ -96,6 +99,37 @@
         font-size: 24px !important;
         text-decoration: none !important;
         line-height: 1.35 !important;
+        position: relative !important;
+        padding-bottom: 2px !important;
+        transition: color 0.3s ease !important;
+    }
+
+    .footer-link:hover,
+    .footer-link-social:hover,
+    .footer-email:hover {
+        color: #eeeff3 !important;
+    }
+
+    .footer-link::after,
+    .footer-link-social::after,
+    .footer-email::after {
+        content: '' !important;
+        position: absolute !important;
+        bottom: -2px !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 1.5px !important;
+        background-color: #eeeff3 !important;
+        transform: scaleX(0) !important;
+        transform-origin: right !important;
+        transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1) !important;
+    }
+
+    .footer-link:hover::after,
+    .footer-link-social:hover::after,
+    .footer-email:hover::after {
+        transform: scaleX(1) !important;
+        transform-origin: left !important;
     }
 
     .footer-name {
@@ -108,10 +142,7 @@
     }
 
     .footer-email {
-        color: #f7fbf8 !important;
-        font-family: 'Roobert', var(--font-body) !important;
-        font-size: 24px !important;
-        text-decoration: none !important;
+        /* Already handled above but kept for any specific overrides if needed */
         line-height: 1.24 !important;
     }
 
@@ -322,6 +353,30 @@ a {
     color: #1e1e1e;
     text-decoration: none;
     position: relative;
+    padding-bottom: 2px;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.nav-link:hover {
+    color: #000;
 }
 
 .mobile-menu-toggle {
@@ -975,8 +1030,8 @@ a {
     }
 
     .case-study-card {
-        padding-left: 16px;
-        padding-right: 16px;
+        padding-left: 24px;
+        padding-right: 24px;
         width: 100%;
         max-width: 100%;
         gap: 24px;
@@ -1349,7 +1404,8 @@ a {
         /* Node 119:61 */
         padding-top: 44px;
         padding-bottom: 36px;
-        padding-left: 0;
+        padding-left: 24px;
+        padding-right: 24px;
         text-align: center;
         margin: 0;
         font-size: 30px;
@@ -1357,8 +1413,8 @@ a {
     }
 
     .case-study-card {
-        padding-left: 8px;
-        padding-right: 8px;
+        padding-left: 24px;
+        padding-right: 24px;
         width: 100%;
         max-width: 100%;
         gap: 24px;
@@ -1374,8 +1430,8 @@ a {
 
     .card-content-row {
         width: 100%;
-        padding-left: 16px;
-        padding-right: 16px;
+        padding-left: 24px;
+        padding-right: 24px;
         box-sizing: border-box;
         flex-direction: column;
         gap: 24px;
@@ -2118,7 +2174,7 @@ a {
     /* 13. Footer - Mobile Node 196:2353 */
     @media (max-width: 640px) {
         .site-footer {
-            padding: 0 24px 57px 25px !important;
+            padding: 0 24px 57px 24px !important;
             align-items: flex-start !important;
             background-color: #1e1e1e !important;
             z-index: 10 !important;
@@ -2429,6 +2485,11 @@ a {
     color: #f7fbf8 !important;
 }
 
+.about-page .header-nav-desktop .nav-link:hover,
+.designops-page .header-nav-desktop .nav-link:hover {
+    color: #ffffff !important;
+}
+
 .about-page .nuxx-logo-img,
 .designops-page .nuxx-logo-img {
     filter: invert(1) brightness(100) !important;
@@ -2451,6 +2512,8 @@ a {
 .about-page .footer-link,
 .about-page .footer-link-social {
     color: #090d1b !important;
+    position: relative !important;
+    padding-bottom: 2px !important;
 }
 
 .about-page .footer-name {
@@ -2460,8 +2523,30 @@ a {
 .about-page .footer-link:hover,
 .about-page .footer-link-social:hover,
 .about-page .footer-email:hover {
-    opacity: 0.6 !important;
-    color: #090d1b !important;
+    opacity: 1 !important;
+    color: #0d1327 !important;
+}
+
+.about-page .footer-link::after,
+.about-page .footer-link-social::after,
+.about-page .footer-email::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -2px !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 1.5px !important;
+    background-color: #090d1b !important;
+    transform: scaleX(0) !important;
+    transform-origin: right !important;
+    transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1) !important;
+}
+
+.about-page .footer-link:hover::after,
+.about-page .footer-link-social:hover::after,
+.about-page .footer-email:hover::after {
+    transform: scaleX(1) !important;
+    transform-origin: left !important;
 }
 
 /* Menu toggle lines in mobile for about and designops page */
@@ -2984,6 +3069,31 @@ a {
 /* text-dark classes for footer */
 .text-dark {
     color: #1e1e1e !important;
+    position: relative !important;
+    padding-bottom: 2px !important;
+    transition: color 0.3s ease !important;
+}
+
+.text-dark:hover {
+    color: #000 !important;
+}
+
+.text-dark::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -2px !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 1.5px !important;
+    background-color: #1e1e1e !important;
+    transform: scaleX(0) !important;
+    transform-origin: right !important;
+    transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1) !important;
+}
+
+.text-dark:hover::after {
+    transform: scaleX(1) !important;
+    transform-origin: left !important;
 }
 
 /* Responsive Adjustments */
@@ -3153,13 +3263,13 @@ a {
 
     /* Mobile styles overrides */
     .designops-page .ops-hero-section {
-        padding-top: 160px;
-        padding-bottom: 56px;
+        padding-top: 136px;
+        padding-bottom: 64px;
         padding-left: 24px;
         padding-right: 24px;
         align-items: center;
         text-align: center;
-        gap: 9px;
+        gap: 31px;
     }
 
     .designops-page .ops-hero-title {
@@ -3192,6 +3302,10 @@ a {
         width: 100%;
     }
 
+    .ops-visual-section .ops-image-container {
+        margin-bottom: 0;
+    }
+
     .ops-legend {
         flex-direction: row;
         flex-wrap: wrap;
@@ -3212,9 +3326,10 @@ a {
     }
 
     .designops-page .ops-description-section {
-        padding: 60px 24px;
+        padding: 45px 24px 60px 24px;
         align-items: flex-start;
         text-align: left;
+        gap: 41px;
     }
 
     .designops-page .ops-desc-title {
@@ -3249,7 +3364,7 @@ a {
     }
 
     .designops-page .ops-stats-section {
-        padding: 30px 24px 80px 24px;
+        padding: 64px 24px 80px 24px;
         flex-direction: column;
         gap: 40px;
         align-items: flex-start;
