@@ -4117,6 +4117,7 @@ html:has(.lauhaus-page) .site-footer {
 
     .lauhaus-page .lauhaus-plp {
         padding-top: 128px;
+        padding-bottom: 78px;
     }
 
     .plp-header {
@@ -4496,10 +4497,23 @@ html:has(.lauhaus-page) .site-footer {
 
     .lauhaus-page .lauhaus-plp {
         padding-top: 128px;
+        padding-bottom: 78px;
     }
 
     .plp-header {
         margin-bottom: 60px;
+    }
+
+    .lauhaus-impact {
+        padding-bottom: 0;
+    }
+
+    .lauhaus-impact .stats-grid {
+        margin-bottom: 70px;
+    }
+
+    .lauhaus-showcase {
+        padding-top: 80px;
     }
 
     .lauhaus-green-bg {
