@@ -4526,9 +4526,9 @@ html:has(.lauhaus-page) .site-footer {
 
     .showcase-main-title,
     .showcase-title-md {
-        font-family: var(--font-heading);
-        font-size: 30px;
-        line-height: 40px;
+        font-family: 'Roobert', var(--font-body);
+        font-size: 18px;
+        line-height: 28px;
         font-weight: 400;
         margin-bottom: 32px;
     }
