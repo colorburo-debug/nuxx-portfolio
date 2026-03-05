@@ -4097,7 +4097,7 @@ html:has(.lauhaus-page) .site-footer {
     .opp-grid {
         display: flex;
         flex-direction: column;
-        gap: 32px;
+        gap: 60px;
     }
 
     .opp-item {
@@ -4472,7 +4472,7 @@ html:has(.lauhaus-page) .site-footer {
 
     .opp-grid {
         flex-direction: column;
-        gap: 32px;
+        gap: 60px;
     }
 
     .opp-item {
