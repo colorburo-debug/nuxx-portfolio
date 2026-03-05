@@ -758,6 +758,32 @@ a {
     }
 }
 
+@keyframes swipe-hint {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-4px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse-swipe {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
 .interaction-indicator:hover {
     transform: scale(1.1);
     animation-play-state: paused;
@@ -3466,5 +3492,1230 @@ a {
 
     .site-footer {
         padding: 0 24px 80px 24px !important;
+    }
+}
+
+/* --- PROJECT LAUHAUS PAGE --- */
+html:has(.lauhaus-page) {
+    background-color: #f7fbf8 !important;
+}
+
+body.lauhaus-page {
+    background-color: #f7fbf8 !important;
+}
+
+.lauhaus-main {
+    background-color: transparent !important;
+}
+
+/* Base utilities for the page */
+.lauhaus-page .width-clamped {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-left: 94px;
+    padding-right: 94px;
+    box-sizing: border-box;
+}
+
+/* Header Overrides */
+.lauhaus-page .header-pill {
+    background-color: #1e1e1e !important;
+}
+
+.lauhaus-page .header-nav-desktop .nav-link {
+    color: #f7fbf8 !important;
+}
+
+.lauhaus-page .header-nav-desktop .nav-link:hover {
+    color: #ffffff !important;
+}
+
+.lauhaus-page .nuxx-logo-img {
+    filter: invert(1) brightness(100) !important;
+}
+
+/* Typography styles */
+.lauhaus-page .section-heading-w {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 50px;
+    color: #f7fbf8;
+    margin: 0;
+}
+
+.desktop-heading-line {
+    width: 100%;
+    height: 2px;
+    background-color: #f7fbf8;
+    margin-top: 40px;
+    margin-bottom: 64px;
+}
+
+.mobile-heading-line {
+    display: none;
+}
+
+/* Hero Section */
+.lauhaus-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 206px;
+    padding-bottom: 64px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.lauhaus-hero-title {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 1.17;
+    color: #0d1327;
+    text-align: center;
+    max-width: 925px;
+    margin: 0 auto 96px auto;
+    /* visual gap to image */
+    padding: 0 24px;
+}
+
+.lauhaus-hero-img-wrapper {
+    width: 100%;
+    max-width: 1056px;
+    /* 1588 - 267*2 gives 1054px, approx 1056px */
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.hero-image-lg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.lauhaus-hero-caption {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500;
+    font-size: 14px;
+    color: #0d1327;
+    margin: 16px 0 0 0;
+    letter-spacing: 0.14px;
+    width: 100%;
+    max-width: 1056px;
+    text-align: left;
+}
+
+/* Opportunity Section */
+.lauhaus-opp {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 120px 196px 160px 196px;
+    /* desktop padding */
+    box-sizing: border-box;
+    color: #0d1327;
+}
+
+.opp-intro {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 72px;
+    margin-bottom: 120px;
+}
+
+.opp-title {
+    font-family: var(--font-heading);
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 40px;
+    margin: 0;
+    width: 327px;
+    flex-shrink: 0;
+}
+
+.opp-text {
+    font-family: 'Roobert', var(--font-body);
+    font-size: 20px;
+    line-height: 32px;
+    max-width: 648px;
+}
+
+.opp-text p {
+    margin: 0 0 32px 0;
+}
+
+.opp-text p:last-child {
+    margin-bottom: 0;
+}
+
+.opp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 66px;
+    column-gap: 144px;
+}
+
+.opp-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.opp-item-title {
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    margin: 0;
+}
+
+.opp-item-desc {
+    font-family: 'Roobert', var(--font-body);
+    font-size: 20px;
+    line-height: 32px;
+    margin: 0;
+}
+
+/* Green Background area for PLP */
+.lauhaus-green-bg {
+    background-color: #0c775e;
+    width: 100%;
+    position: relative;
+    color: #f7fbf8;
+    padding-bottom: 240px;
+}
+
+.lauhaus-plp {
+    padding-top: 160px;
+    padding-bottom: 144px;
+}
+
+.plp-header {
+    display: flex;
+    flex-direction: row;
+    gap: 48px;
+    margin-bottom: 120px;
+    padding-left: 119px;
+    /* matching 213px absolute - 94px container pad */
+}
+
+.plp-title {
+    font-family: var(--font-heading);
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 64px;
+    width: 355px;
+    flex-shrink: 0;
+    margin: 0;
+    text-transform: lowercase;
+}
+
+.plp-title::first-letter {
+    text-transform: capitalize;
+}
+
+.plp-text {
+    font-family: 'Roobert', var(--font-body);
+    font-size: 20px;
+    line-height: 32px;
+    max-width: 641px;
+}
+
+.plp-text p {
+    margin: 0;
+}
+
+.plp-screens {
+    display: flex;
+    flex-direction: row;
+    gap: 67px;
+}
+
+.plp-screen {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.lauhaus-discovery {
+    padding-top: 62px;
+}
+
+.stats-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 73px;
+    margin-top: 40px;
+    margin-bottom: 112px;
+}
+
+.stat-col {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.stat-title {
+    font-family: var(--font-heading);
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 40px;
+    margin: 0;
+}
+
+.stat-desc {
+    font-family: 'Roobert', var(--font-body);
+    font-size: 18px;
+    line-height: 1.77;
+    margin: 0;
+}
+
+.journey-section {
+    padding-top: 64px;
+}
+
+.journey-title {
+    font-family: 'Roobert', var(--font-body);
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.journey-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.journey-block.block-1 {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-bottom: 62px;
+}
+
+.journey-img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+}
+
+.journey-img-lg {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+    margin-top: 30px;
+}
+
+.journey-caption {
+    font-family: 'Roobert', var(--font-body);
+    font-size: 18px;
+    margin: 0 0 30px 0;
+    line-height: 28px;
+}
+
+.journey-sub-container {
+    display: grid;
+    grid-template-columns: 577fr 806fr;
+    grid-template-rows: auto 1fr;
+    column-gap: 1.214%;
+    /* 17px / 1400px */
+    row-gap: 0;
+    margin-top: 62px;
+    width: 100%;
+    align-items: start;
+}
+
+.journey-sub-container .journey-block {
+    display: contents;
+}
+
+.matrix-title {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.storyboard-title {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.matrix-img-wrapper {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: end;
+}
+
+.storyboard-img-wrapper {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: end;
+}
+
+.journey-grid-title {
+    font-family: 'Roobert', var(--font-body);
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0 0 5px 0;
+    color: #f7fbf8;
+}
+
+.journey-img-container {
+    height: auto;
+    width: 100%;
+}
+
+.journey-img-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+}
+
+.journey-conclusion {
+    font-family: 'Roobert', var(--font-body);
+    font-size: 18px;
+    line-height: 1.77;
+    max-width: 508px;
+    margin: 50px 0 0 0;
+    color: #f7fbf8;
+    grid-column: 1 / span 2;
+}
+
+.lauhaus-divider {
+    height: 16px;
+    background-image: url('http://localhost:3845/assets/6ef324c11b0bfd1656577a4ee0b311131609aaeb.svg');
+    background-size: cover;
+    background-repeat: repeat-x;
+    margin: 112px auto;
+}
+
+.lauhaus-impact {
+    padding-top: 180px;
+    padding-bottom: 112px;
+}
+
+.lauhaus-showcase {
+    padding-top: 80px;
+    position: relative;
+}
+
+.showcase-main-title {
+    font-family: 'Roobert', var(--font-body);
+    font-size: 30px;
+    font-weight: 500;
+    margin: 0 0 64px 0;
+}
+
+.showcase-title-md {
+    font-family: 'Roobert', var(--font-body);
+    font-size: 30px;
+    font-weight: 500;
+    margin: 0 0 64px 0;
+}
+
+.showcase-hero-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 120px;
+}
+
+.showcase-split {
+    display: flex;
+    flex-direction: row;
+    gap: 3.05%;
+    /* Scaled Gap (42px) */
+    margin-bottom: 120px;
+    width: 100%;
+}
+
+.showcase-left {
+    width: 50.29%;
+    flex: none;
+    min-width: 0;
+}
+
+.screens-row {
+    display: flex;
+    flex-direction: row;
+    gap: 6.54%;
+    /* Scaled Gap (42px inside group) */
+    width: 100%;
+}
+
+.screens-row img {
+    width: 46.73%;
+    flex: none;
+    min-width: 0;
+    height: auto;
+}
+
+.showcase-right {
+    width: 46.66%;
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+}
+
+.showcase-half-img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+}
+
+.screens-grid,
+.plp-screens {
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+}
+
+.screens-grid img,
+.plp-screen {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    height: auto;
+}
+
+/* FOOTER CUSTOM OVERRIDE FOR THIS PAGE */
+html:has(.lauhaus-page) .site-footer {
+    background-color: #0c775e !important;
+}
+
+.lauhaus-page .site-footer {
+    background-color: #0c775e !important;
+    padding-top: 1px !important;
+    padding-bottom: 48px !important;
+}
+
+.lauhaus-page .footer-divider {
+    background-color: #f7fbf8 !important;
+    opacity: 1 !important;
+}
+
+.lauhaus-page .footer-name {
+    color: rgba(247, 251, 248, 0.7) !important;
+}
+
+.lauhaus-page .footer-email,
+.lauhaus-page .footer-link,
+.lauhaus-page .footer-link-social {
+    color: #f7fbf8 !important;
+}
+
+.lauhaus-page .footer-email:hover,
+.lauhaus-page .footer-link:hover,
+.lauhaus-page .footer-link-social:hover {
+    color: #e0e0e0 !important;
+}
+
+.lauhaus-page .footer-link::after,
+.lauhaus-page .footer-link-social::after,
+.lauhaus-page .footer-email::after {
+    background-color: #e0e0e0 !important;
+}
+
+.lauhaus-page .mobile-nav-item .nav-arrow path {
+    stroke: #eeeff3 !important;
+}
+
+/* RESPONSIVE STYLES for Project Lauhaus */
+@media screen and (max-width: 1024px) {
+    .lauhaus-page .width-clamped {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .lauhaus-hero {
+        padding: 160px 32px 104px 32px;
+        align-items: center;
+    }
+
+    .lauhaus-hero-title {
+        font-size: 45px;
+        line-height: 1.16;
+        max-width: 649px;
+        margin-bottom: 88px;
+        text-align: center;
+        padding: 0;
+    }
+
+    .lauhaus-hero-img-wrapper {
+        max-width: 100%;
+        margin-bottom: 6px;
+    }
+
+    .lauhaus-hero-caption {
+        max-width: 100%;
+        margin-top: 6px;
+        padding: 0;
+    }
+
+    .lauhaus-opp {
+        padding: 0 32px 128px 32px;
+        color: #0d1327;
+    }
+
+    .opp-intro {
+        flex-direction: row;
+        gap: 24px;
+        margin-bottom: 88px;
+    }
+
+    .opp-title {
+        width: 280px;
+        flex-shrink: 0;
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .opp-text {
+        flex: 1;
+        max-width: 648px;
+        font-size: 20px;
+        line-height: 32px;
+    }
+
+    .opp-text p {
+        margin-bottom: 20px;
+    }
+
+    .opp-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .opp-item {
+        gap: 8px;
+    }
+
+    .opp-item-title {
+        font-size: 20px;
+        line-height: 44px;
+        font-weight: 500;
+    }
+
+    .opp-item-desc {
+        font-size: 20px;
+        line-height: 32px;
+    }
+
+    .lauhaus-page .lauhaus-plp {
+        padding-top: 128px;
+    }
+
+    .plp-header {
+        flex-direction: column;
+        padding-left: 0;
+        gap: 24px;
+    }
+
+    .stats-grid {
+        flex-direction: column;
+        gap: 41px;
+    }
+
+    .stat-col {
+        width: 100%;
+        gap: 24px;
+    }
+
+    .stat-title {
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .stat-desc {
+        font-size: 18px;
+        line-height: 1.77;
+    }
+
+    .journey-sub-container {
+        flex-direction: column;
+        gap: 63px;
+    }
+
+    .showcase-split {
+        flex-direction: column;
+    }
+
+    .plp-screens-container {
+        position: relative;
+        width: calc(100% + 64px);
+        margin-left: -32px;
+        margin-right: -32px;
+    }
+
+    .screens-grid,
+    .plp-screens {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 24px;
+        padding-left: 32px;
+        padding-right: 32px;
+        padding-bottom: 24px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .screens-grid::-webkit-scrollbar,
+    .plp-screens::-webkit-scrollbar {
+        display: none;
+    }
+
+    .screens-grid>img,
+    .plp-screens>.plp-screen {
+        scroll-snap-align: center;
+        flex: 0 0 247px;
+        width: 247px;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    /* Target Journey Section specifically on tablet */
+    .journey-section {
+        display: flex;
+        flex-direction: column;
+        padding-top: 40px;
+    }
+
+    .journey-title {
+        font-size: 18px !important;
+        line-height: 28px !important;
+        margin-top: 0;
+        padding-top: 0;
+        padding-bottom: 30px;
+    }
+
+    .journey-img-lg {
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+
+    .journey-block {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .journey-block.block-1 {
+        margin-top: 70px;
+        margin-bottom: 0;
+    }
+
+    .journey-caption {
+        font-size: 18px !important;
+        line-height: 28px !important;
+        padding-top: 0;
+        margin-top: 0;
+        padding-bottom: 30px;
+        margin-bottom: 0;
+    }
+
+    .journey-img.margin-t {
+        margin-bottom: 30px;
+        margin-top: 0;
+    }
+
+    .journey-sub-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        margin-top: 0;
+    }
+
+    .journey-sub-container .journey-block {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .journey-block.block-2 {
+        margin-top: 70px;
+    }
+
+    .journey-grid-title {
+        font-size: 18px !important;
+        line-height: 28px !important;
+        padding-top: 0;
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+
+    .matrix-img-wrapper {
+        margin-bottom: 30px;
+    }
+
+    .journey-conclusion {
+        font-size: 18px !important;
+        line-height: 1.77 !important;
+        max-width: 563px;
+        margin-top: 0;
+        margin-bottom: 100px;
+    }
+
+    /* Specific Tablet Slider behavior for mobile-slider class */
+    .mobile-slider-wrapper {
+        position: relative;
+        width: calc(100% + 64px);
+        /* Account for 32px padding */
+        margin-left: -32px;
+        margin-right: -32px;
+    }
+
+    .mobile-slider {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 24px;
+        padding-left: 32px;
+        padding-right: 32px;
+        padding-bottom: 24px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .mobile-slider::-webkit-scrollbar {
+        display: none;
+    }
+
+    .mobile-slider>img,
+    .mobile-slider>div {
+        scroll-snap-align: center;
+        flex: 0 0 247px;
+        width: 247px;
+        height: auto;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    /* Ensure swipe indicators are visible and centered on tablet */
+    .lauhaus-page .swipe-indicator.mobile-only {
+        display: flex !important;
+        justify-content: center;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+    }
+}
+
+/* Tablet Specific Showcase Slider */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .showcase-split {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 42px;
+        padding-bottom: 80px;
+        align-items: flex-start;
+        /* More space for indicator */
+        width: calc(100% + 64px);
+        margin-left: -32px;
+        padding-left: 32px;
+        padding-right: 32px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .showcase-split::-webkit-scrollbar {
+        display: none;
+    }
+
+    .showcase-left {
+        width: 680px;
+        flex: 0 0 680px;
+        scroll-snap-align: center;
+    }
+
+    .showcase-left img {
+        height: 670px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .showcase-right,
+    .showcase-right .mobile-slider-wrapper,
+    .showcase-right .mobile-slider {
+        display: contents;
+    }
+
+    .showcase-right .mobile-slider>img {
+        width: 300px;
+        height: 637px;
+        flex: 0 0 300px;
+        scroll-snap-align: center;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    /* Absolute swipe indicator for tablet slider */
+    .showcase-slider-section {
+        position: relative;
+    }
+
+    .showcase-right .swipe-indicator {
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex !important;
+        margin: 0;
+        z-index: 20;
+        color: #F7FBF8 !important;
+        animation: pulse-swipe 2s infinite ease-in-out;
+    }
+}
+
+/* Base Desktop Helpers */
+.mobile-only {
+    display: none !important;
+}
+
+.tablet-only {
+    display: none !important;
+}
+
+.desktop-only {
+    display: block !important;
+}
+
+@media screen and (max-width: 1024px) {
+    .desktop-only {
+        display: none !important;
+    }
+
+    .tablet-only {
+        display: block !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .tablet-only {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .lauhaus-page .width-clamped {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    .lauhaus-hero {
+        padding: 148px 0 40px 0;
+        align-items: flex-start;
+    }
+
+    .lauhaus-hero-title {
+        font-size: 30px;
+        line-height: 1.19;
+        text-align: left;
+        padding: 0 24px;
+        margin-bottom: 60px;
+        margin-left: 0;
+    }
+
+    .hidden-mobile-sm {
+        display: none !important;
+    }
+
+    .lauhaus-hero-img-wrapper {
+        border-radius: 0;
+        height: 368px;
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 0;
+        aspect-ratio: auto;
+    }
+
+    .hero-image-lg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .lauhaus-hero-caption {
+        padding: 8px 102px 8px 24px;
+        margin-top: 0;
+        font-size: 14px;
+        line-height: 1.4;
+        letter-spacing: 0.14px;
+        align-self: flex-start;
+        max-width: 100%;
+    }
+
+    .lauhaus-opp {
+        padding: 70px 24px 128px 24px;
+    }
+
+    .opp-grid {
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .opp-item {
+        width: 100%;
+    }
+
+    .opp-intro {
+        flex-direction: column;
+        gap: 24px;
+        margin-bottom: 90px;
+    }
+
+    .opp-title {
+        width: auto;
+    }
+
+    .plp-title {
+        font-size: 40px;
+        line-height: 52px;
+        width: auto;
+    }
+
+    .lauhaus-page .lauhaus-plp {
+        padding-top: 128px;
+    }
+
+    .plp-header {
+        margin-bottom: 60px;
+    }
+
+    .lauhaus-green-bg {
+        padding-bottom: 120px;
+    }
+
+    .showcase-hero-img {
+        margin-bottom: 64px;
+    }
+
+    .showcase-main-title,
+    .showcase-title-md {
+        margin-bottom: 32px;
+    }
+
+    /* Mobile specific helpers */
+    .hidden-mobile {
+        display: none !important;
+    }
+
+    .mobile-only {
+        display: block !important;
+    }
+
+    .swipe-indicator.mobile-only {
+        display: flex !important;
+    }
+
+    .mobile-slider-wrapper {
+        position: relative;
+        width: 100vw;
+        margin-left: -24px;
+        margin-right: -24px;
+    }
+
+    .swipe-indicator {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        color: #F7FBF8;
+        font-family: 'Roobert', var(--font-body);
+        font-size: 14px;
+        font-weight: 500;
+        pointer-events: none;
+        animation: pulse-swipe 2s infinite ease-in-out;
+        z-index: 10;
+        margin: 20px auto 0 auto;
+    }
+
+    .swipe-indicator svg {
+        animation: swipe-hint 2s infinite ease-in-out;
+    }
+
+    @keyframes swipe-hint {
+        0% {
+            transform: translateX(0);
+        }
+
+        50% {
+            transform: translateX(-4px);
+        }
+
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes pulse-swipe {
+
+        0%,
+        100% {
+            opacity: 0.6;
+        }
+
+        50% {
+            opacity: 1;
+        }
+    }
+
+    /* Ensure swipe indicator matches wrapper context */
+    .lauhaus-showcase .swipe-indicator {
+        color: #F7FBF8 !important;
+        /* uniform light color for showcase section */
+    }
+
+    .mobile-slider {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline-start: 16px;
+        gap: 16px !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        padding-bottom: 24px !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    .mobile-slider::-webkit-scrollbar {
+        display: none;
+        /* Chrome/Safari */
+    }
+
+    .mobile-slider>img,
+    .mobile-slider>div {
+        scroll-snap-align: center;
+        flex: 0 0 auto !important;
+        flex-shrink: 0;
+        width: 80vw !important;
+        height: auto;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .lauhaus-page .site-footer {
+        padding: 0 24px 80px 24px !important;
+    }
+
+    /* Target Journey Section specifically on mobile */
+    .mobile-heading-line {
+        display: block;
+        width: 100%;
+        margin: 8px 0 32px 0;
+        border: none;
+        border-top: 1px solid #f7fbf8;
+    }
+
+    .journey-section {
+        display: flex;
+        flex-direction: column;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    .journey-title {
+        text-align: left !important;
+        margin-bottom: 32px !important;
+    }
+
+    .journey-block {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+    }
+
+    .journey-block.block-1 {
+        margin-top: 0 !important;
+        margin-bottom: 79px !important;
+    }
+
+    .journey-img-mobile-step3 {
+        height: 908px !important;
+        width: 100% !important;
+        object-fit: cover !important;
+        object-position: 59% center !important;
+        border-radius: 10px !important;
+    }
+
+    .journey-sub-container {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 63px !important;
+        margin-top: 0 !important;
+    }
+
+    .journey-block {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .journey-sub-container .block-2,
+    .journey-sub-container .block-3 {
+        width: 100% !important;
+    }
+
+    .matrix-img-content {
+        aspect-ratio: 1161 / 1103 !important;
+        height: auto !important;
+        width: 100% !important;
+        object-fit: cover !important;
+        border-radius: 10px !important;
+    }
+
+    .storyboard-img-mobile {
+        height: 527px !important;
+        width: 100% !important;
+        object-fit: cover !important;
+        object-position: 20% center !important;
+        border-radius: 10px !important;
+    }
+
+    .journey-caption {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        line-height: 28px !important;
+        color: #f7fbf8 !important;
+        font-size: 18px !important;
+    }
+
+    .journey-grid-title {
+        width: 100% !important;
+        margin-bottom: 0 !important;
+        font-size: 18px !important;
+        line-height: 28px !important;
+    }
+
+    .journey-img-container img {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        max-width: 100% !important;
+        border-radius: 10px !important;
     }
 }
