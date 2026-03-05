@@ -1129,8 +1129,8 @@ a {
         right: auto;
         top: auto;
         transform: none;
-        width: 298px;
-        max-width: 100%;
+        width: 100%;
+        max-width: 298px;
         height: auto;
         aspect-ratio: 1 / 1;
         margin: 0 auto 48px auto;
