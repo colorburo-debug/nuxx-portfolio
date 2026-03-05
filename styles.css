@@ -1,3 +1,5 @@
+@import url('./utilities.css');
+
 :root {
     /* Colors */
     --color-bg-primary: #c3fe0c;
@@ -21,6 +23,18 @@
     --font-heading: 'Unbounded', sans-serif;
     --font-body: 'Outfit', sans-serif;
     /* Substitution for Roobert */
+
+    /* Typography Scale */
+    --text-xs: 14px;
+    --text-sm: 16px;
+    --text-base: 18px;
+    --text-lg: 20px;
+    --text-xl: 24px;
+    --text-2xl: 30px;
+    --text-3xl: 36px;
+    --text-4xl: 40px;
+    --text-5xl: 50px;
+    --text-6xl: 60px;
 
     /* Spacing */
     --spacing-sm: 8px;
@@ -51,7 +65,7 @@
         height: 1px !important;
         background-color: #898989 !important;
         opacity: 0.3 !important;
-        margin-bottom: 47px !important;
+        margin-bottom: 48px !important;
         display: block !important;
     }
 
@@ -60,8 +74,8 @@
         flex-direction: row !important;
         justify-content: space-between !important;
         align-items: center !important;
-        padding-left: 94px !important;
-        padding-right: 94px !important;
+        padding-left: 96px !important;
+        padding-right: 96px !important;
         gap: 0 !important;
         width: 100% !important;
         max-width: 1440px !important;
@@ -75,14 +89,14 @@
         padding: 0 !important;
         margin: 0 !important;
         border: none !important;
-        gap: 7px !important;
+        gap: 8px !important;
     }
 
     .site-footer .footer-links {
         display: flex !important;
         flex-direction: row !important;
         align-items: center !important;
-        gap: 70px !important;
+        gap: 72px !important;
         width: auto !important;
         padding: 0 !important;
         margin: 0 !important;
@@ -137,7 +151,7 @@
         font-family: 'Roobert', var(--font-body) !important;
         font-size: 24px !important;
         line-height: 1.24 !important;
-        margin-right: 10px !important;
+        margin-right: 8px !important;
         /* Spacing if needed, though they are stacked in contact */
     }
 
@@ -341,7 +355,7 @@ a {
 
 .header-nav-desktop {
     display: flex;
-    gap: 60px;
+    gap: 64px;
     align-items: center;
 }
 
@@ -384,7 +398,7 @@ a {
     background: transparent;
     border: none;
     flex-direction: column;
-    gap: 7px;
+    gap: 8px;
     cursor: pointer;
     padding: 0;
 }
@@ -463,7 +477,7 @@ a {
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 10.6px;
+    gap: 8px;
     position: relative;
     padding: 0;
     margin: 0;
@@ -477,8 +491,8 @@ a {
     height: 1px;
     width: 100%;
     background-color: rgba(238, 239, 243, 0.2);
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 24px;
+    margin-bottom: 24px;
 }
 
 /* Hero Section (Node 109:23 -> 132:185) */
@@ -491,10 +505,10 @@ a {
     /* Gap to About Card */
     padding-top: 584px;
     /* Large top padding per Node 132:185 */
-    padding-bottom: 100px;
-    padding-left: 94px;
+    padding-bottom: 104px;
+    padding-left: 96px;
     /* Align with Header */
-    padding-right: 94px;
+    padding-right: 96px;
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
@@ -591,7 +605,7 @@ a {
 /* --- Sellos Grouped Component --- */
 .about-sellos {
     position: absolute;
-    right: 86px;
+    right: 88px;
     top: 50%;
     transform: translateY(-50%);
     width: 334px;
@@ -620,10 +634,10 @@ a {
     position: relative;
     box-sizing: border-box;
     /* Padding per Node 26:333 */
-    padding: 71px 66px;
+    padding: 72px 64px;
     display: flex;
     flex-direction: column;
-    /* gap: 39px;  Removed gap to control spacing via margins for different gaps */
+    /* gap: 40px;  Removed gap to control spacing via margins for different gaps */
 }
 
 /* To match Figma specific margins inside the card */
@@ -646,7 +660,7 @@ a {
     color: #b3b3b3;
     /* Light grey for subtitle on dark bg */
     margin: 0;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     /* Updated to 14px per user request */
 }
 
@@ -660,7 +674,7 @@ a {
     /* White text */
     max-width: 721px;
     margin: 0;
-    margin-bottom: 39px;
+    margin-bottom: 40px;
     /* Gap between description and CTA */
     /* Push CTA to bottom */
 }
@@ -689,7 +703,7 @@ a {
     font-size: 20px;
     box-sizing: border-box;
     transition: all 0.3s ease;
-    padding-left: 29px;
+    padding-left: 32px;
     margin-top: 0;
     /* Margin handled by description bottom margin */
 }
@@ -701,7 +715,7 @@ a {
 
 .cta-icon-wrapper {
     position: absolute;
-    right: 30px;
+    right: 32px;
     display: flex;
     align-items: center;
     transform: rotate(90deg);
@@ -851,7 +865,7 @@ a {
     flex-direction: column;
     align-items: center;
     /* Center the cards container */
-    padding-bottom: 100px;
+    padding-bottom: 104px;
     z-index: 10;
 }
 
@@ -862,9 +876,9 @@ a {
     /* Container max width */
     margin: 0 auto;
     /* Spacing from Figma 119:59 */
-    padding-top: 129px;
-    padding-bottom: 129px;
-    padding-left: 94px;
+    padding-top: 128px;
+    padding-bottom: 128px;
+    padding-left: 96px;
     box-sizing: border-box;
 
     font-family: 'Roobert', var(--font-body);
@@ -884,12 +898,12 @@ a {
     flex-direction: column;
     /* Cards need to align with title (pl-94px) but are 1224px wide */
     /* So we can structure the content to match */
-    padding-left: 94px;
+    padding-left: 96px;
     /* Align content start */
-    padding-right: 94px;
+    padding-right: 96px;
     /* Though card is only 1224px */
     box-sizing: border-box;
-    gap: 42px;
+    gap: 40px;
     margin-bottom: 80px;
     /* Spacing between cards halved, adjusted to user request */
 }
@@ -920,7 +934,7 @@ a {
     width: clamp(240px, 39.6vw - 165px, 405px);
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
     /* Reduced by 50% from 12px per user request */
     flex-shrink: 0;
 }
@@ -970,7 +984,7 @@ a {
 /* Actions */
 .case-actions {
     display: flex;
-    gap: clamp(16px, 2vw, 28px);
+    gap: clamp(16px, 2vw, 32px);
     /* Fluid gap */
     flex-wrap: nowrap;
     /* Keep side-by-side on desktop */
@@ -982,12 +996,12 @@ a {
     height: 72px;
     border: 1px solid #898989;
     border-radius: 6px;
-    padding: 16px 28px;
+    padding: 16px 32px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    gap: 36px;
+    gap: 40px;
     text-decoration: none;
     transition: all 0.2s ease;
     background: transparent;
@@ -999,7 +1013,7 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 4px;
+    gap: 8px;
     flex: 1;
     overflow: hidden;
 }
@@ -1046,8 +1060,8 @@ a {
 @media (max-width: 640px) {
     .work-section-title {
         /* Node 119:61 */
-        padding-top: 44px;
-        padding-bottom: 36px;
+        padding-top: 48px;
+        padding-bottom: 40px;
         padding-left: 0;
         text-align: center;
         margin: 0;
@@ -1081,7 +1095,7 @@ a {
     /* Left Column Mobile */
     .card-left-col {
         width: 100%;
-        gap: 4px;
+        gap: 8px;
     }
 
     .case-title {
@@ -1115,7 +1129,7 @@ a {
         margin-left: calc(-50vw + 50% + 8px) !important;
         margin-right: 0 !important;
         height: auto;
-        padding: 41px 24px 61px 24px;
+        padding: 40px 24px 64px 24px;
         gap: 16px;
         border-radius: 10px;
         justify-content: flex-start;
@@ -1170,7 +1184,7 @@ a {
         font-size: 24px;
         line-height: 1.5;
         width: 100%;
-        margin-bottom: 31px;
+        margin-bottom: 32px;
         /* tablet gap is 16px + 31px margin = 47px */
         max-width: 326px;
         /* Restrict width per design */
@@ -1192,9 +1206,9 @@ a {
         justify-content: space-between;
         align-items: center;
         /* Ensure vertical center */
-        padding-left: 25px;
+        padding-left: 24px;
         /* Exact match from Figma ml-[25px] */
-        padding-right: 25px;
+        padding-right: 24px;
         white-space: nowrap;
         /* Prevent wrapping per design */
     }
@@ -1231,7 +1245,7 @@ a {
     flex-direction: column;
     align-items: center;
     /* Center the cards container */
-    padding-bottom: 100px;
+    padding-bottom: 104px;
     z-index: 10;
     overflow-x: hidden;
 }
@@ -1243,9 +1257,9 @@ a {
     /* Container max width */
     margin: 0 auto;
     /* Spacing from Figma 119:59 */
-    padding-top: 157px;
+    padding-top: 160px;
     padding-bottom: 88px;
-    padding-left: 94px;
+    padding-left: 96px;
     box-sizing: border-box;
 
     font-family: 'Roobert', var(--font-body);
@@ -1265,12 +1279,12 @@ a {
     flex-direction: column;
     /* Cards need to align with title (pl-94px) but are 1224px wide */
     /* So we can structure the content to match */
-    padding-left: 94px;
+    padding-left: 96px;
     /* Align content start */
-    padding-right: 94px;
+    padding-right: 96px;
     /* Though card is only 1224px */
     box-sizing: border-box;
-    gap: 42px;
+    gap: 40px;
     margin-bottom: 88px;
     /* Spacing between cards */
 }
@@ -1299,7 +1313,7 @@ a {
     width: clamp(240px, 39.6vw - 165px, 405px);
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
     flex-shrink: 0;
 }
 
@@ -1348,7 +1362,7 @@ a {
 /* Actions */
 .case-actions {
     display: flex;
-    gap: clamp(16px, 2vw, 28px);
+    gap: clamp(16px, 2vw, 32px);
     flex-wrap: nowrap;
 }
 
@@ -1358,12 +1372,12 @@ a {
     height: 72px;
     border: 1px solid #898989;
     border-radius: 6px;
-    padding: 16px 28px;
+    padding: 16px 32px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    gap: 36px;
+    gap: 40px;
     text-decoration: none;
     transition: all 0.2s ease;
     background: transparent;
@@ -1375,7 +1389,7 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 4px;
+    gap: 8px;
     flex: 1;
     overflow: hidden;
 }
@@ -1431,8 +1445,8 @@ a {
 @media (max-width: 640px) {
     .work-section-title {
         /* Node 119:61 */
-        padding-top: 44px;
-        padding-bottom: 36px;
+        padding-top: 48px;
+        padding-bottom: 40px;
         padding-left: 24px;
         padding-right: 24px;
         text-align: center;
@@ -1447,7 +1461,7 @@ a {
         width: 100%;
         max-width: 100%;
         gap: 24px;
-        margin-bottom: 132px;
+        margin-bottom: 136px;
     }
 
     .card-image {
@@ -1472,7 +1486,7 @@ a {
         width: 100%;
         flex-direction: column !important;
         align-items: flex-start !important;
-        gap: 4px;
+        gap: 8px;
         /* Halved from original 8px */
     }
 
@@ -1535,15 +1549,15 @@ a {
 
     /* Hero Section */
     .hero-section {
-        padding-top: 538px;
+        padding-top: 536px;
         padding-left: 32px;
         padding-right: 32px;
-        padding-bottom: 47px;
+        padding-bottom: 48px;
         gap: 0;
     }
 
     .hero-content {
-        gap: 27px;
+        gap: 24px;
     }
 
     .hero-title {
@@ -1554,7 +1568,7 @@ a {
     .hero-subtitle {
         font-size: 40px;
         line-height: 52px;
-        margin-bottom: 27px;
+        margin-bottom: 24px;
         height: auto;
     }
 
@@ -1582,7 +1596,7 @@ a {
         transform: none;
         width: 388px;
         height: 388px;
-        margin: 0 auto 47px auto;
+        margin: 0 auto 48px auto;
         order: -1;
     }
 
@@ -1591,13 +1605,13 @@ a {
         padding: 88px 32px 88px 32px;
         height: auto;
         justify-content: flex-start;
-        gap: 14px;
+        gap: 16px;
         margin-left: 0;
         margin-right: 0;
     }
 
     .about-card .about-card-content {
-        gap: 14px;
+        gap: 16px;
     }
 
     .about-location {
@@ -1607,7 +1621,7 @@ a {
 
     .about-description {
         font-size: 30px;
-        margin-bottom: 33px;
+        margin-bottom: 32px;
         /* mobile gap is 14px + 33px margin = 47px */
         max-width: 100%;
     }
@@ -1636,7 +1650,7 @@ a {
         max-width: 100%;
         margin-bottom: 120px;
         /* Updated per user request */
-        gap: 42px;
+        gap: 40px;
     }
 
     .card-image {
@@ -1648,7 +1662,7 @@ a {
     .card-content-row {
         flex-direction: column;
         width: 100%;
-        gap: 42px;
+        gap: 40px;
     }
 
     .card-left-col {
@@ -1656,14 +1670,14 @@ a {
         flex-direction: column !important;
         align-items: flex-start !important;
         justify-content: flex-start !important;
-        gap: 10px !important;
+        gap: 8px !important;
     }
 
     .case-actions {
         width: 100%;
         flex-direction: row;
         flex-wrap: nowrap;
-        gap: 20px;
+        gap: 24px;
     }
 
     .action-btn {
@@ -1680,7 +1694,7 @@ a {
         right: 50% !important;
         margin-left: -50vw !important;
         margin-right: -50vw !important;
-        padding: 55px 32px 95px 32px !important;
+        padding: 56px 32px 96px 32px !important;
         align-items: flex-start !important;
         height: auto !important;
         box-sizing: border-box !important;
@@ -1693,7 +1707,7 @@ a {
         height: 1px !important;
         background-color: #898989 !important;
         opacity: 0.3 !important;
-        margin-bottom: 50px !important;
+        margin-bottom: 48px !important;
     }
 
     .footer-content {
@@ -1704,7 +1718,7 @@ a {
         height: auto !important;
         border: none !important;
         padding: 0 !important;
-        gap: 70px !important;
+        gap: 72px !important;
         width: 100% !important;
         max-width: 1440px !important;
     }
@@ -1716,7 +1730,7 @@ a {
         display: flex !important;
         flex-direction: column !important;
         align-items: flex-start !important;
-        gap: 7px !important;
+        gap: 8px !important;
         margin: 0 !important;
     }
 
@@ -1773,21 +1787,21 @@ a {
     .hero-section {
         flex-direction: column;
         align-items: flex-start;
-        padding-top: 100px;
+        padding-top: 104px;
         /* Adjust if needed */
         padding-left: 24px;
         padding-right: 24px;
-        padding-bottom: 52px;
+        padding-bottom: 56px;
     }
 
     .hero-content {
-        gap: 41px;
+        gap: 40px;
         /* Gap between title group and description */
         width: 100%;
     }
 
     .hero-text-group {
-        gap: 20px;
+        gap: 24px;
         /* Gap between Name and Title */
     }
 
@@ -1847,7 +1861,7 @@ a {
         width: auto;
         margin-left: 8px;
         margin-right: 8px;
-        margin-bottom: 132px;
+        margin-bottom: 136px;
         border-radius: 10px;
         background-color: transparent;
         /* Keep transparent, or maybe need background if it overlaps? */
@@ -1891,24 +1905,24 @@ a {
 
     /* Hero Section Mobile (Node 133:240) */
     .hero-section {
-        padding-top: 393px;
+        padding-top: 392px;
         /* Node 133:240 */
-        padding-bottom: 53px;
+        padding-bottom: 56px;
         padding-left: 24px;
         padding-right: 24px;
-        gap: 42px;
+        gap: 40px;
         /* Gap to Anchor */
     }
 
     .hero-content {
-        gap: 42px;
+        gap: 40px;
         /* Sync with section gap */
     }
 
     .hero-top-row {
         flex-direction: column;
         align-items: flex-start;
-        gap: 42px;
+        gap: 40px;
     }
 
     .hero-text-group {
@@ -1947,7 +1961,7 @@ a {
     .hero-title {
         font-size: 25px;
         line-height: 40px;
-        margin-bottom: 13px;
+        margin-bottom: 16px;
         /* Gap to subtitle */
     }
 
@@ -1956,7 +1970,7 @@ a {
         font-size: 26px;
         line-height: 1.24;
         width: 100%;
-        margin-bottom: 37px;
+        margin-bottom: 40px;
         /* Gap to description */
         height: auto;
     }
@@ -1976,7 +1990,7 @@ a {
         width: 100%;
         max-width: 1440px;
         margin: 0 auto;
-        padding: 0 20px 85px 20px;
+        padding: 0 24px 88px 24px;
         /* 85px bottom padding from design */
         box-sizing: border-box;
         display: flex;
@@ -2021,13 +2035,13 @@ a {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding-left: 73px;
+        padding-left: 72px;
         border-right: 2px solid #898989;
         height: 100%;
         width: 382px;
         /* Fixed width from design Node 157:396 */
         box-sizing: border-box;
-        gap: 4px;
+        gap: 8px;
         /* Visual gap */
     }
 
@@ -2060,7 +2074,7 @@ a {
         flex-grow: 1;
         /* Fills remaining space */
         justify-content: center;
-        gap: 44px;
+        gap: 48px;
         border-right: 2px solid #898989;
     }
 
@@ -2124,13 +2138,13 @@ a {
     .site-footer .footer-divider {
         width: 100%;
         max-width: 1440px;
-        padding-left: 94px;
-        padding-right: 94px;
+        padding-left: 96px;
+        padding-right: 96px;
         box-sizing: border-box;
     }
 
     .site-footer .footer-divider {
-        margin-bottom: 47px;
+        margin-bottom: 48px;
         /* Gap logic moved here */
     }
 
@@ -2154,7 +2168,7 @@ a {
     .footer-contact {
         display: flex;
         flex-direction: column;
-        gap: 7px;
+        gap: 8px;
     }
 
     .footer-name {
@@ -2181,7 +2195,7 @@ a {
 
     .footer-links {
         display: flex;
-        gap: 70px;
+        gap: 72px;
         align-items: center;
     }
 
@@ -2204,7 +2218,7 @@ a {
     /* 13. Footer - Mobile Node 196:2353 */
     @media (max-width: 640px) {
         .site-footer {
-            padding: 0 24px 57px 24px !important;
+            padding: 0 24px 56px 24px !important;
             align-items: flex-start !important;
             background-color: #1e1e1e !important;
             z-index: 10 !important;
@@ -2223,7 +2237,7 @@ a {
 
         .site-footer .footer-divider {
             width: 100% !important;
-            margin-bottom: 49px !important;
+            margin-bottom: 48px !important;
             background-color: #898989 !important;
             opacity: 0.3 !important;
         }
@@ -2235,9 +2249,9 @@ a {
             align-items: flex-start !important;
             text-align: left !important;
             /* Force left alignment */
-            gap: 6px !important;
+            gap: 8px !important;
             width: 100% !important;
-            margin-bottom: 45px !important;
+            margin-bottom: 48px !important;
             margin-left: 0 !important;
             margin-right: 0 !important;
             padding-left: 0 !important;
@@ -2253,7 +2267,7 @@ a {
             display: block !important;
             width: 100% !important;
             margin: 0 !important;
-            margin-bottom: 6px !important;
+            margin-bottom: 8px !important;
             align-self: flex-start !important;
         }
 
@@ -2299,7 +2313,7 @@ a {
             justify-content: center !important;
             width: 21px !important;
             height: 21px !important;
-            margin-right: 14px !important;
+            margin-right: 16px !important;
         }
 
         .link-arrow svg {
@@ -2333,11 +2347,11 @@ a {
 
 /* About Hero */
 .about-hero-section {
-    padding-top: 156px;
+    padding-top: 160px;
     /* Base padding for nav */
     padding-bottom: 24px;
-    padding-left: 94px;
-    padding-right: 94px;
+    padding-left: 96px;
+    padding-right: 96px;
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
@@ -2350,7 +2364,7 @@ a {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 86px;
+    gap: 88px;
     margin-top: 56px;
 }
 
@@ -2398,9 +2412,9 @@ a {
 
 /* Professional Path Section */
 .professional-path-section {
-    padding-left: 94px;
-    padding-right: 94px;
-    padding-bottom: 100px;
+    padding-left: 96px;
+    padding-right: 96px;
+    padding-bottom: 104px;
     margin-top: 80px;
     width: 100%;
     max-width: 1440px;
@@ -2449,7 +2463,7 @@ a {
 .experience-left {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
     max-width: 878px;
 }
 
@@ -2611,7 +2625,7 @@ a {
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
-        gap: 20px;
+        gap: 24px;
         padding: 32px 0;
     }
 
@@ -2626,7 +2640,7 @@ a {
 
 @media (max-width: 640px) {
     .about-hero-section {
-        padding-top: 100px;
+        padding-top: 104px;
         padding-left: 24px;
         padding-right: 24px;
     }
@@ -2717,14 +2731,14 @@ a {
 
 .designops-page .ops-hero-section {
     padding-top: 192px;
-    padding-bottom: 91px;
+    padding-bottom: 88px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 19px;
-    padding-left: 94px;
-    padding-right: 94px;
+    gap: 16px;
+    padding-left: 96px;
+    padding-right: 96px;
     max-width: 1440px;
     margin: 0 auto;
 }
@@ -2759,7 +2773,7 @@ a {
     max-width: 1440px;
     margin: 0 auto;
     width: 100%;
-    padding: 0 94px;
+    padding: 0 96px;
     /* Desktop side padding */
 }
 
@@ -2769,7 +2783,7 @@ a {
     /* Constrain wide diagram */
     display: flex;
     justify-content: center;
-    margin-bottom: 36px;
+    margin-bottom: 40px;
 }
 
 .ops-main-diagram {
@@ -2789,7 +2803,7 @@ a {
 .ops-legend {
     display: flex;
     flex-direction: row;
-    gap: 78px;
+    gap: 80px;
     /* Space between legend items */
     justify-content: center;
     align-items: center;
@@ -2838,9 +2852,9 @@ a {
     align-items: flex-start;
     max-width: 1440px;
     margin: 0 auto;
-    padding: 104px 94px 56px 94px;
+    padding: 104px 96px 56px 96px;
     text-align: left;
-    gap: 22px;
+    gap: 24px;
 }
 
 .ops-desc-title,
@@ -2870,7 +2884,7 @@ a {
 /* Background divider wrapper for bottom sections */
 .ops-bg-wrapper {
     position: relative;
-    padding-top: 50px;
+    padding-top: 48px;
     /* Add some padding before title */
     background-color: #ffffff;
     border-top: 1px solid #1E1E1E;
@@ -2881,13 +2895,13 @@ a {
 .ops-header-title {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 144px 94px 64px 94px;
+    padding: 144px 96px 64px 96px;
     display: flex;
     justify-content: flex-start;
 }
 
 .ops-highlights-title {
-    padding: 80px 94px 40px 94px;
+    padding: 80px 96px 40px 96px;
     /* Aligned with Outcome Group (94px) */
     width: 100%;
 }
@@ -2910,7 +2924,7 @@ a {
 .designops-page .ops-stats-section {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 33px 94px 136px 94px;
+    padding: 32px 96px 136px 96px;
     /* Desktop padding */
     display: flex;
     flex-direction: row;
@@ -2922,7 +2936,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 21px;
+    gap: 24px;
 }
 
 .ops-heading {
@@ -2952,7 +2966,7 @@ a {
     display: flex;
     align-items: flex-start;
     position: relative;
-    padding: 17px 8px 16px 15px;
+    padding: 16px 8px 16px 16px;
     /* Consistent inner padding */
     border: 1px solid rgba(13, 19, 39, 0.5);
     border-radius: 4px;
@@ -2986,14 +3000,14 @@ a {
 .ops-outcome-group {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 60px 94px 88px 94px;
+    padding: 64px 96px 88px 96px;
     display: flex;
     flex-direction: column;
     transition: all 0.3s ease-in-out;
 }
 
 .ops-outcome-group:last-of-type {
-    padding-bottom: 149px;
+    padding-bottom: 152px;
 }
 
 .ops-outcome-header {
@@ -3019,7 +3033,7 @@ a {
     /* Fallback line color */
     width: 100%;
     margin-top: 8px;
-    margin-bottom: 44px;
+    margin-bottom: 48px;
 }
 
 .bg-gradient-blue {
@@ -3033,7 +3047,7 @@ a {
 .ops-outcome-grid {
     display: flex;
     flex-direction: row;
-    gap: 118px;
+    gap: 120px;
     /* Space between the two columns */
     padding: 0;
     /* Flush left with the title and headers */
@@ -3049,7 +3063,7 @@ a {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin-bottom: 44px;
+    margin-bottom: 48px;
     padding: 0;
 }
 
@@ -3138,7 +3152,7 @@ a {
         padding-right: 32px;
         align-items: center;
         text-align: center;
-        padding-top: 175px;
+        padding-top: 176px;
         /* Based on pt-75 but including header space */
         padding-bottom: 64px;
         gap: 40px;
@@ -3161,7 +3175,7 @@ a {
 
     /* Highlights Title Layout */
     .designops-page .ops-header-title {
-        padding: 60px 32px 32px 32px;
+        padding: 64px 32px 32px 32px;
     }
 
     .designops-page .ops-highlights-title {
@@ -3211,7 +3225,7 @@ a {
     }
 
     .ops-heading {
-        margin-bottom: 21px;
+        margin-bottom: 24px;
         width: 100%;
     }
 
@@ -3221,8 +3235,8 @@ a {
         flex-direction: row;
         flex-wrap: wrap;
         width: 100%;
-        gap: 13px 16px;
-        margin-bottom: 30px;
+        gap: 16px 16px;
+        margin-bottom: 32px;
     }
 
     .box-product.box-wide {
@@ -3240,7 +3254,7 @@ a {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        gap: 15px 16px;
+        gap: 16px 16px;
         width: 100%;
     }
 
@@ -3256,7 +3270,7 @@ a {
 
     /* 5. Outcomes Section */
     .ops-outcome-group {
-        padding: 60px 32px 88px 32px;
+        padding: 64px 32px 88px 32px;
         /* Tablet margin offsets */
     }
 
@@ -3266,7 +3280,7 @@ a {
 
     .ops-outcome-grid {
         flex-direction: column;
-        gap: 60px;
+        gap: 64px;
     }
 
     .desktop-only {
@@ -3277,14 +3291,14 @@ a {
     .site-footer {
         flex-direction: column !important;
         align-items: flex-start !important;
-        padding: 0 32px 95px 32px !important;
-        gap: 70px !important;
+        padding: 0 32px 96px 32px !important;
+        gap: 72px !important;
     }
 
     .site-footer .footer-content {
         flex-direction: column;
         align-items: flex-start;
-        gap: 70px;
+        gap: 72px;
     }
 
 }
@@ -3299,7 +3313,7 @@ a {
         padding-right: 24px;
         align-items: center;
         text-align: center;
-        gap: 31px;
+        gap: 32px;
     }
 
     .designops-page .ops-hero-title {
@@ -3339,10 +3353,10 @@ a {
     .ops-legend {
         flex-direction: row;
         flex-wrap: wrap;
-        gap: 16px 26px;
+        gap: 16px 24px;
         align-items: flex-start;
         justify-content: center;
-        padding: 25px 8px 56px 8px;
+        padding: 24px 8px 56px 8px;
         width: 100%;
     }
 
@@ -3356,10 +3370,10 @@ a {
     }
 
     .designops-page .ops-description-section {
-        padding: 45px 24px 60px 24px;
+        padding: 48px 24px 64px 24px;
         align-items: flex-start;
         text-align: left;
-        gap: 41px;
+        gap: 40px;
     }
 
     .designops-page .ops-desc-title {
@@ -3377,11 +3391,11 @@ a {
     }
 
     .designops-page .ops-header-title {
-        padding: 60px 24px 32px 24px;
+        padding: 64px 24px 32px 24px;
     }
 
     .designops-page .ops-highlights-title {
-        padding: 82px 24px 48px 24px;
+        padding: 80px 24px 48px 24px;
         text-align: left;
     }
 
@@ -3408,7 +3422,7 @@ a {
     }
 
     .designops-page .ops-heading {
-        margin-bottom: 21px;
+        margin-bottom: 24px;
         text-align: left;
         line-height: 1.2;
     }
@@ -3418,7 +3432,7 @@ a {
         flex-direction: row;
         flex-wrap: wrap;
         width: 100%;
-        gap: 15px 16px;
+        gap: 16px 16px;
         justify-content: flex-start;
     }
 
@@ -3426,7 +3440,7 @@ a {
         display: flex;
         flex-direction: column;
         width: 100%;
-        gap: 15px 16px;
+        gap: 16px 16px;
         align-items: flex-start;
     }
 
@@ -3452,7 +3466,7 @@ a {
     }
 
     .designops-page .stat-box {
-        padding: 17px 15px 16px 15px;
+        padding: 16px 16px 16px 16px;
     }
 
     .designops-page .stat-label {
@@ -3463,11 +3477,11 @@ a {
     }
 
     .ops-outcome-group {
-        padding: 60px 24px 88px 24px;
+        padding: 64px 24px 88px 24px;
     }
 
     .ops-outcome-group:last-of-type {
-        padding-bottom: 130px;
+        padding-bottom: 128px;
     }
 
     .ops-outcome-header {
@@ -3517,8 +3531,8 @@ body.lauhaus-page {
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
-    padding-left: 94px;
-    padding-right: 94px;
+    padding-left: 96px;
+    padding-right: 96px;
     box-sizing: border-box;
 }
 
@@ -3566,7 +3580,7 @@ body.lauhaus-page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 206px;
+    padding-top: 208px;
     padding-bottom: 64px;
     width: 100%;
     box-sizing: border-box;
@@ -3617,7 +3631,7 @@ body.lauhaus-page {
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
-    padding: 120px 196px 160px 196px;
+    padding: 120px 200px 160px 200px;
     /* desktop padding */
     box-sizing: border-box;
     color: #0d1327;
@@ -3659,7 +3673,7 @@ body.lauhaus-page {
 .opp-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    row-gap: 66px;
+    row-gap: 64px;
     column-gap: 144px;
 }
 
@@ -3704,7 +3718,7 @@ body.lauhaus-page {
     flex-direction: row;
     gap: 48px;
     margin-bottom: 120px;
-    padding-left: 119px;
+    padding-left: 120px;
     /* matching 213px absolute - 94px container pad */
 }
 
@@ -3737,7 +3751,7 @@ body.lauhaus-page {
 .plp-screens {
     display: flex;
     flex-direction: row;
-    gap: 67px;
+    gap: 64px;
 }
 
 .plp-screen {
@@ -3749,13 +3763,13 @@ body.lauhaus-page {
 }
 
 .lauhaus-discovery {
-    padding-top: 62px;
+    padding-top: 64px;
 }
 
 .stats-grid {
     display: flex;
     flex-direction: row;
-    gap: 73px;
+    gap: 72px;
     margin-top: 40px;
     margin-bottom: 112px;
 }
@@ -3802,8 +3816,8 @@ body.lauhaus-page {
 .journey-block.block-1 {
     display: flex;
     flex-direction: column;
-    margin-top: 50px;
-    margin-bottom: 62px;
+    margin-top: 48px;
+    margin-bottom: 64px;
 }
 
 .journey-img {
@@ -3818,13 +3832,13 @@ body.lauhaus-page {
     height: auto;
     border-radius: 10px;
     display: block;
-    margin-top: 30px;
+    margin-top: 32px;
 }
 
 .journey-caption {
     font-family: 'Roobert', var(--font-body);
     font-size: 18px;
-    margin: 0 0 30px 0;
+    margin: 0 0 32px 0;
     line-height: 28px;
 }
 
@@ -3835,7 +3849,7 @@ body.lauhaus-page {
     column-gap: 1.214%;
     /* 17px / 1400px */
     row-gap: 0;
-    margin-top: 62px;
+    margin-top: 64px;
     width: 100%;
     align-items: start;
 }
@@ -3870,7 +3884,7 @@ body.lauhaus-page {
     font-family: 'Roobert', var(--font-body);
     font-size: 18px;
     font-weight: 400;
-    margin: 0 0 5px 0;
+    margin: 0 0 8px 0;
     color: #f7fbf8;
 }
 
@@ -3891,7 +3905,7 @@ body.lauhaus-page {
     font-size: 18px;
     line-height: 1.77;
     max-width: 508px;
-    margin: 50px 0 0 0;
+    margin: 48px 0 0 0;
     color: #f7fbf8;
     grid-column: 1 / span 2;
 }
@@ -3905,7 +3919,7 @@ body.lauhaus-page {
 }
 
 .lauhaus-impact {
-    padding-top: 180px;
+    padding-top: 184px;
     padding-bottom: 112px;
 }
 
@@ -3984,7 +3998,7 @@ body.lauhaus-page {
 .plp-screens {
     display: flex;
     flex-direction: row;
-    gap: 35px;
+    gap: 32px;
 }
 
 .screens-grid img,
@@ -4060,12 +4074,12 @@ html:has(.lauhaus-page) .site-footer {
 
     .lauhaus-hero-img-wrapper {
         max-width: 100%;
-        margin-bottom: 6px;
+        margin-bottom: 8px;
     }
 
     .lauhaus-hero-caption {
         max-width: 100%;
-        margin-top: 6px;
+        margin-top: 8px;
         padding: 0;
     }
 
@@ -4095,13 +4109,13 @@ html:has(.lauhaus-page) .site-footer {
     }
 
     .opp-text p {
-        margin-bottom: 20px;
+        margin-bottom: 24px;
     }
 
     .opp-grid {
         display: flex;
         flex-direction: column;
-        gap: 60px;
+        gap: 64px;
     }
 
     .opp-item {
@@ -4121,7 +4135,7 @@ html:has(.lauhaus-page) .site-footer {
 
     .lauhaus-page .lauhaus-plp {
         padding-top: 128px;
-        padding-bottom: 78px;
+        padding-bottom: 80px;
     }
 
     .plp-header {
@@ -4132,7 +4146,7 @@ html:has(.lauhaus-page) .site-footer {
 
     .stats-grid {
         flex-direction: column;
-        gap: 60px;
+        gap: 64px;
     }
 
     .stat-col {
@@ -4152,7 +4166,7 @@ html:has(.lauhaus-page) .site-footer {
 
     .journey-sub-container {
         flex-direction: column;
-        gap: 63px;
+        gap: 64px;
     }
 
     .showcase-split {
@@ -4207,12 +4221,12 @@ html:has(.lauhaus-page) .site-footer {
         line-height: 28px !important;
         margin-top: 0;
         padding-top: 0;
-        padding-bottom: 30px;
+        padding-bottom: 32px;
     }
 
     .journey-img-lg {
         margin-top: 0;
-        margin-bottom: 30px;
+        margin-bottom: 32px;
     }
 
     .journey-block {
@@ -4222,7 +4236,7 @@ html:has(.lauhaus-page) .site-footer {
     }
 
     .journey-block.block-1 {
-        margin-top: 70px;
+        margin-top: 72px;
         margin-bottom: 0;
     }
 
@@ -4231,12 +4245,12 @@ html:has(.lauhaus-page) .site-footer {
         line-height: 28px !important;
         padding-top: 0;
         margin-top: 0;
-        padding-bottom: 30px;
+        padding-bottom: 32px;
         margin-bottom: 0;
     }
 
     .journey-img.margin-t {
-        margin-bottom: 30px;
+        margin-bottom: 32px;
         margin-top: 0;
     }
 
@@ -4253,7 +4267,7 @@ html:has(.lauhaus-page) .site-footer {
     }
 
     .journey-block.block-2 {
-        margin-top: 70px;
+        margin-top: 72px;
     }
 
     .journey-grid-title {
@@ -4261,11 +4275,11 @@ html:has(.lauhaus-page) .site-footer {
         line-height: 28px !important;
         padding-top: 0;
         margin-top: 0;
-        margin-bottom: 30px;
+        margin-bottom: 32px;
     }
 
     .matrix-img-wrapper {
-        margin-bottom: 30px;
+        margin-bottom: 32px;
     }
 
     .journey-conclusion {
@@ -4273,7 +4287,7 @@ html:has(.lauhaus-page) .site-footer {
         line-height: 1.77 !important;
         max-width: 563px;
         margin-top: 0;
-        margin-bottom: 100px;
+        margin-bottom: 104px;
     }
 
     /* Specific Tablet Slider behavior for mobile-slider class */
@@ -4317,7 +4331,7 @@ html:has(.lauhaus-page) .site-footer {
     .lauhaus-page .swipe-indicator.mobile-only {
         display: flex !important;
         justify-content: center;
-        margin-top: 20px;
+        margin-top: 24px;
         margin-left: auto;
         margin-right: auto;
         width: fit-content;
@@ -4331,7 +4345,7 @@ html:has(.lauhaus-page) .site-footer {
         flex-wrap: nowrap;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
-        gap: 42px;
+        gap: 40px;
         padding-bottom: 80px;
         align-items: flex-start;
         /* More space for indicator */
@@ -4428,7 +4442,7 @@ html:has(.lauhaus-page) .site-footer {
     }
 
     .lauhaus-hero {
-        padding: 148px 0 40px 0;
+        padding: 152px 0 40px 0;
         align-items: flex-start;
     }
 
@@ -4437,7 +4451,7 @@ html:has(.lauhaus-page) .site-footer {
         line-height: 1.19;
         text-align: left;
         padding: 0 24px;
-        margin-bottom: 60px;
+        margin-bottom: 64px;
         margin-left: 0;
     }
 
@@ -4461,7 +4475,7 @@ html:has(.lauhaus-page) .site-footer {
     }
 
     .lauhaus-hero-caption {
-        padding: 8px 102px 8px 24px;
+        padding: 8px 104px 8px 24px;
         margin-top: 0;
         font-size: 14px;
         line-height: 1.4;
@@ -4471,12 +4485,12 @@ html:has(.lauhaus-page) .site-footer {
     }
 
     .lauhaus-opp {
-        padding: 70px 24px 128px 24px;
+        padding: 72px 24px 128px 24px;
     }
 
     .opp-grid {
         flex-direction: column;
-        gap: 60px;
+        gap: 64px;
     }
 
     .opp-item {
@@ -4486,7 +4500,7 @@ html:has(.lauhaus-page) .site-footer {
     .opp-intro {
         flex-direction: column;
         gap: 24px;
-        margin-bottom: 90px;
+        margin-bottom: 88px;
     }
 
     .opp-title {
@@ -4501,11 +4515,11 @@ html:has(.lauhaus-page) .site-footer {
 
     .lauhaus-page .lauhaus-plp {
         padding-top: 128px;
-        padding-bottom: 78px;
+        padding-bottom: 80px;
     }
 
     .plp-header {
-        margin-bottom: 60px;
+        margin-bottom: 64px;
     }
 
     .lauhaus-impact {
@@ -4513,7 +4527,7 @@ html:has(.lauhaus-page) .site-footer {
     }
 
     .lauhaus-impact .stats-grid {
-        margin-bottom: 70px;
+        margin-bottom: 72px;
     }
 
     .lauhaus-showcase {
@@ -4562,7 +4576,7 @@ html:has(.lauhaus-page) .site-footer {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 6px;
+        gap: 8px;
         color: #F7FBF8;
         font-family: 'Roobert', var(--font-body);
         font-size: 14px;
@@ -4570,7 +4584,7 @@ html:has(.lauhaus-page) .site-footer {
         pointer-events: none;
         animation: pulse-swipe 2s infinite ease-in-out;
         z-index: 10;
-        margin: 20px auto 0 auto;
+        margin: 24px auto 0 auto;
     }
 
     .swipe-indicator svg {
@@ -4674,7 +4688,7 @@ html:has(.lauhaus-page) .site-footer {
 
     .journey-block.block-1 {
         margin-top: 0 !important;
-        margin-bottom: 79px !important;
+        margin-bottom: 80px !important;
     }
 
     .journey-img-mobile-step3 {
@@ -4688,7 +4702,7 @@ html:has(.lauhaus-page) .site-footer {
     .journey-sub-container {
         display: flex !important;
         flex-direction: column !important;
-        gap: 63px !important;
+        gap: 64px !important;
         margin-top: 0 !important;
     }
 

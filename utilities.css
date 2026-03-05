@@ -1,0 +1,671 @@
+/* =========================================================================
+   UTILITY CLASSES (8-Point Grid System)
+   Inspired by Tailwind CSS, built for Vanilla CSS integration
+   ========================================================================= */
+
+/* --- Flexbox & Grid --- */
+.flex {
+    display: flex;
+}
+
+.inline-flex {
+    display: inline-flex;
+}
+
+.grid {
+    display: grid;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.items-start {
+    align-items: flex-start;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.items-end {
+    align-items: flex-end;
+}
+
+.items-baseline {
+    align-items: baseline;
+}
+
+.items-stretch {
+    align-items: stretch;
+}
+
+.justify-start {
+    justify-content: flex-start;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-around {
+    justify-content: space-around;
+}
+
+.self-start {
+    align-self: flex-start;
+}
+
+.self-center {
+    align-self: center;
+}
+
+.self-end {
+    align-self: flex-end;
+}
+
+.self-stretch {
+    align-self: stretch;
+}
+
+/* --- Spacing: Gaps (8-point scale) --- */
+.gap-0 {
+    gap: 0px;
+}
+
+.gap-8 {
+    gap: 8px;
+}
+
+.gap-16 {
+    gap: 16px;
+}
+
+.gap-24 {
+    gap: 24px;
+}
+
+.gap-32 {
+    gap: 32px;
+}
+
+.gap-40 {
+    gap: 40px;
+}
+
+.gap-48 {
+    gap: 48px;
+}
+
+.gap-56 {
+    gap: 56px;
+}
+
+.gap-64 {
+    gap: 64px;
+}
+
+.gap-72 {
+    gap: 72px;
+}
+
+.gap-80 {
+    gap: 80px;
+}
+
+.gap-88 {
+    gap: 88px;
+}
+
+.gap-96 {
+    gap: 96px;
+}
+
+.gap-104 {
+    gap: 104px;
+}
+
+.gap-112 {
+    gap: 112px;
+}
+
+.gap-120 {
+    gap: 120px;
+}
+
+.gap-128 {
+    gap: 128px;
+}
+
+.gap-144 {
+    gap: 144px;
+}
+
+.gap-160 {
+    gap: 160px;
+}
+
+/* --- Spacing: Padding (8-point scale) --- */
+.p-0 {
+    padding: 0px;
+}
+
+.p-8 {
+    padding: 8px;
+}
+
+.p-16 {
+    padding: 16px;
+}
+
+.p-24 {
+    padding: 24px;
+}
+
+.p-32 {
+    padding: 32px;
+}
+
+.p-40 {
+    padding: 40px;
+}
+
+.p-48 {
+    padding: 48px;
+}
+
+.p-56 {
+    padding: 56px;
+}
+
+.p-64 {
+    padding: 64px;
+}
+
+.p-80 {
+    padding: 80px;
+}
+
+.p-96 {
+    padding: 96px;
+}
+
+.p-128 {
+    padding: 128px;
+}
+
+/* Padding X (Left & Right) */
+.px-8 {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.px-16 {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.px-24 {
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.px-32 {
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+.px-48 {
+    padding-left: 48px;
+    padding-right: 48px;
+}
+
+.px-64 {
+    padding-left: 64px;
+    padding-right: 64px;
+}
+
+.px-96 {
+    padding-left: 96px;
+    padding-right: 96px;
+}
+
+/* Padding Y (Top & Bottom) */
+.py-8 {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.py-16 {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.py-24 {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+.py-32 {
+    padding-top: 32px;
+    padding-bottom: 32px;
+}
+
+.py-48 {
+    padding-top: 48px;
+    padding-bottom: 48px;
+}
+
+.py-64 {
+    padding-top: 64px;
+    padding-bottom: 64px;
+}
+
+.py-96 {
+    padding-top: 96px;
+    padding-bottom: 96px;
+}
+
+/* Padding Top */
+.pt-8 {
+    padding-top: 8px;
+}
+
+.pt-16 {
+    padding-top: 16px;
+}
+
+.pt-24 {
+    padding-top: 24px;
+}
+
+.pt-32 {
+    padding-top: 32px;
+}
+
+.pt-48 {
+    padding-top: 48px;
+}
+
+.pt-64 {
+    padding-top: 64px;
+}
+
+.pt-80 {
+    padding-top: 80px;
+}
+
+.pt-96 {
+    padding-top: 96px;
+}
+
+.pt-128 {
+    padding-top: 128px;
+}
+
+/* Padding Bottom */
+.pb-8 {
+    padding-bottom: 8px;
+}
+
+.pb-16 {
+    padding-bottom: 16px;
+}
+
+.pb-24 {
+    padding-bottom: 24px;
+}
+
+.pb-32 {
+    padding-bottom: 32px;
+}
+
+.pb-48 {
+    padding-bottom: 48px;
+}
+
+.pb-64 {
+    padding-bottom: 64px;
+}
+
+.pb-80 {
+    padding-bottom: 80px;
+}
+
+.pb-96 {
+    padding-bottom: 96px;
+}
+
+.pb-128 {
+    padding-bottom: 128px;
+}
+
+/* --- Spacing: Margin (8-point scale) --- */
+.m-0 {
+    margin: 0px;
+}
+
+.m-8 {
+    margin: 8px;
+}
+
+.m-16 {
+    margin: 16px;
+}
+
+.m-24 {
+    margin: 24px;
+}
+
+.m-32 {
+    margin: 32px;
+}
+
+.m-48 {
+    margin: 48px;
+}
+
+.m-64 {
+    margin: 64px;
+}
+
+/* Margin X & Auto */
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mx-8 {
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.mx-16 {
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.mx-24 {
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+.mx-32 {
+    margin-left: 32px;
+    margin-right: 32px;
+}
+
+/* Margin Y */
+.my-8 {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.my-16 {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.my-24 {
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.my-32 {
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+
+.my-48 {
+    margin-top: 48px;
+    margin-bottom: 48px;
+}
+
+.my-64 {
+    margin-top: 64px;
+    margin-bottom: 64px;
+}
+
+/* Margin Top */
+.mt-0 {
+    margin-top: 0px;
+}
+
+.mt-8 {
+    margin-top: 8px;
+}
+
+.mt-16 {
+    margin-top: 16px;
+}
+
+.mt-24 {
+    margin-top: 24px;
+}
+
+.mt-32 {
+    margin-top: 32px;
+}
+
+.mt-40 {
+    margin-top: 40px;
+}
+
+.mt-48 {
+    margin-top: 48px;
+}
+
+.mt-64 {
+    margin-top: 64px;
+}
+
+.mt-80 {
+    margin-top: 80px;
+}
+
+.mt-96 {
+    margin-top: 96px;
+}
+
+.mt-128 {
+    margin-top: 128px;
+}
+
+/* Margin Bottom */
+.mb-0 {
+    margin-bottom: 0px;
+}
+
+.mb-8 {
+    margin-bottom: 8px;
+}
+
+.mb-16 {
+    margin-bottom: 16px;
+}
+
+.mb-24 {
+    margin-bottom: 24px;
+}
+
+.mb-32 {
+    margin-bottom: 32px;
+}
+
+.mb-40 {
+    margin-bottom: 40px;
+}
+
+.mb-48 {
+    margin-bottom: 48px;
+}
+
+.mb-64 {
+    margin-bottom: 64px;
+}
+
+.mb-80 {
+    margin-bottom: 80px;
+}
+
+.mb-96 {
+    margin-bottom: 96px;
+}
+
+.mb-128 {
+    margin-bottom: 128px;
+}
+
+/* Margin Left */
+.ml-auto {
+    margin-left: auto;
+}
+
+/* Margin Right */
+.mr-auto {
+    margin-right: auto;
+}
+
+/* --- Design System Tokens (Colors) --- */
+/* Utilizing the variables already defined in your :root */
+.bg-primary {
+    background-color: var(--color-bg-primary);
+}
+
+/* Chartreuse */
+.bg-accent {
+    background-color: var(--color-accent);
+}
+
+/* Navy */
+.bg-card {
+    background-color: var(--color-card-bg);
+}
+
+/* Off-white */
+.bg-dark {
+    background-color: var(--color-dark-section);
+}
+
+/* #1e1e1e */
+.bg-white {
+    background-color: #ffffff;
+}
+
+.bg-transparent {
+    background-color: transparent;
+}
+
+.text-primary {
+    color: var(--color-text-primary);
+}
+
+.text-secondary {
+    color: var(--color-text-secondary);
+}
+
+.text-card {
+    color: var(--color-card-text);
+}
+
+.text-light {
+    color: var(--color-light-text);
+}
+
+.text-white {
+    color: #ffffff;
+}
+
+/* --- Layout & Dimensions --- */
+.w-full {
+    width: 100%;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.w-auto {
+    width: auto;
+}
+
+.h-auto {
+    height: auto;
+}
+
+.max-w-full {
+    max-width: 100%;
+}
+
+.max-w-1440 {
+    max-width: 1440px;
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.fixed {
+    position: fixed;
+}
+
+/* --- Text Alignment --- */
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Add any more specialized ones you need as we build sections! */
+/* --- Typography (Derived from :root scale) --- */
+.font-heading { font-family: var(--font-heading); }
+.font-body { font-family: var(--font-body); }
+
+.font-normal { font-weight: 400; }
+.font-medium { font-weight: 500; }
+.font-bold { font-weight: 700; }
+
+.text-xs { font-size: var(--text-xs); line-height: 20px; }
+.text-sm { font-size: var(--text-sm); line-height: 24px; }
+.text-base { font-size: var(--text-base); line-height: 28px; }
+.text-lg { font-size: var(--text-lg); line-height: 32px; }
+.text-xl { font-size: var(--text-xl); line-height: 32px; }
+.text-2xl { font-size: var(--text-2xl); line-height: 40px; }
+.text-3xl { font-size: var(--text-3xl); line-height: 48px; }
+.text-4xl { font-size: var(--text-4xl); line-height: 56px; }
+.text-5xl { font-size: var(--text-5xl); line-height: 64px; }
+.text-6xl { font-size: var(--text-6xl); line-height: 72px; }
+
+.leading-none { line-height: 1; }
+.leading-tight { line-height: 1.1; }
+.leading-normal { line-height: 1.5; }
+
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
