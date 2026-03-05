@@ -1013,7 +1013,7 @@ a {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
     font-size: 18px;
-    line-height: 1;
+    line-height: 1.2;
     color: #f7fbf8;
     white-space: nowrap;
     overflow: hidden;
@@ -1024,7 +1024,7 @@ a {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
     font-size: 14px;
-    line-height: 1;
+    line-height: 1.2;
     color: #898989;
 }
 
@@ -1066,7 +1066,8 @@ a {
 
     .card-image {
         width: 100%;
-        height: 348px;
+        height: auto;
+        aspect-ratio: 4 / 3;
         /* Node 119:62 */
         border-radius: 8px;
     }
@@ -1391,7 +1392,7 @@ a {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
     font-size: 18px;
-    line-height: 1;
+    line-height: 1.2;
     color: #f7fbf8;
     white-space: nowrap;
     overflow: hidden;
@@ -1402,7 +1403,7 @@ a {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
     font-size: 14px;
-    line-height: 1;
+    line-height: 1.2;
     color: #898989;
 }
 
@@ -1449,7 +1450,8 @@ a {
 
     .card-image {
         width: 100%;
-        height: 348px;
+        height: auto;
+        aspect-ratio: 4 / 3;
         /* Node 119:62 */
         border-radius: 8px;
     }
@@ -1638,7 +1640,7 @@ a {
     .card-image {
         width: 100%;
         height: auto;
-        aspect-ratio: 680 / 400;
+        aspect-ratio: 4 / 3;
     }
 
     .card-content-row {
