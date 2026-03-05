@@ -1130,7 +1130,9 @@ a {
         top: auto;
         transform: none;
         width: 298px;
-        height: 298px;
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 1 / 1;
         margin: 0 auto 48px auto;
         order: -1;
     }
