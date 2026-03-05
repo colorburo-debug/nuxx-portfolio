@@ -4128,7 +4128,7 @@ html:has(.lauhaus-page) .site-footer {
 
     .stats-grid {
         flex-direction: column;
-        gap: 41px;
+        gap: 60px;
     }
 
     .stat-col {
