@@ -3912,7 +3912,7 @@ body.lauhaus-page {
 
 .lauhaus-divider {
     height: 16px;
-    background-image: url('http://localhost:3845/assets/6ef324c11b0bfd1656577a4ee0b311131609aaeb.svg');
+    background-image: url('assets/common/background-pattern.svg');
     background-size: cover;
     background-repeat: repeat-x;
     margin: 112px auto;
@@ -4753,5 +4753,1260 @@ html:has(.lauhaus-page) .site-footer {
         margin-right: 0 !important;
         max-width: 100% !important;
         border-radius: 10px !important;
+    }
+}
+
+/* ==========================================================================
+   FINCAS CASE STUDY STYLES (Blocks 1 & 2)
+   Mobile-First, 8px Grid System
+   ========================================================================== */
+
+/* Base Page Overrides */
+html:has(.fincas-page) {
+    background-color: #F7FBF8 !important;
+    /* Match background context for scrolling momentum */
+}
+
+.fincas-page {
+    background-color: #F7FBF8;
+    color: #0d1327;
+}
+
+.fincas-container {
+    background-color: transparent !important;
+}
+
+/* Header Overrides */
+.fincas-page .header-pill {
+    background-color: #1e1e1e !important;
+}
+
+.fincas-page .header-nav-desktop .nav-link {
+    color: #f7fbf8 !important;
+}
+
+.fincas-page .header-nav-desktop .nav-link:hover {
+    color: #ffffff !important;
+}
+
+.fincas-page .nuxx-logo-img {
+    filter: invert(1) brightness(100) !important;
+}
+
+
+/* BLOCK 1: Hero Section */
+.fincas-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+    padding: 160px 24px 8px 24px;
+    /* 72px visual gap + 88px header offset */
+    width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.fincas-hero-title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.fincas-hero-title {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500;
+    /* Medium */
+    font-size: 30px;
+    line-height: 1.33;
+    color: #0d1327;
+    margin: 0;
+    width: 100%;
+    /* Max-width on mobile was artificially restricted; removed to allow full use of available space */
+    max-width: 100%;
+}
+
+.fincas-hero-image-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100vw;
+    margin-left: -24px;
+    margin-right: -24px;
+}
+
+.fincas-hero-image-container {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.fincas-hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    border-radius: 0;
+}
+
+.fincas-hero-caption {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.4;
+    letter-spacing: 0.14px;
+    color: #0d1327;
+    margin: 0;
+    text-align: left;
+    width: 100%;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+/* BLOCK 2: Overview Section */
+.fincas-overview {
+    display: flex;
+    flex-direction: column;
+    gap: 57px;
+    /* Approximately 7x8px */
+    padding: 70px 24px 88px 24px;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: flex-start;
+}
+
+.fincas-overview-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 400;
+    /* Regular */
+    font-size: 30px;
+    line-height: 30px;
+    color: #0d1327;
+    margin: 0;
+    width: 100%;
+}
+
+.fincas-overview-content {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 32px;
+    color: #0d1327;
+    margin: 0;
+    width: 100%;
+}
+
+.fincas-overview-content p {
+    margin: 0;
+}
+
+.spacer-block {
+    height: 35px;
+    /* Simulating line-height spacing block from Figma */
+    width: 100%;
+}
+
+.semibold {
+    font-weight: 600;
+    /* SemiBold mapped to Roobert 600 */
+}
+
+/* BLOCK 3: Stats Section */
+.fincas-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 88px;
+    /* High margin between columns on mobile */
+    padding: 8px 24px 96px 24px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.fincas-stats-col {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.fincas-col-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    /* spacing between title and colored line */
+    margin-bottom: 56px;
+    /* High spacing below line, mapping to Figma's 57px offset via 8px grid rounding */
+}
+
+.fincas-col-title {
+    font-family: 'Unbounded', var(--font-heading);
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.43;
+    color: #0d1327;
+    margin: 0;
+}
+
+.fincas-col-line {
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+}
+
+.line-green {
+    background-color: #2A9F67;
+}
+
+.line-blue {
+    background-color: #75BDFF;
+}
+
+.line-yellow {
+    background-color: #FBD26B;
+}
+
+.fincas-stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-bottom: 56px;
+    margin-bottom: 56px;
+    border-bottom: 1px solid #0d1327;
+}
+
+/* Remove border and bottom margin from the last item in a column */
+.fincas-stat-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.fincas-stat-number {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 1;
+    /* Match visual tightness of Figma */
+    color: #0d1327;
+    margin: 0;
+}
+
+/* The small text modifier (e.g., '2eq tons' next to '7.4B CO') */
+.text-small {
+    font-size: 24px;
+}
+
+.fincas-stat-desc {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.6;
+    /* 32px line height / 20px font-size */
+    color: #0d1327;
+    margin: 0;
+}
+
+/* BLOCK 4: Brand Gallery */
+.fincas-brand-gallery {
+    width: 100%;
+    background-color: #f0f2e9;
+    padding: 96px 0 111px 0;
+    /* Vertical Mobile padding from node 829:8468 (top updated to 96px per user spec) */
+    box-sizing: border-box;
+}
+
+.fincas-brand-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 24px;
+    /* Horizontal mobile padding mapped exactly to block 3 */
+    box-sizing: border-box;
+}
+
+.fincas-brand-title {
+    font-family: 'Unbounded', var(--font-heading);
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1;
+    color: #0d1327;
+    /* Changed from #16503e based on mobile spec */
+    margin: 0 0 72px 0;
+    /* 72px bottom margin to map to node 829:8468 spacing to the logo */
+    text-align: center;
+    /* Explicitly requested */
+}
+
+.fincas-logo-container {
+    width: calc(100% + 32px);
+    margin-left: -16px;
+    margin-right: -16px;
+    height: auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.fincas-gallery-grid {
+    display: flex;
+    flex-direction: column;
+    margin-top: 36px;
+    /* Break out of the 24px parent padding to leave exactly 8px of edge gap */
+    margin-left: -16px;
+    margin-right: -16px;
+    width: calc(100% + 32px);
+    gap: 36px;
+}
+
+.fincas-gallery-pair {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    width: 100%;
+}
+
+.fincas-brand-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    display: block;
+    /* prevents inline gap */
+}
+
+/* Icon grid hidden on mobile */
+.fincas-icon-grid.desktop-only {
+    display: none;
+}
+
+/* ==========================================================================
+   FINCAS BLOCK 5: INSETTING PLATFORM (Mobile First)
+   ========================================================================== */
+.fincas-insetting {
+    background-color: #146a56;
+    color: #f7fbf8;
+    overflow: hidden;
+    /* For breaking out horizontal sliders if needed */
+}
+
+.insetting-intro {
+    padding: 104px 24px 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.insetting-title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 40px;
+    line-height: 1.3;
+    font-weight: 400;
+}
+
+.insetting-desc {
+    margin: 0;
+    font-family: 'Roobert', sans-serif;
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+.insetting-values-header {
+    padding: 112px 24px 0 24px;
+    display: block;
+}
+
+.iv-tag {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 50px;
+    color: #f7fbf8;
+    margin: 0;
+}
+
+.iv-line {
+    width: 100%;
+    height: 2px;
+    background-color: #f7fbf8;
+    margin-top: 40px;
+    margin-bottom: 64px;
+}
+
+.insetting-values-grid {
+    padding: 0 24px 112px 24px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+}
+
+.iv-item {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.iv-title {
+    font-family: var(--font-heading);
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.iv-desc {
+    font-family: 'Roobert', sans-serif;
+    font-size: 18px;
+    line-height: 1.77;
+    margin: 0;
+}
+
+/* Sliders */
+.insetting-slider {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    padding: 88px 24px 0 24px;
+    overflow-x: auto;
+    /* Edge bleed */
+    width: 100%;
+}
+
+.slider-2 {
+    padding-top: 0;
+}
+
+/* Hide scrollbar for elegant sliders */
+.insetting-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.insetting-slider {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.is-img {
+    width: 284px;
+    height: 600px;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.insetting-hero-image {
+    padding: 8px 8px 0 8px;
+    display: none;
+    /* Hidden on mobile per user request */
+}
+
+.ihi-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+}
+
+.insetting-disruptive {
+    padding: 120px 24px 104px 24px;
+    /* Updated gap above title to 120px per user request */
+}
+
+.id-intro {
+    padding-bottom: 48px;
+    /* Reduced to 48px per user request */
+}
+
+.id-main-title {
+    font-family: var(--font-heading);
+    font-size: 30px;
+    line-height: 1.33;
+    font-weight: 400;
+    margin: 0;
+}
+
+.id-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    margin: 0;
+}
+
+.id-item {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    /* Synced with .iv-item */
+}
+
+.id-title {
+    font-family: var(--font-heading);
+    font-size: 30px;
+    line-height: 1.33;
+    font-weight: 400;
+    margin: 0;
+}
+
+.id-desc {
+    font-family: 'Roobert', sans-serif;
+    font-size: 18px;
+    line-height: 1.77;
+    margin: 0;
+}
+
+.insetting-collage {
+    padding: 8px 8px 104px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+}
+
+.ic-top {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+}
+
+.ic-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 11px;
+    /* Precisely matching Figma 10.937px */
+}
+
+.insetting-impact {
+    padding: 12px 24px 112px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+}
+
+.impact-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 33px;
+    text-align: center;
+    padding-bottom: 0;
+}
+
+.impact-title {
+    font-family: var(--font-heading);
+    font-size: 30px;
+    line-height: 1.54;
+    font-weight: 400;
+    margin: 0;
+}
+
+.impact-subtitle {
+    font-family: var(--font-body);
+    font-size: 20px;
+    line-height: 32px;
+    margin: 0;
+}
+
+.impact-matrix {
+    display: flex;
+    flex-direction: column;
+    gap: 74px;
+    align-items: flex-start;
+}
+
+.im-item {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    text-align: left;
+    gap: 27px;
+    width: 100%;
+    max-width: 342px;
+}
+
+.im-text {
+    font-family: var(--font-body);
+    font-size: 20px;
+    line-height: 32px;
+    font-weight: 500;
+}
+
+.im-icon {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+    max-width: 100%;
+}
+
+/* ==========================================================================
+   FINCAS RESPONSIVE MEDIA QUERIES (Tablet & Mobile Specifics)
+   ========================================================================== */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .fincas-hero {
+        padding: 160px 32px 0 32px;
+        /* Offset for tablet */
+    }
+
+    .fincas-hero-title-wrapper {
+        justify-content: center;
+    }
+
+    .fincas-hero-title {
+        font-size: 48px;
+        line-height: 1.17;
+        text-align: center;
+        max-width: 800px;
+    }
+
+    .fincas-hero-image-wrapper {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .fincas-hero-image-container {
+        aspect-ratio: auto;
+        border-radius: 10px;
+    }
+
+    .fincas-hero-image {
+        border-radius: 10px;
+    }
+
+    /* Tablet Overview (Aligns perfectly with the 32px padded hero image above) */
+    .fincas-overview {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    /* Tablet Stats */
+    .fincas-stats {
+        padding-left: 32px;
+        padding-right: 32px;
+        padding-bottom: 112px;
+        /* Explicit distance to the Block 4 background edge below it */
+    }
+
+    /* Tablet Brand Gallery */
+    .fincas-brand-gallery {
+        /* Top padding set to 112px per user spec */
+        padding: 112px 0 152px 0;
+    }
+
+    .fincas-brand-container {
+        padding: 0 32px;
+    }
+
+    .fincas-brand-title {
+        font-size: 40px;
+        line-height: 1.28;
+        text-align: left;
+        /* Explicitly overrides the mobile centered text */
+        margin-bottom: 4px;
+        /* Container has 84px gap, 84px + 4px = 88px gap to the logo */
+    }
+
+    .fincas-logo-container {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .fincas-brand-container {
+        gap: 84px;
+    }
+
+    .fincas-gallery-grid {
+        margin-left: 0;
+        /* Resets the mobile breakout margins */
+        margin-right: 0;
+        width: 100%;
+        gap: 88px;
+    }
+
+    .fincas-gallery-pair {
+        flex-direction: row;
+        gap: 25px;
+    }
+
+    .fincas-brand-image {
+        flex: 1;
+        min-width: 1px;
+    }
+
+    .fincas-desktop-icons-container.desktop-only {
+        width: 100%;
+        display: block;
+    }
+
+    /* Block 5 Tablet Overrides */
+    .fincas-insetting {
+        padding: 0;
+    }
+
+    .insetting-intro {
+        padding: 120px 129px 0 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .insetting-title {
+        font-size: 50px;
+        /* Tablet spec */
+        line-height: 64px;
+    }
+
+    .insetting-desc {
+        line-height: 32px;
+    }
+
+    .insetting-values-header {
+        padding: 112px 32px 0 32px;
+    }
+
+    .insetting-values-grid {
+        padding: 0 32px 112px 32px;
+        flex-direction: column;
+        gap: 64px;
+    }
+
+    .iv-item {
+        gap: 24px;
+    }
+
+    .insetting-slider {
+        padding: 104px 32px 0 32px;
+    }
+
+    .insetting-hero-image {
+        padding: 8px 32px 0 32px;
+        display: block;
+        /* Desktop specs */
+    }
+
+    .insetting-disruptive {
+        background-color: var(--fincas-viridian);
+        color: #f7fbf8;
+        padding: 120px 64px 0 64px;
+    }
+
+    .id-intro {
+        padding: 0 0 48px 0;
+        text-align: left;
+    }
+
+    .id-main-title {
+        font-size: 50px;
+        line-height: 64px;
+        margin: 0;
+    }
+
+    .id-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 64px;
+        padding: 0 0 0 0;
+    }
+
+    .id-item {
+        max-width: 616px;
+    }
+
+    .id-title {
+        font-size: 30px;
+        line-height: 40px;
+        margin-bottom: 0;
+        /* Reset margin to use id-item gap */
+    }
+
+    .id-desc {
+        font-size: 18px;
+        line-height: 1.77;
+    }
+
+    .insetting-collage {
+        padding: 120px 32px 88px 32px;
+    }
+
+    .insetting-impact {
+        padding: 8px 32px 143px 32px;
+        gap: 0;
+        /* Managed by intro padding or matrix margin */
+    }
+
+    .impact-intro {
+        gap: 24px;
+        padding-bottom: 80px;
+    }
+
+    .impact-title {
+        font-size: 30px;
+        line-height: 48px;
+    }
+
+    .impact-matrix {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 74px;
+        column-gap: 20px;
+        place-items: start;
+    }
+
+    .im-item {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        text-align: left;
+        gap: 27px;
+        width: 100%;
+        max-width: 330px;
+    }
+}
+
+/* ==========================================================================
+   FINCAS RESPONSIVE MEDIA QUERIES (Desktop)
+   ========================================================================== */
+@media (min-width: 1024px) {
+
+    /* Desktop Hero */
+    .fincas-hero {
+        padding: 200px 48px 0 48px;
+        /* 112px visual gap + 88px header offset */
+        gap: 112px;
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    .fincas-hero-title {
+        font-size: 60px;
+        line-height: 1.17;
+        text-align: center;
+        max-width: 895px;
+    }
+
+    .fincas-hero-image-wrapper {
+        width: 100%;
+        max-width: 1056px;
+        gap: 17px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .fincas-hero-image-container {
+        height: auto;
+        aspect-ratio: auto;
+        border-radius: 10px;
+    }
+
+    .fincas-hero-image {
+        border-radius: 10px;
+    }
+
+    .fincas-hero-title-wrapper {
+        justify-content: center;
+    }
+
+    .fincas-hero-title {
+        font-size: 60px;
+        line-height: 1.17;
+        text-align: center;
+        max-width: 895px;
+    }
+
+    .fincas-hero-image-wrapper {
+        width: 100%;
+        max-width: 1056px;
+        gap: 17px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .fincas-hero-image-container {
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .fincas-hero-image {
+        border-radius: 10px;
+    }
+
+    .fincas-hero-caption {
+        text-align: left;
+    }
+
+    /* Desktop Overview */
+    .fincas-overview {
+        flex-direction: row;
+        gap: 68px;
+        padding: 96px 48px 120px 48px;
+        max-width: 1065px;
+        /* Centers the 969px inner content with 48px padding boundaries */
+        margin: 0 auto;
+        justify-content: center;
+    }
+
+    .fincas-overview-title {
+        width: 213px;
+        line-height: 30px;
+        flex-shrink: 0;
+    }
+
+    .fincas-overview-content {
+        max-width: 688px;
+    }
+
+    /* Desktop Stats */
+    .fincas-stats {
+        flex-direction: row;
+        gap: 25px;
+        padding: 16px 96px 152px 96px;
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    .fincas-stats-col {
+        flex: 1;
+        /* Distribute the 3 columns equally */
+        max-width: 451px;
+        /* Matching Figma column widths of ~450/451px */
+    }
+
+    .fincas-col-header {
+        margin-bottom: 57px;
+        /* Matches desktop gap mapping */
+    }
+
+    .fincas-stat-item {
+        padding-bottom: 53px;
+        margin-bottom: 57px;
+    }
+
+    /* Desktop Block 4: Brand Gallery */
+    .fincas-brand-gallery {
+        padding: 165px 0 152px 0;
+    }
+
+    .fincas-brand-title {
+        font-size: 50px;
+        line-height: 1.28;
+        /* 64px / 50px */
+        text-align: left;
+        margin-bottom: 4px;
+        /* Container has 84px gap, 84px + 4px = 88px gap to the logo */
+    }
+
+    .fincas-logo-container {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .fincas-brand-container {
+        padding: 0 96px;
+        /* Explicitly synced with Block 3 stats left/right padding */
+        gap: 84px;
+    }
+
+    .fincas-gallery-grid {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+        gap: 88px;
+    }
+
+    .fincas-gallery-pair {
+        flex-direction: row;
+        gap: 25px;
+    }
+
+    .fincas-brand-image {
+        flex: 1;
+        /* Makes images take equal width */
+        min-width: 1px;
+    }
+
+    .fincas-desktop-icons-container.desktop-only {
+        width: 100%;
+        display: block;
+        /* Overrides any display: none for mobile */
+    }
+
+    .fincas-desktop-icons-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 10px;
+    }
+
+    /* Block 5 Desktop Overrides */
+    .insetting-intro {
+        padding: 104px 94px 0 94px;
+        max-width: 1440px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .insetting-title {
+        font-size: 50px;
+        line-height: 1.28;
+        max-width: 600px;
+    }
+
+    .mobile-tablet-only {
+        display: none;
+    }
+
+    .insetting-desc {
+        max-width: 580px;
+    }
+
+    .insetting-values-header {
+        padding: 112px 96px 0 96px;
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    .insetting-values-grid {
+        flex-direction: row;
+        gap: 72px;
+        padding: 0 96px 112px 96px;
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    .iv-item {
+        flex: 1;
+        gap: 32px;
+    }
+
+    .insetting-slider {
+        padding: 88px 96px 0 96px;
+        flex-wrap: wrap;
+        /* Convert slider to grid on massive screens depending on width */
+        justify-content: space-between;
+        /* To stretch nicely */
+        overflow: visible;
+        /* Disable slider effect */
+        max-width: 1440px;
+        margin: 0 auto;
+        gap: 24px;
+    }
+
+    .is-img {
+        width: calc(25% - 18px);
+        /* 4 columns on 1440px */
+        height: auto;
+    }
+
+    .insetting-hero-image {
+        padding: 8px 96px 0 96px;
+        display: block;
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    .insetting-disruptive {
+        padding: 120px 92px 120px 92px;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    .id-grid {
+        gap: 72px;
+        /* Synced with .insetting-values-grid */
+    }
+
+    .id-item {
+        gap: 32px;
+        /* Synced with .iv-item */
+    }
+
+    .insetting-disruptive .id-intro {
+        padding-bottom: 48px;
+    }
+
+    .id-main-title {
+        font-size: 50px;
+        line-height: 1.28;
+    }
+
+    .id-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 144px;
+        row-gap: 73px;
+    }
+
+    .id-item {
+        gap: 32px;
+    }
+
+    .insetting-collage {
+        padding: 16px 94px 144px 94px;
+        max-width: 1440px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 112px;
+    }
+
+    .ic-top {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+    }
+
+    .ic-img {
+        flex: 1;
+        /* Match widths on top row */
+    }
+
+    .insetting-impact {
+        padding: 16px 94px 127px 94px;
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    .impact-intro {
+        gap: 53px;
+        padding-bottom: 80px;
+    }
+
+    .impact-title {
+        font-size: 50px;
+        line-height: 64px;
+    }
+
+    .impact-subtitle {
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .impact-matrix {
+        display: flex;
+        flex-direction: row;
+        gap: 58px;
+        justify-content: space-between;
+    }
+
+    .im-item {
+        flex: 1;
+        flex-direction: column-reverse;
+        text-align: left;
+        align-items: flex-start;
+        justify-content: flex-end;
+        max-width: 306px;
+    }
+}
+
+/* ==========================================================================
+   FINCAS FOOTER OVERRIDES (Synced with Lauhaus Style)
+   Scoted to .fincas-page for visual consistency with Lauhaus project
+   ========================================================================== */
+
+/* 1. Mobile & Default (Synced with Lauhaus) */
+.fincas-page .site-footer {
+    background-color: #146A56 !important;
+    padding: 1px 24px 80px 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 45px !important;
+    align-items: flex-start !important;
+    width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+}
+
+.fincas-page .site-footer .footer-divider {
+    display: block !important;
+    width: 100% !important;
+    height: 1px !important;
+    background-color: #f7fbf8 !important;
+    opacity: 1 !important;
+    margin-bottom: 48px !important;
+}
+
+.fincas-page .site-footer .footer-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 45px !important;
+    width: 100% !important;
+    padding: 0 !important;
+    align-items: flex-start !important;
+}
+
+.fincas-page .footer-name {
+    color: rgba(247, 251, 248, 0.7) !important;
+    font-size: 24px !important;
+}
+
+.fincas-page .footer-email,
+.fincas-page .footer-link,
+.fincas-page .footer-link-social {
+    color: #f7fbf8 !important;
+    font-size: 24px !important;
+}
+
+.fincas-page .footer-email:hover,
+.fincas-page .footer-link:hover,
+.fincas-page .footer-link-social:hover {
+    color: #e0e0e0 !important;
+}
+
+.fincas-page .footer-links {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 32px !important;
+    width: 100% !important;
+    padding: 0 !important;
+}
+
+/* 2. Tablet Overrides (Synced with Lauhaus) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .fincas-page .site-footer {
+        padding: 1px 32px 80px 32px !important;
+    }
+
+    .fincas-page .footer-links {
+        flex-direction: row !important;
+        gap: 72px !important;
+        align-items: center !important;
+    }
+}
+
+/* 3. Desktop Overrides (Synced with Lauhaus) */
+@media (min-width: 1025px) {
+    .fincas-page .site-footer {
+        padding: 1px 96px 48px 96px !important;
+        align-items: center !important;
+    }
+
+    .fincas-page .site-footer .footer-divider {
+        max-width: 1440px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .fincas-page .site-footer .footer-content {
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        max-width: 1440px !important;
+    }
+
+    .fincas-page .footer-links {
+        flex-direction: row !important;
+        gap: 72px !important;
+        width: auto !important;
     }
 }
