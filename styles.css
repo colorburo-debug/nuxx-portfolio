@@ -911,8 +911,8 @@ a {
     /* Though card is only 1224px */
     box-sizing: border-box;
     gap: 40px;
-    margin-bottom: 80px;
-    /* Spacing between cards halved, adjusted to user request */
+    margin-bottom: 192px;
+    /* Updated gap to 192px per user request */
 }
 
 /* 1. Image */
@@ -1272,8 +1272,8 @@ a {
     /* Though card is only 1224px */
     box-sizing: border-box;
     gap: 40px;
-    margin-bottom: 88px;
-    /* Spacing between cards */
+    margin-bottom: 192px;
+    /* Updated gap to 192px per user request */
 }
 
 /* 1. Image */
