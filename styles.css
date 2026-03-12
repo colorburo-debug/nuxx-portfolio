@@ -41,14 +41,21 @@
     --spacing-md: 16px;
     --spacing-lg: 32px;
     --spacing-xl: 64px;
+
+    /* Global Footer Variables (Default Dark) */
+    --footer-bg: #1e1e1e;
+    --footer-divider: #898989;
+    --footer-divider-opacity: 0.3;
+    --footer-name-color: #898989;
+    --footer-text-color: #f7fbf8;
+    --footer-link-hover: #e0e0e0;
 }
 
 
 /* FORCE DESKTOP FOOTER FIX (High Specificity - Top Injection) */
 @media (min-width: 1025px) {
     .site-footer {
-        background-color: #1e1e1e !important;
-        /* var(--color-dark-section) */
+        background-color: var(--footer-bg) !important;
         position: relative !important;
         z-index: 99 !important;
         width: 100% !important;
@@ -61,10 +68,9 @@
 
     .footer-divider {
         width: 100% !important;
-        max-width: 1440px !important;
         height: 1px !important;
-        background-color: #898989 !important;
-        opacity: 0.3 !important;
+        background-color: var(--footer-divider) !important;
+        opacity: var(--footer-divider-opacity) !important;
         margin-bottom: 48px !important;
         display: block !important;
     }
@@ -79,6 +85,7 @@
         gap: 0 !important;
         width: 100% !important;
         max-width: 1440px !important;
+        box-sizing: border-box !important;
     }
 
     .site-footer .footer-contact {
@@ -108,8 +115,8 @@
         display: inline-block !important;
         padding-left: 0 !important;
         width: auto !important;
-        color: #f7fbf8 !important;
-        font-family: 'Roobert', var(--font-body) !important;
+        color: var(--footer-text-color) !important;
+        font-family: var(--font-body) !important;
         font-size: 24px !important;
         text-decoration: none !important;
         line-height: 1.35 !important;
@@ -121,7 +128,7 @@
     .footer-link:hover,
     .footer-link-social:hover,
     .footer-email:hover {
-        color: #eeeff3 !important;
+        color: var(--footer-link-hover) !important;
     }
 
     .footer-link::after,
@@ -133,7 +140,7 @@
         left: 0 !important;
         width: 100% !important;
         height: 1.5px !important;
-        background-color: #eeeff3 !important;
+        background-color: var(--footer-link-hover) !important;
         transform: scaleX(0) !important;
         transform-origin: right !important;
         transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1) !important;
@@ -147,16 +154,14 @@
     }
 
     .footer-name {
-        color: #898989 !important;
-        font-family: 'Roobert', var(--font-body) !important;
+        color: var(--footer-name-color) !important;
+        font-family: var(--font-body) !important;
         font-size: 24px !important;
         line-height: 1.24 !important;
-        margin-right: 8px !important;
-        /* Spacing if needed, though they are stacked in contact */
+        margin: 0 !important;
     }
 
     .footer-email {
-        /* Already handled above but kept for any specific overrides if needed */
         line-height: 1.24 !important;
     }
 
@@ -217,7 +222,7 @@ body.designops-page {
 }
 
 body.home-page {
-    background-color: #c3fe0c;
+    background-color: transparent !important;
 }
 
 /* Main container */
@@ -850,21 +855,23 @@ a {
 
 /* ... existing styles ... */
 
-/* Work Highlights Section */
-.work-highlights {
+/* Dark Section Wrapper (Work Highlights + Footer) */
+.dark-section-wrapper {
     background-color: var(--color-dark-section);
-    /* #1e1e1e to cover Green Body */
+    width: 100%;
     position: relative;
     z-index: 2;
-    /* Ensure it covers body */
+}
+
+/* Work Highlights Section */
+.work-highlights {
+    background-color: transparent;
+    position: relative;
     width: 100%;
-    /* Spans full width of .main-container (which is now 100%) */
     padding: 0;
-    /* Reset padding, inner containers handle it */
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* Center the cards container */
     padding-bottom: 104px;
     z-index: 10;
 }
@@ -1229,26 +1236,6 @@ a {
 
 
 
-/* Work Highlights Section */
-/* Work Highlights Section */
-.work-highlights {
-    background-color: var(--color-dark-section);
-    /* Full bleed breakout */
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Center the cards container */
-    padding-bottom: 104px;
-    z-index: 10;
-    overflow-x: hidden;
-}
 
 /* Section Title */
 .work-section-title {
@@ -1633,8 +1620,11 @@ a {
     }
 
     /* Work Highlights */
+    /* Work Highlights and Footer Wrapper */
     .dark-section-wrapper {
+        width: 100%;
         padding: 0;
+        margin: 0;
     }
 
     .work-section-title {
@@ -1685,78 +1675,62 @@ a {
         max-width: 354px;
     }
 
-    /* Footer Tablet */
+    /* Tablet Footer (Horizontal) */
     .site-footer {
-        background-color: var(--color-dark-section) !important;
-        width: 100vw !important;
-        position: relative !important;
-        left: 50% !important;
-        right: 50% !important;
-        margin-left: -50vw !important;
-        margin-right: -50vw !important;
-        padding: 56px 32px 96px 32px !important;
-        align-items: flex-start !important;
-        height: auto !important;
-        box-sizing: border-box !important;
-        z-index: 10 !important;
-    }
-
-    .footer-divider {
-        display: block !important;
+        background-color: var(--footer-bg) !important;
         width: 100% !important;
-        height: 1px !important;
-        background-color: #898989 !important;
-        opacity: 0.3 !important;
-        margin-bottom: 48px !important;
-    }
-
-    .footer-content {
+        padding: 56px 0 96px 0 !important;
         display: flex !important;
         flex-direction: column !important;
-        align-items: flex-start !important;
-        justify-content: flex-start !important;
-        height: auto !important;
-        border: none !important;
-        padding: 0 !important;
-        gap: 72px !important;
-        width: 100% !important;
-        max-width: 1440px !important;
+        align-items: center !important;
+        gap: 0 !important;
     }
 
-    .footer-contact {
-        padding: 0 !important;
-        border: none !important;
+    .site-footer .footer-divider {
         width: 100% !important;
+        height: 1px !important;
+        background-color: var(--footer-divider) !important;
+        opacity: var(--footer-divider-opacity) !important;
+        margin-bottom: 96px !important;
+    }
+
+    .site-footer .footer-content {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0 48px !important;
+        gap: 0 !important;
+        width: 100% !important;
+        max-width: 1440px !important;
+        box-sizing: border-box !important;
+    }
+
+    .site-footer .footer-contact {
         display: flex !important;
         flex-direction: column !important;
         align-items: flex-start !important;
         gap: 8px !important;
-        margin: 0 !important;
     }
 
-    .footer-name {
-        font-size: 24px !important;
-        color: #898989 !important;
-        margin: 0 !important;
-    }
-
-    .footer-email {
-        font-size: 24px !important;
-        color: #f7fbf8 !important;
-        margin: 0 !important;
-        text-decoration: none !important;
-    }
-
-    .footer-nav,
-    .footer-links {
+    .site-footer .footer-links {
         display: flex !important;
         flex-direction: row !important;
-        flex-wrap: wrap !important;
-        gap: 72px !important;
-        width: 100% !important;
-        justify-content: flex-start !important;
-        padding: 0 !important;
+        align-items: center !important;
+        gap: 48px !important;
+    }
+
+    .site-footer .footer-name {
+        font-size: 24px !important;
+        color: var(--footer-name-color) !important;
         margin: 0 !important;
+    }
+
+    .site-footer .footer-email {
+        font-size: 24px !important;
+        color: var(--footer-text-color) !important;
+        margin: 0 !important;
+        text-decoration: none !important;
     }
 
     .footer-link,
@@ -1764,14 +1738,88 @@ a {
         font-size: 24px !important;
         display: flex !important;
         align-items: center !important;
-        color: #f7fbf8 !important;
+        color: var(--footer-text-color) !important;
+        text-decoration: none !important;
     }
 
     .link-arrow {
         display: flex !important;
-        position: static !important;
-        margin-right: 8px !important;
-        transform: none !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 21px !important;
+        height: 21px !important;
+        margin-right: 16px !important;
+    }
+
+    .link-arrow svg {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .site-footer .footer-links .link-arrow {
+        transform: rotate(-45deg) !important;
+    }
+}
+
+/* Mobile Footer (Vertical) */
+@media (max-width: 767px) {
+    .site-footer {
+        background-color: var(--footer-bg) !important;
+        width: 100% !important;
+        padding: 56px 0 96px 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0 !important;
+    }
+
+    .site-footer .footer-divider {
+        width: 100% !important;
+        margin-bottom: 96px !important;
+        background-color: var(--footer-divider) !important;
+        opacity: var(--footer-divider-opacity) !important;
+    }
+
+    .site-footer .footer-content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0 !important;
+        width: 100% !important;
+        padding: 0 24px !important;
+        box-sizing: border-box !important;
+    }
+
+    .site-footer .footer-contact {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        gap: 0 !important;
+        margin-bottom: 72px !important;
+        width: 100% !important;
+    }
+
+    .site-footer .footer-name {
+        font-size: 24px !important;
+        color: var(--footer-name-color) !important;
+        margin-bottom: 8px !important;
+        text-align: left !important;
+    }
+
+    .site-footer .footer-email {
+        font-size: 24px !important;
+        color: var(--footer-text-color) !important;
+        margin-bottom: 0 !important;
+        text-align: left !important;
+    }
+
+    .site-footer .footer-links {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 32px !important;
+        width: 100% !important;
     }
 }
 
@@ -1986,350 +2034,23 @@ a {
 
 
     /* Footer Styles */
-    .site-footer {
-        width: 100%;
-        max-width: 1440px;
-        margin: 0 auto;
-        padding: 0 24px 88px 24px;
-        /* 85px bottom padding from design */
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-    }
-
-    .footer-content {
-        width: 100%;
-        max-width: 1400px;
-        height: 112px;
-        border: 2px solid #898989;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        position: relative;
-        background-color: transparent;
-        /* Or #1e1e1e if needed, design shows transparent/background frame */
-        box-sizing: border-box;
-    }
-
-    /* 1. Logo Section */
-    .footer-brand {
-        width: 170px;
-        height: 100%;
-        border-right: 2px solid #898989;
-        /* Separator? Design inspection suggests lines or borders */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-    }
-
-    .footer-logo {
-        display: block;
-        /* Adjust size if needed based on svg */
-        width: auto;
-        height: auto;
-    }
-
-    /* 2. Contact Section */
-    .footer-contact {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding-left: 72px;
-        border-right: 2px solid #898989;
-        height: 100%;
-        width: 382px;
-        /* Fixed width from design Node 157:396 */
-        box-sizing: border-box;
-        gap: 8px;
-        /* Visual gap */
-    }
-
-    .contact-label {
-        font-family: 'Roobert', var(--font-body);
-        font-weight: 500;
-        font-size: 16px;
-        color: #898989;
-        line-height: 1.25;
-    }
-
-    .contact-email {
-        font-family: 'Roobert', var(--font-body);
-        font-weight: 400;
-        font-size: 24px;
-        color: #f7fbf8;
-        text-decoration: none;
-        line-height: 1.25;
-    }
-
-    .contact-email:hover {
-        text-decoration: underline;
-    }
-
-    /* 3. Navigation */
-    .footer-nav {
-        display: flex;
-        align-items: center;
-        height: 100%;
-        flex-grow: 1;
-        /* Fills remaining space */
-        justify-content: center;
-        gap: 48px;
-        border-right: 2px solid #898989;
-    }
-
-    .footer-link {
-        font-family: 'Roobert', var(--font-body);
-        font-weight: 500;
-        font-size: 18px;
-        color: #f7fbf8;
-        text-decoration: none;
-        line-height: 1.35;
-    }
-
-    .footer-link:hover {
-        color: #ffffff;
-        opacity: 0.8;
-    }
-
-    /* 4. Social / CTA */
-    .footer-social {
-        width: 111px;
-        /* Fixed width from Node 157:421 */
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-    }
-
-    .social-link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #f7fbf8;
-        transition: transform 0.2s ease;
-    }
-
-    .social-link:hover {
-        transform: scale(1.1);
-    }
 
 
 
     /* New Footer Styles */
-    .site-footer {
-        background-color: var(--color-dark-section);
-        /* #1e1e1e */
-        width: 100vw;
-        position: relative;
-        left: 50%;
-        right: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
-        padding: 0 0 calc(48px + env(safe-area-inset-bottom)) 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        box-sizing: border-box;
-    }
 
-    .site-footer .footer-content,
-    .site-footer .footer-divider {
-        width: 100%;
-        max-width: 1440px;
-        padding-left: 96px;
-        padding-right: 96px;
-        box-sizing: border-box;
-    }
-
-    .site-footer .footer-divider {
-        margin-bottom: 48px;
-        /* Gap logic moved here */
-    }
-
-    /* Redefine gap for footer columns */
-
-
-    .footer-divider {
-        width: 100%;
-        height: 1px;
-        background-color: #898989;
-        opacity: 0.3;
-    }
-
-    .footer-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-    }
-
-    .footer-contact {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .footer-name {
-        font-family: 'Roobert', var(--font-body);
-        font-weight: 500;
-        font-size: 24px;
-        line-height: 1.24;
-        color: #898989;
-    }
-
-    .footer-email {
-        font-family: 'Roobert', var(--font-body);
-        font-weight: 400;
-        font-size: 24px;
-        line-height: 1.24;
-        color: #f7fbf8;
-        text-decoration: none;
-        transition: opacity 0.2s ease;
-    }
-
-    .footer-email:hover {
-        opacity: 0.8;
-    }
-
-    .footer-links {
-        display: flex;
-        gap: 72px;
-        align-items: center;
-    }
-
-    .footer-link,
-    .footer-link-social {
-        font-family: 'Roobert', var(--font-body);
-        font-weight: 400;
-        font-size: 24px;
-        line-height: 1.35;
-        color: #f7fbf8;
-        text-decoration: none;
-        transition: opacity 0.2s ease;
-    }
-
-    .footer-link:hover,
-    .footer-link-social:hover {
-        opacity: 0.8;
-    }
-
-    /* 13. Footer - Mobile Node 196:2353 */
-    @media (max-width: 640px) {
-        .site-footer {
-            padding: 0 24px 56px 24px !important;
-            align-items: flex-start !important;
-            background-color: #1e1e1e !important;
-            z-index: 10 !important;
-            /* Ensure above green main container */
-            position: relative !important;
-        }
-
-        .site-footer .footer-content {
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            gap: 0 !important;
-            width: 100% !important;
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-
-        .site-footer .footer-divider {
-            width: 100% !important;
-            margin-bottom: 48px !important;
-            background-color: #898989 !important;
-            opacity: 0.3 !important;
-        }
-
-        /* Ensure Contact Info has NO border/background and is Left Aligned */
-        .site-footer .footer-contact {
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            text-align: left !important;
-            /* Force left alignment */
-            gap: 8px !important;
-            width: 100% !important;
-            margin-bottom: 48px !important;
-            margin-left: 0 !important;
-            margin-right: 0 !important;
-            padding-left: 0 !important;
-            padding-right: 0 !important;
-            border: none !important;
-            background: none !important;
-            box-shadow: none !important;
-            outline: none !important;
-        }
-
-        .site-footer .footer-contact .footer-name {
-            text-align: left !important;
-            display: block !important;
-            width: 100% !important;
-            margin: 0 !important;
-            margin-bottom: 8px !important;
-            align-self: flex-start !important;
-        }
-
-        .site-footer .footer-contact .footer-email {
-            text-align: left !important;
-            display: block !important;
-            width: 100% !important;
-            margin: 0 !important;
-            margin-bottom: 0 !important;
-            align-self: flex-start !important;
-        }
-
-        .site-footer .footer-links {
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            gap: 32px !important;
-            width: 100% !important;
-        }
-
-        /* Mobile Link Styles with Arrow */
-        .footer-link,
-        .footer-link-social {
-            display: flex !important;
-            align-items: center !important;
-            width: 100% !important;
-            padding: 0 !important;
-            font-size: 24px !important;
-            color: #f7fbf8 !important;
-            text-decoration: none !important;
-        }
-
-        .footer-link:hover,
-        .footer-link-social:hover {
-            text-decoration: underline !important;
-            opacity: 1 !important;
-        }
-
-        /* Arrow Implementation */
-        .link-arrow {
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            width: 21px !important;
-            height: 21px !important;
-            margin-right: 16px !important;
-        }
-
-        .link-arrow svg {
-            width: 100% !important;
-            height: auto !important;
-        }
-
-        /* Rotation for ALL links including Work (as requested) */
-        .site-footer .footer-links .link-arrow {
-            transform: rotate(-45deg) !important;
-        }
-    }
+    /* Footer Styles - Standardized in consolidated block above */
 }
 
 /* --- About Me Page Styles --- */
 .about-page {
+    /* Footer Variables Override */
+    --footer-bg: #f7fbf8;
+    --footer-divider: #090d1b;
+    --footer-divider-opacity: 0.2;
+    --footer-name-color: #898989;
+    --footer-text-color: #090d1b;
+    --footer-link-hover: #0d1327;
     background-color: #f7fbf8 !important;
     color: #090d1b;
 }
@@ -2539,59 +2260,7 @@ a {
     filter: invert(1) brightness(100) !important;
 }
 
-/* Custom Footer for About Page */
-.about-page .site-footer {
-    background-color: #f7fbf8 !important;
-}
-
-
-
-.about-page .footer-divider {
-    background-color: #090d1b !important;
-    opacity: 0.2 !important;
-}
-
-.about-page .footer-name,
-.about-page .footer-email,
-.about-page .footer-link,
-.about-page .footer-link-social {
-    color: #090d1b !important;
-    position: relative !important;
-    padding-bottom: 2px !important;
-}
-
-.about-page .footer-name {
-    color: #898989 !important;
-}
-
-.about-page .footer-link:hover,
-.about-page .footer-link-social:hover,
-.about-page .footer-email:hover {
-    opacity: 1 !important;
-    color: #0d1327 !important;
-}
-
-.about-page .footer-link::after,
-.about-page .footer-link-social::after,
-.about-page .footer-email::after {
-    content: '' !important;
-    position: absolute !important;
-    bottom: -2px !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 1.5px !important;
-    background-color: #090d1b !important;
-    transform: scaleX(0) !important;
-    transform-origin: right !important;
-    transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1) !important;
-}
-
-.about-page .footer-link:hover::after,
-.about-page .footer-link-social:hover::after,
-.about-page .footer-email:hover::after {
-    transform: scaleX(1) !important;
-    transform-origin: left !important;
-}
+/* About Footer - Standardized */
 
 /* Menu toggle lines in mobile for about and designops page */
 .about-page .mobile-menu-toggle .menu-line,
@@ -3288,18 +2957,6 @@ a {
     }
 
     /* 6. Footer Adjustments */
-    .site-footer {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        padding: 0 32px 96px 32px !important;
-        gap: 72px !important;
-    }
-
-    .site-footer .footer-content {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 72px;
-    }
 
 }
 
@@ -3507,11 +3164,8 @@ a {
         font-size: 18px;
         line-height: 1.77;
     }
-
-    .site-footer {
-        padding: 0 24px 80px 24px !important;
-    }
 }
+
 
 /* --- PROJECT LAUHAUS PAGE --- */
 html:has(.lauhaus-page) {
@@ -3519,6 +3173,13 @@ html:has(.lauhaus-page) {
 }
 
 body.lauhaus-page {
+    /* Footer Variables Override */
+    --footer-bg: #0c775e;
+    --footer-divider: #f7fbf8;
+    --footer-divider-opacity: 1;
+    --footer-name-color: rgba(247, 251, 248, 0.7);
+    --footer-text-color: #f7fbf8;
+    --footer-link-hover: #e0e0e0;
     background-color: #f7fbf8 !important;
 }
 
@@ -3816,8 +3477,8 @@ body.lauhaus-page {
 .journey-block.block-1 {
     display: flex;
     flex-direction: column;
-    margin-top: 48px;
-    margin-bottom: 64px;
+    margin-top: 144px;
+    margin-bottom: 0;
 }
 
 .journey-img {
@@ -3842,10 +3503,10 @@ body.lauhaus-page {
     line-height: 28px;
 }
 
-.journey-sub-container {
+.journey-main-container {
     display: grid;
     grid-template-columns: 577fr 806fr;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto 1fr auto;
     column-gap: 1.214%;
     /* 17px / 1400px */
     row-gap: 0;
@@ -3854,18 +3515,20 @@ body.lauhaus-page {
     align-items: start;
 }
 
-.journey-sub-container .journey-block {
+.journey-main-container .journey-block {
     display: contents;
 }
 
 .matrix-title {
     grid-column: 1;
     grid-row: 1;
+    padding-top: 80px !important;
 }
 
 .storyboard-title {
     grid-column: 2;
     grid-row: 1;
+    padding-top: 80px !important;
 }
 
 .matrix-img-wrapper {
@@ -3884,9 +3547,10 @@ body.lauhaus-page {
     font-family: 'Roobert', var(--font-body);
     font-size: 18px;
     font-weight: 400;
-    margin: 0 0 8px 0;
+    margin: 0 0 32px 0;
     color: #f7fbf8;
 }
+
 
 .journey-img-container {
     height: auto;
@@ -3908,6 +3572,7 @@ body.lauhaus-page {
     margin: 48px 0 0 0;
     color: #f7fbf8;
     grid-column: 1 / span 2;
+    grid-row: 3;
 }
 
 .lauhaus-divider {
@@ -3920,11 +3585,14 @@ body.lauhaus-page {
 
 .lauhaus-impact {
     padding-top: 184px;
-    padding-bottom: 112px;
+    padding-bottom: 0;
 }
 
+.lauhaus-impact .stats-grid {
+    margin-bottom: 0;
+}
 .lauhaus-showcase {
-    padding-top: 80px;
+    padding-top: 144px;
     position: relative;
 }
 
@@ -4009,43 +3677,7 @@ body.lauhaus-page {
     height: auto;
 }
 
-/* FOOTER CUSTOM OVERRIDE FOR THIS PAGE */
-html:has(.lauhaus-page) .site-footer {
-    background-color: #0c775e !important;
-}
-
-.lauhaus-page .site-footer {
-    background-color: #0c775e !important;
-    padding-top: 1px !important;
-    padding-bottom: 48px !important;
-}
-
-.lauhaus-page .footer-divider {
-    background-color: #f7fbf8 !important;
-    opacity: 1 !important;
-}
-
-.lauhaus-page .footer-name {
-    color: rgba(247, 251, 248, 0.7) !important;
-}
-
-.lauhaus-page .footer-email,
-.lauhaus-page .footer-link,
-.lauhaus-page .footer-link-social {
-    color: #f7fbf8 !important;
-}
-
-.lauhaus-page .footer-email:hover,
-.lauhaus-page .footer-link:hover,
-.lauhaus-page .footer-link-social:hover {
-    color: #e0e0e0 !important;
-}
-
-.lauhaus-page .footer-link::after,
-.lauhaus-page .footer-link-social::after,
-.lauhaus-page .footer-email::after {
-    background-color: #e0e0e0 !important;
-}
+/* Lauhaus Footer - Standardized */
 
 .lauhaus-page .mobile-nav-item .nav-arrow path {
     stroke: #eeeff3 !important;
@@ -4147,6 +3779,7 @@ html:has(.lauhaus-page) .site-footer {
     .stats-grid {
         flex-direction: column;
         gap: 64px;
+        margin-bottom: 0 !important;
     }
 
     .stat-col {
@@ -4164,9 +3797,9 @@ html:has(.lauhaus-page) .site-footer {
         line-height: 1.77;
     }
 
-    .journey-sub-container {
+    .journey-main-container {
         flex-direction: column;
-        gap: 64px;
+        gap: 0;
     }
 
     .showcase-split {
@@ -4213,7 +3846,8 @@ html:has(.lauhaus-page) .site-footer {
     .journey-section {
         display: flex;
         flex-direction: column;
-        padding-top: 40px;
+        padding-top: 144px;
+        gap: 0;
     }
 
     .journey-title {
@@ -4226,7 +3860,7 @@ html:has(.lauhaus-page) .site-footer {
 
     .journey-img-lg {
         margin-top: 0;
-        margin-bottom: 32px;
+        margin-bottom: 40px;
     }
 
     .journey-block {
@@ -4236,15 +3870,15 @@ html:has(.lauhaus-page) .site-footer {
     }
 
     .journey-block.block-1 {
-        margin-top: 72px;
+        margin-top: 104px;
         margin-bottom: 0;
     }
 
     .journey-caption {
         font-size: 18px !important;
         line-height: 28px !important;
-        padding-top: 0;
         margin-top: 0;
+        padding-top: 0;
         padding-bottom: 32px;
         margin-bottom: 0;
     }
@@ -4254,20 +3888,24 @@ html:has(.lauhaus-page) .site-footer {
         margin-top: 0;
     }
 
-    .journey-sub-container {
+    .journey-main-container {
         display: flex;
         flex-direction: column;
         gap: 0;
         margin-top: 0;
     }
 
-    .journey-sub-container .journey-block {
+    .journey-main-container .journey-block {
         display: flex;
         flex-direction: column;
     }
 
     .journey-block.block-2 {
-        margin-top: 72px;
+        margin-top: 104px;
+    }
+
+    .matrix-title {
+        padding-top: 0 !important;
     }
 
     .journey-grid-title {
@@ -4276,6 +3914,11 @@ html:has(.lauhaus-page) .site-footer {
         padding-top: 0;
         margin-top: 0;
         margin-bottom: 32px;
+    }
+
+    .storyboard-title {
+        padding-top: 104px !important;
+        padding-bottom: 32px !important;
     }
 
     .matrix-img-wrapper {
@@ -4287,7 +3930,7 @@ html:has(.lauhaus-page) .site-footer {
         line-height: 1.77 !important;
         max-width: 563px;
         margin-top: 0;
-        margin-bottom: 104px;
+        margin-bottom: 0;
     }
 
     /* Specific Tablet Slider behavior for mobile-slider class */
@@ -4299,15 +3942,18 @@ html:has(.lauhaus-page) .site-footer {
         margin-right: -32px;
     }
 
-    .mobile-slider {
+    .mobile-slider,
+    .plp-screens,
+    .screens-grid,
+    .screens-row {
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         gap: 24px;
-        padding-left: 32px;
-        padding-right: 32px;
+        padding-left: 32px !important;
+        padding-right: 0 !important;
         padding-bottom: 24px;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
@@ -4389,11 +4035,11 @@ html:has(.lauhaus-page) .site-footer {
     }
 
     /* Absolute swipe indicator for tablet slider */
-    .showcase-slider-section {
+    .showcase-slider-wrapper {
         position: relative;
     }
 
-    .showcase-right .swipe-indicator {
+    .showcase-slider-wrapper .swipe-indicator {
         position: absolute;
         bottom: 24px;
         left: 50%;
@@ -4415,6 +4061,10 @@ html:has(.lauhaus-page) .site-footer {
     display: none !important;
 }
 
+.mobile-tablet-only {
+    display: none !important;
+}
+
 .desktop-only {
     display: block !important;
 }
@@ -4427,15 +4077,90 @@ html:has(.lauhaus-page) .site-footer {
     .tablet-only {
         display: block !important;
     }
-}
 
-@media screen and (max-width: 768px) {
-    .tablet-only {
-        display: none !important;
+    .mobile-tablet-only {
+        display: block !important;
+    }
+
+    .lauhaus-page .mobile-slider-wrapper {
+        position: relative;
+        width: auto !important;
+        margin-left: -32px !important;
+        margin-right: -32px !important;
+    }
+
+    .swipe-indicator {
+        position: relative;
+        display: none;
+        /* Shown via .mobile-tablet-only */
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        color: #F7FBF8;
+        font-family: 'Roobert', var(--font-body);
+        font-size: 14px;
+        font-weight: 500;
+        pointer-events: none;
+        animation: pulse-swipe 2s infinite ease-in-out;
+        z-index: 10;
+        margin: 24px auto 0 auto;
+    }
+
+    .swipe-indicator svg {
+        animation: swipe-hint 2s infinite ease-in-out;
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
+    .tablet-only {
+        display: none !important;
+    }
+
+    .mobile-slider-wrapper {
+        width: auto;
+        margin-left: -24px;
+        margin-right: -24px;
+    }
+
+    .mobile-slider {
+        padding-left: 48px !important;
+        padding-right: 48px !important;
+        scroll-padding-inline-start: 48px;
+    }
+
+    /* Reset Showcase Slider 2 components on mobile */
+    .showcase-split {
+        display: block !important;
+    }
+
+    .showcase-right {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .showcase-right .mobile-slider-wrapper {
+        display: block !important;
+        position: relative !important;
+        width: auto !important;
+        margin-left: -24px !important;
+        margin-right: -24px !important;
+    }
+
+    .showcase-right .mobile-slider {
+        display: flex !important;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+        scroll-padding-inline-start: 24px !important;
+    }
+
+    .showcase-right .mobile-slider>img {
+        width: 80vw !important;
+        flex: 0 0 auto !important;
+        height: auto !important;
+    }
+}
+
+@media screen and (max-width: 767px) {
     .lauhaus-page .width-clamped {
         padding-left: 24px;
         padding-right: 24px;
@@ -4485,12 +4210,14 @@ html:has(.lauhaus-page) .site-footer {
     }
 
     .lauhaus-opp {
-        padding: 72px 24px 128px 24px;
+        padding: 72px 24px 0 24px !important;
     }
 
     .opp-grid {
+        display: flex;
         flex-direction: column;
         gap: 64px;
+        margin-top: 56px;
     }
 
     .opp-item {
@@ -4500,7 +4227,12 @@ html:has(.lauhaus-page) .site-footer {
     .opp-intro {
         flex-direction: column;
         gap: 24px;
-        margin-bottom: 88px;
+        margin-bottom: 0 !important;
+    }
+
+    .lauhaus-opp {
+        margin-bottom: 0 !important;
+        padding-bottom: 128px !important;
     }
 
     .opp-title {
@@ -4514,28 +4246,39 @@ html:has(.lauhaus-page) .site-footer {
     }
 
     .lauhaus-page .lauhaus-plp {
-        padding-top: 128px;
-        padding-bottom: 80px;
+        padding-top: 184px !important;
+        padding-bottom: 0 !important;
     }
 
     .plp-header {
-        margin-bottom: 64px;
+        margin-bottom: 0 !important;
+        gap: 40px !important;
+    }
+
+    .plp-description-bottom {
+        margin-bottom: 56px !important;
+    }
+
+    .stats-grid {
+        margin-bottom: 0 !important;
     }
 
     .lauhaus-impact {
-        padding-bottom: 0;
+        padding-top: 184px !important;
+        padding-bottom: 0 !important;
     }
 
-    .lauhaus-impact .stats-grid {
-        margin-bottom: 72px;
+    .lauhaus-discovery {
+        padding-top: 184px !important;
+        padding-bottom: 0 !important;
     }
 
     .lauhaus-showcase {
-        padding-top: 80px;
+        padding-top: 184px !important;
     }
 
     .lauhaus-green-bg {
-        padding-bottom: 120px;
+        padding-bottom: 0 !important;
     }
 
     .showcase-hero-img {
@@ -4560,67 +4303,20 @@ html:has(.lauhaus-page) .site-footer {
         display: block !important;
     }
 
-    .swipe-indicator.mobile-only {
+    .swipe-indicator.mobile-only,
+    .swipe-indicator.mobile-tablet-only {
         display: flex !important;
     }
 
     .mobile-slider-wrapper {
         position: relative;
-        width: 100vw;
-        margin-left: -24px;
-        margin-right: -24px;
+        width: auto !important;
+        margin-left: -24px !important;
+        margin-right: -24px !important;
     }
 
-    .swipe-indicator {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        color: #F7FBF8;
-        font-family: 'Roobert', var(--font-body);
-        font-size: 14px;
-        font-weight: 500;
-        pointer-events: none;
-        animation: pulse-swipe 2s infinite ease-in-out;
-        z-index: 10;
-        margin: 24px auto 0 auto;
-    }
-
-    .swipe-indicator svg {
-        animation: swipe-hint 2s infinite ease-in-out;
-    }
-
-    @keyframes swipe-hint {
-        0% {
-            transform: translateX(0);
-        }
-
-        50% {
-            transform: translateX(-4px);
-        }
-
-        100% {
-            transform: translateX(0);
-        }
-    }
-
-    @keyframes pulse-swipe {
-
-        0%,
-        100% {
-            opacity: 0.6;
-        }
-
-        50% {
-            opacity: 1;
-        }
-    }
-
-    /* Ensure swipe indicator matches wrapper context */
-    .lauhaus-showcase .swipe-indicator {
-        color: #F7FBF8 !important;
-        /* uniform light color for showcase section */
+    .showcase-bottom .swipe-indicator {
+        margin-bottom: 112px;
     }
 
     .mobile-slider {
@@ -4628,11 +4324,16 @@ html:has(.lauhaus-page) .site-footer {
         flex-direction: row;
         flex-wrap: nowrap !important;
         overflow-x: auto;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        width: 100%;
+        cursor: grab;
+        padding-bottom: 24px;
         scroll-snap-type: x mandatory;
-        scroll-padding-inline-start: 16px;
+        scroll-padding-inline-start: 24px !important;
         gap: 16px !important;
-        padding-left: 16px !important;
-        padding-right: 16px !important;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
         padding-bottom: 24px !important;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
@@ -4655,9 +4356,7 @@ html:has(.lauhaus-page) .site-footer {
         border-radius: 10px;
     }
 
-    .lauhaus-page .site-footer {
-        padding: 0 24px 80px 24px !important;
-    }
+    /* Footer Styles - Handled by standardized global rules */
 
     /* Target Journey Section specifically on mobile */
     .mobile-heading-line {
@@ -4671,48 +4370,88 @@ html:has(.lauhaus-page) .site-footer {
     .journey-section {
         display: flex;
         flex-direction: column;
-        padding-left: 8px !important;
-        padding-right: 8px !important;
+        padding: 0 8px 0 8px !important;
+        gap: 0 !important;
+        margin-left: -24px !important;
+        margin-right: -24px !important;
+        width: calc(100% + 48px) !important;
+        box-sizing: border-box !important;
+    }
+
+    .journey-main-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0 !important;
+        margin-top: 0 !important;
+        width: 100%;
     }
 
     .journey-title {
         text-align: left !important;
-        margin-bottom: 32px !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .journey-caption {
+        margin-top: 0 !important;
+        margin-bottom: 40px !important;
+        line-height: 28px !important;
+        color: #f7fbf8 !important;
+        font-size: 18px !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    .journey-grid-title {
+        width: 100% !important;
+        margin-bottom: 40px !important;
+        font-size: 18px !important;
+        line-height: 28px !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        box-sizing: border-box !important;
     }
 
     .journey-block {
         display: flex !important;
         flex-direction: column !important;
-        gap: 16px !important;
+        gap: 32px !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
     }
 
     .journey-block.block-1 {
-        margin-top: 0 !important;
-        margin-bottom: 80px !important;
+        margin-top: 184px !important;
+        margin-bottom: 0 !important;
+    }
+
+    .journey-block.block-2 {
+        gap: 32px !important;
+        margin-top: 72px !important;
+        margin-bottom: 0 !important;
+    }
+
+    .journey-block.block-3 {
+        margin-top: 72px !important;
+        margin-bottom: 0 !important;
     }
 
     .journey-img-mobile-step3 {
-        height: 908px !important;
+        aspect-ratio: 374 / 495 !important;
+        height: auto !important;
         width: 100% !important;
         object-fit: cover !important;
         object-position: 59% center !important;
         border-radius: 10px !important;
     }
 
-    .journey-sub-container {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 64px !important;
-        margin-top: 0 !important;
-    }
-
     .journey-block {
         display: flex !important;
         flex-direction: column !important;
     }
 
-    .journey-sub-container .block-2,
-    .journey-sub-container .block-3 {
+    .journey-main-container .block-2,
+    .journey-section .block-3 {
         width: 100% !important;
     }
 
@@ -4725,11 +4464,16 @@ html:has(.lauhaus-page) .site-footer {
     }
 
     .storyboard-img-mobile {
-        height: 527px !important;
+        aspect-ratio: 374 / 495 !important;
+        height: auto !important;
         width: 100% !important;
         object-fit: cover !important;
-        object-position: 20% center !important;
+        object-position: center !important;
         border-radius: 10px !important;
+    }
+
+    .storyboard-title {
+        padding-top: 0 !important;
     }
 
     .journey-caption {
@@ -4738,6 +4482,8 @@ html:has(.lauhaus-page) .site-footer {
         line-height: 28px !important;
         color: #f7fbf8 !important;
         font-size: 18px !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
     }
 
     .journey-grid-title {
@@ -4745,14 +4491,32 @@ html:has(.lauhaus-page) .site-footer {
         margin-bottom: 0 !important;
         font-size: 18px !important;
         line-height: 28px !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        box-sizing: border-box !important;
     }
 
     .journey-img-container img {
         width: 100% !important;
+        display: block;
         margin-left: 0 !important;
         margin-right: 0 !important;
         max-width: 100% !important;
         border-radius: 10px !important;
+    }
+
+    .journey-conclusion {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .matrix-img-wrapper,
+    .storyboard-img-wrapper {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
     }
 }
 
@@ -4768,6 +4532,13 @@ html:has(.fincas-page) {
 }
 
 .fincas-page {
+    /* Footer Variables Override */
+    --footer-bg: #146A56;
+    --footer-divider: #f7fbf8;
+    --footer-divider-opacity: 1;
+    --footer-name-color: rgba(247, 251, 248, 0.7);
+    --footer-text-color: #f7fbf8;
+    --footer-link-hover: #e0e0e0;
     background-color: #F7FBF8;
     color: #0d1327;
 }
@@ -5143,11 +4914,7 @@ html:has(.fincas-page) {
     gap: 64px;
 }
 
-.iv-item {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
+/* iv-item handled by utility */
 
 .iv-title {
     font-family: var(--font-heading);
@@ -5209,15 +4976,9 @@ html:has(.fincas-page) {
     border-radius: 10px;
 }
 
-.insetting-disruptive {
-    padding: 120px 24px 104px 24px;
-    /* Updated gap above title to 120px per user request */
-}
+/* insetting-disruptive handled by utility */
 
-.id-intro {
-    padding-bottom: 48px;
-    /* Reduced to 48px per user request */
-}
+/* id-intro handled by utility */
 
 .id-main-title {
     font-family: var(--font-heading);
@@ -5227,19 +4988,9 @@ html:has(.fincas-page) {
     margin: 0;
 }
 
-.id-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 64px;
-    margin: 0;
-}
+/* id-grid handled by utility */
 
-.id-item {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    /* Synced with .iv-item */
-}
+/* id-item handled by utility */
 
 .id-title {
     font-family: var(--font-heading);
@@ -5256,18 +5007,7 @@ html:has(.fincas-page) {
     margin: 0;
 }
 
-.insetting-collage {
-    padding: 8px 8px 104px 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 34px;
-}
-
-.ic-top {
-    display: flex;
-    flex-direction: column;
-    gap: 34px;
-}
+/* Base rules for insetting sections removed as they are now handled by utilities */
 
 .ic-img {
     width: 100%;
@@ -5277,18 +5017,10 @@ html:has(.fincas-page) {
     /* Precisely matching Figma 10.937px */
 }
 
-.insetting-impact {
-    padding: 12px 24px 112px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 72px;
-}
+/* Impact matrix handled by utility */
 
 .impact-intro {
-    display: flex;
-    flex-direction: column;
-    gap: 33px;
-    text-align: center;
+    /* Layout and gap handled by utility classes in HTML */
     padding-bottom: 0;
 }
 
@@ -5308,18 +5040,12 @@ html:has(.fincas-page) {
 }
 
 .impact-matrix {
-    display: flex;
-    flex-direction: column;
-    gap: 74px;
+    /* Layout and gap handled by utility classes in HTML */
     align-items: flex-start;
 }
 
 .im-item {
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: flex-start;
-    text-align: left;
-    gap: 27px;
+    /* Layout and gap handled by utility classes in HTML */
     width: 100%;
     max-width: 342px;
 }
@@ -5478,6 +5204,25 @@ html:has(.fincas-page) {
 
     .insetting-slider {
         padding: 104px 32px 0 32px;
+    }
+
+    .fincas-page .mobile-slider-wrapper {
+        margin-left: 32px !important;
+        margin-right: -32px !important;
+        width: auto !important;
+    }
+
+    .fincas-page .mobile-slider,
+    .fincas-page .insetting-slider {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .swipe-indicator.mobile-tablet-only {
+        display: flex !important;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .insetting-hero-image {
@@ -5906,56 +5651,7 @@ html:has(.fincas-page) {
     }
 }
 
-/* ==========================================================================
-   FINCAS FOOTER OVERRIDES (Synced with Lauhaus Style)
-   Scoted to .fincas-page for visual consistency with Lauhaus project
-   ========================================================================== */
-
-/* 1. Mobile & Default (Synced with Lauhaus) */
-.fincas-page .site-footer {
-    background-color: #146A56 !important;
-    padding: 1px 24px 80px 24px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 45px !important;
-    align-items: flex-start !important;
-    width: 100vw !important;
-    position: relative !important;
-    left: 50% !important;
-    right: 50% !important;
-    margin-left: -50vw !important;
-    margin-right: -50vw !important;
-}
-
-.fincas-page .site-footer .footer-divider {
-    display: block !important;
-    width: 100% !important;
-    height: 1px !important;
-    background-color: #f7fbf8 !important;
-    opacity: 1 !important;
-    margin-bottom: 48px !important;
-}
-
-.fincas-page .site-footer .footer-content {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 45px !important;
-    width: 100% !important;
-    padding: 0 !important;
-    align-items: flex-start !important;
-}
-
-.fincas-page .footer-name {
-    color: rgba(247, 251, 248, 0.7) !important;
-    font-size: 24px !important;
-}
-
-.fincas-page .footer-email,
-.fincas-page .footer-link,
-.fincas-page .footer-link-social {
-    color: #f7fbf8 !important;
-    font-size: 24px !important;
-}
+/* Fincas Footer Overrides - Colors handled by variables */
 
 .fincas-page .footer-email:hover,
 .fincas-page .footer-link:hover,
@@ -5963,50 +5659,23 @@ html:has(.fincas-page) {
     color: #e0e0e0 !important;
 }
 
-.fincas-page .footer-links {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 32px !important;
-    width: 100% !important;
-    padding: 0 !important;
-}
 
-/* 2. Tablet Overrides (Synced with Lauhaus) */
-@media (min-width: 768px) and (max-width: 1024px) {
-    .fincas-page .site-footer {
-        padding: 1px 32px 80px 32px !important;
+/* 4. Mobile Overrides for Fincas Sliders */
+@media screen and (max-width: 767px) {
+    .fincas-page .mobile-slider-wrapper {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 100% !important;
     }
 
-    .fincas-page .footer-links {
-        flex-direction: row !important;
-        gap: 72px !important;
-        align-items: center !important;
-    }
-}
-
-/* 3. Desktop Overrides (Synced with Lauhaus) */
-@media (min-width: 1025px) {
-    .fincas-page .site-footer {
-        padding: 1px 96px 48px 96px !important;
-        align-items: center !important;
+    .fincas-page .mobile-slider {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+        scroll-padding-inline-start: 24px !important;
     }
 
-    .fincas-page .site-footer .footer-divider {
-        max-width: 1440px !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-    }
-
-    .fincas-page .site-footer .footer-content {
-        flex-direction: row !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        max-width: 1440px !important;
-    }
-
-    .fincas-page .footer-links {
-        flex-direction: row !important;
-        gap: 72px !important;
-        width: auto !important;
+    .fincas-page .mobile-slider > img {
+        width: 284px !important;
+        flex: 0 0 284px !important;
     }
 }

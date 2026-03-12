@@ -237,11 +237,20 @@
                 </div>
 
                 <!-- 2. First UI Slider (Moved here per Figma) -->
-                <div class="insetting-slider slider-1">
-                    <img src="assets/fincas/fincas-ui-1.png" alt="UI Screen 1" class="is-img">
-                    <img src="assets/fincas/fincas-ui-2.png" alt="UI Screen 2" class="is-img">
-                    <img src="assets/fincas/fincas-ui-3.png" alt="UI Screen 3" class="is-img">
-                    <img src="assets/fincas/fincas-ui-4.png" alt="UI Screen 4" class="is-img">
+                <div class="mobile-slider-wrapper">
+                    <div class="insetting-slider slider-1 mobile-slider">
+                        <img src="assets/fincas/fincas-ui-1.png" alt="UI Screen 1" class="is-img">
+                        <img src="assets/fincas/fincas-ui-2.png" alt="UI Screen 2" class="is-img">
+                        <img src="assets/fincas/fincas-ui-3.png" alt="UI Screen 3" class="is-img">
+                        <img src="assets/fincas/fincas-ui-4.png" alt="UI Screen 4" class="is-img">
+                    </div>
+                    <div class="swipe-indicator mobile-tablet-only">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                        <span>Swipe</span>
+                    </div>
                 </div>
 
                 <div class="insetting-values-header">
@@ -250,18 +259,18 @@
                     <hr class="mobile-heading-line mobile-only">
                 </div>
 
-                <div class="insetting-values-grid">
-                    <div class="iv-item">
+                <div class="insetting-values-grid flex flex-col gap-40">
+                    <div class="iv-item flex flex-col gap-24">
                         <h3 class="iv-title">Identify insetting opportunities</h3>
                         <p class="iv-desc">We give users the reach they need, whatever the transaction we facilitate. We
                             make it easy, and it works for almost anyone with a debit card.</p>
                     </div>
-                    <div class="iv-item">
+                    <div class="iv-item flex flex-col gap-24">
                         <h3 class="iv-title">Define insetting projects</h3>
                         <p class="iv-desc">With concrete, measurable results in carbon reduction, biodiversity, water
                             quality and social impact.</p>
                     </div>
-                    <div class="iv-item">
+                    <div class="iv-item flex flex-col gap-24">
                         <h3 class="iv-title">Deliver reliable indicators</h3>
                         <p class="iv-desc">That certify all impacts and provide traceability over the supply chain.</p>
                     </div>
@@ -273,36 +282,45 @@
                 </div>
 
                 <!-- 4. Second UI Slider -->
-                <div class="insetting-slider slider-2">
-                    <img src="assets/fincas/fincas-ui-5.png" alt="UI Screen 5" class="is-img">
-                    <img src="assets/fincas/fincas-ui-6.png" alt="UI Screen 6" class="is-img">
-                    <img src="assets/fincas/fincas-ui-7.png" alt="UI Screen 7" class="is-img">
-                    <img src="assets/fincas/fincas-ui-8.png" alt="UI Screen 8" class="is-img">
+                <div class="mobile-slider-wrapper">
+                    <div class="insetting-slider slider-2 mobile-slider">
+                        <img src="assets/fincas/fincas-ui-5.png" alt="UI Screen 5" class="is-img">
+                        <img src="assets/fincas/fincas-ui-6.png" alt="UI Screen 6" class="is-img">
+                        <img src="assets/fincas/fincas-ui-7.png" alt="UI Screen 7" class="is-img">
+                        <img src="assets/fincas/fincas-ui-8.png" alt="UI Screen 8" class="is-img">
+                    </div>
+                    <div class="swipe-indicator mobile-tablet-only">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                        <span>Swipe</span>
+                    </div>
                 </div>
 
                 <!-- 5. Disruptive Approach -->
-                <div class="insetting-disruptive">
-                    <div class="id-intro">
+                <div class="insetting-disruptive px-24 pt-120 pb-104">
+                    <div class="id-intro pb-48">
                         <h2 class="id-main-title">A disruptive approach<br>to monitoring and reporting</h2>
                     </div>
 
-                    <div class="id-grid">
-                        <div class="id-item">
+                    <div class="id-grid flex flex-col gap-64">
+                        <div class="id-item flex flex-col gap-24">
                             <h3 class="id-title">Tech based</h3>
                             <p class="id-desc">Optimised to measure the indicators of the nature bond methodology at a
                                 low cost (CO2eq, soil and water health, biodiversity, farmers' income).</p>
                         </div>
-                        <div class="id-item">
+                        <div class="id-item flex flex-col gap-24">
                             <h3 class="id-title">Secure + transparent</h3>
                             <p class="id-desc">All information stored on a public blockchain creates trust and allows
                                 for external audits.</p>
                         </div>
-                        <div class="id-item">
+                        <div class="id-item flex flex-col gap-24">
                             <h3 class="id-title">Integration & Automation</h3>
                             <p class="id-desc">Provide seamless, real-time updates on the progress and impact of
                                 corporate projects, with a focus on minimizing the reliance on human intervention.</p>
                         </div>
-                        <div class="id-item">
+                        <div class="id-item flex flex-col gap-24">
                             <h3 class="id-title">Community driven</h3>
                             <p class="id-desc">Most manual tasks are executed by the local communities after trainings.
                             </p>
@@ -311,8 +329,8 @@
                 </div>
 
                 <!-- 6. Photo Collage -->
-                <div class="insetting-collage">
-                    <div class="ic-top">
+                <div class="insetting-collage flex flex-col gap-32 p-8 pb-104">
+                    <div class="ic-top flex flex-col gap-32">
                         <img src="assets/fincas/fincas-nature-2.png" alt="Nature 2" class="ic-img">
                         <img src="assets/fincas/fincas-nature-3.png" alt="Nature 3" class="ic-img">
                     </div>
@@ -322,29 +340,33 @@
                 </div>
 
                 <!-- 7. Impact Matrix -->
-                <div class="insetting-impact">
-                    <div class="impact-intro">
+                <div class="insetting-impact flex flex-col gap-72 px-24 pt-16 pb-112">
+                    <div class="impact-intro flex flex-col gap-32 text-center">
                         <h2 class="impact-title">The first viable model to finance nature based solutions in smallholder
                             farming</h2>
-                        <p class="impact-subtitle">5 Million smallholder farmers holding 45% of all productive land</p>
+                        <p class="impact-subtitle text-base">5 Million smallholder farmers holding 45% of all productive
+                            land</p>
                     </div>
-                    <div class="impact-matrix">
-                        <div class="im-item">
-                            <p class="im-text">Regenerative agriculture, restoration of native ecosystems + CO2 capture
+                    <div class="impact-matrix flex flex-col gap-72 items-start">
+                        <div class="im-item flex flex-col-reverse items-start gap-24">
+                            <p class="im-text text-lg font-medium">Regenerative agriculture, restoration of native
+                                ecosystems + CO2 capture
                             </p>
                             <img src="assets/fincas/fincas-icon-co2-captura.svg" alt="CO2 Capture" class="im-icon">
                         </div>
-                        <div class="im-item">
-                            <p class="im-text">Increased biodiversity<br>+ recovery of water resources</p>
+                        <div class="im-item flex flex-col-reverse items-start gap-24">
+                            <p class="im-text text-lg font-medium">Increased biodiversity<br>+ recovery of water
+                                resources</p>
                             <img src="assets/fincas/fincas-icon-biodiversidad.svg" alt="Biodiversity" class="im-icon">
                         </div>
-                        <div class="im-item">
-                            <p class="im-text">Improved living conditions<br>for smallholder farmers</p>
+                        <div class="im-item flex flex-col-reverse items-start gap-24">
+                            <p class="im-text text-lg font-medium">Improved living conditions<br>for smallholder farmers
+                            </p>
                             <img src="assets/fincas/fincas-icon-ingresos.svg" alt="Better Living Conditions"
                                 class="im-icon">
                         </div>
-                        <div class="im-item">
-                            <p class="im-text">Increased resilience<br>of sponsors’ supply chain</p>
+                        <div class="im-item flex flex-col-reverse items-start gap-24">
+                            <p class="im-text text-lg font-medium">Increased resilience<br>of sponsors’ supply chain</p>
                             <img src="assets/fincas/fincas-icon-salud.svg" alt="Supply Chain Resilience"
                                 class="im-icon">
                         </div>
@@ -391,7 +413,7 @@
                     </span>
                     <span class="link-text">Artifacts</span>
                 </a>
-                <a href="#" class="footer-link-social">
+                <a href="https://www.linkedin.com/in/colorburo/" class="footer-link-social" target="_blank" rel="noopener noreferrer">
                     <span class="link-arrow">
                         <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 7.5H16M16 7.5L9.5 1M16 7.5L9.5 14" stroke="currentColor" stroke-width="2"
