@@ -1,14 +1,19 @@
-console.log('Nuxx Portfolio loaded');
-
-document.addEventListener('DOMContentLoaded', () => {
+const initPage = () => {
+    console.log('Nuxx Page Initialized');
+    
+    // Mobile Menu Logic
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const mobileMenuClose = document.getElementById('mobile-menu-close');
     const mobileMenuOverlay = document.getElementById('mobile-menu');
     const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
 
     if (mobileMenuToggle && mobileMenuClose && mobileMenuOverlay) {
-        mobileMenuToggle.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent WebGL morph trigger
+        // Remove existing listeners if any (simple way for this prototype)
+        const newToggle = mobileMenuToggle.cloneNode(true);
+        mobileMenuToggle.parentNode.replaceChild(newToggle, mobileMenuToggle);
+        
+        newToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
             mobileMenuOverlay.classList.add('active');
             document.body.classList.add('no-scroll');
         });
@@ -19,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.remove('no-scroll');
         });
 
-        // Close menu when a link is clicked
         mobileNavItems.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenuOverlay.classList.remove('active');
@@ -28,10 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Custom Cursor Logic for pages without background.js
+    // Custom Cursor Logic
     const reticle = document.getElementById('cursor-reticle');
     const hasWebGL = document.getElementById('webgl-container');
-
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
     if (reticle && !hasWebGL && !isTouchDevice) {
@@ -40,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
             reticle.style.top = `${e.clientY}px`;
         });
 
-        const interactiveElements = document.querySelectorAll('a, button, .action-btn, .mobile-menu-toggle');
+        const interactiveElements = document.querySelectorAll('a, button, .action-btn, .mobile-menu-toggle, .about-cta-pill');
         interactiveElements.forEach(el => {
             el.addEventListener('mouseenter', () => {
                 reticle.style.transform = 'translate(-50%, -50%) scale(2.5)';
@@ -52,4 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-});
+};
+
+// Expose globally for Barba
+window.initPage = initPage;
+
+document.addEventListener('DOMContentLoaded', initPage);

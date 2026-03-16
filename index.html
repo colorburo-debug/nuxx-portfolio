@@ -14,10 +14,11 @@
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Unbounded:wght@400;500;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css?v=cachebust30">
+    <link rel="stylesheet" href="styles.css?v=cachebust31">
 </head>
 
-<body class="home-page">
+<body class="home-page" data-barba="wrapper">
+    <div id="page-transition-curtain"></div>
     <div id="webgl-container"></div>
     <div id="cursor-reticle"></div>
 
@@ -58,7 +59,8 @@
         </nav>
     </div>
 
-    <main class="main-container">
+    <div data-barba="container" data-barba-namespace="home" data-body-class="home-page">
+        <main class="main-container">
         <!-- Navigation / Header Pill -->
         <div class="header-wrapper">
             <header class="header-pill">
@@ -84,65 +86,38 @@
 
         <!-- Main Hero Content -->
         <section class="hero-section">
-            <div class="hero-content">
-                <div class="hero-top-row">
-                    <div class="hero-text-group">
-                        <h1 class="hero-title">Jorge Garcia</h1>
-                        <h2 class="hero-subtitle">Interaction designer <br>& Design Director</h2>
-                        <div class="hero-description">
-                            <p>
-                                Amateur runner and <span class="strikethrough">elite video game player</span> converted
-                                interaction designer and product craftsman.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Interaction Indicator (Anchor to #work) -->
-                    <a href="#work" class="interaction-indicator">
-                        <!-- Desktop SVG (Node 52:635) -->
-                        <svg class="anchor-icon-desktop" width="55" height="63" viewBox="0 0 54.3306 62.0921"
-                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g>
-                                <rect width="54.3306" height="62.0921" rx="27.1653" fill="#1E1E1E" />
-                                <path class="anchor-arrow"
-                                    d="M28.5516 36.5333L34.5751 30.5099L36.4042 32.34L27.2577 41.4865L18.1102 32.34L19.9403 30.5099L25.9638 36.5333V20.6974H28.5516V36.5333Z"
-                                    fill="#F7FBF8" />
-                            </g>
-                        </svg>
-                        <!-- Mobile SVG (Node 52:634) -->
-                        <svg class="anchor-icon-mobile" width="42" height="48" viewBox="0 0 42 48" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <rect width="42" height="48" rx="21" fill="#1E1E1E" />
-                            <path class="anchor-arrow"
-                                d="M22.0713 28.2432L26.7285 23.5859L28.1426 25L21.0713 32.0713L14 25L15.4141 23.5859L20.0713 28.2432V16H22.0713V28.2432Z"
-                                fill="#F7FBF8" />
-                        </svg>
-                    </a>
+            <div class="hero-intro">
+                <div class="hero-intro-left">
+                    <h1 class="hero-name">Jorge Garcia</h1>
+                    <p class="hero-location">Based in Bogotá, Colombia</p>
                 </div>
+                <div class="hero-intro-right">
+                    <p class="hero-main-description">
+                        Design Director and product craftsman with a decade and a half of experience building impact-driven teams—driven by interaction, strategy, and the mastery of the craft.
+                    </p>
+                </div>
+            </div>
 
-                <!-- About Me Card (Node 26:333 -> 109:23) -->
-                <div class="about-card" id="about">
-                    <div class="about-card-content">
-                        <p class="about-location">Based in Bogotá, Colombia</p>
-                        <p class="about-description">
-                            Crafting human-centred, story-driven products and brands, and simply delightful artifacts
-                            that people love to interact with.
-                        </p>
-                        <a href="about.html" class="about-cta-pill">
-                            The human behind the designer
-                            <div class="cta-icon-wrapper">
-                                <svg width="15" height="16" viewBox="0 0 15 16" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7.5 13.5V2.5M7.5 2.5L2.5 7.5M7.5 2.5L12.5 7.5" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </div>
-                        </a>
+            <!-- About Me Card -->
+            <div class="about-card" id="about">
+                <div class="about-card-visuals">
+                    <img src="assets/about-visuals.png" alt="About Visuals" class="vector-image">
+                </div>
+                <div class="about-card-content-wrapper">
+                    <div class="about-card-text">
+                        <h2 class="about-card-title">
+                            From amateur runner and <span class="strikethrough">elite video game player</span>
+                            to interaction designer and product craftsman.
+                        </h2>
                     </div>
-                    <!-- Decorative Sellos Layer -->
-                    <div class="about-sellos" aria-hidden="true">
-                        <img src="assets/sellos/Sellos.svg" alt="" class="sello-single">
-                    </div>
+                    <a href="about.html" class="about-cta-pill">
+                        <span>The human behind the designer</span>
+                        <div class="cta-icon-wrapper">
+                            <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.5 13.5V2.5M7.5 2.5L2.5 7.5M7.5 2.5L12.5 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </a>
                 </div>
             </div>
         </section>
@@ -356,16 +331,20 @@
                     </div>
                 </div>
             </footer>
-        </div>
-    </main>
+        </main>
+    </div>
 
+    <!-- GSAP for Smooth Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Barba.js for Page Transitions -->
+    <script src="https://unpkg.com/@barba/core"></script>
+    
     <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="background.js?v=4"></script>
     <script src="script.js?v=2"></script>
+    <script src="animations.js"></script>
 </body>
-
-</html>
->
 
 </html>

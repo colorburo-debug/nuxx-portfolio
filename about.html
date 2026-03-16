@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="styles.css?v=about_v1">
 </head>
 
-<body class="about-page">
+<body class="about-page" data-barba="wrapper">
+    <div id="page-transition-curtain"></div>
     <!-- Custom Cursor -->
     <div id="cursor-reticle"></div>
 
@@ -58,7 +59,8 @@
         </nav>
     </div>
 
-    <main class="main-container">
+    <div data-barba="container" data-barba-namespace="about" data-body-class="about-page">
+        <main class="main-container">
         <!-- Navigation / Header Pill -->
         <div class="header-wrapper">
             <header class="header-pill">
@@ -270,7 +272,11 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@barba/core"></script>
     <script src="script.js?v=2"></script>
+    <script src="animations.js"></script>
 </body>
 
 </html>

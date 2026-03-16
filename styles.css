@@ -181,22 +181,38 @@
     width: 100%;
     height: 100vh;
     z-index: 0 !important;
-    /* Behind main content (z-1) but ABOVE body background */
     pointer-events: none;
-    /* Let clicks pass through if needed, though script uses document listeners */
+    transition: opacity 1s cubic-bezier(0.27, 0, 0.51, 1);
+    opacity: 1; /* Default visible on home */
 }
 
 html {
     scroll-behavior: smooth;
-    /* Remove overflow-x: hidden from html/body as it breaks iOS momentum scroll */
     background-color: #1e1e1e;
+    transition: background-color 0.8s cubic-bezier(0.27, 0, 0.51, 1);
+}
+
+body {
+    transition: background-color 0.8s cubic-bezier(0.27, 0, 0.51, 1);
 }
 
 /* 
    Home Page: Top overscroll is chartreuse, bottom is dark green 
 */
-html:has(.home-page) {
-    background: linear-gradient(#c3fe0c 50%, #1e1e1e 50%) no-repeat;
+body.home-page {
+    background-color: #c3fe0c !important;
+}
+
+#page-transition-curtain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10000;
+    pointer-events: none;
+    transform: translateX(-100%);
+    background-color: #c3fe0c;
 }
 
 /* LaHaus Page: All-white overscroll */
@@ -219,10 +235,6 @@ body {
 
 body.designops-page {
     background-color: #f7fbf8 !important;
-}
-
-body.home-page {
-    background-color: transparent !important;
 }
 
 /* Main container */
@@ -500,217 +512,429 @@ a {
     margin-bottom: 24px;
 }
 
-/* Hero Section (Node 109:23 -> 132:185) */
+/* Hero Section - Restored and Refined */
 .hero-section {
-    /* background-color removed to reveal WebGL */
-    /* Full hero background to catch padding */
     display: flex;
     flex-direction: column;
-    gap: 144px;
-    /* Gap to About Card */
-    padding-top: 584px;
-    /* Large top padding per Node 132:185 */
-    padding-bottom: 104px;
-    padding-left: 96px;
-    /* Align with Header */
-    padding-right: 96px;
+    align-items: flex-start;
     width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
+    max-width: 1440px; /* Standard website max-width adjusted for alignment */
+    margin: 92px auto 0 auto;
+    padding: 56px 96px 96px 96px; /* Aligning with 96px grid */
     box-sizing: border-box;
-}
-
-.hero-content {
-    /* background-color removed to reveal WebGL */
-    display: flex;
-    flex-direction: column;
-    gap: 144px;
-    width: 100%;
-}
-
-.hero-top-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    /* Align text bottom with anchor bottom? */
-    width: 100%;
     position: relative;
-    /* Figma 132:184 is flex row, items-end. Correct. */
-}
-
-/* Node 132:183 */
-.hero-text-group {
-    display: flex;
-    flex-direction: column;
-    /* gap: 32px; Removed to use explicit margins for better control */
-    /* width: 634px; Removed fixed width to allow natural flow */
-    max-width: 634px;
-    /* Use max-width to allow shrinking if needed, but respect design max width */
-    color: #1e1e1e;
-}
-
-/* "Jorge Garcia" Node 14:105 */
-.hero-title {
-    font-family: 'Roobert', var(--font-body);
-    font-weight: 500;
-    /* Medium */
-    font-size: 30px;
-    line-height: 40px;
-    color: #1e1e1e;
-    margin: 0;
-    margin-bottom: 16px;
-    /* Explicit 16px from Figma Node 166:80 gap */
-    height: 40px;
-    /* Logical height from line-height? Figma says h-[24px] text but block? */
-}
-
-/* "Interaction designer..." Node 14:37 */
-.hero-subtitle {
-    font-family: var(--font-heading);
-    /* Unbounded */
-    font-weight: 500;
-    /* Medium */
-    font-size: 50px;
-    line-height: 64px;
-    margin: 0;
-    margin-bottom: 56px;
-    /* Calculated spacing: Description Top 206px - Subtitle Bottom ~150px = 56px */
-    color: #1e1e1e;
-    /* height: 128px; Removed fixed height */
-    /* 2 lines * 64px = 128px? Figma says h-[102px]? */
-    /* "Interaction designer & Design Director" */
-    /* If it wraps, likely 2 lines. width 634px. */
-}
-
-/* Description Node 14:38 */
-.hero-description {
-    font-family: 'Roobert', var(--font-body);
-    font-weight: 500;
-    /* Medium */
-    font-size: 24px;
-    line-height: 1.35;
-    /* ~32.4px */
-    color: #1e1e1e;
-    width: 100%;
-    /* Fill container */
-    max-width: none;
-    /* Was 688px, now constrained by parent 634px */
-}
-
-.hero-description p {
-    margin: 0;
-}
-
-.strikethrough {
-    text-decoration: line-through;
-    text-decoration-thickness: 1px;
-    /* Refined thickness */
-}
-
-/* --- Sellos Grouped Component --- */
-.about-sellos {
-    position: absolute;
-    right: 88px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 334px;
-    height: 334px;
     z-index: 10;
-    pointer-events: none;
 }
 
-.about-sellos .sello-single {
+.hero-intro {
+    display: flex;
+    justify-content: space-between; /* Dynamically compresses the gap as the viewport narrows */
+    align-items: flex-start;
+    gap: 32px; /* Minimum distance between elements to prevent touching */
     width: 100%;
-    height: 100%;
-    margin-top: 0;
+    max-width: 1224px;
+    margin: 0 0 737px 0;
 }
 
-/* About Card (Node 26:333 -> 109:23) */
-/* About Card (Node 26:333 -> 109:23 -> 132:189) */
-.about-card {
-    background-color: var(--color-dark-section);
-    /* #1e1e1e */
-    color: #f7fbf8;
-    /* Off-white text on dark card */
-    border-radius: 10px;
-    width: 100%;
-    /* Fixed height removed to allow content to dictate size per Figma auto layout */
-    /* height: 400px; */
-    position: relative;
-    box-sizing: border-box;
-    /* Padding per Node 26:333 */
-    padding: 72px 64px;
+.hero-intro-left {
     display: flex;
     flex-direction: column;
-    /* gap: 40px;  Removed gap to control spacing via margins for different gaps */
+    gap: 0; 
+    flex-shrink: 0;
+
+    width: 331px;
 }
 
-/* To match Figma specific margins inside the card */
-.about-card-content {
-    /* Correctly target the inner wrapper if it exists, or just ensure no stray text */
-    /* The HTML has .about-card-content, so let's style it to fill space if needed */
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    /* Stacking from top */
-    margin: 0;
-}
-
-.about-location {
+.hero-name {
     font-family: 'Roobert', var(--font-body);
-    font-weight: 500;
+    font-weight: 600; /* SemiBold */
+    font-size: 22px;
+    line-height: 1.44;
+    color: #1e1e1e;
+    margin: 0 0 4px 0; /* Applied 4px bottom margin from mobile standard */
+
+}
+
+.hero-location {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500; /* Medium */
     font-size: 22px;
     line-height: 1.4;
-    color: #b3b3b3;
-    /* Light grey for subtitle on dark bg */
+    color: #6f6f6f;
     margin: 0;
-    margin-bottom: 16px;
-    /* Updated to 14px per user request */
 }
 
-.about-description {
+.hero-intro-right {
+    flex: 0 1 670px; /* Allows the description to shrink gracefully after the gap hits 32px */
+    max-width: 670px;
+}
+
+.hero-main-description {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500; /* Medium */
+    font-size: 22px;
+    line-height: 1.68;
+    color: #1e1e1e;
+    margin: 0;
+}
+
+/* About Me Card */
+.about-card {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 1224px; /* Unified with 1224px home page standard */
+    margin: 0; /* Aligned to 96px grid padding */
+    min-height: 424px;
+    position: relative;
+    overflow: hidden;
+    padding: 75px 72px 72px 72px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto; /* Center alignment */
+}
+
+.about-card-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 56px;
+    width: 100%;
+    height: 100%;
+}
+
+.about-card-text {
+    width: 100%;
+    max-width: 616px;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    position: relative;
+    z-index: 10; /* Above visuals */
+}
+
+.about-card-title {
     font-family: 'Roobert', var(--font-body);
     font-weight: 400;
-    font-size: 36px;
-    line-height: 1.33;
-    line-height: 1.33;
+    font-size: 34px;
+    line-height: 1.4;
     color: #f7fbf8;
-    /* White text */
-    max-width: 721px;
     margin: 0;
-    margin-bottom: 40px;
-    /* Gap between description and CTA */
-    /* Push CTA to bottom */
 }
 
-
-
-/* Note: In desktop it might be absolute, but flow is safer. 
-   Figma: Content top 91px. Description ~170px height. CTA Top 316px? 
-   Let's stick to flow for now to avoid breakages. */
+.about-card-title .strikethrough {
+    text-decoration: line-through;
+}
 
 .about-cta-pill {
-    position: relative;
     display: flex;
     align-items: center;
-    width: 384px;
-    height: 64px;
-    width: 384px;
-    height: 64px;
-    border: 2px solid #f7fbf8;
-    /* Border Off-White, updated to 2px */
+    width: fit-content;
+    min-width: 384px;
+    height: 72px;
+    border: 2px solid #ffffff;
     border-radius: 100px;
-    text-decoration: none;
-    color: #f7fbf8;
+    padding: 0 32px;
+    box-sizing: border-box;
+    color: #ffffff;
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
     font-size: 20px;
-    box-sizing: border-box;
+    text-decoration: none;
     transition: all 0.3s ease;
-    padding-left: 32px;
-    margin-top: 0;
-    /* Margin handled by description bottom margin */
+    justify-content: space-between;
+}
+
+.about-cta-pill:hover {
+    background-color: #ffffff;
+    color: #1e1e1e;
+}
+
+.cta-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(90deg);
+    pointer-events: none;
+}
+
+/* Visuals / Vectors - Desktop */
+/* Visuals / Vectors - Desktop */
+.about-card-visuals {
+    position: absolute;
+    right: 72px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 431px;
+    height: 280px;
+    pointer-events: none;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vector-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@media (max-width: 1250px) and (min-width: 1025px) {
+    .about-card {
+        padding: 400px 32px 80px 32px !important;
+        min-height: 800px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+    }
+
+    .about-card-content-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 56px !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .about-card-text {
+        max-width: 100% !important;
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 48px !important;
+    }
+
+    .about-card-visuals {
+        position: absolute !important;
+        top: 106px !important;
+        left: 50% !important;
+        right: auto !important;
+        transform: translateX(-50%) !important;
+        width: 100% !important;
+        max-width: 450px !important;
+        height: 320px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .about-cta-pill {
+        margin: 0 auto !important;
+        min-width: 0 !important;
+        width: fit-content !important;
+    }
+}
+
+.about-card-visuals img {
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .hero-section {
+        padding-top: 400px;
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .hero-intro {
+        flex-direction: column;
+        gap: 32px;
+        margin-bottom: 120px;
+    }
+
+    .hero-intro-right {
+        max-width: 100%;
+    }
+
+    .about-card {
+        padding: 400px 32px 80px 32px;
+        min-height: 800px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .about-card-content-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 56px;
+        width: 100%;
+    }
+
+    .about-card-text {
+        max-width: 100%;
+        text-align: center;
+        align-items: center;
+        gap: 48px;
+    }
+
+    .about-card-visuals {
+        position: absolute;
+        top: 106px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 450px;
+        height: 320px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .vector-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-section {
+        padding-top: 0;
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 96px;
+        position: relative;
+    }
+
+    .hero-intro {
+        position: absolute;
+        top: 0; /* Parent .hero-section already has margin-top: 80px for header space */
+        left: 0;
+        width: 100%;
+        height: 720px; /* 800 - 80 */
+        padding: 32px 24px;
+        margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        box-sizing: border-box;
+    }
+
+    .hero-intro-left {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 4px; 
+    }
+
+    .hero-name {
+        font-size: 22px;
+        line-height: 1.44;
+        font-weight: 600;
+        color: #1e1e1e;
+    }
+
+    .hero-location {
+        font-size: 22px;
+        line-height: 1.4;
+        font-weight: 500;
+        color: #6f6f6f;
+    }
+
+    .hero-intro-right {
+        width: 100%;
+        max-width: none;
+        margin-top: 0;
+    }
+
+    .hero-main-description {
+        font-size: 18px;
+        line-height: 1.77;
+        font-weight: 500;
+        color: #1e1e1e;
+    }
+
+    .about-card {
+        margin: 800px 8px 0 8px; /* Maintain vertical flow below absolute hero */
+        width: calc(100% - 16px);
+        height: auto;
+        min-height: unset;
+        padding: 76px 24px 64px 24px; /* Updated to 24px horizontal gap */
+        box-sizing: border-box;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 58px; /* Exactly from Figma gap-[58px] */
+        overflow: hidden;
+        border-radius: 10px;
+    }
+
+    .about-card-content-wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 58px; /* Gap between title and CTA from Figma */
+        z-index: 20;
+    }
+
+    .about-card-text {
+        width: 100%;
+        max-width: 326px; /* Width from Figma */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .about-card-title {
+        font-size: 24px;
+        line-height: 37px;
+        width: 100%;
+        margin: 0;
+        font-weight: 400;
+        color: #f7fbf8;
+        font-family: 'Roobert', sans-serif;
+    }
+
+    .about-card-title .strikethrough {
+        text-decoration: line-through;
+        text-decoration-thickness: 1px;
+    }
+
+    .about-cta-pill {
+        width: 100%;
+        min-width: unset;
+        height: 64px;
+        font-size: 16px;
+        padding: 0 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 2px solid #ffffff;
+        border-radius: 100px;
+        background: transparent;
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+    /* REFINED MOBILE VECTORS - Matching Figma 1068:420 */
+    .about-card-visuals {
+        position: relative;
+        width: 100%;
+        max-width: 342px;
+        aspect-ratio: 342 / 240;
+        pointer-events: none;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+    }
+
+    .vector-image {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
 }
 
 .about-cta-pill:hover {
@@ -718,14 +942,7 @@ a {
     color: #090d1b;
 }
 
-.cta-icon-wrapper {
-    position: absolute;
-    right: 32px;
-    display: flex;
-    align-items: center;
-    transform: rotate(90deg);
-    /* Arrow points right */
-}
+/* Consolidated with main CTA block */
 
 /* If svg is down arrow, -90 makes it right. */
 
@@ -865,7 +1082,7 @@ a {
 
 /* Work Highlights Section */
 .work-highlights {
-    background-color: transparent;
+    background-color: #1e1e1e; /* Explicitly dark to cover green body bleed */
     position: relative;
     width: 100%;
     padding: 0;
@@ -880,7 +1097,6 @@ a {
 .work-section-title {
     width: 100%;
     max-width: 1440px;
-    /* Container max width */
     margin: 0 auto;
     /* Spacing from Figma 119:59 */
     padding-top: 128px;
@@ -1128,105 +1344,7 @@ a {
         max-width: 100%;
     }
 
-    /* Mobile About Card (Node 109:26) */
-    .about-card {
-        width: calc(100vw - 16px) !important;
-        max-width: none !important;
-        /* Center in the screen, respecting the exact 8px edge */
-        margin-left: calc(-50vw + 50% + 8px) !important;
-        margin-right: 0 !important;
-        height: auto;
-        padding: 40px 24px 64px 24px;
-        gap: 16px;
-        border-radius: 10px;
-        justify-content: flex-start;
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* Ensure content stacks correctly */
-    .about-sellos {
-        position: relative;
-        right: auto;
-        top: auto;
-        transform: none;
-        width: 100%;
-        max-width: 298px;
-        height: auto;
-        aspect-ratio: 1 / 1;
-        margin: 0 auto 48px auto;
-        order: -1;
-    }
-
-    .about-card-content {
-        display: contents;
-        /* Let children follow grid/flex of parent if needed, OR just reset */
-        /* Actually, about-card is a flex column now. Let's target children directly if they are direct children, 
-           BUT about-card content is wrapped in .about-card-content in HTML? 
-           Let's Check HTML. Line 86: <div class="about-card-content"> 
-           So .about-card flex settings apply to .about-card-content.
-        */
-    }
-
-    /* We need .about-card-content to fill the card and space items */
-    .about-card .about-card-content {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        /* Updated gap to 16px match */
-        justify-content: flex-start;
-    }
-
-    .about-location {
-        font-size: 22px;
-        color: #898989;
-        margin-bottom: 0;
-        line-height: 1.4;
-    }
-
-    .about-description {
-        font-size: 24px;
-        line-height: 1.5;
-        width: 100%;
-        margin-bottom: 32px;
-        /* tablet gap is 16px + 31px margin = 47px */
-        max-width: 326px;
-        /* Restrict width per design */
-    }
-
-    .about-cta-pill {
-        width: 100%;
-        max-width: 326px;
-        /* Ensure max-width matches design */
-        height: 64px;
-        min-height: 64px;
-        flex-shrink: 0;
-        font-size: 16px;
-        margin-top: auto;
-        border: 2px solid #f7fbf8;
-
-        /* Flex positioning for arrow */
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        /* Ensure vertical center */
-        padding-left: 24px;
-        /* Exact match from Figma ml-[25px] */
-        padding-right: 24px;
-        white-space: nowrap;
-        /* Prevent wrapping per design */
-    }
-
-    .about-cta-pill .cta-icon-wrapper {
-        position: static;
-        /* Remove absolute positioning */
-        transform: rotate(90deg) !important;
-        /* Rotate to point right */
-        right: auto;
-    }
+    /* Redundant Mobile About Card styles removed to allow primary implementation at line 837 to take precedence */
 }
 
 .tag:hover {
@@ -1534,36 +1652,23 @@ a {
         display: flex;
     }
 
-    /* Hero Section */
+    /* Responsive Hero Section */
     .hero-section {
-        padding-top: 536px;
-        padding-left: 32px;
-        padding-right: 32px;
-        padding-bottom: 48px;
-        gap: 0;
+        margin-top: 80px;
+        padding: 48px 32px 96px 32px;
     }
 
-    .hero-content {
-        gap: 24px;
+    .hero-intro {
+        flex-direction: column;
+        gap: 40px;
+        margin-bottom: 617.62px; /* Adjusted to achieve exactly 850px gap from header */
     }
 
-    .hero-title {
-        font-size: 30px;
-        line-height: 40px;
+    .hero-intro-right {
+        max-width: 100%;
     }
 
-    .hero-subtitle {
-        font-size: 40px;
-        line-height: 52px;
-        margin-bottom: 24px;
-        height: auto;
-    }
-
-    .hero-description {
-        font-size: 22px;
-        line-height: 1.35;
-    }
-
+    /* Conflict Resolution: Removed redundant tabletish about-card styles */
     .hero-top-row {
         flex-direction: column;
         align-items: flex-start;
@@ -1587,37 +1692,7 @@ a {
         order: -1;
     }
 
-    /* About Card */
-    .about-card {
-        padding: 88px 32px 88px 32px;
-        height: auto;
-        justify-content: flex-start;
-        gap: 16px;
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    .about-card .about-card-content {
-        gap: 16px;
-    }
-
-    .about-location {
-        font-size: 22px;
-        margin-bottom: 0;
-    }
-
-    .about-description {
-        font-size: 30px;
-        margin-bottom: 32px;
-        /* mobile gap is 14px + 33px margin = 47px */
-        max-width: 100%;
-    }
-
-    .about-cta-pill {
-        width: 100%;
-        max-width: none;
-        margin-top: auto;
-    }
+    /* Conflict Resolution: Removed redundant mobile about-card styles causing clumping */
 
     /* Work Highlights */
     /* Work Highlights and Footer Wrapper */
@@ -1763,6 +1838,17 @@ a {
 
 /* Mobile Footer (Vertical) */
 @media (max-width: 767px) {
+    .case-actions {
+        flex-direction: column !important;
+        gap: 16px !important;
+        width: 100% !important;
+    }
+
+    .action-btn {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
     .site-footer {
         background-color: var(--footer-bg) !important;
         width: 100% !important;
@@ -1821,6 +1907,62 @@ a {
         gap: 32px !important;
         width: 100% !important;
     }
+
+    /* Force 8px gap for About Me card on mobile */
+    .hero-section {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .about-card {
+        margin: 674px 8px 0 8px !important;
+        width: calc(100% - 16px) !important;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0 !important; /* Control gaps manually for precision */
+    }
+
+    .about-card-content-wrapper {
+        display: contents !important;
+    }
+
+    .about-card-text {
+        order: 2 !important;
+        width: 100% !important;
+        max-width: none !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        box-sizing: border-box !important;
+        margin-bottom: 58px !important; /* Aesthetic gap between text and CTA */
+        text-align: left !important;
+    }
+
+    .about-card-visuals {
+        order: 1 !important;
+        margin-bottom: 56px !important; /* Required gap between vector and following element (Text) */
+        position: relative !important;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        transform: none !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        width: 100% !important;
+        max-width: 342px !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    .about-cta-pill {
+        order: 3 !important;
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-bottom: 0 !important; /* Bottom element */
+    }
 }
 
 /* Mobile Reponsive Design (max-width: 768px) */
@@ -1831,205 +1973,8 @@ a {
         padding: 8px;
     }
 
-    /* Hero Section */
-    .hero-section {
-        flex-direction: column;
-        align-items: flex-start;
-        padding-top: 104px;
-        /* Adjust if needed */
-        padding-left: 24px;
-        padding-right: 24px;
-        padding-bottom: 56px;
-    }
+/* Mobile Nav Toggle Overrides if needed, but they are handled in global block */
 
-    .hero-content {
-        gap: 40px;
-        /* Gap between title group and description */
-        width: 100%;
-    }
-
-    .hero-text-group {
-        gap: 24px;
-        /* Gap between Name and Title */
-    }
-
-    .hero-title {
-        font-size: 25px;
-        line-height: 40px;
-    }
-
-    .hero-subtitle {
-        font-size: 26px;
-        line-height: 1.25;
-        height: auto;
-        white-space: normal;
-    }
-
-    .hero-description {
-        font-size: 20px;
-        max-width: 100%;
-    }
-
-
-
-    /* Work Highlights Mobile */
-    .section-title,
-    .work-highlights h2,
-    .work-highlights .section-label,
-    .section-label,
-    .work-highlights h3.section-label {
-        font-size: 30px;
-        margin-bottom: 40px;
-        text-align: center !important;
-        width: 100% !important;
-        align-self: center;
-        display: block;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        color: #ffffff !important;
-        /* Force white for visibility */
-        position: relative;
-        z-index: 10;
-    }
-
-    .action-cards-container {
-        flex-direction: column;
-        width: 100%;
-        gap: 24px;
-    }
-
-    .action-card {
-        width: 100%;
-        min-width: 0;
-    }
-
-    /* Case Study Card Mobile */
-    .case-study-card {
-        padding: 0;
-        width: auto;
-        margin-left: 8px;
-        margin-right: 8px;
-        margin-bottom: 136px;
-        border-radius: 10px;
-        background-color: transparent;
-        /* Keep transparent, or maybe need background if it overlaps? */
-    }
-
-    .card-image-placeholder {
-        height: 300px;
-        border-radius: 10px 10px 0 0;
-    }
-
-    .card-content {
-        padding: 40px 24px;
-        gap: 32px;
-    }
-
-    .card-title {
-        font-size: 32px;
-        line-height: 1.2;
-    }
-
-    .card-meta {
-        font-size: 14px;
-    }
-
-    .card-description {
-        font-size: 18px;
-        color: #FFFFFF;
-        /* Ensure white text on dark mobile bg */
-    }
-
-    .card-actions {
-        flex-direction: column;
-        gap: 16px;
-    }
-}
-
-/* Old Mobile Menu Overlay Removed */
-
-/* Mobile Responsive Styles */
-@media (max-width: 640px) {
-
-    /* Hero Section Mobile (Node 133:240) */
-    .hero-section {
-        padding-top: 392px;
-        /* Node 133:240 */
-        padding-bottom: 56px;
-        padding-left: 24px;
-        padding-right: 24px;
-        gap: 40px;
-        /* Gap to Anchor */
-    }
-
-    .hero-content {
-        gap: 40px;
-        /* Sync with section gap */
-    }
-
-    .hero-top-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 40px;
-    }
-
-    .hero-text-group {
-        width: 100%;
-        gap: 0;
-        /* Use margins for specific gaps */
-    }
-
-    .case-actions {
-        flex-direction: column;
-        width: 100%;
-        gap: 16px;
-    }
-
-    .action-btn {
-        width: 100% !important;
-        max-width: 100%;
-    }
-
-    /* Mobile Anchor */
-    .anchor-icon-desktop {
-        display: none;
-    }
-
-    .anchor-icon-mobile {
-        display: block;
-    }
-
-    .interaction-indicator {
-        width: 42px;
-        height: 48px;
-        border-radius: 21px;
-    }
-
-    /* Node 48:438 */
-    .hero-title {
-        font-size: 25px;
-        line-height: 40px;
-        margin-bottom: 16px;
-        /* Gap to subtitle */
-    }
-
-    /* Node 48:439 */
-    .hero-subtitle {
-        font-size: 26px;
-        line-height: 1.24;
-        width: 100%;
-        margin-bottom: 40px;
-        /* Gap to description */
-        height: auto;
-    }
-
-    /* Node 48:440 */
-    .hero-description {
-        font-size: 20px;
-        line-height: 1.35;
-        max-width: 100%;
-        margin-bottom: 0;
-    }
 
 
 
@@ -2058,6 +2003,12 @@ a {
 /* Override body background to be light */
 .about-page .main-container {
     background-color: transparent !important;
+}
+
+/* Ensure WebGL is hidden when not on home-page through CSS as fallback */
+body:not(.home-page) #webgl-container {
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Make sure nuxx logo is black in about page */
@@ -4131,6 +4082,7 @@ body.lauhaus-page {
     /* Reset Showcase Slider 2 components on mobile */
     .showcase-split {
         display: block !important;
+        margin-bottom: 0 !important;
     }
 
     .showcase-right {
@@ -4306,6 +4258,10 @@ body.lauhaus-page {
     .swipe-indicator.mobile-only,
     .swipe-indicator.mobile-tablet-only {
         display: flex !important;
+    }
+
+    .showcase-slider-wrapper .swipe-indicator {
+        margin-bottom: 112px;
     }
 
     .mobile-slider-wrapper {
@@ -5677,5 +5633,90 @@ html:has(.fincas-page) {
     .fincas-page .mobile-slider > img {
         width: 284px !important;
         flex: 0 0 284px !important;
+    }
+}
+/* 5. Mobile Intro Container Final Adjustments (Figma Node 1048:1118) */
+@media screen and (max-width: 767px) {
+    .hero-section {
+        margin-top: 80px !important;
+        padding-top: 0 !important;
+    }
+    .hero-intro {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 32px 24px 8px 24px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 32px !important;
+        box-sizing: border-box !important;
+        z-index: 10 !important;
+    }
+    .hero-intro-left {
+        gap: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .hero-name {
+        font-family: 'Roobert', sans-serif !important;
+        font-weight: 600 !important;
+        font-size: 22px !important;
+        line-height: 1.44 !important;
+        color: #1e1e1e !important;
+        margin: 0 !important;
+    }
+    .hero-location {
+        font-family: 'Roobert', sans-serif !important;
+        font-weight: 500 !important;
+        font-size: 22px !important;
+        line-height: 1.4 !important;
+        color: #6f6f6f !important;
+        margin: 0 !important;
+    }
+    .hero-main-description {
+        font-family: 'Roobert', sans-serif !important;
+        font-weight: 500 !important;
+        font-size: 18px !important;
+        line-height: 1.77 !important;
+        color: #1e1e1e !important;
+        margin: 0 !important;
+    }
+}
+
+/* 6. Mobile About Card Alignment Fix */
+@media screen and (max-width: 767px) {
+    .about-card {
+        margin-top: 722px !important; /* To maintain 730px gap from the header after removing section padding-top */
+    }
+}
+
+/* 7. Final Gap Adjustments for Desktop and Tablet */
+@media screen and (min-width: 1025px) {
+    .hero-intro {
+        margin: 0 0 737px 0 !important; /* Unified left alignment at 96px */
+    }
+    .hero-name {
+        margin-bottom: 4px !important; /* Unified with mobile standard */
+    }
+    .hero-intro-left {
+        gap: 0 !important;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .hero-intro {
+        margin-bottom: 584.62px !important; /* Final adjustment to hit 850px gap at 1024px width */
+    }
+    .hero-name {
+        margin-bottom: 4px !important; /* Unified with mobile standard */
+    }
+    .hero-intro-left {
+        gap: 0 !important;
+    }
+    .hero-section {
+        margin-top: 80px !important;
+        padding-top: 48px !important;
     }
 }

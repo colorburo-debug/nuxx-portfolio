@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="styles.css?v=lauhaus_v13">
 </head>
 
-<body class="lauhaus-page">
+<body class="lauhaus-page" data-barba="wrapper">
+    <div id="page-transition-curtain"></div>
     <!-- Custom Cursor -->
     <div id="cursor-reticle"></div>
 
@@ -58,7 +59,8 @@
         </nav>
     </div>
 
-    <main class="main-container lauhaus-main">
+    <div data-barba="container" data-barba-namespace="project" data-body-class="lauhaus-page">
+        <main class="main-container lauhaus-main">
         <!-- Navigation / Header Pill -->
         <div class="header-wrapper">
             <header class="header-pill">
@@ -357,7 +359,11 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@barba/core"></script>
     <script src="script.js?v=2"></script>
+    <script src="animations.js"></script>
 </body>
 
 </html>
