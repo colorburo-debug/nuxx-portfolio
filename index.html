@@ -14,7 +14,7 @@
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Unbounded:wght@400;500;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css?v=cachebust31">
+    <link rel="stylesheet" href="styles.css?v=cachebust56">
 </head>
 
 <body class="home-page" data-barba="wrapper">
@@ -98,7 +98,31 @@
                 </div>
             </div>
 
-            <!-- About Me Card -->
+            <!-- Interaction Indicator (Anchor to #work) -->
+            <a href="#work" class="interaction-indicator" aria-label="Scroll to work section">
+                <!-- Desktop SVG -->
+                <svg class="anchor-icon-desktop" width="55" height="63" viewBox="0 0 54.3306 62.0921"
+                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <rect width="54.3306" height="62.0921" rx="27.1653" fill="#1E1E1E" />
+                        <path class="anchor-arrow"
+                            d="M28.5516 36.5333L34.5751 30.5099L36.4042 32.34L27.2577 41.4865L18.1102 32.34L19.9403 30.5099L25.9638 36.5333V20.6974H28.5516V36.5333Z"
+                            fill="#F7FBF8" />
+                    </g>
+                </svg>
+                <!-- Mobile SVG -->
+                <svg class="anchor-icon-mobile" width="42" height="48" viewBox="0 0 42 48" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <rect width="42" height="48" rx="21" fill="#1E1E1E" />
+                    <path class="anchor-arrow"
+                        d="M22.0713 28.2432L26.7285 23.5859L28.1426 25L21.0713 32.0713L14 25L15.4141 23.5859L20.0713 28.2432V16H22.0713V28.2432Z"
+                        fill="#F7FBF8" />
+                </svg>
+            </a>
+        </section>
+
+        <!-- About Me Section -->
+        <section class="about-section">
             <div class="about-card" id="about">
                 <div class="about-card-visuals">
                     <img src="assets/about-visuals.png" alt="About Visuals" class="vector-image">
@@ -106,7 +130,7 @@
                 <div class="about-card-content-wrapper">
                     <div class="about-card-text">
                         <h2 class="about-card-title">
-                            From amateur runner and <span class="strikethrough">elite video game player</span>
+                            Amateur runner and <span class="strikethrough">elite video game player</span>
                             to interaction designer and product craftsman.
                         </h2>
                     </div>

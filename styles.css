@@ -578,156 +578,184 @@ a {
     margin: 0;
 }
 
-/* About Me Card */
+/* About Me Card - REBUILT for FIGMA PRECISION (Desktop, Tablet, Mobile) */
 .about-card {
-    background-color: #1e1e1e;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 1224px; /* Unified with 1224px home page standard */
-    margin: 0; /* Aligned to 96px grid padding */
-    min-height: 424px;
-    position: relative;
-    overflow: hidden;
-    padding: 75px 72px 72px 72px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto; /* Center alignment */
+    background-color: #1e1e1e !important;
+    border-radius: 10px !important;
+    width: 100% !important;
+    max-width: 1224px !important; /* Re-aligned with site's 1224px standard */
+    margin: -146px auto 96px auto !important; /* Overlap by 146px to match Figma, 96px bottom gap */
+    display: flex !important;
+    flex-direction: row-reverse !important; /* Content LEFT, Visuals RIGHT (Visuals is 1st in HTML) */
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 16px 56px 14px 56px !important;
+    gap: 56px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    position: relative !important;
+    min-height: 424px !important;
+    z-index: 20 !important; /* Ensure it stays above the hero overlap area */
+}
+
+/* --- END ABOUT ME CARD FINALIZED IMPLEMENTATION --- */
+
+.about-card-visuals {
+    flex: 0 1 538px !important; /* Allow shrink for 1224px container */
+    height: 394px !important; /* Fixed height from Figma */
+    max-width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    transform: none !important;
 }
 
 .about-card-content-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 56px;
-    width: 100%;
-    height: 100%;
-}
-
-.about-card-text {
-    width: 100%;
-    max-width: 616px;
-    display: flex;
-    flex-direction: column;
-    gap: 56px;
-    position: relative;
-    z-index: 10; /* Above visuals */
+    flex: 0 1 616px !important; /* Allow shrink for 1224px container */
+    max-width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 56px !important;
+    align-items: flex-start !important;
 }
 
 .about-card-title {
-    font-family: 'Roobert', var(--font-body);
-    font-weight: 400;
-    font-size: 34px;
-    line-height: 1.4;
-    color: #f7fbf8;
-    margin: 0;
+    font-family: 'Roobert', var(--font-body) !important;
+    font-weight: 400 !important; /* Regular in Figma code */
+    font-size: 34px !important;
+    line-height: 1.4 !important; /* 47.6px from Figma */
+    color: #f7fbf8 !important;
+    margin: 0 !important;
+    text-align: left !important;
 }
 
 .about-card-title .strikethrough {
-    text-decoration: line-through;
+    text-decoration: line-through !important;
+    text-decoration-thickness: 1px !important;
 }
 
 .about-cta-pill {
-    display: flex;
-    align-items: center;
-    width: fit-content;
-    min-width: 384px;
-    height: 72px;
-    border: 2px solid #ffffff;
-    border-radius: 100px;
-    padding: 0 32px;
-    box-sizing: border-box;
-    color: #ffffff;
-    font-family: 'Roobert', var(--font-body);
-    font-weight: 500;
-    font-size: 20px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    justify-content: space-between;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 442px !important;
+    height: 64px !important;
+    border: 2px solid #ffffff !important; /* border-2 in Figma code */
+    border-radius: 100px !important;
+    padding: 0 40px !important;
+    box-sizing: border-box !important;
+    color: #ffffff !important;
+    font-family: 'Roobert', var(--font-body) !important;
+    font-weight: 500 !important;
+    font-size: 20px !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
 }
 
 .about-cta-pill:hover {
-    background-color: #ffffff;
-    color: #1e1e1e;
+    background-color: #ffffff !important;
+    color: #1e1e1e !important;
 }
 
 .cta-icon-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: rotate(90deg);
-    pointer-events: none;
-}
-
-/* Visuals / Vectors - Desktop */
-/* Visuals / Vectors - Desktop */
-.about-card-visuals {
-    position: absolute;
-    right: 72px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 431px;
-    height: 280px;
-    pointer-events: none;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transform: rotate(90deg) !important;
+    pointer-events: none !important;
 }
 
 .vector-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important; /* Best to show the whole graphic clearly */
 }
 
-@media (max-width: 1250px) and (min-width: 1025px) {
+/* Tablet - Artboard 744px */
+@media (max-width: 1024px) {
     .about-card {
-        padding: 400px 32px 80px 32px !important;
-        min-height: 800px !important;
-        display: flex !important;
         flex-direction: column !important;
-        justify-content: flex-start !important;
-    }
-
-    .about-card-content-wrapper {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 56px !important;
+        padding: 89px 48px 57px 48px !important;
+        gap: 57px !important;
         width: 100% !important;
-        height: auto !important;
-    }
-
-    .about-card-text {
-        max-width: 100% !important;
-        text-align: center !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 48px !important;
+        max-width: none !important; 
+        min-height: auto !important;
+        margin-top: 120px !important;
+        margin-bottom: 96px !important;
     }
 
     .about-card-visuals {
-        position: absolute !important;
-        top: 106px !important;
-        left: 50% !important;
-        right: auto !important;
-        transform: translateX(-50%) !important;
+        flex: 0 1 auto !important;
         width: 100% !important;
-        max-width: 450px !important;
-        height: 320px !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
+        max-width: 526px !important;
+        order: 1 !important; /* Visuals TOP */
+        margin-bottom: 0 !important;
+    }
+
+    .about-card-content-wrapper {
+        flex: 0 1 auto !important;
+        max-width: 584px !important;
+        width: 100% !important;
+        align-items: flex-start !important;
+        order: 2 !important; /* Content BOTTOM */
+        gap: 56px !important;
+    }
+
+    .about-card-title {
+        font-size: 34px !important;
+        text-align: left !important; /* Aligned left in Tablet content frame */
     }
 
     .about-cta-pill {
-        margin: 0 auto !important;
-        min-width: 0 !important;
-        width: fit-content !important;
+        width: 100% !important;
+        max-width: 584px !important;
+        height: 72px !important;
     }
+}
+
+/* Mobile - Artboard 390px */
+@media (max-width: 767px) {
+    .about-card {
+        padding: 55px 24px 56px 24px !important;
+        gap: 51px !important;
+        width: 100% !important;
+        max-width: none !important;
+        min-height: auto !important;
+        margin-top: 100px !important;
+        margin-bottom: 88px !important;
+    }
+
+    .about-card-visuals {
+        width: 100% !important;
+        max-width: none !important;
+    }
+
+    .about-card-content-wrapper {
+        width: 100% !important;
+        max-width: none !important;
+        padding: 0 !important;
+        gap: 51px !important;
+    }
+
+    .about-card-title {
+        font-size: 24px !important;
+        line-height: 37px !important; /* ~154% */
+    }
+
+    .about-cta-pill {
+        width: 100% !important;
+        max-width: none !important;
+        height: 64px !important;
+        font-size: 16px !important;
+        padding: 0 25px !important;
+    }
+}
+
+@media (max-width: 1250px) and (min-width: 1025px) {
+    /* Removed intermediate desktop overrides */
 }
 
 .about-card-visuals img {
@@ -751,47 +779,7 @@ a {
         max-width: 100%;
     }
 
-    .about-card {
-        padding: 400px 32px 80px 32px;
-        min-height: 800px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-    }
-
-    .about-card-content-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 56px;
-        width: 100%;
-    }
-
-    .about-card-text {
-        max-width: 100%;
-        text-align: center;
-        align-items: center;
-        gap: 48px;
-    }
-
-    .about-card-visuals {
-        position: absolute;
-        top: 106px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        max-width: 450px;
-        height: 320px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .vector-image {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
+/* Removed tablet overrides */
 }
 
 @media (max-width: 767px) {
@@ -851,90 +839,7 @@ a {
         color: #1e1e1e;
     }
 
-    .about-card {
-        margin: 800px 8px 0 8px; /* Maintain vertical flow below absolute hero */
-        width: calc(100% - 16px);
-        height: auto;
-        min-height: unset;
-        padding: 76px 24px 64px 24px; /* Updated to 24px horizontal gap */
-        box-sizing: border-box;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 58px; /* Exactly from Figma gap-[58px] */
-        overflow: hidden;
-        border-radius: 10px;
-    }
-
-    .about-card-content-wrapper {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 58px; /* Gap between title and CTA from Figma */
-        z-index: 20;
-    }
-
-    .about-card-text {
-        width: 100%;
-        max-width: 326px; /* Width from Figma */
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: left;
-    }
-
-    .about-card-title {
-        font-size: 24px;
-        line-height: 37px;
-        width: 100%;
-        margin: 0;
-        font-weight: 400;
-        color: #f7fbf8;
-        font-family: 'Roobert', sans-serif;
-    }
-
-    .about-card-title .strikethrough {
-        text-decoration: line-through;
-        text-decoration-thickness: 1px;
-    }
-
-    .about-cta-pill {
-        width: 100%;
-        min-width: unset;
-        height: 64px;
-        font-size: 16px;
-        padding: 0 25px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border: 2px solid #ffffff;
-        border-radius: 100px;
-        background: transparent;
-        color: #ffffff;
-        text-decoration: none;
-    }
-
-    /* REFINED MOBILE VECTORS - Matching Figma 1068:420 */
-    .about-card-visuals {
-        position: relative;
-        width: 100%;
-        max-width: 342px;
-        aspect-ratio: 342 / 240;
-        pointer-events: none;
-        z-index: 10;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-sizing: border-box;
-    }
-
-    .vector-image {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-    }
+/* Removed mobile overrides */
 }
 
 .about-cta-pill:hover {
@@ -963,6 +868,7 @@ a {
     padding: 0;
     border: none;
     background: none;
+    align-self: flex-end;
 }
 
 .action-icon {
@@ -1293,8 +1199,8 @@ a {
     }
 
     .case-study-card {
-        padding-left: 24px;
-        padding-right: 24px;
+        padding-left: 0;
+        padding-right: 0;
         width: 100%;
         max-width: 100%;
         gap: 24px;
@@ -1311,7 +1217,11 @@ a {
 
     .card-content-row {
         width: 100%;
+        padding-left: 24px;
+        padding-right: 24px;
+        box-sizing: border-box;
         flex-direction: column;
+        align-items: flex-start;
         gap: 24px;
     }
 
@@ -1561,8 +1471,8 @@ a {
     }
 
     .case-study-card {
-        padding-left: 24px;
-        padding-right: 24px;
+        padding-left: 0;
+        padding-right: 0;
         width: 100%;
         max-width: 100%;
         gap: 24px;
@@ -1583,6 +1493,7 @@ a {
         padding-right: 24px;
         box-sizing: border-box;
         flex-direction: column;
+        align-items: flex-start;
         gap: 24px;
     }
 
@@ -1592,7 +1503,6 @@ a {
         flex-direction: column !important;
         align-items: flex-start !important;
         gap: 8px;
-        /* Halved from original 8px */
     }
 
     .case-title {
@@ -1611,6 +1521,7 @@ a {
         flex-direction: column;
         width: 100%;
         gap: 8px;
+        align-items: flex-start;
     }
 
     .action-btn {
@@ -1914,55 +1825,7 @@ a {
         padding-right: 0 !important;
     }
 
-    .about-card {
-        margin: 674px 8px 0 8px !important;
-        width: calc(100% - 16px) !important;
-        padding-left: 24px !important;
-        padding-right: 24px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 0 !important; /* Control gaps manually for precision */
-    }
-
-    .about-card-content-wrapper {
-        display: contents !important;
-    }
-
-    .about-card-text {
-        order: 2 !important;
-        width: 100% !important;
-        max-width: none !important;
-        padding-left: 8px !important;
-        padding-right: 8px !important;
-        box-sizing: border-box !important;
-        margin-bottom: 58px !important; /* Aesthetic gap between text and CTA */
-        text-align: left !important;
-    }
-
-    .about-card-visuals {
-        order: 1 !important;
-        margin-bottom: 56px !important; /* Required gap between vector and following element (Text) */
-        position: relative !important;
-        left: auto !important;
-        right: auto !important;
-        top: auto !important;
-        transform: none !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        width: 100% !important;
-        max-width: 342px !important;
-        display: flex !important;
-        justify-content: center !important;
-    }
-
-    .about-cta-pill {
-        order: 3 !important;
-        width: 100% !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        margin-bottom: 0 !important; /* Bottom element */
-    }
+/* Removed mobile refined overrides */
 }
 
 /* Mobile Reponsive Design (max-width: 768px) */
@@ -5685,12 +5548,8 @@ html:has(.fincas-page) {
     }
 }
 
-/* 6. Mobile About Card Alignment Fix */
-@media screen and (max-width: 767px) {
-    .about-card {
-        margin-top: 722px !important; /* To maintain 730px gap from the header after removing section padding-top */
-    }
-}
+    /* Removed mobile overlap override */
+
 
 /* 7. Final Gap Adjustments for Desktop and Tablet */
 @media screen and (min-width: 1025px) {
@@ -5720,3 +5579,1000 @@ html:has(.fincas-page) {
         padding-top: 48px !important;
     }
 }
+
+/* 8. Mobile Case Study Card Alignment & Spacing (Final Override) */
+@media screen and (max-width: 767px) {
+    .case-study-card {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        gap: 24px !important;
+    }
+
+    .card-content-row {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 24px !important;
+    }
+
+    .card-left-col {
+        width: 100% !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+    }
+
+    .card-right-col {
+        width: 100% !important;
+        align-items: flex-start !important;
+    }
+
+    .case-description {
+        text-align: left !important;
+        width: 100% !important;
+    }
+
+    .case-actions {
+        width: 100% !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+    }
+
+    .action-btn {
+        width: 100% !important;
+        max-width: 100% !important;
+        justify-content: space-between !important;
+    }
+}
+
+/* 9. Mobile Case Study Image Spacing (Final Override) */
+@media screen and (max-width: 767px) {
+    .case-study-card {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+    
+    .card-image {
+        width: 100% !important;
+        border-radius: 8px !important; /* Ensuring corners look good with the gap */
+    }
+}
+
+/* 10. Missing Animations */
+@keyframes pulse-scale {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes bob-down {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+}
+
+/* 11. Interaction Indicator Placement (Desktop, Tablet, Mobile) */
+.hero-section {
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    padding-bottom: 48px !important; /* Space for the indicator */
+}
+
+.interaction-indicator {
+    position: relative !important;
+    align-self: center !important;
+    margin-top: auto !important;
+    margin-bottom: 0 !important;
+    z-index: 101 !important;
+}
+
+/* Tablet Overrides */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        min-height: 100vh !important;
+        padding-bottom: 32px !important;
+        padding-top: 120px !important; /* Adjust for fixed header */
+        margin-top: 0 !important;
+    }
+    
+    .hero-intro {
+        margin-bottom: 0 !important;
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+    }
+}
+
+/* Mobile Overrides */
+@media screen and (max-width: 767px) {
+    .hero-section {
+        min-height: 100vh !important;
+        padding-top: 80px !important;
+        padding-bottom: 24px !important;
+    }
+    
+    .hero-intro {
+        position: relative !important; /* Reset from absolute if applied */
+        padding: 0 24px !important;
+        margin-top: 40px !important;
+    }
+}
+
+/* 12. Unifying Scroll Helper Position (Desktop & Tablet) */
+@media screen and (min-width: 768px) {
+    .hero-section {
+        min-height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        padding-bottom: 48px !important;
+        padding-top: 92px !important; /* Standardized top margin */
+        box-sizing: border-box !important;
+        margin-top: 0 !important;
+    }
+
+    .hero-intro {
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: row !important; /* Keep desktop row layout */
+        justify-content: space-between !important;
+        align-items: center !important; /* Vertically center text in the remaining space */
+        margin-bottom: 0 !important;
+        width: 100% !important;
+        max-width: 1224px !important;
+    }
+
+    .interaction-indicator {
+        position: absolute !important;
+        bottom: 48px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
+        display: flex !important;
+    }
+}
+
+/* 13. Unifying Scroll Helper Position (Desktop & Tablet) - Clean Override */
+@media screen and (min-width: 768px) {
+    .hero-section {
+        min-height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        padding-bottom: 64px !important;
+        padding-top: 56px !important;
+        box-sizing: border-box !important;
+        margin-top: 80px !important;
+        padding-left: 96px !important;
+        padding-right: 96px !important;
+    }
+
+    .hero-intro {
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: 1224px !important;
+    }
+
+    .interaction-indicator {
+        position: absolute !important;
+        bottom: 64px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
+        display: flex !important;
+        z-index: 100 !important;
+    }
+}
+
+/* 14. Scroll Helper Placement (100px gap above About Card) */
+.hero-section {
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    padding-top: 92px !important;
+    padding-bottom: 96px !important;
+    box-sizing: border-box !important;
+}
+
+.hero-intro {
+    margin: 0 auto auto auto !important; /* Push down the lower elements */
+    width: 100% !important;
+    max-width: 1224px !important;
+}
+
+.interaction-indicator {
+    position: relative !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 0 auto 100px auto !important; /* THE EXACT 100PX GAP */
+    display: flex !important;
+    z-index: 100 !important;
+}
+
+/* Removed desktop max-width override */
+
+
+/* Tablet & Mobile Consistency */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 80px !important;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+    
+    .hero-intro {
+        margin-top: 40px !important;
+        flex-direction: column !important;
+        gap: 32px !important;
+    }
+
+    .interaction-indicator {
+        margin-bottom: 100px !important;
+    }
+}
+
+/* 15. GUARANTEED FOLD VISIBILITY FOR SCROLL HELPER */
+.hero-section {
+    position: relative !important;
+    height: 100vh !important; /* Forces exact viewport height */
+    height: 100dvh !important; /* Dynamic view height for mobile browsers */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important; /* Centers intro text in the remaining space */
+    padding-top: 80px !important;
+    padding-bottom: 120px !important; /* Safe zone for the absolute helper */
+    box-sizing: border-box !important;
+    margin: 0 !important;
+}
+
+.hero-intro {
+    width: 100% !important;
+    max-width: 1224px !important;
+    margin: 0 auto !important;
+}
+
+.interaction-indicator {
+    position: absolute !important;
+    bottom: 32px !important; /* Pinned 32px from the bottom of the phone screen */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+    z-index: 100 !important;
+    display: flex !important;
+}
+
+/* Removed late overrides */
+
+/* 16. Restoring Hero Text Gaps & Alignment */
+.hero-intro {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 32px !important;
+    width: 100% !important;
+    max-width: 1224px !important;
+    margin: 0 auto !important;
+}
+
+@media screen and (max-width: 1024px) {
+    .hero-intro {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 32px !important;
+    }
+}
+
+.hero-intro-left {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important; /* Space between name and location */
+    width: 331px !important;
+    flex-shrink: 0 !important;
+}
+
+.hero-intro-right {
+    flex: 0 1 670px !important;
+    max-width: 670px !important;
+}
+
+/* Ensure mobile specific overrides don't break horizontal gap on larger mobile */
+@media screen and (max-width: 767px) {
+    .hero-intro-left, .hero-intro-right {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* 17. Final Spacing Adjustments for Hero Text Top Gap (Desktop) */
+@media screen and (min-width: 1025px) {
+    .hero-section {
+        padding-top: 112px !important; /* Fixed Header 80px + 32px requested gap */
+        justify-content: flex-start !important;
+        align-items: center !important;
+    }
+
+    .hero-intro {
+        margin-top: 0 !important; /* Remove any existing margin */
+        padding-top: 0 !important;
+    }
+}
+
+/* 18. THE 128PX TOP GAP & DESKTOP CENTERING */
+.hero-section {
+    padding-top: 208px !important; /* 80px fixed header + 128px requested gap */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Horizontally center hero content */
+    min-height: 100vh !important;
+    box-sizing: border-box !important;
+    justify-content: flex-start !important; /* Anchor text to the top gap */
+}
+
+@media screen and (min-width: 1025px) {
+    .hero-intro {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important; /* Maintain 2-column layout */
+        align-items: flex-start !important; /* Align texts to each other's top */
+        width: 100% !important;
+        max-width: 1224px !important;
+        margin: 0 auto !important; /* CENTERED CONTAINER */
+    }
+}
+
+/* Ensure tablet & mobile also have the 128px gap */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 208px !important;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+
+    .hero-intro {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 32px !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+    }
+}
+
+/* 19. FINAL OVERRIDE: 72PX TOP GAP (152PX TOTAL) ACROSS ALL BREAKPOINTS */
+.hero-section {
+    padding-top: 152px !important; /* 80px header + 72px gap */
+}
+
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 152px !important;
+    }
+}
+
+/* 20. ENSURING HORIZONTAL CENTERING & 72PX GAP */
+.hero-section {
+    padding-top: 152px !important; /* Header 80 + Gap 72 */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Horizontal center */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+@media screen and (min-width: 1025px) {
+    .hero-intro {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important; /* Now vertically center relative to each other */
+        width: 100% !important;
+        max-width: 1224px !important;
+        margin: 0 auto !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+/* 19. REFINED 72PX TOP GAP (80px Header + 72px Gap = 152px) */
+.hero-section {
+    padding-top: 152px !important; 
+    transition: padding-top 0.3s ease;
+}
+
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 152px !important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .hero-section {
+        padding-top: 152px !important;
+    }
+}
+
+/* 20. Corrected 72px Gap (88px Header Total + 72px = 160px) & Horizontal Centering */
+.hero-section {
+    padding-top: 160px !important; /* Fixed: 8px wrapper padding + 80px pill + 72px gap */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Centers the Intro container */
+    text-align: center !important; /* Ensuring text centering if requested */
+}
+
+.hero-intro {
+    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: 1224px !important;
+    display: flex !important;
+    justify-content: center !important; /* Group them in the center */
+    gap: 144px !important; /* Standard wide gap while being centered */
+    text-align: left !important; /* Keep text aligned left within centered blocks */
+}
+
+@media screen and (max-width: 1024px) {
+    .hero-intro {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 32px !important;
+    }
+    
+    .hero-intro-left, .hero-intro-right {
+        width: 100% !important;
+        max-width: 600px !important; /* Constrain for readability when centered */
+    }
+}
+
+
+/* 22. PERFECT ALIGNMENT FIX (Aligning Hero and Projects) */
+@media screen and (min-width: 1025px) {
+    .hero-section, 
+    .case-section-title,
+    .case-study-card {
+        max-width: 1224px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        left: 0 !important;
+        transform: none !important;
+    }
+
+    .hero-section {
+        padding-top: 152px !important; /* 80px + 72px gap */
+        align-items: center !important;
+    }
+
+    .hero-intro, 
+    .work-section-title,
+    .case-study-card {
+        width: 100% !important;
+        max-width: 1224px !important;
+        margin: 0 !important;
+        display: flex !important;
+        justify-content: space-between !important; /* Force edges to the 1224px boundaries */
+        gap: 0 !important; /* space-between handles the gap */
+    }
+}
+
+/* Ensure projects also follow the 1224px center at desktop */
+@media screen and (min-width: 1025px) {
+    .case-study-card {
+        gap: 48px !important;
+    }
+    
+    .card-image, .card-content-row, .case-actions {
+        width: 100% !important;
+        max-width: 1224px !important;
+    }
+}
+
+/* 23. DEFINITIVE ALIGNMENT HARMONY (Desktop) */
+@media screen and (min-width: 1025px) {
+    /* 1. Reset all parent section paddings that could cause offsets */
+    .hero-section, 
+    .dark-section-wrapper,
+    .work-highlights {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    /* 2. Unified Width & Centering for content blocks */
+    .hero-intro, 
+    .work-section-title, 
+    .case-study-card {
+        width: 100% !important;
+        max-width: 1224px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        left: 0 !important;
+        right: 0 !important;
+        transform: none !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* 3. Force hero text blocks to hit the 1224px edges */
+    .hero-intro {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+    }
+
+    /* removed about-card padding override */
+}
+
+/* 24. ULTIMATE HERO GAP & CENTERING (72px Precision) */
+
+/* Desktop & General */
+.hero-section {
+    padding-top: 160px !important; /* Calc: Header Wrap 8px + Pill 80px + Gap 72px = 160px */
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding-left: 48px !important; /* Safety minimum */
+    padding-right: 48px !important;
+    box-sizing: border-box !important;
+}
+
+.hero-intro {
+    width: 100% !important;
+    max-width: 1224px !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+}
+
+/* Tablet & Mobile Header Height Change */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 144px !important; /* Calc: Header Wrap 8px + Pill 64px + Gap 72px = 144px */
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+    
+    .hero-intro {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 32px !important;
+    }
+    
+    .hero-intro-left, .hero-intro-right {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* 25. VERTICAL STABILITY (Anchoring Top Text) */
+.hero-section {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; /* FORCES TOP ALIGNMENT: Stops vertical jumping on resize */
+    padding-top: 160px !important; /* Math: 88px (Header + Wrap) + 72px (Gap) */
+    position: relative !important;
+}
+
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 144px !important; /* Math: 72px (Header + Wrap) + 72px (Gap) */
+    }
+}
+
+/* 26. HERO FULL VIEWPORT HEIGHT (Ensures indicator at fold bottom) */
+.hero-section {
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; /* FIXED POSITION from the top header */
+}
+
+/* 27. FINAL HERO RESOLUTION - UNIFYING 72PX GAP & HORIZONTAL CENTERING */
+.hero-section {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* GLOBAL HORIZONTAL CENTERING */
+    justify-content: flex-start !important; /* GLOBAL VERTICAL STABILITY (Anchored Top) */
+    min-height: 100vh !important;
+    background: none !important;
+    box-sizing: border-box !important;
+}
+
+/* DESKTOP (88px Header + 72px Gap = 160px Total Padding) */
+@media screen and (min-width: 1025px) {
+    .hero-section {
+        padding-top: 160px !important;
+    }
+    
+    .hero-intro {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        max-width: 1224px !important;
+        margin: 0 auto !important;
+    }
+}
+
+/* TABLET & MOBILE (72px Header + 72px Gap = 144px Total Padding) */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 144px !important;
+    }
+    
+    .hero-intro {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important; /* Center text blocks horizontally when stacked */
+        text-align: center !important;
+        gap: 32px !important;
+        width: 100% !important;
+        max-width: 670px !important; /* Constrain description width for better look */
+        margin: 0 auto !important;
+    }
+}
+
+/* 28. TOTAL VERTICAL STACK STABILITY (Unifying all breakpoints) */
+.hero-section {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; /* ALWAYS ANCHORED TO TOP */
+    align-items: center !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+}
+
+/* Precise Top Gap (Accounting for Header height differences) */
+@media screen and (min-width: 1025px) {
+    .hero-section {
+        padding-top: 160px !important; /* 88px Header + 72px Gap */
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 144px !important; /* 72px Header + 72px Gap */
+    }
+}
+
+/* Ensure the intro container doesn't have any centering margins */
+.hero-intro {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Keep indicator at the bottom fold without pushing top text */
+.interaction-indicator {
+    position: absolute !important;
+    bottom: 32px !important;
+}
+
+/* 29. THE ABSOLUTE ANCHOR FIX (Tablet & Mobile) */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        justify-content: flex-start !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .hero-intro {
+        flex: none !important; /* CRITICAL: Stops the container from stretching to fill the screen */
+        height: auto !important; /* CRITICAL: Keeps name and description together at the top */
+        justify-content: flex-start !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    /* Ensure children don't push each other away */
+    .hero-intro-left, .hero-intro-right {
+        flex: none !important;
+        margin: 0 !important;
+    }
+}
+
+/* 30. MOBILE & TABLET LEFT ALIGNMENT (Hero Text) */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        align-items: flex-start !important; /* Align the container to the left boundary */
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+
+    .hero-intro {
+        align-items: flex-start !important; /* Left align stacked blocks */
+        text-align: left !important; /* Left align individual text lines */
+        margin-left: 0 !important; /* Remove centering margin */
+        max-width: 100% !important;
+    }
+}
+
+/* 31. PRECISE SIDE GAPS (Tablet: 32px, Mobile: 24px) */
+
+/* Base Hero Section structure for all breakpoints */
+.hero-section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important; 
+    box-sizing: border-box !important;
+}
+
+.hero-intro {
+    width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* TABLET BREAKPOINT (768px to 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .hero-section {
+        padding-left: 32px !important;
+        padding-right: 32px !important;
+    }
+    
+    .hero-intro {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+/* MOBILE BREAKPOINT (Up to 767px) */
+@media screen and (max-width: 767px) {
+    .hero-section {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+    
+    .hero-intro {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+/* Ensure centering on Desktop remains at 1224px max width */
+@media screen and (min-width: 1025px) {
+    .hero-section {
+        align-items: center !important;
+    }
+    .hero-intro {
+        max-width: 1224px !important;
+        margin: 0 auto !important;
+    }
+}
+
+/* 32. FLUID DESKTOP SAFETY GAPS (32px Minimum side gap) */
+@media screen and (min-width: 1025px) {
+    .hero-section, 
+    .work-highlights {
+        padding-left: 32px !important;
+        padding-right: 32px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Keep the internal content width limited but allow the padding to protect the edges */
+    .hero-intro, 
+    .work-section-title,
+    .case-study-card {
+        width: 100% !important;
+        max-width: 1224px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+/* Specific fix for Case Study Cards to ensure they don't lose the 32px buffer */
+@media screen and (min-width: 1025px) {
+    .case-study-card {
+        padding-left: 0 !important; /* Content centered by its own max-width logic */
+        padding-right: 0 !important;
+    }
+}
+
+/* 33. GLOBAL SIDE BUFFER (32px Desktop Safety + 32px Tablet Unified) */
+
+/* Apply to all major landing page sections */
+@media screen and (min-width: 768px) {
+    .hero-section,
+    .work-highlights {
+        padding-left: 32px !important;
+        padding-right: 32px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Keep content centered but protected by the 32px padding */
+    .hero-intro, 
+    .work-section-title,
+    .case-study-card {
+        width: 100% !important;
+        max-width: 1224px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+/* Maintain the 24px Mobile override for consistency */
+@media screen and (max-width: 767px) {
+    .hero-section,
+    .work-highlights {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+}
+
+/* 34. DESKTOP PROTECTION (32px Minimum Gap Before Breakpoint) */
+@media screen and (min-width: 1025px) {
+    .hero-intro, 
+    .work-section-title,
+    .case-study-card {
+        width: calc(100% - 64px) !important; /* Forces 32px safety gap on both sides */
+        max-width: 1224px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+/* 36. BREAKPOINT-SPECIFIC HORIZONTAL GAPS (CLEAN RESET) */
+
+/* 1. Desktop Breakpoint (1025px and up) */
+@media screen and (min-width: 1025px) {
+    .hero-section, 
+    .dark-section-wrapper,
+    .work-highlights {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    /* Restore Hero Interaction Guide/Scroll Indicator Visibility */
+    .hero-section {
+        min-height: calc(100vh - 92px) !important; /* Viewport height minus header top margin */
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important; /* Context for centering children */
+    }
+
+    .hero-intro, 
+    .about-card, 
+    .work-section-title,
+    .case-study-card {
+        width: calc(100% - 64px) !important; /* The 32px Desktop safety gap */
+        max-width: 1224px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-align: left !important;
+    }
+
+    .hero-intro {
+        margin-bottom: 0 !important; /* Managed by indicator margin */
+    }
+
+    .interaction-indicator {
+        display: flex !important;
+        position: relative !important; /* Back to relative to follow flow */
+        margin: 80px auto 48px auto !important; /* Universal centering logic */
+        align-self: center !important;
+        left: auto !important; /* Reset any absolute leftovers */
+        right: auto !important;
+        transform: none !important; /* Reset transform for perfect alignment */
+        z-index: 101 !important;
+    }
+
+    .case-study-card {
+        margin-bottom: 160px !important;
+    }
+}
+
+/* 2. Tablet Breakpoint (768px to 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .hero-section,
+    .about-section,
+    .work-highlights {
+        padding-left: 32px !important; /* The 32px Tablet gap */
+        padding-right: 32px !important;
+    }
+
+    .hero-intro, 
+    .about-card,
+    .work-section-title,
+    .case-study-card {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
+/* 3. Mobile Breakpoint (767px and below) */
+@media screen and (max-width: 767px) {
+    .hero-section {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+
+    .work-highlights {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .about-section {
+        padding-left: 8px !important; /* Specific 8px gap for About Card */
+        padding-right: 8px !important;
+    }
+
+    .hero-intro, 
+    .about-card,
+    .work-section-title,
+    .case-study-card {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    /* Portfolio Cases Mobile Gaps */
+    .work-section-title {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+        box-sizing: border-box !important;
+    }
+
+    .case-study-card {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        gap: 24px !important; /* Gap between image and text */
+    }
+
+    .card-image {
+        width: calc(100% - 16px) !important;
+        margin-left: 8px !important;
+        margin-right: 8px !important;
+        border-radius: 8px !important;
+    }
+
+    .card-content-row {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* 38. PROJECT MASTER STABILITY GUARD */
+/* 
+   THE HERO SECTION AND INTERACTION INDICATOR LAYOUTS ARE FINAL.
+   DO NOT MODIFY THE VERTICAL STACKING, CENTERING, OR MARGINS 
+   IN THE HERO OR ABOUT CARD WITHOUT CONSULTING THE STABILITY RECORD.
+   VERIFIED STATE: HERO (100VH), INDICATOR (CENTERED, RELATIVE), ABOUT (OVERLAP: -146PX).
+*/
