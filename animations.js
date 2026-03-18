@@ -40,7 +40,15 @@ const initHeroAnimations = () => {
 };
 
 const initScrollReveals = () => {
+    const hasAnimatedWork = sessionStorage.getItem('workAnimated');
     const cards = gsap.utils.toArray('.case-study-card');
+
+    if (hasAnimatedWork) {
+        // Skip entry animation: Set cards to visible state immediately
+        gsap.set(cards, { opacity: 1, y: 0 });
+        return;
+    }
+
     cards.forEach((card) => {
         gsap.from(card, {
             scrollTrigger: {
@@ -54,6 +62,9 @@ const initScrollReveals = () => {
             ease: guglieriEase
         });
     });
+
+    // Set flag so animations don't repeat in the same session
+    sessionStorage.setItem('workAnimated', 'true');
 };
 
 const initNavEntrance = () => {
