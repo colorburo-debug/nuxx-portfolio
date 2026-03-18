@@ -761,3 +761,70 @@
 .text-right {
     text-align: right;
 }
+
+/* =========================================================================
+   MASTER LAYOUT UTILITIES (Precision Alignment)
+   ========================================================================= */
+
+/* Universal Content Container (Centered 1224px with responsive safety gaps) */
+.content-wrapper {
+    width: 100%;
+    max-width: 1224px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+}
+
+/* Response Safety Gaps for the wrapper */
+@media screen and (min-width: 1025px) {
+    .content-wrapper {
+        padding-left: 0;
+        padding-right: 0;
+        /* Protection via parent or absolute width if fluid */
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .content-wrapper {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .content-wrapper {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
+
+/* =========================================================================
+   SEMANTIC SECTION GAPS (8px Grid Alignment)
+   ========================================================================= */
+
+/* Large Gap (184px - Standard for major header transitions on Mobile) */
+.section-gap-xl {
+    padding-top: 184px;
+}
+
+/* Large/Standard Gap (128px - Standard for Project Section Mobile) */
+.section-gap-lg {
+    padding-top: 128px;
+}
+
+/* Medium Gap (72px - Header to Content gap) */
+.section-gap-md {
+    padding-top: 72px;
+}
+
+/* Small Title Gap (32px - Between headings and sub-content) */
+.title-gap-sm {
+    margin-bottom: 32px;
+}
+
+/* RESPONSIVE GAP OVERRIDES */
+@media screen and (min-width: 1025px) {
+    /* Large Desktop Gaps might differ from Mobile */
+    .section-gap-xl { padding-top: 160px; }
+    .section-gap-lg { padding-top: 96px; }
+}

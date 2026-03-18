@@ -4033,10 +4033,7 @@ body.lauhaus-page {
 }
 
 @media screen and (max-width: 767px) {
-    .lauhaus-page .width-clamped {
-        padding-left: 24px;
-        padding-right: 24px;
-    }
+    /* Side padding handled by .content-wrapper utilities */
 
     .lauhaus-hero {
         padding: 152px 0 40px 0;
@@ -4117,10 +4114,7 @@ body.lauhaus-page {
         width: auto;
     }
 
-    .lauhaus-page .lauhaus-plp {
-        padding-top: 184px !important;
-        padding-bottom: 0 !important;
-    }
+    /* Paps handled by .section-gap-lg utilities */
 
     .plp-header {
         margin-bottom: 0 !important;
@@ -4135,19 +4129,8 @@ body.lauhaus-page {
         margin-bottom: 0 !important;
     }
 
-    .lauhaus-impact {
-        padding-top: 184px !important;
-        padding-bottom: 0 !important;
-    }
+    /* Gaps handled by .section-gap-xl utilities */
 
-    .lauhaus-discovery {
-        padding-top: 184px !important;
-        padding-bottom: 0 !important;
-    }
-
-    .lauhaus-showcase {
-        padding-top: 184px !important;
-    }
 
     .lauhaus-green-bg {
         padding-bottom: 0 !important;
