@@ -220,6 +220,13 @@ html:has(.designops-page) {
     background-color: #f7fbf8 !important;
 }
 
+/* On mobile, override with pure white so no tinted gap appears */
+@media (max-width: 767px) {
+    html:has(.designops-page) {
+        background-color: #ffffff !important;
+    }
+}
+
 body {
     margin: 0;
     -webkit-overflow-scrolling: touch;
@@ -2770,7 +2777,35 @@ body:not(.home-page) #webgl-container {
         display: none;
     }
 
-    /* 6. Footer Adjustments */
+    /* 6. Footer Adjustments — designops tablet fix */
+    /* Same fix as mobile: the 56px padding-top from the global .site-footer tablet
+       rule creates a gray/tinted band between the white ops-bg-wrapper and the
+       footer divider. We remove it and set the background to pure white to match. */
+    .designops-footer {
+        --footer-bg: #ffffff !important;
+        --footer-text-color: #1e1e1e !important;
+        --footer-name-color: #898989 !important;
+        --footer-divider: #1e1e1e !important;
+        --footer-divider-opacity: 0.2 !important;
+        --footer-link-hover: #000 !important;
+        background-color: #ffffff !important;
+        padding-top: 0 !important;
+    }
+
+    .designops-footer .footer-name {
+        color: #898989 !important;
+    }
+
+    .designops-footer .footer-email,
+    .designops-footer .footer-link,
+    .designops-footer .footer-link-social {
+        color: #1e1e1e !important;
+    }
+
+    .designops-footer .footer-divider {
+        background-color: #1e1e1e !important;
+        opacity: 0.2 !important;
+    }
 
 }
 
@@ -2977,6 +3012,28 @@ body:not(.home-page) #webgl-container {
     .outcome-item-desc {
         font-size: 18px;
         line-height: 1.77;
+    }
+
+    /* Fix: The main container is transparent, letting the body background
+       (#f7fbf8) show through the gap after the white ops-bg-wrapper ends.
+       Setting the main container to white on mobile makes the entire background
+       uniform, eliminating the visible color boundary above the footer divider. */
+    body.designops-page {
+        background-color: #ffffff !important;
+    }
+
+    body.designops-page main.ops-main,
+    .designops-page .ops-main {
+        background-color: #ffffff !important;
+    }
+
+    .designops-page .ops-bg-wrapper {
+        flex-grow: 1;
+        padding-bottom: 0 !important;
+    }
+
+    .designops-footer {
+        margin-top: 0 !important;
     }
 }
 
@@ -6576,3 +6633,46 @@ html:has(.fincas-page) {
    IN THE HERO OR ABOUT CARD WITHOUT CONSULTING THE STABILITY RECORD.
    VERIFIED STATE: HERO (100VH), INDICATOR (CENTERED, RELATIVE), ABOUT (OVERLAP: -146PX).
 */
+
+/* 39. DESIGN OPS FOOTER — MOBILE FIX */
+/* 
+   The global site-footer mobile rule uses var(--footer-text-color) which defaults 
+   to white (from the dark homepage theme). The designops-footer has a white background,
+   making white text invisible. This block overrides those colors ONLY on mobile.
+*/
+@media (max-width: 767px) {
+    .designops-footer {
+        --footer-bg: #ffffff !important;
+        --footer-divider: #1e1e1e !important;
+        --footer-divider-opacity: 0.2 !important;
+        --footer-name-color: #898989 !important;
+        --footer-text-color: #1e1e1e !important;
+        --footer-link-hover: #000 !important;
+        background-color: #ffffff !important;
+        /* Remove top padding so the divider line connects directly
+           to the white content section above — no visible gap */
+        padding-top: 0 !important;
+    }
+
+    .designops-footer .footer-name {
+        color: #898989 !important;
+    }
+
+    .designops-footer .footer-email,
+    .designops-footer .footer-link,
+    .designops-footer .footer-link-social {
+        color: #1e1e1e !important;
+    }
+
+    .designops-footer .footer-email:hover,
+    .designops-footer .footer-link:hover,
+    .designops-footer .footer-link-social:hover {
+        color: #000 !important;
+    }
+
+    .designops-footer .footer-divider {
+        background-color: #1e1e1e !important;
+        opacity: 0.2 !important;
+    }
+}
+
