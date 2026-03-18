@@ -3,6 +3,40 @@
 const container = document.getElementById('webgl-container');
 const reticle = document.getElementById('cursor-reticle');
 
+// ─── Hero Zone Clip-Path ─────────────────────────────────────
+// Prevents the WebGL canvas from visually bleeding BELOW the
+// about-me card. The top is intentionally left open — the hero
+// text and header both have higher z-indices and will naturally
+// appear on top of the sphere, so no top clip is needed.
+// This means the full sphere shape stays visible and uncut.
+function updateWebGLClip() {
+    const aboutCard = document.querySelector('.about-card');
+    if (!aboutCard || !container) return;
+
+    const aboutRect   = aboutCard.getBoundingClientRect();
+    const vh          = window.innerHeight;
+
+    // Only clip the BOTTOM — stop particles bleeding below the about card.
+    // The about-card has z-index:20, so even a few px of overlap is fine,
+    // but we cut at its top edge for a clean boundary.
+    const bottomInset = Math.max(0, vh - aboutRect.top);
+
+    container.style.clipPath = `inset(0 0 ${bottomInset}px 0)`;
+}
+
+// Run on scroll (passive for performance) and resize
+window.addEventListener('scroll', updateWebGLClip, { passive: true });
+window.addEventListener('resize', updateWebGLClip);
+
+// Run once after DOM is ready, and again after layout settles
+document.addEventListener('DOMContentLoaded', () => {
+    updateWebGLClip();
+    setTimeout(updateWebGLClip, 200);
+});
+// Also call immediately in case the script loads after DOMContentLoaded
+updateWebGLClip();
+// ─────────────────────────────────────────────────────────────
+
 // Scene Setup
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);

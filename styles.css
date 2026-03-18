@@ -180,10 +180,11 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    z-index: 0 !important;
+    z-index: 0;
     pointer-events: none;
     transition: opacity 1s cubic-bezier(0.27, 0, 0.51, 1);
     opacity: 1; /* Default visible on home */
+    /* clip-path is set dynamically by JS to confine the visual to the hero zone */
 }
 
 html {
@@ -317,15 +318,7 @@ a {
     transform: translate(-50%, -50%);
 }
 
-#webgl-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: -1;
-    pointer-events: auto;
-}
+/* #webgl-container second definition removed — consolidated above */
 
 /* Consistently define .main-container as full width */
 .main-container {
@@ -525,9 +518,7 @@ a {
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
-    max-width: 1440px; /* Standard website max-width adjusted for alignment */
     margin: 92px auto 0 auto;
-    padding: 56px 96px 96px 96px; /* Aligning with 96px grid */
     box-sizing: border-box;
     position: relative;
     z-index: 10;
@@ -535,11 +526,9 @@ a {
 
 .hero-intro {
     display: flex;
-    justify-content: space-between; /* Dynamically compresses the gap as the viewport narrows */
+    justify-content: space-between;
     align-items: flex-start;
-    gap: 32px; /* Minimum distance between elements to prevent touching */
-    width: 100%;
-    max-width: 1224px;
+    gap: 32px;
     margin: 0 0 737px 0;
 }
 
@@ -589,11 +578,9 @@ a {
 .about-card {
     background-color: #1e1e1e !important;
     border-radius: 10px !important;
-    width: 100% !important;
-    max-width: 1224px !important; /* Re-aligned with site's 1224px standard */
     margin: -146px auto 96px auto !important; /* Overlap by 146px to match Figma, 96px bottom gap */
     display: flex !important;
-    flex-direction: row-reverse !important; /* Content LEFT, Visuals RIGHT (Visuals is 1st in HTML) */
+    flex-direction: row-reverse !important;
     align-items: center !important;
     justify-content: space-between !important;
     padding: 16px 56px 14px 56px !important;
@@ -602,7 +589,7 @@ a {
     overflow: hidden !important;
     position: relative !important;
     min-height: 424px !important;
-    z-index: 20 !important; /* Ensure it stays above the hero overlap area */
+    z-index: 20 !important;
 }
 
 /* --- END ABOUT ME CARD FINALIZED IMPLEMENTATION --- */
@@ -860,14 +847,14 @@ a {
 
 .interaction-indicator {
     /* Styles for the anchor button on the right of hero text */
-    /* Node 52:635 */
-    width: 55px;
-    height: 63px;
+    /* Node 52:635 - 20% Size Reduction */
+    width: 44px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     /* Match SVG size */
-    border-radius: 27px;
+    border-radius: 22px;
     /* Optional: Ensure circular hit area matches SVG */
     cursor: pointer;
     transition: transform 0.3s ease;
@@ -995,13 +982,8 @@ a {
 
 /* Work Highlights Section */
 .work-highlights {
-    background-color: #1e1e1e; /* Explicitly dark to cover green body bleed */
+    background-color: #1e1e1e;
     position: relative;
-    width: 100%;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding-bottom: 104px;
     z-index: 10;
 }
@@ -1009,13 +991,10 @@ a {
 /* Section Title */
 .work-section-title {
     width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
-    /* Spacing from Figma 119:59 */
+    box-sizing: border-box;
     padding-top: 128px;
     padding-bottom: 128px;
-    padding-left: 96px;
-    box-sizing: border-box;
+    /* padding-left removed since content-wrapper handles side gaps */
 
     font-family: 'Roobert', var(--font-body);
     font-weight: 400;
@@ -1889,14 +1868,7 @@ body:not(.home-page) #webgl-container {
 
 /* About Hero */
 .about-hero-section {
-    padding-top: 160px;
-    /* Base padding for nav */
-    padding-bottom: 24px;
-    padding-left: 96px;
-    padding-right: 96px;
     width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -1954,13 +1926,8 @@ body:not(.home-page) #webgl-container {
 
 /* Professional Path Section */
 .professional-path-section {
-    padding-left: 96px;
-    padding-right: 96px;
     padding-bottom: 104px;
-    margin-top: 80px;
     width: 100%;
-    max-width: 1440px;
-    margin: 80px auto 0;
     box-sizing: border-box;
 }
 
@@ -2101,15 +2068,8 @@ body:not(.home-page) #webgl-container {
         max-width: 100%;
     }
 
-    .about-hero-section {
-        padding-left: 32px;
-        padding-right: 32px;
-    }
+    /* Side paddings handled by .content-wrapper */
 
-    .professional-path-section {
-        padding-left: 32px;
-        padding-right: 32px;
-    }
 
     .experience-item {
         flex-direction: column;
@@ -2131,8 +2091,6 @@ body:not(.home-page) #webgl-container {
 @media (max-width: 640px) {
     .about-hero-section {
         padding-top: 104px;
-        padding-left: 24px;
-        padding-right: 24px;
     }
 
     .about-title-large {
@@ -2149,10 +2107,8 @@ body:not(.home-page) #webgl-container {
         font-size: 18px;
     }
 
-    .professional-path-section {
-        padding-left: 24px;
-        padding-right: 24px;
-    }
+    /* Side paddings handled by .content-wrapper */
+
 
     .professional-path-title {
         font-size: 30px;
