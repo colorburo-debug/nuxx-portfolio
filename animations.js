@@ -12,7 +12,7 @@ const initHeroAnimations = () => {
     
     if (hasAnimated) {
         // Skip animation: Set elements to final state immediately
-        gsap.set(".hero-title, .hero-subtitle, .hero-description, .interaction-indicator, .about-card", {
+        gsap.set(".hero-name, .hero-location, .hero-main-description, .interaction-indicator, .about-card", {
             opacity: 1,
             y: 0
         });
@@ -23,15 +23,15 @@ const initHeroAnimations = () => {
         defaults: { ease: guglieriEase, duration: 1.2 }
     });
 
-    gsap.set(".hero-title, .hero-subtitle, .hero-description, .interaction-indicator, .about-card", {
+    gsap.set(".hero-name, .hero-location, .hero-main-description, .interaction-indicator, .about-card", {
         opacity: 0,
         y: 40
     });
 
     heroTl
-        .to(".hero-title", { opacity: 1, y: 0, delay: 0.5 })
-        .to(".hero-subtitle", { opacity: 1, y: 0 }, "-=1.0")
-        .to(".hero-description", { opacity: 1, y: 0 }, "-=1.0")
+        .to(".hero-name", { opacity: 1, y: 0, delay: 0.5 })
+        .to(".hero-location", { opacity: 1, y: 0 }, "-=1.0")
+        .to(".hero-main-description", { opacity: 1, y: 0 }, "-=1.0")
         .to(".interaction-indicator", { opacity: 1, y: 0 }, "-=1.0")
         .to(".about-card", { opacity: 1, y: 0, duration: 1.5 }, "-=0.8");
 

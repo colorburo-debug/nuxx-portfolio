@@ -115,8 +115,8 @@ function createMorphGeometry(particleCount) {
     return geometry;
 }
 
-// Increased Particle Count to 35,000 for visibility
-const particleCount = 35000;
+// Increased Particle Count to 50,000 for a more premium/seamless feel
+const particleCount = 50000;
 const geometry = createMorphGeometry(particleCount);
 
 const material = new THREE.ShaderMaterial({
@@ -138,6 +138,7 @@ const material = new THREE.ShaderMaterial({
         
         varying vec2 vUv;
         varying float vDist;
+        varying float vDepth; // NEW: To pass depth for brightness
 
         void main() {
             vUv = uv;
@@ -152,7 +153,8 @@ const material = new THREE.ShaderMaterial({
             float wave = sin(spherePos.y * frequency + waveSpeed) * amplitude + 
                          cos(spherePos.x * frequency + waveSpeed * 0.8) * amplitude;
             
-            float jitter = sin(spherePos.z * 10.0 + uTime * 3.0) * 0.02;
+            float jitter = sin(spherePos.z * 10.0 + uTime * 3.0) * 0.02 +
+                           cos(spherePos.y * 5.0 + uTime * 2.0) * 0.01; // Added secondary low-freq noise
 
             vec3 animatedSpherePos = spherePos + normalize(spherePos) * (wave + jitter);
 
@@ -220,14 +222,12 @@ const material = new THREE.ShaderMaterial({
                 // Unified Interaction: Ocean Wave (Delicate Refinement - VISIBLE)
                 // "Fluid, delicate, slow, natural" - simulating slow ocean movement
                 
-                // 1. Slow, "Breathing" Swell
-                // Freq 3.0, Speed 0.8 (Slow). 
-                // AMPLITUDE INCREASED (0.15 -> 0.4) to ensure visibility.
-                float slowSwell = sin(dist * 3.0 - uTime * 0.8) * 0.4;
+                // 1. Slow, "Breathing" Swell with smooth radial wave
+                // Reduced amplitude but improved frequency for "water-like" density
+                float slowSwell = sin(dist * 5.0 - uTime * 1.5) * 0.25;
                 
                 // 2. Gentle Drift (Lateral)
-                // Amplitude 0.1 for visible floating
-                float drift = sin(finalPos.x * 1.5 + uTime * 0.5) * 0.1;
+                float drift = sin(finalPos.x * 2.5 + uTime * 0.7) * 0.12;
                 
                 // 3. Soft Falloff
                 float delicateInfluence = pow(mouseInfluence, 2.0);
@@ -244,22 +244,37 @@ const material = new THREE.ShaderMaterial({
 
             vec4 mvPosition = modelViewMatrix * vec4(finalPos, 1.0);
             
-            // Adjust size. Sphere down 25% (7.2 -> 5.4), Face down 25% (9.6 -> 7.2)
-            float baseSize = mix(5.4, 7.2, uMorphFactor); 
+            // Pass the Z position (negative because camera is at z=0 in MV)
+            vDepth = -mvPosition.z; 
+            
+            // Refined Size Logic: Increase slightly for better glow visibility
+            float baseSize = mix(6.5, 8.5, uMorphFactor); 
             gl_PointSize = baseSize * (1.0 / -mvPosition.z); 
             gl_Position = projectionMatrix * mvPosition;
         }
     `,
     fragmentShader: `
         uniform vec3 uColor;
+        varying float vDepth; // NEW
         
         void main() {
             vec2 cxy = 2.0 * gl_PointCoord - 1.0;
             float r = dot(cxy, cxy);
+            
+            // Digital Glow Falloff
+            float alpha = 1.0 - smoothstep(0.0, 1.0, r);
+            alpha = pow(alpha, 1.5); 
+            
+            // Depth-based brightness/opacity (Closer = Brighter)
+            // Camera Z is 2.5, particles move in Z=0 to Z=1.5 roughly
+            // Higher depth = further away? No, mvPosition.z is -1 to -5.
+            // vDepth is 1.0 to 5.0.
+            float depthInfluence = smoothstep(4.0, 1.5, vDepth);
+            alpha *= mix(0.3, 1.0, depthInfluence); 
+
             if (r > 1.0) discard;
 
-            // Opacity 1.0 (100%)
-            gl_FragColor = vec4(uColor, 1.0);
+            gl_FragColor = vec4(uColor, alpha);
         }
     `,
     transparent: true,

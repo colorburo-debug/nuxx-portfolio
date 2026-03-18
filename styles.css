@@ -713,8 +713,8 @@ a {
 /* Mobile - Artboard 390px */
 @media (max-width: 767px) {
     .about-card {
-        padding: 28px 24px 56px 24px !important;
-        gap: 26px !important;
+        padding: 24px 24px 48px 24px !important;
+        gap: 20px !important; /* Set exact bottom gap to 20px */
         width: 100% !important;
         max-width: none !important;
         min-height: auto !important;
@@ -725,6 +725,7 @@ a {
     .about-card-visuals {
         width: 100% !important;
         max-width: none !important;
+        height: auto !important; /* Removed fixed height to eliminate internal gaps and use the exact 20px gap below */
     }
 
     .about-card-content-wrapper {
@@ -5846,6 +5847,23 @@ html:has(.fincas-page) {
     margin: 0 !important;
     z-index: 100 !important;
     display: flex !important;
+    
+    /* Added Premium Animations */
+    animation: bob-down 2s ease-in-out infinite, pulse-scale 3s ease-in-out infinite;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.interaction-indicator:hover {
+    /* Global hover: Includes translateX for mobile/tablet where it's absolute */
+    transform: translateX(-50%) scale(1.1) !important;
+}
+
+/* Desktop Hover Fix: Prevents the translateX(-50%) from shifting the element left 
+   since it's centered via margin: auto on large screens. */
+@media screen and (min-width: 1025px) {
+    .interaction-indicator:hover {
+        transform: scale(1.1) !important;
+    }
 }
 
 /* Removed late overrides */
