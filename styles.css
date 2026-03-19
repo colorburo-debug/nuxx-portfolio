@@ -175,17 +175,16 @@
 }
 
 #webgl-container {
-    position: relative !important;
-    width: 100% !important;
-    height: 480px !important; /* Fixed height for the hero component area */
-    margin: 40px 0 !important; /* Space between text and arrow */
-    z-index: 0 !important;
-    pointer-events: none !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
     transition: opacity 1s cubic-bezier(0.27, 0, 0.51, 1);
     opacity: 1; /* Default visible on home */
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
+    /* clip-path is set dynamically by JS to confine the visual to the hero zone */
 }
 
 html {
@@ -5840,7 +5839,15 @@ html:has(.fincas-page) {
     margin: 0 auto !important;
 }
 
-/* Redundant absolute rule removed */
+.interaction-indicator {
+    position: absolute !important;
+    bottom: 32px !important; /* Pinned 32px from the bottom of the phone screen */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+    z-index: 100 !important;
+    display: flex !important;
+}
 
 /* Removed late overrides */
 
@@ -6110,7 +6117,51 @@ html:has(.fincas-page) {
     /* removed about-card padding override */
 }
 
-/* REMOVED REDUNDANT HERO SECTION DEFS ABOVE */
+/* 24. ULTIMATE HERO GAP & CENTERING (72px Precision) */
+
+/* Desktop & General */
+.hero-section {
+    padding-top: 160px !important; /* Calc: Header Wrap 8px + Pill 80px + Gap 72px = 160px */
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding-left: 48px !important; /* Safety minimum */
+    padding-right: 48px !important;
+    box-sizing: border-box !important;
+}
+
+.hero-intro {
+    width: 100% !important;
+    max-width: 1224px !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+}
+
+/* Tablet & Mobile Header Height Change */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 144px !important; /* Calc: Header Wrap 8px + Pill 64px + Gap 72px = 144px */
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+    
+    .hero-intro {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 32px !important;
+    }
+    
+    .hero-intro-left, .hero-intro-right {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
 
 /* 25. VERTICAL STABILITY (Anchoring Top Text) */
 .hero-section {
@@ -6182,7 +6233,30 @@ html:has(.fincas-page) {
     }
 }
 
-/* REMOVED REDUNDANT HERO STACK STABILITY ABOVE */
+/* 28. TOTAL VERTICAL STACK STABILITY (Unifying all breakpoints) */
+.hero-section {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; /* ALWAYS ANCHORED TO TOP */
+    align-items: center !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+}
+
+/* Precise Top Gap (Accounting for Header height differences) */
+@media screen and (min-width: 1025px) {
+    .hero-section {
+        padding-top: 160px !important; /* 88px Header + 72px Gap */
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 144px !important; /* 72px Header + 72px Gap */
+    }
+}
 
 /* Ensure the intro container doesn't have any centering margins */
 .hero-intro {
@@ -6190,7 +6264,11 @@ html:has(.fincas-page) {
     margin-bottom: 0 !important;
 }
 
-/* Consolidated below */
+/* Keep indicator at the bottom fold without pushing top text */
+.interaction-indicator {
+    position: absolute !important;
+    bottom: 32px !important;
+}
 
 /* 29. THE ABSOLUTE ANCHOR FIX (Tablet & Mobile) */
 @media screen and (max-width: 1024px) {
@@ -6364,69 +6442,127 @@ html:has(.fincas-page) {
 
 /* 36. BREAKPOINT-SPECIFIC HORIZONTAL GAPS (CLEAN RESET) */
 
-/* 36. FINAL UNIFIED HERO LAYOUT (Text > WebGL > Indicator) */
-.hero-section {
-    min-height: 100vh !important;
-    min-height: 100dvh !important;
-    position: relative !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important; /* Spread items across the full height */
-    align-items: center !important;
-    padding-top: 160px !important; /* Math: 88px (Header + Wrap) + 72px (Gap) */
-    padding-bottom: 220px !important; /* LARGE SHIFT to keep arrow visible above -146px overlap card */
-    box-sizing: border-box !important;
-}
+/* 1. Desktop Breakpoint (1025px and up) */
+@media screen and (min-width: 1025px) {
+    .hero-section, 
+    .dark-section-wrapper,
+    .work-highlights {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
 
-@media screen and (max-width: 1024px) {
+    /* Restore Hero Interaction Guide/Scroll Indicator Visibility */
     .hero-section {
-        padding-top: 144px !important; /* Math: 72px (Header + Wrap) + 72px (Gap) */
-        padding-left: 24px !important;
-        padding-right: 24px !important;
-        padding-bottom: 180px !important; /* Adjusted for mobile overlap */
+        min-height: calc(100vh - 92px) !important; /* Viewport height minus header top margin */
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important; /* Context for centering children */
+    }
+
+    .hero-intro, 
+    .about-card, 
+    .work-section-title,
+    .case-study-card {
+        width: calc(100% - 64px) !important; /* The 32px Desktop safety gap */
+        max-width: 1224px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-align: left !important;
+    }
+
+    .hero-intro {
+        margin-bottom: 0 !important; /* Managed by indicator margin */
+    }
+
+    .interaction-indicator {
+        display: flex !important;
+        position: relative !important; /* Back to relative to follow flow */
+        margin: 80px auto 48px auto !important; /* Universal centering logic */
+        align-self: center !important;
+        left: auto !important; /* Reset any absolute leftovers */
+        right: auto !important;
+        transform: none !important; /* Reset transform for perfect alignment */
+        z-index: 101 !important;
+    }
+
+    .case-study-card {
+        margin-bottom: 160px !important;
     }
 }
 
-.hero-intro {
-    width: 100% !important;
-    max-width: 1224px !important;
-    margin: 0 auto !important;
-    flex: none !important;
-    z-index: 10 !important;
+/* 2. Tablet Breakpoint (768px to 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .hero-section,
+    .about-section,
+    .work-highlights {
+        padding-left: 32px !important; /* The 32px Tablet gap */
+        padding-right: 32px !important;
+    }
+
+    .hero-intro, 
+    .about-card,
+    .work-section-title,
+    .case-study-card {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
 }
 
-/* Centralized WebGL Container Component */
-#webgl-container {
-    position: relative !important;
-    width: 100% !important;
-    flex-grow: 1 !important; /* Fill space between text and arrow */
-    min-height: 380px !important;
-    max-height: 680px !important;
-    z-index: 0 !important;
-    pointer-events: auto !important; /* RE-ENABLED for sphere interactivity */
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-}
+/* 3. Mobile Breakpoint (767px and below) */
+@media screen and (max-width: 767px) {
+    .hero-section {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
 
-/* Centralized Interaction Indicator */
-.interaction-indicator {
-    display: flex !important;
-    position: relative !important;
-    margin: 0 auto !important;
-    align-self: center !important;
-    z-index: 110 !important; /* Higher to ensure it's above card if they still touch */
-    flex: none !important;
-}
+    .work-highlights {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
 
-/* Mobile Alignment Fix for Hero Intro */
-@media screen and (max-width: 1024px) {
-    .hero-intro {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        text-align: left !important;
-        gap: 24px !important;
+    .about-section {
+        padding-left: 8px !important; /* Specific 8px gap for About Card */
+        padding-right: 8px !important;
+    }
+
+    .hero-intro, 
+    .about-card,
+    .work-section-title,
+    .case-study-card {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    /* Portfolio Cases Mobile Gaps */
+    .work-section-title {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+        box-sizing: border-box !important;
+    }
+
+    .case-study-card {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        gap: 24px !important; /* Gap between image and text */
+    }
+
+    .card-image {
+        width: calc(100% - 16px) !important;
+        margin-left: 8px !important;
+        margin-right: 8px !important;
+        border-radius: 8px !important;
+    }
+
+    .card-content-row {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+        box-sizing: border-box !important;
     }
 }
 

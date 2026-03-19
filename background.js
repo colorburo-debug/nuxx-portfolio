@@ -3,20 +3,38 @@
 const container = document.getElementById('webgl-container');
 const reticle = document.getElementById('cursor-reticle');
 
-// ─── Resize Handling ─────────────────────────────────────
-function resizeRenderer() {
-    if (!container || !renderer || !camera) return;
-    const width = container.clientWidth || window.innerWidth;
-    const height = container.clientHeight || 480;
-    
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+// ─── Hero Zone Clip-Path ─────────────────────────────────────
+// Prevents the WebGL canvas from visually bleeding BELOW the
+// about-me card. The top is intentionally left open — the hero
+// text and header both have higher z-indices and will naturally
+// appear on top of the sphere, so no top clip is needed.
+// This means the full sphere shape stays visible and uncut.
+function updateWebGLClip() {
+    const aboutCard = document.querySelector('.about-card');
+    if (!aboutCard || !container) return;
+
+    const aboutRect   = aboutCard.getBoundingClientRect();
+    const vh          = window.innerHeight;
+
+    // Only clip the BOTTOM — stop particles bleeding below the about card.
+    // The about-card has z-index:20, so even a few px of overlap is fine,
+    // but we cut at its top edge for a clean boundary.
+    const bottomInset = Math.max(0, vh - aboutRect.top);
+
+    container.style.clipPath = `inset(0 0 ${bottomInset}px 0)`;
 }
 
-window.addEventListener('resize', resizeRenderer);
-document.addEventListener('DOMContentLoaded', resizeRenderer);
+// Run on scroll (passive for performance) and resize
+window.addEventListener('scroll', updateWebGLClip, { passive: true });
+window.addEventListener('resize', updateWebGLClip);
+
+// Run once after DOM is ready, and again after layout settles
+document.addEventListener('DOMContentLoaded', () => {
+    updateWebGLClip();
+    setTimeout(updateWebGLClip, 200);
+});
+// Also call immediately in case the script loads after DOMContentLoaded
+updateWebGLClip();
 // ─────────────────────────────────────────────────────────────
 
 // Scene Setup
@@ -25,8 +43,9 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 camera.position.z = 2.5;
 
 const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 container.appendChild(renderer.domElement);
-resizeRenderer();
 
 // Load Face Depth Texture
 const textureLoader = new THREE.TextureLoader();
@@ -44,13 +63,8 @@ function createMorphGeometry(particleCount) {
     const geometry = new THREE.BufferGeometry();
     const spherePositions = [];
     const facePositions = [];
-    const colors = [];
     const uvs = [];
     const randoms = []; // For noise offsets
-
-    const color1 = new THREE.Color('#1E1E1E'); // 50%
-    const color2 = new THREE.Color('#FA2E5E'); // 25%
-    const color3 = new THREE.Color('#EEEFF3'); // 25%
 
     // Grid dimensions for Face (must be square to match texture UVs roughly)
     const gridSize = Math.floor(Math.sqrt(particleCount));
@@ -63,6 +77,7 @@ function createMorphGeometry(particleCount) {
         const theta = 2 * Math.PI * u;
         const phi = Math.acos(2 * v - 1);
 
+        // Increased Radius by 10% (1.2 -> 1.32)
         const r = 1.32;
 
         const sx = r * Math.sin(phi) * Math.cos(theta);
@@ -71,27 +86,19 @@ function createMorphGeometry(particleCount) {
         spherePositions.push(sx, sy, sz);
 
         // --- 2. Face Position (Grid Plane) ---
+        // We generate a flat plane. The Z-displacement happens in the vertex shader via texture.
         const row = Math.floor(i / gridSize);
         const col = i % gridSize;
+
         const uPlane = col / (gridSize - 1);
         const vPlane = row / (gridSize - 1);
 
+        // Center the plane. Size ~ 3.3 (was 3.0) -> +10%
         const tx = (uPlane - 0.5) * 3.3;
         const ty = (vPlane - 0.5) * 3.3;
-        const tz = 0; 
-        facePositions.push(tx, ty, tz);
+        const tz = 0; // Flat base
 
-        // --- 3. Color Selection (50/25/25) ---
-        const rand = Math.random();
-        let selectedColor;
-        if (rand < 0.5) {
-            selectedColor = color1;
-        } else if (rand < 0.75) {
-            selectedColor = color2;
-        } else {
-            selectedColor = color3;
-        }
-        colors.push(selectedColor.r, selectedColor.g, selectedColor.b);
+        facePositions.push(tx, ty, tz);
 
         // UVs for texture sampling
         uvs.push(uPlane, vPlane);
@@ -102,7 +109,6 @@ function createMorphGeometry(particleCount) {
 
     geometry.setAttribute('position', new THREE.Float32BufferAttribute(spherePositions, 3));
     geometry.setAttribute('aTargetPos', new THREE.Float32BufferAttribute(facePositions, 3));
-    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
     geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
     geometry.setAttribute('aRandom', new THREE.Float32BufferAttribute(randoms, 1));
 
@@ -116,6 +122,7 @@ const geometry = createMorphGeometry(particleCount);
 const material = new THREE.ShaderMaterial({
     uniforms: {
         uTime: { value: 0 },
+        uColor: { value: new THREE.Color('#0d1327') },
         uMouse: { value: new THREE.Vector3(9999, 9999, 9999) },
         uMorphFactor: { value: 0.0 }, // 0=Sphere, 1=Face
         uDisplacementTexture: { value: displacementMap }
@@ -128,15 +135,12 @@ const material = new THREE.ShaderMaterial({
         
         attribute vec3 aTargetPos;
         attribute float aRandom;
-        attribute vec3 color;
         
         varying vec2 vUv;
         varying float vDist;
-        varying vec3 vColor;
 
         void main() {
             vUv = uv;
-            vColor = color;
             vec3 spherePos = position;
             vec3 faceBasePos = aTargetPos;
 
@@ -159,6 +163,9 @@ const material = new THREE.ShaderMaterial({
             
             float depthScale = 1.5; 
             vec3 facePos = faceBasePos;
+            // Move face back slightly so it's not too close to the camera (Camera Z=2.5)
+            // Face Base is at Z=0? No, in createMorphGeometry tz=0.
+            // So face starts at 0.
             facePos.z = -1.0 + faceHeight * depthScale;
 
             // Procedural Smile
@@ -200,16 +207,32 @@ const material = new THREE.ShaderMaterial({
             vec3 finalPos = mixPos + noiseOffset;
 
             // --- Unified Interaction: Ocean Wave (Both Stages) ---
+            // "onhover state particles should sway in a fluid and smood manner, simulating the waves of the osean"
+            
             float dist = distance(finalPos, uMouse);
             vDist = dist;
-            float interactionRadius = 1.2; 
+            float interactionRadius = 1.2; // Slightly larger for water ripple feel
+            
+            // Interaction Influence with smooth falloff
             float mouseInfluence = smoothstep(interactionRadius, 0.0, dist);
             
             if (mouseInfluence > 0.001) {
+                // Unified Interaction: Ocean Wave (Delicate Refinement - VISIBLE)
+                // "Fluid, delicate, slow, natural" - simulating slow ocean movement
+                
+                // 1. Slow, "Breathing" Swell
+                // Freq 3.0, Speed 0.8 (Slow). 
+                // AMPLITUDE INCREASED (0.15 -> 0.4) to ensure visibility.
                 float slowSwell = sin(dist * 3.0 - uTime * 0.8) * 0.4;
+                
+                // 2. Gentle Drift (Lateral)
+                // Amplitude 0.1 for visible floating
                 float drift = sin(finalPos.x * 1.5 + uTime * 0.5) * 0.1;
+                
+                // 3. Soft Falloff
                 float delicateInfluence = pow(mouseInfluence, 2.0);
                 
+                // Combine forces
                 vec3 waveOffset = vec3(
                     drift, 
                     drift * 0.5, 
@@ -221,20 +244,22 @@ const material = new THREE.ShaderMaterial({
 
             vec4 mvPosition = modelViewMatrix * vec4(finalPos, 1.0);
             
+            // Adjust size. Sphere down 25% (7.2 -> 5.4), Face down 25% (9.6 -> 7.2)
             float baseSize = mix(5.4, 7.2, uMorphFactor); 
             gl_PointSize = baseSize * (1.0 / -mvPosition.z); 
             gl_Position = projectionMatrix * mvPosition;
         }
     `,
     fragmentShader: `
-        varying vec3 vColor;
+        uniform vec3 uColor;
         
         void main() {
             vec2 cxy = 2.0 * gl_PointCoord - 1.0;
             float r = dot(cxy, cxy);
             if (r > 1.0) discard;
 
-            gl_FragColor = vec4(vColor, 1.0);
+            // Opacity 1.0 (100%)
+            gl_FragColor = vec4(uColor, 1.0);
         }
     `,
     transparent: true,
@@ -334,10 +359,9 @@ window.addEventListener('resize', () => {
 const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
 document.addEventListener('mousemove', (e) => {
-    if (isTouchDevice || !renderer) return;
-    const rect = renderer.domElement.getBoundingClientRect();
-    mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    if (isTouchDevice) return;
+    mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
     reticle.style.left = `${e.clientX}px`;
     reticle.style.top = `${e.clientY}px`;
 });
