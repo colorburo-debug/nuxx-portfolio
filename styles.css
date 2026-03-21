@@ -189,13 +189,13 @@
 
 @media (max-width: 1024px) {
     #webgl-container {
-        height: 1200px;
+        height: 100%; /* Stretches dynamically to the exact edge of the next section */
     }
 }
 
 @media (max-width: 767px) {
     #webgl-container {
-        height: 1200px;
+        height: 100%; /* Stretches dynamically to the exact edge of the next section */
     }
 }
 
