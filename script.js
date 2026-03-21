@@ -7,11 +7,6 @@
    ============================================================ */
 
 // ─── Mobile Menu ────────────────────────────────────────────
-// We delegate from `document` so the handler survives Barba
-// swapping the inner container (which contains the toggle).
-// The overlay and close button live outside the Barba container
-// on index.html, but we query them fresh each time to support
-// pages that load independently (about.html, lahaus.html, etc.)
 
 const openMobileMenu = () => {
     const overlay = document.getElementById('mobile-menu');
@@ -28,48 +23,6 @@ const closeMobileMenu = () => {
         document.body.classList.remove('no-scroll');
     }
 };
-
-// Single delegated listener on document — survives all DOM mutations
-document.addEventListener('click', (e) => {
-    // Open: click on the toggle button or any child inside it
-    if (e.target.closest('#mobile-menu-toggle')) {
-        e.stopPropagation();
-        openMobileMenu();
-        return;
-    }
-
-    // Close: click on the close button or any child inside it
-    if (e.target.closest('#mobile-menu-close')) {
-        e.stopPropagation();
-        closeMobileMenu();
-        return;
-    }
-
-    // Close: click on a nav item inside the overlay
-    if (e.target.closest('.mobile-nav-item')) {
-        closeMobileMenu();
-        return;
-    }
-}, true); // useCapture=true ensures we catch events even on elements that stopPropagation
-
-// Also handle touch events explicitly for iOS Safari reliability
-document.addEventListener('touchend', (e) => {
-    if (e.target.closest('#mobile-menu-toggle')) {
-        e.preventDefault();
-        openMobileMenu();
-        return;
-    }
-    if (e.target.closest('#mobile-menu-close')) {
-        e.preventDefault();
-        closeMobileMenu();
-        return;
-    }
-    if (e.target.closest('.mobile-nav-item')) {
-        closeMobileMenu();
-        return;
-    }
-}, { passive: false, capture: true });
-
 
 // ─── Custom Cursor ──────────────────────────────────────────
 const initCursor = () => {
@@ -116,7 +69,78 @@ const initPage = () => {
 
     // Re-bind hover events for the new page content
     updateCursorHover();
+
+    // Re-bind WebGL if entering home
+    if (window.initWebGL) {
+        window.initWebGL();
+    }
+
+    // Handle hash scrolling (e.g., /index.html#work)
+    const hash = window.location.hash;
+    if (hash) {
+        const target = document.querySelector(hash);
+        if (target) {
+            // Slight delay to ensure content is rendered and layout is stable
+            setTimeout(() => {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+    }
 };
+
+// ─── Global Event Listeners (Attached Once) ─────────────────
+
+const initGlobalListeners = () => {
+    // Single delegated listener on document — survives all DOM mutations
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        
+        // 1. Mobile Menu Toggle Logic
+        if (e.target.closest('#mobile-menu-toggle')) {
+            e.stopPropagation();
+            openMobileMenu();
+            return;
+        }
+
+        if (e.target.closest('#mobile-menu-close')) {
+            e.stopPropagation();
+            closeMobileMenu();
+            return;
+        }
+
+        // 2. Hash Link Logic (e.g., #work)
+        if (link && link.getAttribute('href')?.startsWith('#')) {
+            const targetId = link.getAttribute('href');
+            const targetEl = document.querySelector(targetId);
+            
+            if (targetEl) {
+                e.preventDefault();
+                closeMobileMenu();
+                targetEl.scrollIntoView({ behavior: 'smooth' });
+                // Update URL hash without jumping
+                history.pushState(null, null, targetId);
+                return;
+            }
+        }
+
+        // 3. Close menu on any nav item click (even external/other pages)
+        if (e.target.closest('.mobile-nav-item')) {
+            closeMobileMenu();
+            // Allow default link behavior to proceed
+        }
+    }, true);
+
+    // Also handle touch events explicitly for iOS Safari reliability
+    document.addEventListener('touchend', (e) => {
+        if (e.target.closest('#mobile-menu-toggle')) {
+            // e.preventDefault(); // Might interfere with click above if not careful
+            openMobileMenu();
+        }
+        if (e.target.closest('#mobile-menu-close')) {
+            closeMobileMenu();
+        }
+    }, { passive: true });
+}
 
 // Expose globally for Barba
 window.initPage = initPage;
@@ -124,5 +148,6 @@ window.initPage = initPage;
 // Run on first load
 document.addEventListener('DOMContentLoaded', () => {
     initCursor();
+    initGlobalListeners();
     initPage();
 });
