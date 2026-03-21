@@ -1896,12 +1896,26 @@ body:not(.home-page) #webgl-container {
     flex-direction: column;
 }
 
+/* Force specific 160px visual gap strictly from the bottom edge of the header for Desktop */
+@media (min-width: 1025px) {
+    .about-hero-section {
+        margin-top: 88px; /* Clears the 80px fixed header + 8px wrapper padding */
+        padding-top: 160px !important; /* The requested 160px gap */
+    }
+}
+
 .about-hero-content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 88px;
     margin-top: 56px;
+}
+
+@media (min-width: 1025px) {
+    .about-hero-content {
+        margin-top: 0 !important; /* Neutralizes old margins so gap is perfectly accurate */
+    }
 }
 
 .about-title-col {
