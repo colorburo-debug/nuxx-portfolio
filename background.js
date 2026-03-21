@@ -1,24 +1,32 @@
-// WebGL Background with Three.js
-let renderer, scene, camera, clock, material, particles, hitSphere, hitPlane, raycaster;
+// WebGL Background with Three.js - Antigravity Style (Liftoff Intro & Scroll Parallax & Bokeh & Vortex)
+let renderer, scene, camera, clock, particles, raycaster, hitPlane;
 let isInitialized = false;
-let mouse = new THREE.Vector2();
+
+// Global Animation Tracking
+let accumTime = 0;
+let smoothedScrollY = 0;
+let burstVelocity = 35.0; // The massive initial speed for the "Liftoff" burst
+
+// Mouse Tracking Variables
+let mouse2D = new THREE.Vector2(-9999, -9999);
+let targetMouse = new THREE.Vector3(9999, 9999, 9999);
+let currentMouse = new THREE.Vector3(9999, 9999, 9999);
+let isMouseDown = false;
 
 const initWebGL = () => {
     const container = document.getElementById('webgl-container');
-    const reticle = document.getElementById('cursor-reticle');
     if (!container) return;
 
-    // If already created, just re-append the renderer's DOM element
     if (isInitialized) {
         container.appendChild(renderer.domElement);
         if (window.updateWebGLSize) window.updateWebGLSize();
         return;
     }
 
-    // ─── Scene Setup ──────────────────────────────────────────
+    // --- Scene Setup ---
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 2.5;
+    camera.position.z = 5;
 
     renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -33,249 +41,289 @@ const initWebGL = () => {
     };
     updateSize();
     container.appendChild(renderer.domElement);
-
-    // Make updateSize accessible
     window.updateWebGLSize = updateSize;
 
-    // Load Face Depth Texture
-    const textureLoader = new THREE.TextureLoader();
-    const displacementMap = textureLoader.load('face_depth.png');
-
-    // Raycaster
+    // --- Interaction Setup ---
     raycaster = new THREE.Raycaster();
+    const hitPlaneGeometry = new THREE.PlaneGeometry(100, 100);
+    const hitMaterial = new THREE.MeshBasicMaterial({ visible: false });
+    hitPlane = new THREE.Mesh(hitPlaneGeometry, hitMaterial);
+    scene.add(hitPlane);
 
-    // Interaction State
-    let isFace = false;
+    // --- Particle System ---
+    const particleCount = 1170; // High Density
+    const geometry = new THREE.BufferGeometry();
+    
+    // Attributes
+    const positions = new Float32Array(particleCount * 3);
+    const randoms = new Float32Array(particleCount * 3);
+    const scales = new Float32Array(particleCount);
 
-    // Custom Geometry Generation
-    function createMorphGeometry(particleCount) {
-        const geometry = new THREE.BufferGeometry();
-        const spherePositions = [];
-        const facePositions = [];
-        const uvs = [];
-        const randoms = [];
+    for (let i = 0; i < particleCount; i++) {
+        // Initial positions spread across a wide area to allow for wrapping
+        // X: -10 to 10
+        // Y: -10 to 10
+        // Z: -2 to 2
+        positions[i * 3 + 0] = (Math.random() - 0.5) * 20;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 4;
 
-        const gridSize = Math.floor(Math.sqrt(particleCount));
-        const count = gridSize * gridSize;
+        // Random values for individualized motion
+        randoms[i * 3 + 0] = Math.random();
+        randoms[i * 3 + 1] = Math.random();
+        randoms[i * 3 + 2] = Math.random();
 
-        for (let i = 0; i < count; i++) {
-            const u = Math.random();
-            const v = Math.random();
-            const theta = 2 * Math.PI * u;
-            const phi = Math.acos(2 * v - 1);
-            const r = 2.2;
-
-            const sx = r * Math.sin(phi) * Math.cos(theta);
-            const sy = r * Math.sin(phi) * Math.sin(theta);
-            const sz = r * Math.cos(phi);
-            spherePositions.push(sx, sy, sz);
-
-            const row = Math.floor(i / gridSize);
-            const col = i % gridSize;
-            const uPlane = col / (gridSize - 1);
-            const vPlane = row / (gridSize - 1);
-
-            const tx = (uPlane - 0.5) * 6.0;
-            const ty = (vPlane - 0.5) * 4.0;
-            const tz = 0;
-
-            facePositions.push(tx, ty, tz);
-            uvs.push(uPlane, vPlane);
-            randoms.push(Math.random());
-        }
-
-        geometry.setAttribute('position', new THREE.Float32BufferAttribute(spherePositions, 3));
-        geometry.setAttribute('aTargetPos', new THREE.Float32BufferAttribute(facePositions, 3));
-        geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
-        geometry.setAttribute('aRandom', new THREE.Float32BufferAttribute(randoms, 1));
-
-        return geometry;
+        // Scale variations mostly small with occasional larger dots
+        scales[i] = 1.0 + Math.random() * 2.5;
     }
 
-    const particleCount = 60000;
-    const geometry = createMorphGeometry(particleCount);
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 3));
+    geometry.setAttribute('aScale', new THREE.BufferAttribute(scales, 1));
 
-    material = new THREE.ShaderMaterial({
+    const material = new THREE.ShaderMaterial({
         uniforms: {
             uTime: { value: 0 },
-            uColor: { value: new THREE.Color('#0d1327') },
+            uScrollOffset: { value: 0 }, // For Parallax Depth
             uMouse: { value: new THREE.Vector3(9999, 9999, 9999) },
-            uMorphFactor: { value: 0.0 },
-            uDisplacementTexture: { value: displacementMap }
+            uIsMouseDown: { value: 0.0 }, // Trigger for Vortex
+            uColor1: { value: new THREE.Color('#1E1E1E') },
+            uColor2: { value: new THREE.Color('#6F6F6F') },
+            uPixelRatio: { value: renderer.getPixelRatio() }
         },
         vertexShader: `
             uniform float uTime;
+            uniform float uPixelRatio;
             uniform vec3 uMouse;
-            uniform float uMorphFactor;
-            uniform sampler2D uDisplacementTexture;
+            uniform float uScrollOffset;
+            uniform float uIsMouseDown;
             
-            attribute vec3 aTargetPos;
-            attribute float aRandom;
+            attribute vec3 aRandom;
+            attribute float aScale;
             
-            varying vec2 vUv;
-            varying float vDist;
+            varying vec3 vRandom;
+            varying float vScale;
+            varying float vDepth; // Distance to camera
 
             void main() {
-                vUv = uv;
-                vec3 spherePos = position;
-                vec3 faceBasePos = aTargetPos;
+                vRandom = aRandom;
+                vScale = aScale;
 
-                float frequency = 4.0; 
-                float amplitude = 0.1; 
-                float waveSpeed = uTime * 1.2; 
+                vec3 pos = position;
 
-                float wave = sin(spherePos.y * frequency + waveSpeed) * amplitude + 
-                             cos(spherePos.x * frequency + waveSpeed * 0.8) * amplitude;
+                // Delicate carpet flow logic (More noticeable motion)
+                // 1. Smooth continuous vertical drift
+                float driftSpeed = 0.3 + aRandom.y * 0.2;
+                float timeOffset = uTime * driftSpeed;
                 
-                float jitter = sin(spherePos.z * 10.0 + uTime * 3.0) * 0.02;
-                vec3 animatedSpherePos = spherePos + normalize(spherePos) * (wave + jitter);
+                // Wrap Y position continuously so they never run out
+                pos.y = mod(pos.y + timeOffset + uScrollOffset + 10.0, 20.0) - 10.0;
 
-                vec4 displacement = texture2D(uDisplacementTexture, uv);
-                float faceHeight = displacement.r; 
-                
-                float depthScale = 1.5; 
-                vec3 facePos = faceBasePos;
-                facePos.z = -1.0 + faceHeight * depthScale;
+                // 2. Wider horizontal sway 
+                float sway = sin(uTime * 0.25 + pos.y * 0.3 + aRandom.x * 6.28) * 1.5;
+                pos.x += sway;
 
-                vec2 mouthCenter = vec2(0.5, 0.33); 
-                float xDist = abs(uv.x - mouthCenter.x);
-                float yDist = abs(uv.y - mouthCenter.y);
+                // 3. More pronounced depth undulation (the "carpet" wave)
+                float wave = sin(pos.x * 0.5 + uTime * 0.5) * cos(pos.y * 0.5 + uTime * 0.4);
+                pos.z += wave * 1.0 + aRandom.z * 0.5;
+
+                // 4. Smooth Interaction & Magnetic Click Vortex
+                float dist = distance(pos.xy, uMouse.xy);
+                float influenceRadius = mix(3.5, 7.0, uIsMouseDown); // Expand reach when clicked
                 
-                if (yDist < 0.15 && xDist < 0.25) {
-                    float smile = pow(xDist * 4.0, 2.0) * 0.5; 
-                    float blend = smoothstep(0.15, 0.0, yDist) * smoothstep(0.25, 0.1, xDist);
-                    facePos.y += smile * blend;
-                    facePos.z += smile * blend * 0.3;
+                // Smooth bell curve for repulsion/attraction
+                float influence = smoothstep(influenceRadius, 0.0, dist);
+                if (influence > 0.0) {
+                    vec2 dir = normalize(pos.xy - uMouse.xy + 0.001);
+                    
+                    // Push away normally, pull intensely when clicked
+                    float pushFactor = mix(1.2, -1.8, uIsMouseDown * influence);
+                    
+                    // Swirl delicately normally, spin rapidly when clicked
+                    vec2 swirlDir = vec2(-dir.y, dir.x); 
+                    float swirlFactor = mix(0.6, 6.0, uIsMouseDown * influence);
+                    
+                    // Blend push and swirl smoothly
+                    pos.xy += dir * influence * pushFactor;
+                    pos.xy += swirlDir * influence * swirlFactor;
+                    
+                    // Push back slightly for volume naturally, pull sharply forward towards user during vortex
+                    float depthPush = mix(0.8, -2.5, uIsMouseDown);
+                    pos.z -= influence * depthPush; 
                 }
 
-                float swayAngle = sin(uTime * 0.5) * 0.08; 
-                float cx = cos(swayAngle);
-                float sx = sin(swayAngle);
-                float tx = facePos.x * cx - facePos.z * sx;
-                float tz = facePos.x * sx + facePos.z * cx;
-                facePos.x = tx;
-                facePos.z = tz;
+                vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+                vDepth = -mvPosition.z; // Send depth forward to simulate blur
                 
-                float t = uMorphFactor;
-                float easeT = t * t * (3.0 - 2.0 * t);
+                // Size mapping
+                float baseSize = 10.4; 
+                // Grow particles drastically while pulling them out of the background during vortex
+                baseSize += uIsMouseDown * influence * 15.0;
                 
-                vec3 mixPos = mix(animatedSpherePos, facePos, easeT);
-                float noiseStrength = sin(t * 3.14159) * 0.2;
-                vec3 noiseOffset = vec3(
-                    sin(position.y * 10.0 + uTime * 2.0),
-                    cos(position.z * 10.0 + uTime * 2.0),
-                    sin(position.x * 10.0 + uTime * 2.0)
-                ) * noiseStrength;
-                
-                vec3 finalPos = mixPos + noiseOffset;
-                float dist = distance(finalPos, uMouse);
-                vDist = dist;
-                float interactionRadius = 2.2;
-                float mouseInfluence = smoothstep(interactionRadius, 0.0, dist);
-                
-                if (mouseInfluence > 0.001) {
-                    float slowSwell = sin(dist * 3.0 - uTime * 0.8) * 0.4;
-                    float drift = sin(finalPos.x * 1.5 + uTime * 0.5) * 0.1;
-                    float delicateInfluence = pow(mouseInfluence, 2.0);
-                    vec3 waveOffset = vec3(drift, drift * 0.5, slowSwell) * delicateInfluence;
-                    finalPos += waveOffset;
-                }
-
-                vec4 mvPosition = modelViewMatrix * vec4(finalPos, 1.0);
-                float baseSize = mix(5.4, 7.2, uMorphFactor); 
-                gl_PointSize = baseSize * (1.0 / -mvPosition.z); 
+                gl_PointSize = aScale * baseSize * uPixelRatio * (1.0 / vDepth);
                 gl_Position = projectionMatrix * mvPosition;
             }
         `,
         fragmentShader: `
-            uniform vec3 uColor;
+            uniform float uTime;
+            uniform vec3 uColor1;
+            uniform vec3 uColor2;
+            
+            varying vec3 vRandom;
+            varying float vScale;
+            varying float vDepth;
+
+            vec3 getGradient(float t) {
+                // Two-color gradient interpolation
+                return mix(uColor1, uColor2, t);
+            }
+
             void main() {
-                vec2 cxy = 2.0 * gl_PointCoord - 1.0;
-                float r = dot(cxy, cxy);
-                if (r > 1.0) discard;
-                gl_FragColor = vec4(uColor, 0.7);
+                vec2 uv = gl_PointCoord - 0.5;
+                float dist = length(uv);
+                
+                // Perfect, soft circles
+                if (dist > 0.5) discard;
+                
+                // Depth of Field (Simulated Camera Bokeh)
+                // Focal plane is roughly at 4.5
+                float focusDist = 4.5;
+                float blurAmount = smoothstep(0.0, 3.0, abs(vDepth - focusDist));
+                
+                // Particles completely out of focus have much softer, blurred edges
+                float edgeSoftness = mix(0.1, 0.45, blurAmount);
+                float alpha = smoothstep(0.5, 0.5 - edgeSoftness, dist);
+                
+                if (alpha < 0.01) discard;
+
+                // Derive the internal gradient strictly from coordinates 
+                float gradientInput = (uv.x + uv.y + 0.5) * 0.5;
+                vec3 finalColor = getGradient(clamp(gradientInput, 0.0, 1.0));
+                
+                // Dim particles gracefully as they get incredibly far away
+                float depthFade = 1.0 - smoothstep(5.5, 8.0, vDepth);
+                
+                // Soft pulse over time
+                float pulse = 0.8 + 0.2 * sin(uTime * 0.5 + vRandom.x * 6.28);
+                
+                gl_FragColor = vec4(finalColor, alpha * pulse * depthFade);
             }
         `,
         transparent: true,
-        depthWrite: false
+        depthWrite: false,
+        blending: THREE.NormalBlending
     });
 
     particles = new THREE.Points(geometry, material);
     scene.add(particles);
 
-    const hitGeometry = new THREE.SphereGeometry(2.2, 32, 32);
-    const hitMaterial = new THREE.MeshBasicMaterial({ visible: false, side: THREE.DoubleSide }); 
-    hitSphere = new THREE.Mesh(hitGeometry, hitMaterial);
-    scene.add(hitSphere);
-
-    const hitPlaneGeometry = new THREE.PlaneGeometry(12, 12);
-    hitPlane = new THREE.Mesh(hitPlaneGeometry, hitMaterial);
-    hitPlane.position.z = -0.5;
-    scene.add(hitPlane);
-
     clock = new THREE.Clock();
+    
+    // Performance Optimization: Only render when visible
+    let isVisible = true;
+    const observer = new IntersectionObserver((entries) => {
+        isVisible = entries[0].isIntersecting;
+    }, { rootMargin: "100px" }); // Start rendering just before it enters the screen
+    observer.observe(container);
 
     const animate = () => {
         requestAnimationFrame(animate);
-        const time = clock.getElapsedTime();
-        material.uniforms.uTime.value = time;
+        
+        // Skip all math and GPU rendering if the canvas is off-screen
+        if (!isVisible) return;
 
-        const targetMorph = isFace ? 1.0 : 0.0;
-        const currentMorph = material.uniforms.uMorphFactor.value;
-        material.uniforms.uMorphFactor.value += (targetMorph - currentMorph) * 0.03;
+        // Limit delta so pausing tabs doesn't break the animation mathematically
+        const dt = Math.min(clock.getDelta(), 0.1);
 
-        if (material.uniforms.uMorphFactor.value < 0.99 && !isFace) {
-            const rotSpeed = 0.05;
-            particles.rotation.y -= rotSpeed * 0.016;
-            hitSphere.rotation.y -= rotSpeed * 0.016;
+        // 1. LIFTOFF INTRO BURST LOGIC
+        burstVelocity += (0.0 - burstVelocity) * 1.5 * dt;
+
+        let timeMultiplier = 1.0 + burstVelocity;
+        accumTime += dt * timeMultiplier;
+        material.uniforms.uTime.value = accumTime;
+
+        // 2. PARALLAX SCROLL LOGIC
+        const targetScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+        smoothedScrollY += (targetScrollY - smoothedScrollY) * 5.0 * dt;
+        material.uniforms.uScrollOffset.value = smoothedScrollY * 0.015;
+
+        // 3. ENHANCED VORTEX LOGIC
+        let targetMouseDown = isMouseDown ? 1.0 : 0.0;
+        let vortexEase = targetMouseDown === 1.0 ? 0.2 : 0.05;
+        material.uniforms.uIsMouseDown.value += (targetMouseDown - material.uniforms.uIsMouseDown.value) * vortexEase;
+
+        // 4. ENHANCED VOLUME EFFECTS (Camera tracking)
+        let targetCameraZ = 5 + (burstVelocity * 0.1);
+        camera.position.z += (targetCameraZ - camera.position.z) * 5.0 * dt;
+
+        let baseCameraY = Math.cos(accumTime * 0.04) * 0.3;
+        camera.position.y = baseCameraY - (smoothedScrollY * 0.0012);
+        camera.position.x = Math.sin(accumTime * 0.05) * 0.5;
+        camera.lookAt(scene.position);
+
+        particles.rotation.y = accumTime * 0.05;
+        particles.rotation.z = accumTime * 0.02;
+
+        // 5. MOUSE HANDLING & VORTEX
+        // Optimized to only raycast if the mouse is actively on screen
+        if (mouse2D.x !== -9999) {
+            raycaster.setFromCamera(mouse2D, camera);
+            const intersects = raycaster.intersectObject(hitPlane);
+            
+            if (intersects.length > 0) {
+                targetMouse.copy(intersects[0].point);
+            } else {
+                targetMouse.set(9999, 9999, 9999);
+            }
         } else {
-            particles.rotation.y = THREE.MathUtils.lerp(particles.rotation.y, 0, 0.1);
-            hitSphere.rotation.y = THREE.MathUtils.lerp(hitSphere.rotation.y, 0, 0.1);
+            targetMouse.set(9999, 9999, 9999);
         }
 
-        raycaster.setFromCamera(mouse, camera);
-        let intersects = isFace ? raycaster.intersectObject(hitPlane) : raycaster.intersectObject(hitSphere);
-
-        if (intersects.length > 0) {
-            const worldPoint = intersects[0].point;
-            const localPoint = worldPoint.clone();
-            if (isFace) hitPlane.worldToLocal(localPoint);
-            else hitSphere.worldToLocal(localPoint);
-            material.uniforms.uMouse.value.lerp(localPoint, 0.15);
-            if (reticle) reticle.style.transform = `translate(-50%, -50%) scale(3.5)`;
-        } else {
-            material.uniforms.uMouse.value.lerp(new THREE.Vector3(9999, 9999, 9999), 0.1);
-            if (reticle) reticle.style.transform = `translate(-50%, -50%) scale(1)`;
-        }
+        currentMouse.lerp(targetMouse, 0.05);
+        material.uniforms.uMouse.value.copy(currentMouse);
 
         renderer.render(scene, camera);
     };
 
     animate();
 
-    // Click Interaction
-    const toggleMorph = () => {
-        isFace = !isFace;
+    // Event Listeners
+    const handleMouseMove = (e) => {
+        const container = document.getElementById('webgl-container');
+        if (!container) return;
+        const rect = container.getBoundingClientRect();
+        
+        let clientX = e.clientX ?? e.touches?.[0]?.clientX;
+        let clientY = e.clientY ?? e.touches?.[0]?.clientY;
+        if (clientX === undefined) return;
+        
+        // Convert screen coordinates to normalized device coordinates (NDC) -1 to +1
+        mouse2D.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+        mouse2D.y = -((clientY - rect.top) / rect.height) * 2 + 1;
     };
 
-    document.addEventListener('click', toggleMorph);
-    document.addEventListener('touchstart', toggleMorph);
+    const handleMouseLeave = () => {
+        mouse2D.set(-9999, -9999); 
+        isMouseDown = false;
+    };
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('mouseleave', handleMouseLeave, { passive: true });
+    
+    // Vortex Trigger Listeners
+    window.addEventListener('mousedown', () => { isMouseDown = true; }, { passive: true });
+    window.addEventListener('mouseup', () => { isMouseDown = false; }, { passive: true });
+    window.addEventListener('touchstart', (e) => { 
+        handleMouseMove(e); 
+        isMouseDown = true; 
+    }, { passive: true });
+    window.addEventListener('touchend', () => { isMouseDown = false; }, { passive: true });
 
     isInitialized = true;
 };
 
 // Expose globally
 window.initWebGL = initWebGL;
-
-// Handle Mouse Movement Globally
-const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-document.addEventListener('mousemove', (e) => {
-    const container = document.getElementById('webgl-container');
-    if (isTouchDevice || !container) return;
-    const rect = container.getBoundingClientRect();
-    mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-});
 
 window.addEventListener('resize', () => {
     if (window.updateWebGLSize) window.updateWebGLSize();
