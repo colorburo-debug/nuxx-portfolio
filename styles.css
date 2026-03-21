@@ -695,7 +695,7 @@ a {
 @media (max-width: 1024px) {
     .about-card {
         flex-direction: column !important;
-        padding: 89px 48px 57px 48px !important;
+        padding: 89px 48px 89px 48px !important; /* Bottom gap matched to 89px top gap */
         gap: 57px !important;
         width: 100% !important;
         max-width: none !important; 
