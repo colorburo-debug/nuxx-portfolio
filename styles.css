@@ -179,24 +179,12 @@
     top: 0;
     left: 0;
     width: 100%;
-    /* Reach the dark section edge (~1400px coverage) while being an absolute background */
-    height: 1400px; 
+    /* Stretches dynamically to the exact edge of the next dark section */
+    height: 100%; 
     z-index: 0;
     pointer-events: none;
     transition: opacity 1s cubic-bezier(0.27, 0, 0.51, 1);
     opacity: 1; 
-}
-
-@media (max-width: 1024px) {
-    #webgl-container {
-        height: 100%; /* Stretches dynamically to the exact edge of the next section */
-    }
-}
-
-@media (max-width: 767px) {
-    #webgl-container {
-        height: 100%; /* Stretches dynamically to the exact edge of the next section */
-    }
 }
 
 /* Spacer to maintain the exact design heights previously set for the hero frame */

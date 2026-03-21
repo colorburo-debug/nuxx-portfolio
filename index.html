@@ -83,8 +83,12 @@
             </header>
         </div>
 
-        <!-- Main Hero Content -->
-        <section class="hero-section section-gap-md">
+        <!-- Main Hero Content Wrapper -->
+        <div class="home-intro-wrapper" style="position: relative; width: 100%; display: flex; flex-direction: column;">
+            <div id="webgl-container"></div>
+            
+            <!-- Main Hero Content -->
+            <section class="hero-section section-gap-md">
             <div class="hero-intro content-wrapper">
                 <div class="hero-intro-left">
                     <h1 class="hero-name">Jorge Garcia</h1>
@@ -96,7 +100,7 @@
                     </p>
                 </div>
             </div>
-            <div id="webgl-container"></div>
+
             <div class="hero-spacer"></div>
 
             <!-- Universal Scroll Indicator (Anchor to #work) -->
@@ -138,6 +142,8 @@
                 </div>
             </div>
         </section>
+        </div> <!-- End of home-intro-wrapper -->
+        
         <div class="dark-section-wrapper">
             <!-- Work Highlights Section -->
             <section class="work-highlights content-wrapper" id="work">
