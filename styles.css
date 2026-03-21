@@ -462,7 +462,7 @@ a {
 .mobile-menu-close {
     position: absolute;
     top: 32px;
-    right: 32px;
+    right: 24px; /* Updated to 24px */
     width: 36px;
     height: 36px;
     background: transparent;
@@ -492,7 +492,7 @@ a {
 .mobile-nav-links {
     display: flex;
     flex-direction: column;
-    padding: 0 40px;
+    padding: 0 24px; /* Updated to 24px */
 }
 
 .mobile-nav-item {
