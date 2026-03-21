@@ -736,8 +736,8 @@ a {
 /* Mobile - Artboard 390px */
 @media (max-width: 767px) {
     .about-card {
-        padding: 24px 24px 48px 24px !important;
-        gap: 20px !important; /* Set exact bottom gap to 20px */
+        padding: 64px 24px 64px 24px !important; /* Top and bottom gaps set to 64px */
+        gap: 64px !important; /* Spacing between the image and the content block */
         width: 100% !important;
         max-width: none !important;
         min-height: auto !important;
