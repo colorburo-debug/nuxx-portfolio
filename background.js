@@ -3,9 +3,11 @@ let renderer, scene, camera, clock, particles, raycaster, hitPlane;
 let isInitialized = false;
 
 // Global Animation Tracking
-let accumTime = 0;
-let smoothedScrollY = 0;
-let burstVelocity = 35.0; // The massive initial speed for the "Liftoff" burst
+// Global Animation Tracking (Exposed for Barba.js lifecycle)
+window.accumTime = 0;
+window.smoothedScrollY = 0;
+window.burstVelocity = 35.0; // The massive initial speed for the "Liftoff" burst
+let isVisible = true; 
 
 // Mouse Tracking Variables
 let mouse2D = new THREE.Vector2(-9999, -9999);
@@ -20,6 +22,8 @@ const initWebGL = () => {
     if (isInitialized) {
         container.appendChild(renderer.domElement);
         if (window.updateWebGLSize) window.updateWebGLSize();
+        // Reset velocity for reentry burst even if already initialized
+        window.burstVelocity = 35.0; 
         return;
     }
 
@@ -219,14 +223,21 @@ const initWebGL = () => {
 
     clock = new THREE.Clock();
     
-    // Performance Optimization: Only render when visible
-    let isVisible = true;
+    // Force visibility to true immediately if we are on the homepage to prevent 'frozen' state
+    isVisible = true;
+
     const observer = new IntersectionObserver((entries) => {
         isVisible = entries[0].isIntersecting;
-    }, { rootMargin: "100px" }); // Start rendering just before it enters the screen
+    }, { rootMargin: "100px" });
     observer.observe(container);
 
     const animate = () => {
+        // If the container was removed from the DOM (Barba transition), stop this loop
+        if (!document.getElementById('webgl-container')) {
+            isInitialized = false; // Allow re-initialization next time
+            return; 
+        }
+
         requestAnimationFrame(animate);
         
         // Skip all math and GPU rendering if the canvas is off-screen
@@ -236,16 +247,16 @@ const initWebGL = () => {
         const dt = Math.min(clock.getDelta(), 0.1);
 
         // 1. LIFTOFF INTRO BURST LOGIC
-        burstVelocity += (0.0 - burstVelocity) * 1.5 * dt;
+        window.burstVelocity += (0.0 - window.burstVelocity) * 1.5 * dt;
 
-        let timeMultiplier = 1.0 + burstVelocity;
-        accumTime += dt * timeMultiplier;
-        material.uniforms.uTime.value = accumTime;
+        let timeMultiplier = 1.0 + window.burstVelocity;
+        window.accumTime += dt * timeMultiplier;
+        material.uniforms.uTime.value = window.accumTime;
 
         // 2. PARALLAX SCROLL LOGIC
         const targetScrollY = window.scrollY || document.documentElement.scrollTop || 0;
-        smoothedScrollY += (targetScrollY - smoothedScrollY) * 5.0 * dt;
-        material.uniforms.uScrollOffset.value = smoothedScrollY * 0.015;
+        window.smoothedScrollY += (targetScrollY - window.smoothedScrollY) * 5.0 * dt;
+        material.uniforms.uScrollOffset.value = window.smoothedScrollY * 0.015;
 
         // 3. ENHANCED VORTEX LOGIC
         let targetMouseDown = isMouseDown ? 1.0 : 0.0;
@@ -253,16 +264,16 @@ const initWebGL = () => {
         material.uniforms.uIsMouseDown.value += (targetMouseDown - material.uniforms.uIsMouseDown.value) * vortexEase;
 
         // 4. ENHANCED VOLUME EFFECTS (Camera tracking)
-        let targetCameraZ = 5 + (burstVelocity * 0.1);
+        let targetCameraZ = 5 + (window.burstVelocity * 0.1);
         camera.position.z += (targetCameraZ - camera.position.z) * 5.0 * dt;
 
-        let baseCameraY = Math.cos(accumTime * 0.04) * 0.3;
-        camera.position.y = baseCameraY - (smoothedScrollY * 0.0012);
-        camera.position.x = Math.sin(accumTime * 0.05) * 0.5;
+        let baseCameraY = Math.cos(window.accumTime * 0.04) * 0.3;
+        camera.position.y = baseCameraY - (window.smoothedScrollY * 0.0012);
+        camera.position.x = Math.sin(window.accumTime * 0.05) * 0.5;
         camera.lookAt(scene.position);
 
-        particles.rotation.y = accumTime * 0.05;
-        particles.rotation.z = accumTime * 0.02;
+        particles.rotation.y = window.accumTime * 0.05;
+        particles.rotation.z = window.accumTime * 0.02;
 
         // 5. MOUSE HANDLING & VORTEX
         // Optimized to only raycast if the mouse is actively on screen
@@ -289,15 +300,14 @@ const initWebGL = () => {
 
     // Event Listeners
     const handleMouseMove = (e) => {
-        const container = document.getElementById('webgl-container');
-        if (!container) return;
-        const rect = container.getBoundingClientRect();
+        const currentContainer = document.getElementById('webgl-container');
+        if (!currentContainer) return;
+        const rect = currentContainer.getBoundingClientRect();
         
         let clientX = e.clientX ?? e.touches?.[0]?.clientX;
         let clientY = e.clientY ?? e.touches?.[0]?.clientY;
         if (clientX === undefined) return;
         
-        // Convert screen coordinates to normalized device coordinates (NDC) -1 to +1
         mouse2D.x = ((clientX - rect.left) / rect.width) * 2 - 1;
         mouse2D.y = -((clientY - rect.top) / rect.height) * 2 + 1;
     };
@@ -320,6 +330,15 @@ const initWebGL = () => {
     window.addEventListener('touchend', () => { isMouseDown = false; }, { passive: true });
 
     isInitialized = true;
+};
+
+// Lifecycle management for Barba.js
+window.initPage = () => {
+    if (document.getElementById('webgl-container')) {
+        // Reset animation state for a fresh intro burst every visit
+        window.burstVelocity = 35.0; 
+        initWebGL();
+    }
 };
 
 // Expose globally
