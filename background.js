@@ -55,7 +55,7 @@ const initWebGL = () => {
     scene.add(hitPlane);
 
     // --- Particle System ---
-    const particleCount = 1550; // High Density (Increased by 30%)
+    const particleCount = 2015; // Ultra High Density (Increased by another 30% to over 2k particles)
     const geometry = new THREE.BufferGeometry();
     
     // Attributes
