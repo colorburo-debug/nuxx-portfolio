@@ -309,15 +309,10 @@ function animate() {
         }
 
         material.uniforms.uMouse.value.lerp(localPoint, 0.15);
-
-        reticle.style.transform = `translate(-50%, -50%) scale(2.5)`;
-        reticle.style.borderColor = 'rgba(13, 19, 39, 0.5)';
-        reticle.style.borderWidth = '2px';
+        reticle.style.transform = `translate(-50%, -50%) scale(3)`;
     } else {
         material.uniforms.uMouse.value.lerp(new THREE.Vector3(9999, 9999, 9999), 0.1);
         reticle.style.transform = `translate(-50%, -50%) scale(1)`;
-        reticle.style.borderColor = 'rgba(13, 19, 39, 1)';
-        reticle.style.borderWidth = '1px';
     }
 
     renderer.render(scene, camera);
@@ -336,8 +331,6 @@ document.addEventListener('mousemove', (e) => {
     const rect = container.getBoundingClientRect();
     mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-    reticle.style.left = `${e.clientX}px`;
-    reticle.style.top = `${e.clientY}px`;
 });
 
 // Click Interaction

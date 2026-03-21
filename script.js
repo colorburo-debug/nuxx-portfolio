@@ -71,46 +71,58 @@ document.addEventListener('touchend', (e) => {
 }, { passive: false, capture: true });
 
 
-// ─── initPage ───────────────────────────────────────────────
-// Called by Barba.js beforeEnter hooks in animations.js.
-// Menu setup is handled globally above, so this only handles
-// per-page cursor logic which is not menu-related.
-const initPage = () => {
-    console.log('Nuxx Page Initialized');
-
-    // Always reset menu state on page enter
-    // (clears any stuck 'active' or 'no-scroll' state from a previous page)
-    closeMobileMenu();
-
-    // Custom Cursor Logic (desktop only, non-touch)
+// ─── Custom Cursor ──────────────────────────────────────────
+const initCursor = () => {
     const reticle = document.getElementById('cursor-reticle');
-    const hasWebGL = document.getElementById('webgl-container');
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-    if (reticle && !hasWebGL && !isTouchDevice) {
+    if (reticle && !isTouchDevice) {
+        // Move the cursor dot — only attach once to document
         document.addEventListener('mousemove', (e) => {
             reticle.style.left = `${e.clientX}px`;
             reticle.style.top = `${e.clientY}px`;
         });
+    }
+};
 
+const updateCursorHover = () => {
+    const reticle = document.getElementById('cursor-reticle');
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    if (reticle && !isTouchDevice) {
+        // Re-query interactive elements after page transition
         const interactiveElements = document.querySelectorAll(
-            'a, button, .action-btn, .mobile-menu-toggle, .about-cta-pill'
+            'a, button, .action-btn, .mobile-menu-toggle, .about-cta-pill, .interaction-indicator'
         );
         interactiveElements.forEach(el => {
             el.addEventListener('mouseenter', () => {
-                reticle.style.transform = 'translate(-50%, -50%) scale(2.5)';
-                reticle.style.borderWidth = '2px';
+                reticle.style.transform = 'translate(-50%, -50%) scale(3.5)';
             });
             el.addEventListener('mouseleave', () => {
                 reticle.style.transform = 'translate(-50%, -50%) scale(1)';
-                reticle.style.borderWidth = '1px';
             });
         });
     }
+};
+
+
+// ─── initPage ───────────────────────────────────────────────
+// Called by Barba.js beforeEnter hooks in animations.js.
+const initPage = () => {
+    console.log('Nuxx Page Initialized');
+
+    // Always reset menu state on page enter
+    closeMobileMenu();
+
+    // Re-bind hover events for the new page content
+    updateCursorHover();
 };
 
 // Expose globally for Barba
 window.initPage = initPage;
 
 // Run on first load
-document.addEventListener('DOMContentLoaded', initPage);
+document.addEventListener('DOMContentLoaded', () => {
+    initCursor();
+    initPage();
+});
