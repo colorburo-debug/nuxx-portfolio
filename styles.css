@@ -175,16 +175,48 @@
 }
 
 #webgl-container {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
+    /* Reach the dark section edge (~1400px coverage) while being an absolute background */
+    height: 1400px; 
     z-index: 0;
     pointer-events: none;
     transition: opacity 1s cubic-bezier(0.27, 0, 0.51, 1);
-    opacity: 1; /* Default visible on home */
-    /* clip-path is set dynamically by JS to confine the visual to the hero zone */
+    opacity: 1; 
+}
+
+@media (max-width: 1024px) {
+    #webgl-container {
+        height: 1200px;
+    }
+}
+
+@media (max-width: 767px) {
+    #webgl-container {
+        height: 1200px;
+    }
+}
+
+/* Spacer to maintain the exact design heights previously set for the hero frame */
+.hero-spacer {
+    width: 100%;
+    height: 700px;
+    position: relative;
+    z-index: 10;
+}
+
+@media (max-width: 1024px) {
+    .hero-spacer {
+        height: 500px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-spacer {
+        height: 450px;
+    }
 }
 
 html {
@@ -519,9 +551,11 @@ a {
     align-items: flex-start;
     width: 100%;
     margin: 92px auto 0 auto;
+    padding-bottom: 96px;
     box-sizing: border-box;
     position: relative;
     z-index: 10;
+    overflow: visible !important;
 }
 
 .hero-intro {
@@ -529,7 +563,7 @@ a {
     justify-content: space-between;
     align-items: flex-start;
     gap: 32px;
-    margin: 0 0 737px 0;
+    margin: 0 0 0 0; /* Margin removed to allow container flow */
 }
 
 .hero-intro-left {
@@ -787,11 +821,9 @@ a {
     }
 
     .hero-intro {
-        position: absolute;
-        top: 0; /* Parent .hero-section already has margin-top: 80px for header space */
-        left: 0;
+        position: relative;
         width: 100%;
-        height: 720px; /* 800 - 80 */
+        height: auto;
         padding: 32px 24px;
         margin-bottom: 0;
         display: flex;
@@ -1559,7 +1591,7 @@ a {
     .hero-intro {
         flex-direction: column;
         gap: 40px;
-        margin-bottom: 617.62px; /* Adjusted to achieve exactly 850px gap from header */
+        margin-bottom: 0; /* Margin removed for container flow */
     }
 
     .hero-intro-right {
@@ -6451,21 +6483,19 @@ html:has(.fincas-page) {
         padding-right: 0 !important;
     }
 
-    /* Restore Hero Interaction Guide/Scroll Indicator Visibility */
     .hero-section {
-        min-height: calc(100vh - 92px) !important; /* Viewport height minus header top margin */
         position: relative !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: flex-start !important;
-        align-items: center !important; /* Context for centering children */
+        align-items: center !important; 
     }
 
     .hero-intro, 
     .about-card, 
     .work-section-title,
     .case-study-card {
-        width: calc(100% - 64px) !important; /* The 32px Desktop safety gap */
+        width: calc(100% - 64px) !important; 
         max-width: 1224px !important;
         margin-left: auto !important;
         margin-right: auto !important;
@@ -6473,17 +6503,17 @@ html:has(.fincas-page) {
     }
 
     .hero-intro {
-        margin-bottom: 0 !important; /* Managed by indicator margin */
+        margin-bottom: 0 !important; 
     }
 
     .interaction-indicator {
         display: flex !important;
-        position: relative !important; /* Back to relative to follow flow */
-        margin: 80px auto 48px auto !important; /* Universal centering logic */
+        position: relative !important; 
+        margin: 40px auto 48px auto !important; /* Reduced top margin to fix mobile position */
         align-self: center !important;
-        left: auto !important; /* Reset any absolute leftovers */
+        left: auto !important; 
         right: auto !important;
-        transform: none !important; /* Reset transform for perfect alignment */
+        transform: none !important; 
         z-index: 101 !important;
     }
 

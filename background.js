@@ -3,38 +3,6 @@
 const container = document.getElementById('webgl-container');
 const reticle = document.getElementById('cursor-reticle');
 
-// ─── Hero Zone Clip-Path ─────────────────────────────────────
-// Prevents the WebGL canvas from visually bleeding BELOW the
-// about-me card. The top is intentionally left open — the hero
-// text and header both have higher z-indices and will naturally
-// appear on top of the sphere, so no top clip is needed.
-// This means the full sphere shape stays visible and uncut.
-function updateWebGLClip() {
-    const aboutCard = document.querySelector('.about-card');
-    if (!aboutCard || !container) return;
-
-    const aboutRect   = aboutCard.getBoundingClientRect();
-    const vh          = window.innerHeight;
-
-    // Only clip the BOTTOM — stop particles bleeding below the about card.
-    // The about-card has z-index:20, so even a few px of overlap is fine,
-    // but we cut at its top edge for a clean boundary.
-    const bottomInset = Math.max(0, vh - aboutRect.top);
-
-    container.style.clipPath = `inset(0 0 ${bottomInset}px 0)`;
-}
-
-// Run on scroll (passive for performance) and resize
-window.addEventListener('scroll', updateWebGLClip, { passive: true });
-window.addEventListener('resize', updateWebGLClip);
-
-// Run once after DOM is ready, and again after layout settles
-document.addEventListener('DOMContentLoaded', () => {
-    updateWebGLClip();
-    setTimeout(updateWebGLClip, 200);
-});
-// Also call immediately in case the script loads after DOMContentLoaded
-updateWebGLClip();
 // ─────────────────────────────────────────────────────────────
 
 // Scene Setup
@@ -43,7 +11,16 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 camera.position.z = 2.5;
 
 const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
+// Use container size
+const updateSize = () => {
+    if (!container) return;
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+};
+updateSize();
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 container.appendChild(renderer.domElement);
 
@@ -77,8 +54,8 @@ function createMorphGeometry(particleCount) {
         const theta = 2 * Math.PI * u;
         const phi = Math.acos(2 * v - 1);
 
-        // Increased Radius by 10% (1.2 -> 1.32)
-        const r = 1.32;
+        // Increased Radius to fill more space (was 1.32)
+        const r = 2.2;
 
         const sx = r * Math.sin(phi) * Math.cos(theta);
         const sy = r * Math.sin(phi) * Math.sin(theta);
@@ -93,9 +70,9 @@ function createMorphGeometry(particleCount) {
         const uPlane = col / (gridSize - 1);
         const vPlane = row / (gridSize - 1);
 
-        // Center the plane. Size ~ 3.3 (was 3.0) -> +10%
-        const tx = (uPlane - 0.5) * 3.3;
-        const ty = (vPlane - 0.5) * 3.3;
+        // Increase plane size to fill hero section width (was 3.3)
+        const tx = (uPlane - 0.5) * 6.0;
+        const ty = (vPlane - 0.5) * 4.0;
         const tz = 0; // Flat base
 
         facePositions.push(tx, ty, tz);
@@ -115,8 +92,8 @@ function createMorphGeometry(particleCount) {
     return geometry;
 }
 
-// Increased Particle Count to 35,000 for visibility
-const particleCount = 35000;
+// Increased Particle Count to 60,000 to maintain density over larger area
+const particleCount = 60000;
 const geometry = createMorphGeometry(particleCount);
 
 const material = new THREE.ShaderMaterial({
@@ -211,7 +188,7 @@ const material = new THREE.ShaderMaterial({
             
             float dist = distance(finalPos, uMouse);
             vDist = dist;
-            float interactionRadius = 1.2; // Slightly larger for water ripple feel
+            float interactionRadius = 2.2; // Scaled with larger forms
             
             // Interaction Influence with smooth falloff
             float mouseInfluence = smoothstep(interactionRadius, 0.0, dist);
@@ -258,8 +235,8 @@ const material = new THREE.ShaderMaterial({
             float r = dot(cxy, cxy);
             if (r > 1.0) discard;
 
-            // Opacity 1.0 (100%)
-            gl_FragColor = vec4(uColor, 1.0);
+            // Opacity 0.7 (70%)
+            gl_FragColor = vec4(uColor, 0.7);
         }
     `,
     transparent: true,
@@ -270,14 +247,14 @@ const particles = new THREE.Points(geometry, material);
 scene.add(particles);
 
 // Invisible Hit Sphere for reliable raycasting
-// Increased Radius by 10% (1.3 -> 1.43)
-const hitGeometry = new THREE.SphereGeometry(1.43, 32, 32);
-const hitMaterial = new THREE.MeshBasicMaterial({ visible: false, side: THREE.DoubleSide }); // DoubleSide just in case
+// Radius matched to new sphere size (2.2)
+const hitGeometry = new THREE.SphereGeometry(2.2, 32, 32);
+const hitMaterial = new THREE.MeshBasicMaterial({ visible: false, side: THREE.DoubleSide }); 
 const hitSphere = new THREE.Mesh(hitGeometry, hitMaterial);
 scene.add(hitSphere);
 
-// Invisible Hit Plane for Face state (approx depth z=-0.5)
-const hitPlaneGeometry = new THREE.PlaneGeometry(10, 10);
+// Invisible Hit Plane for Face state 
+const hitPlaneGeometry = new THREE.PlaneGeometry(12, 12);
 const hitPlane = new THREE.Mesh(hitPlaneGeometry, hitMaterial);
 hitPlane.position.z = -0.5;
 scene.add(hitPlane);
@@ -349,19 +326,16 @@ function animate() {
 animate();
 
 // Resizing
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-});
+window.addEventListener('resize', updateSize);
 
 // Mouse Movement
 const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
 document.addEventListener('mousemove', (e) => {
-    if (isTouchDevice) return;
-    mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    if (isTouchDevice || !container) return;
+    const rect = container.getBoundingClientRect();
+    mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
     reticle.style.left = `${e.clientX}px`;
     reticle.style.top = `${e.clientY}px`;
 });
