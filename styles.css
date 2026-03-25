@@ -535,6 +535,16 @@ a {
     overflow: visible !important;
 }
 
+/* Fix for 'Flash of Unstyled Content' (FOUC). Hides elements while JS loads GSAP. */
+body.home-page .hero-name,
+body.home-page .hero-location,
+body.home-page .hero-main-description,
+body.home-page .interaction-indicator,
+body.home-page .about-card {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
 .hero-intro {
     display: flex;
     justify-content: space-between;
