@@ -5578,7 +5578,7 @@ html:has(.fincas-page) {
         font-weight: 600 !important;
         font-size: 22px !important;
         line-height: 1.44 !important;
-        color: #1e1e1e !important;
+        color: #F7FBF8 !important;
         margin: 0 !important;
     }
     .hero-location {
@@ -5594,7 +5594,7 @@ html:has(.fincas-page) {
         font-weight: 500 !important;
         font-size: 18px !important;
         line-height: 1.77 !important;
-        color: #1e1e1e !important;
+        color: #F7FBF8 !important;
         margin: 0 !important;
     }
 }
