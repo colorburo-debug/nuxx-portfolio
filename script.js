@@ -75,7 +75,7 @@ const handleHeaderScroll = () => {
     const workRect = workSection.getBoundingClientRect();
 
     // Check if the bottom of the header has crossed the top of the Work section
-    if (workRect.top <= headerRect.bottom - 40 && workRect.bottom >= headerRect.top + 40) {
+    if (workRect.top <= headerRect.bottom && workRect.bottom >= headerRect.top) {
         header.classList.add('header-inverted');
     } else {
         header.classList.remove('header-inverted');
