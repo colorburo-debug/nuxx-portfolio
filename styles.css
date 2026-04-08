@@ -642,7 +642,7 @@ body.home-page .about-card {
     font-weight: 400 !important; /* Regular in Figma code */
     font-size: 34px !important;
     line-height: 1.4 !important; /* 47.6px from Figma */
-    color: #1E1E1E !important;
+    color: #F7FBF8 !important;
     margin: 0 !important;
     text-align: left !important;
 }
@@ -658,11 +658,11 @@ body.home-page .about-card {
     justify-content: space-between !important;
     width: 442px !important;
     height: 64px !important;
-    border: 2px solid #1E1E1E !important; /* border-2 in Figma code */
+    border: 2px solid #F7FBF8 !important; /* border-2 in Figma code */
     border-radius: 100px !important;
     padding: 0 40px !important;
     box-sizing: border-box !important;
-    color: #1E1E1E !important;
+    color: #F7FBF8 !important;
     font-family: 'Roobert', var(--font-body) !important;
     font-weight: 500 !important;
     font-size: 20px !important;
@@ -671,8 +671,8 @@ body.home-page .about-card {
 }
 
 .about-cta-pill:hover {
-    background-color: #1E1E1E !important;
-    color: #EEEFF3 !important;
+    background-color: #F7FBF8 !important;
+    color: #6F6F6F !important;
 }
 
 .cta-icon-wrapper {
