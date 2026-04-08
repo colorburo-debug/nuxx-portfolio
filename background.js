@@ -91,8 +91,8 @@ const initWebGL = () => {
             uScrollOffset: { value: 0 }, // For Parallax Depth
             uMouse: { value: new THREE.Vector3(9999, 9999, 9999) },
             uIsMouseDown: { value: 0.0 }, // Trigger for Vortex
-            uColor1: { value: new THREE.Color('#1E1E1E') },
-            uColor2: { value: new THREE.Color('#6F6F6F') },
+            uColor1: { value: new THREE.Color('#BFFD00') },
+            uColor2: { value: new THREE.Color('#c3fe0c') },
             uPixelRatio: { value: renderer.getPixelRatio() }
         },
         vertexShader: `

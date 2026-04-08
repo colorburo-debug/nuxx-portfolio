@@ -221,7 +221,7 @@ body {
    Home Page: Top overscroll is chartreuse, bottom is dark green 
 */
 body.home-page {
-    background-color: #c3fe0c !important;
+    background-color: #1E1E1E !important;
 }
 
 #page-transition-curtain {
@@ -233,7 +233,7 @@ body.home-page {
     z-index: 10000;
     pointer-events: none;
     transform: translateX(-100%);
-    background-color: #c3fe0c;
+    background-color: #1E1E1E;
 }
 
 /* LaHaus Page: All-white overscroll */
@@ -567,7 +567,7 @@ body.home-page .about-card {
     font-weight: 600; /* SemiBold */
     font-size: 22px;
     line-height: 1.44;
-    color: #1e1e1e;
+    color: #EEEFF3;
     margin: 0 0 4px 0; /* Applied 4px bottom margin from mobile standard */
 
 }
@@ -577,7 +577,7 @@ body.home-page .about-card {
     font-weight: 500; /* Medium */
     font-size: 22px;
     line-height: 1.4;
-    color: #6f6f6f;
+    color: #A0A0A0;
     margin: 0;
 }
 
@@ -591,7 +591,7 @@ body.home-page .about-card {
     font-weight: 500; /* Medium */
     font-size: 22px;
     line-height: 1.68;
-    color: #1e1e1e;
+    color: #EEEFF3;
     margin: 0;
 }
 
