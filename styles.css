@@ -1155,8 +1155,20 @@ body.home-page .about-card {
 }
 
 .action-btn:hover {
-    background: rgba(0, 0, 0, 0.05);
-    border-color: #6F6F6F;
+    background: #1E1E1E;
+    border-color: #1E1E1E;
+}
+
+.action-btn:hover .action-text-top {
+    color: #F7FBF8;
+}
+
+.action-btn:hover .action-text-bottom {
+    color: #6F6F6F;
+}
+
+.action-btn:hover .action-arrow svg {
+    color: #F7FBF8;
 }
 
 .action-text-top {
@@ -1418,13 +1430,20 @@ body.home-page .about-card {
 }
 
 .action-btn:hover {
-    background: rgba(0, 0, 0, 0.05);
-    border-color: #6F6F6F;
+    background: #1E1E1E;
+    border-color: #1E1E1E;
 }
 
-.action-btn:hover .action-text-top,
+.action-btn:hover .action-text-top {
+    color: #F7FBF8;
+}
+
 .action-btn:hover .action-text-bottom {
     color: #6F6F6F;
+}
+
+.action-btn:hover .action-arrow svg {
+    color: #F7FBF8;
 }
 
 .action-text-top {
