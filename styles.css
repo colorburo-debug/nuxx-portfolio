@@ -597,7 +597,7 @@ body.home-page .about-card {
 
 /* About Me Card - REBUILT for FIGMA PRECISION (Desktop, Tablet, Mobile) */
 .about-card {
-    background-color: #EEEFF3 !important;
+    background-color: #6F6F6F !important;
     border-radius: 10px !important;
     margin: -146px auto 96px auto !important; /* Overlap by 146px to match Figma, 96px bottom gap */
     display: flex !important;
