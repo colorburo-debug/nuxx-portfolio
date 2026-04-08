@@ -5,7 +5,7 @@ let isInitialized = false;
 // Global Animation & Lifecycle Tracking
 window.accumTime = 0;
 window.smoothedScrollY = 0;
-window.burstVelocity = 35.0; 
+window.introProgress = 0.0; // Tracks the smooth majestic load bloom
 window.isWebGLRunning = true; // Tracks the animation loop
 let isVisible = true; 
 
@@ -30,7 +30,7 @@ const initWebGL = () => {
         // PERF: Reuse WebGL Renderer Context completely on return to home page
         container.appendChild(renderer.domElement);
         if (window.updateWebGLSize) window.updateWebGLSize();
-        window.burstVelocity = 35.0; 
+        window.introProgress = 0.0; 
         
         // Restart the animation loop if it was paused
         if (!window.isWebGLRunning) {
@@ -85,12 +85,13 @@ const initWebGL = () => {
 
         // --- DEFAULT FORM: THE NUXX ENTITY (5-Node Core + Halo) ---
         let baseTx = 0, baseTy = 0, baseTz = 0;
-        const nodeDist = 3.8;
-        const nodeRadius = 1.0;
+        const nodeDist = 2.4; // Tighter cluster, bringing entities into the center
+        const nodeRadius = 0.8; // Compacted nodes
         
         if (i < 3000) {
             const nodeIndex = i % 5;
-            if (nodeIndex === 0) { baseTx = 0; baseTy = 0; baseTz = 1.5; } 
+            // The core nodes form a strict "X" pattern, popping slightly forward
+            if (nodeIndex === 0) { baseTx = 0; baseTy = 0; baseTz = 1.0; } 
             if (nodeIndex === 1) { baseTx = -nodeDist; baseTy = nodeDist; baseTz = -0.5; } 
             if (nodeIndex === 2) { baseTx = nodeDist; baseTy = nodeDist; baseTz = -0.5; } 
             if (nodeIndex === 3) { baseTx = -nodeDist; baseTy = -nodeDist; baseTz = -0.5; } 
@@ -106,14 +107,15 @@ const initWebGL = () => {
             baseTy += rn * Math.sin(phi) * Math.sin(theta);
             baseTz += rn * Math.cos(phi);
         } else {
+            // Ethereal Halo encompassing the central structure tightly
             const ringIndex = i - 3000;
             const totalRing = 1500;
             const angle = (ringIndex / totalRing) * Math.PI * 2;
-            const ringRadius = 7.5 + (Math.random() - 0.5) * 1.5; 
+            const ringRadius = 5.0 + (Math.random() - 0.5) * 1.2; // tighter radius (from 7.5 to 5)
             
             baseTx = Math.cos(angle) * ringRadius;
             baseTy = Math.sin(angle) * ringRadius;
-            baseTz = Math.sin(angle * 5) * 2.0 + (Math.random() - 0.5);
+            baseTz = Math.sin(angle * 4) * 1.5 + (Math.random() - 0.5);
         }
         
         // Slightly disrupt perfect symmetry to feel natural
@@ -157,7 +159,8 @@ const initWebGL = () => {
             uScrollOffset: { value: 0 }, 
             uMouse: { value: new THREE.Vector3(9999, 9999, 9999) },
             uIsMouseDown: { value: 0.0 }, 
-            uMorphFactor: { value: 0.0 }, // Morph Interpolation Parameter
+            uMorphFactor: { value: 0.0 }, 
+            uIntroProgress: { value: 0.0 }, // Governs smooth transition
             uColor1: { value: new THREE.Color('#BFFD00') },
             uColor2: { value: new THREE.Color('#c3fe0c') },
             uPixelRatio: { value: renderer.getPixelRatio() }
@@ -169,6 +172,7 @@ const initWebGL = () => {
             uniform float uScrollOffset;
             uniform float uIsMouseDown;
             uniform float uMorphFactor;
+            uniform float uIntroProgress;
             
             attribute vec3 aTargetPos;
             attribute vec3 aRandom;
@@ -231,10 +235,18 @@ const initWebGL = () => {
                 // Add scroll parallax naturally
                 finalPos.y += uScrollOffset * 0.5;
 
+                // Intro Spatial Bloom (Particles drift in elegantly from a scattered burst)
+                float introScale = mix(2.2, 1.0, smoothstep(0.0, 1.0, uIntroProgress));
+                finalPos *= introScale;
+
+                // Add slight intro rotation so it settles elegantly
+                float introRot = mix(1.0, 0.0, smoothstep(0.0, 1.0, uIntroProgress)) * 0.5;
+                mat2 rotIntro = mat2(cos(introRot), -sin(introRot), sin(introRot), cos(introRot));
+                finalPos.xz *= rotIntro;
+
                 vec4 mvPosition = modelViewMatrix * vec4(finalPos, 1.0);
                 vDepth = -mvPosition.z; 
                 
-                // Base size adjusts depending on state (Entity is majestic, Knot is tightly packed)
                 float baseSize = mix(9.0, 11.0, morphEase); 
                 baseSize += uIsMouseDown * influence * 12.0; 
                 
@@ -244,6 +256,7 @@ const initWebGL = () => {
         `,
         fragmentShader: `
             uniform float uTime;
+            uniform float uIntroProgress;
             uniform vec3 uColor1;
             uniform vec3 uColor2;
             
@@ -284,7 +297,10 @@ const initWebGL = () => {
                 // Soft pulse over time
                 float pulse = 0.8 + 0.2 * sin(uTime * 0.5 + vRandom.x * 6.28);
                 
-                gl_FragColor = vec4(finalColor, alpha * pulse * depthFade);
+                // Majestic Intro fade
+                float introFade = smoothstep(0.1, 0.9, uIntroProgress);
+
+                gl_FragColor = vec4(finalColor, alpha * pulse * depthFade * introFade);
             }
         `,
         transparent: true,
@@ -321,11 +337,12 @@ const initWebGL = () => {
         // Limit delta so pausing tabs doesn't break the animation mathematically
         const dt = Math.min(clock.getDelta(), 0.1);
 
-        // 1. LIFTOFF INTRO BURST LOGIC
-        window.burstVelocity += (0.0 - window.burstVelocity) * 1.5 * dt;
+        // 1. MAJESTIC INTRO ANIMATION 
+        // Elegant ease-out over roughly 2.5 seconds
+        window.introProgress += (1.0 - window.introProgress) * 0.8 * dt;
+        material.uniforms.uIntroProgress.value = window.introProgress;
 
-        let timeMultiplier = 1.0 + window.burstVelocity;
-        window.accumTime += dt * timeMultiplier;
+        window.accumTime += dt * 0.8; // Stable, continuous time without the initial violent burst
         material.uniforms.uTime.value = window.accumTime;
 
         // 2. PARALLAX SCROLL LOGIC
@@ -339,16 +356,16 @@ const initWebGL = () => {
         material.uniforms.uIsMouseDown.value += (targetMouseDown - material.uniforms.uIsMouseDown.value) * vortexEase;
 
         // 3.5 MORPHING LOGIC
-        let morphEase = isMorphing ? 0.03 : 0.02; // Slower out, faster snapping in
+        let morphEase = isMorphing ? 0.03 : 0.02; 
         material.uniforms.uMorphFactor.value += (targetMorphFactor - material.uniforms.uMorphFactor.value) * morphEase;
 
-        // 4. ENHANCED VOLUME EFFECTS (Camera tracking)
-        let targetCameraZ = 5 + (window.burstVelocity * 0.1);
+        // 4. ELEGANT CAMERA TRACKING
+        let targetCameraZ = 6.0; // Fixed elegant distance to wrap the centered entity perfectly
         camera.position.z += (targetCameraZ - camera.position.z) * 5.0 * dt;
 
-        let baseCameraY = Math.cos(window.accumTime * 0.04) * 0.3;
-        camera.position.y = baseCameraY - (window.smoothedScrollY * 0.0012);
-        camera.position.x = Math.sin(window.accumTime * 0.05) * 0.5;
+        let baseCameraY = Math.cos(window.accumTime * 0.05) * 0.2; // Slow gentle floating observation
+        camera.position.y = baseCameraY - (window.smoothedScrollY * 0.001);
+        camera.position.x = Math.sin(window.accumTime * 0.06) * 0.3;
         camera.lookAt(scene.position);
 
         particles.rotation.y = window.accumTime * 0.05;
@@ -438,7 +455,7 @@ const initWebGL = () => {
 window.initPage = () => {
     if (document.getElementById('webgl-container')) {
         // Reset animation state for a fresh intro burst every visit
-        window.burstVelocity = 35.0; 
+        window.introProgress = 0.0;
         initWebGL();
     } else {
         // Cleanup on pages without webgl
