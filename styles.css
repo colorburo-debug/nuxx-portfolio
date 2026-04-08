@@ -1002,7 +1002,7 @@ body.home-page .about-card {
 
 /* Work Highlights Section */
 .work-highlights {
-    background-color: #1e1e1e;
+    background-color: #EEEFF3;
     position: relative;
     padding-bottom: 104px;
     z-index: 10;
@@ -1020,7 +1020,7 @@ body.home-page .about-card {
     font-weight: 400;
     font-size: 40px;
     line-height: 64px;
-    color: #f7fbf8;
+    color: #1E1E1E;
 }
 
 /* Case Study Card (Global) */
@@ -1080,7 +1080,7 @@ body.home-page .about-card {
     font-weight: 400;
     font-size: 40px;
     line-height: 50px;
-    color: #f7fbf8;
+    color: #1E1E1E;
     margin: 0;
     font-family: 'Unbounded', sans-serif;
 }
@@ -1109,7 +1109,7 @@ body.home-page .about-card {
     font-size: 18px;
     line-height: 1.77;
     /* ~32px */
-    color: #f7fbf8;
+    color: #1E1E1E;
     margin: 0;
     min-height: 110px;
     /* Align with Figma */
@@ -1140,6 +1140,7 @@ body.home-page .about-card {
     text-decoration: none;
     transition: all 0.2s ease;
     background: transparent;
+    color: #1E1E1E;
     box-sizing: border-box;
 }
 
@@ -1154,8 +1155,8 @@ body.home-page .about-card {
 }
 
 .action-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: #f7fbf8;
+    background: rgba(0, 0, 0, 0.05);
+    border-color: #1E1E1E;
 }
 
 .action-text-top {
@@ -1163,7 +1164,7 @@ body.home-page .about-card {
     font-weight: 500;
     font-size: 18px;
     line-height: 1.2;
-    color: #f7fbf8;
+    color: #1E1E1E;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
