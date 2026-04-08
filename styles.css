@@ -680,8 +680,15 @@ body.home-page .about-card {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    transform: rotate(90deg) !important;
+    width: 17px !important;
+    height: 15px !important;
     pointer-events: none !important;
+}
+
+.cta-icon-wrapper svg {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
 }
 
 .vector-image {
