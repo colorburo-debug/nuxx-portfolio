@@ -2,12 +2,16 @@
 let renderer, scene, camera, clock, particles, raycaster, hitPlane;
 let isInitialized = false;
 
-// Global Animation Tracking
-// Global Animation Tracking (Exposed for Barba.js lifecycle)
+// Global Animation & Lifecycle Tracking
 window.accumTime = 0;
 window.smoothedScrollY = 0;
-window.burstVelocity = 35.0; // The massive initial speed for the "Liftoff" burst
+window.burstVelocity = 35.0; 
+window.isWebGLRunning = true; // Tracks the animation loop
 let isVisible = true; 
+
+// Interactive Morph State
+let isMorphing = false;
+let targetMorphFactor = 0.0;
 
 // Mouse Tracking Variables
 let mouse2D = new THREE.Vector2(-9999, -9999);
@@ -15,15 +19,24 @@ let targetMouse = new THREE.Vector3(9999, 9999, 9999);
 let currentMouse = new THREE.Vector3(9999, 9999, 9999);
 let isMouseDown = false;
 
+// We ensure listeners are only bound once globally to prevent memory leaks across page transitions
+let globalListenersBound = false;
+
 const initWebGL = () => {
     const container = document.getElementById('webgl-container');
     if (!container) return;
 
     if (isInitialized) {
+        // PERF: Reuse WebGL Renderer Context completely on return to home page
         container.appendChild(renderer.domElement);
         if (window.updateWebGLSize) window.updateWebGLSize();
-        // Reset velocity for reentry burst even if already initialized
         window.burstVelocity = 35.0; 
+        
+        // Restart the animation loop if it was paused
+        if (!window.isWebGLRunning) {
+            window.isWebGLRunning = true;
+            if (window.animateWebGL) window.animateWebGL();
+        }
         return;
     }
 
@@ -55,22 +68,74 @@ const initWebGL = () => {
     scene.add(hitPlane);
 
     // --- Particle System ---
-    const particleCount = 2015; // Ultra High Density (Increased by another 30% to over 2k particles)
+    const particleCount = 4500; // Increased density for a solid morphological figure
     const geometry = new THREE.BufferGeometry();
     
     // Attributes
     const positions = new Float32Array(particleCount * 3);
+    const targetPositions = new Float32Array(particleCount * 3);
     const randoms = new Float32Array(particleCount * 3);
     const scales = new Float32Array(particleCount);
 
     for (let i = 0; i < particleCount; i++) {
-        // Initial positions spread across a wide area to allow for wrapping
-        // X: -10 to 10
-        // Y: -10 to 10
-        // Z: -2 to 2
+        // Initial chaotic positions spread across a wide area
         positions[i * 3 + 0] = (Math.random() - 0.5) * 20;
         positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
         positions[i * 3 + 2] = (Math.random() - 0.5) * 4;
+
+        // --- DEFAULT FORM: THE NUXX ENTITY (5-Node Core + Halo) ---
+        let baseTx = 0, baseTy = 0, baseTz = 0;
+        const nodeDist = 3.8;
+        const nodeRadius = 1.0;
+        
+        if (i < 3000) {
+            const nodeIndex = i % 5;
+            if (nodeIndex === 0) { baseTx = 0; baseTy = 0; baseTz = 1.5; } 
+            if (nodeIndex === 1) { baseTx = -nodeDist; baseTy = nodeDist; baseTz = -0.5; } 
+            if (nodeIndex === 2) { baseTx = nodeDist; baseTy = nodeDist; baseTz = -0.5; } 
+            if (nodeIndex === 3) { baseTx = -nodeDist; baseTy = -nodeDist; baseTz = -0.5; } 
+            if (nodeIndex === 4) { baseTx = nodeDist; baseTy = -nodeDist; baseTz = -0.5; } 
+
+            const pointIndex = Math.floor(i / 5);
+            const totalInNode = 600;
+            const phi = Math.acos(1 - 2 * (pointIndex + 0.5) / totalInNode);
+            const theta = Math.PI * (1 + Math.sqrt(5)) * pointIndex; 
+            const rn = nodeRadius * (0.85 + 0.15 * Math.random()); 
+            
+            baseTx += rn * Math.sin(phi) * Math.cos(theta);
+            baseTy += rn * Math.sin(phi) * Math.sin(theta);
+            baseTz += rn * Math.cos(phi);
+        } else {
+            const ringIndex = i - 3000;
+            const totalRing = 1500;
+            const angle = (ringIndex / totalRing) * Math.PI * 2;
+            const ringRadius = 7.5 + (Math.random() - 0.5) * 1.5; 
+            
+            baseTx = Math.cos(angle) * ringRadius;
+            baseTy = Math.sin(angle) * ringRadius;
+            baseTz = Math.sin(angle * 5) * 2.0 + (Math.random() - 0.5);
+        }
+        
+        // Slightly disrupt perfect symmetry to feel natural
+        positions[i * 3 + 0] = baseTx + (Math.random() - 0.5) * 0.1;
+        positions[i * 3 + 1] = baseTy + (Math.random() - 0.5) * 0.1;
+        positions[i * 3 + 2] = baseTz + (Math.random() - 0.5) * 0.1;
+
+        // --- TARGET FORM: 3D TORUS KNOT (Sacred Geometry) ---
+        const t2 = (i / particleCount) * Math.PI * 2 * 10; // 10 loops
+        const p2 = 3;
+        const q2 = 4;
+        const R2 = 3.5; 
+        const r2 = 1.2; 
+        
+        const jitter = 0.15;
+        const jx = (Math.random() - 0.5) * jitter;
+        const jy = (Math.random() - 0.5) * jitter;
+        const jz = (Math.random() - 0.5) * jitter;
+
+        targetPositions[i * 3 + 0] = (R2 + r2 * Math.cos(q2 * t2)) * Math.cos(p2 * t2) * 0.6 + jx;
+        targetPositions[i * 3 + 1] = (R2 + r2 * Math.cos(q2 * t2)) * Math.sin(p2 * t2) * 0.6 + jy;
+        targetPositions[i * 3 + 2] = (r2 * Math.sin(q2 * t2)) * 0.6 + jz;
 
         // Random values for individualized motion
         randoms[i * 3 + 0] = Math.random();
@@ -82,15 +147,17 @@ const initWebGL = () => {
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('aTargetPos', new THREE.BufferAttribute(targetPositions, 3));
     geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 3));
     geometry.setAttribute('aScale', new THREE.BufferAttribute(scales, 1));
 
     const material = new THREE.ShaderMaterial({
         uniforms: {
             uTime: { value: 0 },
-            uScrollOffset: { value: 0 }, // For Parallax Depth
+            uScrollOffset: { value: 0 }, 
             uMouse: { value: new THREE.Vector3(9999, 9999, 9999) },
-            uIsMouseDown: { value: 0.0 }, // Trigger for Vortex
+            uIsMouseDown: { value: 0.0 }, 
+            uMorphFactor: { value: 0.0 }, // Morph Interpolation Parameter
             uColor1: { value: new THREE.Color('#BFFD00') },
             uColor2: { value: new THREE.Color('#c3fe0c') },
             uPixelRatio: { value: renderer.getPixelRatio() }
@@ -101,68 +168,75 @@ const initWebGL = () => {
             uniform vec3 uMouse;
             uniform float uScrollOffset;
             uniform float uIsMouseDown;
+            uniform float uMorphFactor;
             
+            attribute vec3 aTargetPos;
             attribute vec3 aRandom;
             attribute float aScale;
             
             varying vec3 vRandom;
             varying float vScale;
-            varying float vDepth; // Distance to camera
+            varying float vDepth; 
 
             void main() {
                 vRandom = aRandom;
                 vScale = aScale;
 
-                vec3 pos = position;
+                vec3 entityPos = position;
+                vec3 knotPos = aTargetPos;
 
-                // Delicate carpet flow logic (More noticeable motion)
-                // 1. Smooth continuous vertical drift
-                float driftSpeed = 0.3 + aRandom.y * 0.2;
-                float timeOffset = uTime * driftSpeed;
+                // --- GLOBAL ANIMATION SEQUENCES ---
+                float st = uTime * 0.4;
                 
-                // Wrap Y position continuously so they never run out
-                pos.y = mod(pos.y + timeOffset + uScrollOffset + 10.0, 20.0) - 10.0;
-
-                // 2. Wider horizontal sway 
-                float sway = sin(uTime * 0.25 + pos.y * 0.3 + aRandom.x * 6.28) * 1.5;
-                pos.x += sway;
-
-                // 3. More pronounced depth undulation (the "carpet" wave)
-                float wave = sin(pos.x * 0.5 + uTime * 0.5) * cos(pos.y * 0.5 + uTime * 0.4);
-                pos.z += wave * 1.0 + aRandom.z * 0.5;
-
-                // 4. Smooth Interaction & Magnetic Click Vortex
-                float dist = distance(pos.xy, uMouse.xy);
-                float influenceRadius = mix(3.5, 7.0, uIsMouseDown); // Expand reach when clicked
+                // Entity Animation (Slow majestic rotation)
+                mat2 rotEntityXZ = mat2(cos(st * 0.8), -sin(st * 0.8), sin(st * 0.8), cos(st * 0.8));
+                mat2 rotEntityXY = mat2(cos(st * 0.4), -sin(st * 0.4), sin(st * 0.4), cos(st * 0.4));
+                entityPos.xz *= rotEntityXZ;
+                entityPos.xy *= rotEntityXY;
                 
-                // Smooth bell curve for repulsion/attraction
+                float nodePulse = 1.0 + sin(uTime * 2.0 + vRandom.x * 3.14) * 0.05;
+                entityPos *= nodePulse;
+                entityPos.y += sin(uTime * 1.5 + position.x * 0.2) * 0.3; // Gentle wave
+
+                // Knot Animation (Tighter spin to contrast the massive entity)
+                mat2 rotKnotY = mat2(cos(st * 1.5), -sin(st * 1.5), sin(st * 1.5), cos(st * 1.5));
+                knotPos.xz *= rotKnotY;
+                knotPos.y += sin(uTime * 2.0 + aTargetPos.y * 0.5) * 0.2;
+
+                // --- MORPHING MIX ---
+                float morphEase = smoothstep(0.0, 1.0, uMorphFactor);
+                // Elastic snap based on particle randomness for visual flair
+                float elasticMorph = mix(morphEase, smoothstep(0.0, 1.2, uMorphFactor * (1.0 + aRandom.y * 0.5)), morphEase);
+                
+                vec3 finalPos = mix(entityPos, knotPos, elasticMorph);
+
+                // --- INTERACTION / VORTEX ---
+                // Vortex is always active, allowing users to disrupt both the entity and the knot
+                float dist = distance(finalPos.xy, uMouse.xy);
+                float influenceRadius = mix(4.0, 8.0, uIsMouseDown); 
+                
                 float influence = smoothstep(influenceRadius, 0.0, dist);
                 if (influence > 0.0) {
-                    vec2 dir = normalize(pos.xy - uMouse.xy + 0.001);
-                    
-                    // Push away normally, pull intensely when clicked
-                    float pushFactor = mix(1.2, -1.8, uIsMouseDown * influence);
-                    
-                    // Swirl delicately normally, spin rapidly when clicked
+                    vec2 dir = normalize(finalPos.xy - uMouse.xy + 0.001);
+                    float pushFactor = mix(0.5, -2.5, uIsMouseDown * influence);
                     vec2 swirlDir = vec2(-dir.y, dir.x); 
-                    float swirlFactor = mix(0.6, 6.0, uIsMouseDown * influence);
+                    float swirlFactor = mix(0.8, 8.0, uIsMouseDown * influence); // Intense spinning
                     
-                    // Blend push and swirl smoothly
-                    pos.xy += dir * influence * pushFactor;
-                    pos.xy += swirlDir * influence * swirlFactor;
-                    
-                    // Push back slightly for volume naturally, pull sharply forward towards user during vortex
-                    float depthPush = mix(0.8, -2.5, uIsMouseDown);
-                    pos.z -= influence * depthPush; 
+                    finalPos.xy += dir * influence * pushFactor;
+                    finalPos.xy += swirlDir * influence * swirlFactor;
+                    float depthPush = mix(1.0, -3.0, uIsMouseDown);
+                    finalPos.z -= influence * depthPush; 
                 }
 
-                vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-                vDepth = -mvPosition.z; // Send depth forward to simulate blur
+                // Add scroll parallax naturally
+                finalPos.y += uScrollOffset * 0.5;
+
+                vec4 mvPosition = modelViewMatrix * vec4(finalPos, 1.0);
+                vDepth = -mvPosition.z; 
                 
-                // Size mapping
-                float baseSize = 10.4; 
-                // Grow particles drastically while pulling them out of the background during vortex
-                baseSize += uIsMouseDown * influence * 15.0;
+                // Base size adjusts depending on state (Entity is majestic, Knot is tightly packed)
+                float baseSize = mix(9.0, 11.0, morphEase); 
+                baseSize += uIsMouseDown * influence * 12.0; 
                 
                 gl_PointSize = aScale * baseSize * uPixelRatio * (1.0 / vDepth);
                 gl_Position = projectionMatrix * mvPosition;
@@ -232,9 +306,10 @@ const initWebGL = () => {
     observer.observe(container);
 
     const animate = () => {
-        // If the container was removed from the DOM (Barba transition), stop this loop
-        if (!document.getElementById('webgl-container')) {
-            isInitialized = false; // Allow re-initialization next time
+        // PERFORMANCE: If container is gone or we paused manually, shut down the loop entirely 
+        // to save CPU/GPU overhead on other pages. Memory is preserved.
+        if (!document.getElementById('webgl-container') || !window.isWebGLRunning) {
+            window.isWebGLRunning = false; 
             return; 
         }
 
@@ -259,9 +334,13 @@ const initWebGL = () => {
         material.uniforms.uScrollOffset.value = window.smoothedScrollY * 0.015;
 
         // 3. ENHANCED VORTEX LOGIC
-        let targetMouseDown = isMouseDown ? 1.0 : 0.0;
+        let targetMouseDown = isMouseDown && !isMorphing ? 1.0 : 0.0;
         let vortexEase = targetMouseDown === 1.0 ? 0.2 : 0.05;
         material.uniforms.uIsMouseDown.value += (targetMouseDown - material.uniforms.uIsMouseDown.value) * vortexEase;
+
+        // 3.5 MORPHING LOGIC
+        let morphEase = isMorphing ? 0.03 : 0.02; // Slower out, faster snapping in
+        material.uniforms.uMorphFactor.value += (targetMorphFactor - material.uniforms.uMorphFactor.value) * morphEase;
 
         // 4. ENHANCED VOLUME EFFECTS (Camera tracking)
         let targetCameraZ = 5 + (window.burstVelocity * 0.1);
@@ -296,6 +375,7 @@ const initWebGL = () => {
         renderer.render(scene, camera);
     };
 
+    window.animateWebGL = animate; // Store globally to allow restart
     animate();
 
     // Event Listeners
@@ -317,17 +397,39 @@ const initWebGL = () => {
         isMouseDown = false;
     };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('mouseleave', handleMouseLeave, { passive: true });
-    
-    // Vortex Trigger Listeners
-    window.addEventListener('mousedown', () => { isMouseDown = true; }, { passive: true });
-    window.addEventListener('mouseup', () => { isMouseDown = false; }, { passive: true });
-    window.addEventListener('touchstart', (e) => { 
-        handleMouseMove(e); 
-        isMouseDown = true; 
-    }, { passive: true });
-    window.addEventListener('touchend', () => { isMouseDown = false; }, { passive: true });
+    if (!globalListenersBound) {
+        window.addEventListener('mousemove', handleMouseMove, { passive: true });
+        window.addEventListener('mouseleave', handleMouseLeave, { passive: true });
+        
+        // Vortex Trigger Listeners (Vortex triggers on down, Morph toggles on click)
+        const handleDown = () => { isMouseDown = true; };
+        const handleUp = () => { isMouseDown = false; };
+        
+        // The Morph Toggle
+        const toggleMorph = (e) => {
+            // Prevent morph when interacting with links or buttons
+            if (e && e.target && (e.target.closest('a') || e.target.closest('button'))) return;
+            
+            isMorphing = !isMorphing;
+            targetMorphFactor = isMorphing ? 1.0 : 0.0;
+        };
+
+        window.addEventListener('click', toggleMorph, { passive: true });
+        
+        window.addEventListener('mousedown', handleDown, { passive: true });
+        window.addEventListener('mouseup', handleUp, { passive: true });
+        window.addEventListener('touchstart', (e) => { 
+            handleMouseMove(e); 
+            handleDown(); 
+        }, { passive: true });
+        window.addEventListener('touchend', handleUp, { passive: true });
+        
+        window.addEventListener('resize', () => {
+            if (window.updateWebGLSize) window.updateWebGLSize();
+        });
+
+        globalListenersBound = true;
+    }
 
     isInitialized = true;
 };
@@ -338,15 +440,14 @@ window.initPage = () => {
         // Reset animation state for a fresh intro burst every visit
         window.burstVelocity = 35.0; 
         initWebGL();
+    } else {
+        // Cleanup on pages without webgl
+        window.isWebGLRunning = false;
     }
 };
 
 // Expose globally
 window.initWebGL = initWebGL;
-
-window.addEventListener('resize', () => {
-    if (window.updateWebGLSize) window.updateWebGLSize();
-});
 
 // Run if on homepage initially
 if (document.getElementById('webgl-container')) {
