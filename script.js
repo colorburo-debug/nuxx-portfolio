@@ -59,6 +59,29 @@ const updateCursorHover = () => {
 };
 
 
+// ─── Header Inversion ───────────────────────────────────────
+// Managed globally to remain active across page transitions
+const handleHeaderScroll = () => {
+    const header = document.querySelector('.header-pill');
+    const workSection = document.querySelector('.work-highlights');
+
+    if (!header || !workSection) {
+        // Reset if no work section present on current page
+        if (header) header.classList.remove('header-inverted');
+        return;
+    }
+
+    const headerRect = header.getBoundingClientRect();
+    const workRect = workSection.getBoundingClientRect();
+
+    // Check if the bottom of the header has crossed the top of the Work section
+    if (workRect.top <= headerRect.bottom - 40 && workRect.bottom >= headerRect.top + 40) {
+        header.classList.add('header-inverted');
+    } else {
+        header.classList.remove('header-inverted');
+    }
+};
+
 // ─── initPage ───────────────────────────────────────────────
 // Called by Barba.js beforeEnter hooks in animations.js.
 const initPage = () => {
@@ -74,6 +97,9 @@ const initPage = () => {
     if (window.initWebGL) {
         window.initWebGL();
     }
+
+    // Trigger initial check
+    handleHeaderScroll();
 
     // Handle hash scrolling (e.g., /index.html#work)
     const hash = window.location.hash;
@@ -91,6 +117,9 @@ const initPage = () => {
 // ─── Global Event Listeners (Attached Once) ─────────────────
 
 const initGlobalListeners = () => {
+    // Single scroll listener for header inversion
+    window.addEventListener('scroll', handleHeaderScroll, { passive: true });
+
     // Single delegated listener on document — survives all DOM mutations
     document.addEventListener('click', (e) => {
         const link = e.target.closest('a');
