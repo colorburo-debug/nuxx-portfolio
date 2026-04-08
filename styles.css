@@ -658,11 +658,12 @@ body.home-page .about-card {
     justify-content: space-between !important;
     width: 442px !important;
     height: 64px !important;
+    background-color: #F7FBF8 !important;
     border: 2px solid #F7FBF8 !important; /* border-2 in Figma code */
     border-radius: 100px !important;
     padding: 0 40px !important;
     box-sizing: border-box !important;
-    color: #F7FBF8 !important;
+    color: #1E1E1E !important;
     font-family: 'Roobert', var(--font-body) !important;
     font-weight: 500 !important;
     font-size: 20px !important;
@@ -671,8 +672,8 @@ body.home-page .about-card {
 }
 
 .about-cta-pill:hover {
-    background-color: #F7FBF8 !important;
-    color: #6F6F6F !important;
+    background-color: #1E1E1E !important;
+    color: #F7FBF8 !important;
 }
 
 .cta-icon-wrapper {
