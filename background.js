@@ -56,9 +56,14 @@ const initWebGL = () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     const updateSize = () => {
-        const width = container.clientWidth;
-        const height = container.clientHeight;
+        // ALWAYS target the latest container in the DOM to avoid closure stale-ness
+        const currentContainer = document.getElementById('webgl-container');
+        if (!currentContainer) return;
+        
+        const width = currentContainer.clientWidth;
+        const height = currentContainer.clientHeight;
         if (!width || !height) return;
+        
         renderer.setSize(width, height);
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
