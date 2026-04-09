@@ -31,7 +31,14 @@ const initWebGL = () => {
         container.appendChild(renderer.domElement);
         if (window.updateWebGLSize) window.updateWebGLSize();
         window.introProgress = 0.0; 
+        isVisible = true; // Ensure we start visible to prevent freezing
         
+        // RE-OBSERVE: The container was replaced by Barba, so we need a new observation path
+        const observer = new IntersectionObserver((entries) => {
+            isVisible = entries[0].isIntersecting;
+        }, { rootMargin: "100px" });
+        observer.observe(container);
+
         // Restart the animation loop if it was paused
         if (!window.isWebGLRunning) {
             window.isWebGLRunning = true;

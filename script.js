@@ -93,9 +93,11 @@ const initPage = () => {
     // Re-bind hover events for the new page content
     updateCursorHover();
 
-    // Re-bind WebGL if entering home
-    if (window.initWebGL) {
-        window.initWebGL();
+    // Re-bind WebGL lifecycle
+    if (document.getElementById('webgl-container')) {
+        if (window.initWebGL) window.initWebGL();
+    } else {
+        window.isWebGLRunning = false;
     }
 
     // Trigger initial check
