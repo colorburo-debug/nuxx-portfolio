@@ -139,17 +139,17 @@ const initWebGL = () => {
         const t2 = (i / particleCount) * Math.PI * 2 * 10; // 10 loops
         const p2 = 3;
         const q2 = 4;
-        const R2 = 2.2; // Reduced major radius for a tighter core
-        const r2 = 0.7; // Reduced minor radius
+        const R2 = 3.5; 
+        const r2 = 1.2; 
         
         const jitter = 0.15;
         const jx = (Math.random() - 0.5) * jitter;
         const jy = (Math.random() - 0.5) * jitter;
         const jz = (Math.random() - 0.5) * jitter;
 
-        targetPositions[i * 3 + 0] = (R2 + r2 * Math.cos(q2 * t2)) * Math.cos(p2 * t2) * 0.8 + jx;
-        targetPositions[i * 3 + 1] = (R2 + r2 * Math.cos(q2 * t2)) * Math.sin(p2 * t2) * 0.8 + jy;
-        targetPositions[i * 3 + 2] = (r2 * Math.sin(q2 * t2)) * 0.8 + jz;
+        targetPositions[i * 3 + 0] = (R2 + r2 * Math.cos(q2 * t2)) * Math.cos(p2 * t2) * 0.6 + jx;
+        targetPositions[i * 3 + 1] = (R2 + r2 * Math.cos(q2 * t2)) * Math.sin(p2 * t2) * 0.6 + jy;
+        targetPositions[i * 3 + 2] = (r2 * Math.sin(q2 * t2)) * 0.6 + jz;
 
         // Random values for individualized motion
         randoms[i * 3 + 0] = Math.random();
