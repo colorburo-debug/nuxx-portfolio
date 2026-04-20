@@ -3206,13 +3206,14 @@ body.lauhaus-page {
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
-    padding: 120px 200px 160px 200px;
-    /* desktop padding */
+    padding: 120px 96px 160px 96px;
     box-sizing: border-box;
     color: #0d1327;
 }
 
-.opp-intro {
+.lauhaus-opp .opp-intro {
+    max-width: 1047px;
+    margin: 0 auto;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -4592,7 +4593,7 @@ html:has(.fincas-page) {
     flex-direction: column;
     gap: 88px;
     /* High margin between columns on mobile */
-    padding: 8px 24px 96px 24px;
+    padding: 8px 24px 112px 24px; /* 112px bottom padding at boundary */
     width: 100%;
     box-sizing: border-box;
 }
@@ -4684,8 +4685,7 @@ html:has(.fincas-page) {
 .fincas-brand-gallery {
     width: 100%;
     background-color: #f0f2e9;
-    padding: 96px 0 111px 0;
-    /* Vertical Mobile padding from node 829:8468 (top updated to 96px per user spec) */
+    padding: 112px 0 112px 0; /* 112px Top and bottom boundary padding for mobile */
     box-sizing: border-box;
 }
 
@@ -4765,7 +4765,7 @@ html:has(.fincas-page) {
 }
 
 .insetting-intro {
-    padding: 104px 24px 0 24px;
+    padding: 112px 24px 0 24px; /* 112px Top boundary padding for mobile */
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -5004,22 +5004,20 @@ html:has(.fincas-page) {
 
     /* Tablet Overview (Aligns perfectly with the 32px padded hero image above) */
     .fincas-overview {
-        padding-left: 32px;
-        padding-right: 32px;
+        padding: 160px 32px 160px 32px; /* Adopted 160px Lulo vertical rhythm */
     }
 
     /* Tablet Stats */
     .fincas-stats {
         padding-left: 32px;
         padding-right: 32px;
-        padding-bottom: 112px;
-        /* Explicit distance to the Block 4 background edge below it */
+        padding-bottom: 160px; /* 160px internal bottom padding for the white block */
     }
 
     /* Tablet Brand Gallery */
     .fincas-brand-gallery {
-        /* Top padding set to 112px per user spec */
-        padding: 112px 0 152px 0;
+        /* Top and Bottom padding standard 160px rule */
+        padding: 160px 0 160px 0;
     }
 
     .fincas-brand-container {
@@ -5074,10 +5072,10 @@ html:has(.fincas-page) {
     }
 
     .insetting-intro {
-        padding: 120px 129px 0 32px;
+        padding: 160px 129px 0 32px; /* 160px Top padding as requested */
         display: flex;
         flex-direction: column;
-        gap: 40px;
+        gap: 72px; /* Adopted Lulo 'Opp-Intro' gap for more air */
     }
 
     .insetting-title {
@@ -5178,7 +5176,7 @@ html:has(.fincas-page) {
     }
 
     .insetting-impact {
-        padding: 8px 32px 143px 32px;
+        padding: 8px 32px 160px 32px; /* 160px Bottom padding at the end of the color block */
         gap: 0;
         /* Managed by intro padding or matrix margin */
     }
@@ -5218,24 +5216,30 @@ html:has(.fincas-page) {
 @media (min-width: 1024px) {
 
     /* Desktop Hero */
+    /* Desktop Hero */
     .fincas-hero {
-        padding: 200px 48px 0 48px;
-        /* 112px visual gap + 88px header offset */
+        padding: 200px 96px 0 96px; /* Standardized 96px safe margin */
         gap: 112px;
-        max-width: 1440px;
+        max-width: 1592px; /* 1400 + 192 */
         margin: 0 auto;
     }
 
+    .fincas-hero-title-wrapper {
+        justify-content: center;
+    }
+
     .fincas-hero-title {
+        font-family: 'Roobert', var(--font-body);
+        font-weight: 500;
         font-size: 60px;
         line-height: 1.17;
         text-align: center;
-        max-width: 895px;
+        max-width: 895px; /* Hero headline maintains readability width */
     }
 
     .fincas-hero-image-wrapper {
         width: 100%;
-        max-width: 1056px;
+        max-width: 100%; /* Expanded to full fluid 1400px container */
         gap: 17px;
         margin-left: 0;
         margin-right: 0;
@@ -5248,35 +5252,13 @@ html:has(.fincas-page) {
     }
 
     .fincas-hero-image {
-        border-radius: 10px;
-    }
-
-    .fincas-hero-title-wrapper {
-        justify-content: center;
-    }
-
-    .fincas-hero-title {
-        font-size: 60px;
-        line-height: 1.17;
-        text-align: center;
-        max-width: 895px;
-    }
-
-    .fincas-hero-image-wrapper {
         width: 100%;
-        max-width: 1056px;
-        gap: 17px;
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-    .fincas-hero-image-container {
         height: auto;
         border-radius: 10px;
     }
 
-    .fincas-hero-image {
-        border-radius: 10px;
+    .fincas-hero-caption {
+        text-align: left;
     }
 
     .fincas-hero-caption {
@@ -5286,38 +5268,37 @@ html:has(.fincas-page) {
     /* Desktop Overview */
     .fincas-overview {
         flex-direction: row;
-        gap: 68px;
-        padding: 96px 48px 120px 48px;
-        max-width: 1065px;
-        /* Centers the 969px inner content with 48px padding boundaries */
+        gap: 144px; /* Adopted Lulo 'Qualitative-Content' 144px gap for maximum air */
+        padding: 160px 96px 160px 96px; /* Adopted 160px Lulo vertical rhythm */
+        max-width: 1592px;
         margin: 0 auto;
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .fincas-overview-title {
-        width: 213px;
+        width: 25%; /* Percentage based scaling */
+        max-width: 213px;
         line-height: 30px;
         flex-shrink: 0;
     }
 
     .fincas-overview-content {
-        max-width: 688px;
+        flex: 1; /* Allow content to grow into the 1400px space */
+        max-width: 100%;
     }
 
     /* Desktop Stats */
     .fincas-stats {
         flex-direction: row;
-        gap: 25px;
-        padding: 16px 96px 152px 96px;
-        max-width: 1440px;
+        gap: 120px; /* Adopted Lulo 'Research-Grid' style 120px spacing */
+        padding: 0 96px 160px 96px; /* 160px internal bottom padding for the white block */
+        max-width: 1592px;
         margin: 0 auto;
     }
 
     .fincas-stats-col {
         flex: 1;
-        /* Distribute the 3 columns equally */
-        max-width: 451px;
-        /* Matching Figma column widths of ~450/451px */
+        max-width: 100%; /* Fluid percentage distribution */
     }
 
     .fincas-col-header {
@@ -5332,7 +5313,7 @@ html:has(.fincas-page) {
 
     /* Desktop Block 4: Brand Gallery */
     .fincas-brand-gallery {
-        padding: 165px 0 152px 0;
+        padding: 160px 0 160px 0; /* 160px Top and Bottom internal padding for the grey block */
     }
 
     .fincas-brand-title {
@@ -5352,8 +5333,9 @@ html:has(.fincas-page) {
 
     .fincas-brand-container {
         padding: 0 96px;
-        /* Explicitly synced with Block 3 stats left/right padding */
-        gap: 84px;
+        max-width: 1592px; /* Standardize to 1400px inner width */
+        margin: 0 auto;
+        gap: 96px; /* Increased from 84px for better vertical rhythm */
     }
 
     .fincas-gallery-grid {
@@ -5389,12 +5371,12 @@ html:has(.fincas-page) {
 
     /* Block 5 Desktop Overrides */
     .insetting-intro {
-        padding: 104px 94px 0 94px;
-        max-width: 1440px;
+        padding: 160px 96px 0 96px; /* 160px Top padding as requested */
+        max-width: 1592px;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-        gap: 32px;
+        gap: 72px; /* Adopted Lulo 'Opp-Intro' gap for consistency */
     }
 
     .insetting-title {
@@ -5413,15 +5395,15 @@ html:has(.fincas-page) {
 
     .insetting-values-header {
         padding: 112px 96px 0 96px;
-        max-width: 1440px;
+        max-width: 1592px;
         margin: 0 auto;
     }
 
     .insetting-values-grid {
         flex-direction: row;
         gap: 72px;
-        padding: 0 96px 112px 96px;
-        max-width: 1440px;
+        padding: 0 96px 112px 96px; /* Internal gap within the same color block */
+        max-width: 1592px;
         margin: 0 auto;
     }
 
@@ -5438,7 +5420,7 @@ html:has(.fincas-page) {
         /* To stretch nicely */
         overflow: visible;
         /* Disable slider effect */
-        max-width: 1440px;
+        max-width: 1592px;
         margin: 0 auto;
         gap: 24px;
     }
@@ -5452,16 +5434,16 @@ html:has(.fincas-page) {
     .insetting-hero-image {
         padding: 8px 96px 0 96px;
         display: block;
-        max-width: 1440px;
+        max-width: 1592px;
         margin: 0 auto;
     }
 
     .insetting-disruptive {
-        padding: 120px 92px 120px 92px;
+        padding: 120px 96px 120px 96px;
         display: flex;
         flex-direction: column;
         gap: 0;
-        max-width: 1440px;
+        max-width: 1592px;
         margin: 0 auto;
     }
 
@@ -5496,8 +5478,8 @@ html:has(.fincas-page) {
     }
 
     .insetting-collage {
-        padding: 16px 94px 144px 94px;
-        max-width: 1440px;
+        padding: 112px 96px 112px 96px; /* Internal gaps within the same color block */
+        max-width: 1592px;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
@@ -5516,8 +5498,8 @@ html:has(.fincas-page) {
     }
 
     .insetting-impact {
-        padding: 16px 94px 127px 94px;
-        max-width: 1440px;
+        padding: 112px 96px 160px 96px; /* 160px Bottom padding at the end of the color block */
+        max-width: 1592px;
         margin: 0 auto;
     }
 
@@ -6735,3 +6717,1047 @@ html:has(.fincas-page) {
     }
 }
 
+
+/* --- PROJECT GNB LULO PAGE --- */
+html:has(.gnb-lulo-page) {
+    background-color: #f7fbf8 !important;
+}
+
+body.gnb-lulo-page {
+    /* Footer Variables Override */
+    --footer-bg: #090d1b; 
+    --footer-divider: #f7fbf8;
+    --footer-divider-opacity: 1;
+    --footer-name-color: rgba(247, 251, 248, 0.7);
+    --footer-text-color: #f7fbf8;
+    --footer-link-hover: #e0e0e0;
+    background-color: #f7fbf8 !important;
+}
+
+.gnb-lulo-main {
+    background-color: transparent !important;
+}
+
+/* Header Overrides for GNB Lulo */
+.gnb-lulo-page .header-pill {
+    background-color: #1e1e1e !important;
+}
+
+.gnb-lulo-page .header-nav-desktop .nav-link {
+    color: #f7fbf8 !important;
+}
+
+.gnb-lulo-page .header-nav-desktop .nav-link:hover {
+    color: #ffffff !important;
+}
+
+.gnb-lulo-page .nuxx-logo-img {
+    filter: invert(1) brightness(100) !important;
+}
+
+/* Hero Section GNB Lulo */
+.gnb-lulo-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 208px;
+    padding-bottom: 0; /* Reduced as Opportunity follows directly */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.gnb-lulo-hero-title {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 400;
+    font-size: 70px;
+    line-height: 1.17;
+    color: #0d1327;
+    text-align: center;
+    max-width: 1100px;
+    margin: 0 auto 64px auto;
+    padding: 0 24px;
+}
+
+
+
+/* RESPONSIVE STYLES for Project GNB Lulo */
+@media screen and (max-width: 1024px) {
+    .gnb-lulo-hero {
+        padding: 160px 32px 104px 32px;
+        align-items: center;
+    }
+
+    .gnb-lulo-hero-title {
+        font-size: 60px; /* Equivalent to 45pt */
+        line-height: 1.16;
+        max-width: 850px; /* Adjusted width to keep 2-line layout at larger font size */
+        margin-bottom: 88px;
+        text-align: center;
+        padding: 0;
+    }
+
+
+}
+
+@media screen and (max-width: 767px) {
+    .gnb-lulo-hero {
+        padding: 120px 24px 32px 24px; /* Reduced bottom padding to manage gap */
+        align-items: flex-start;
+    }
+
+    .gnb-lulo-hero-title {
+        font-size: 36px;
+        font-weight: 400;
+        line-height: 44px;
+        margin-bottom: 0px; /* Managed by sector gap / next section padding */
+        text-align: left;
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .gnb-lulo-page .gnb-lulo-hero-title {
+        max-width: 100%;
+    }
+
+
+}
+
+/* Opportunity Section GNB Lulo */
+.gnb-lulo-opp {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 64px 96px 120px 96px; 
+    box-sizing: border-box;
+    color: #0d1327;
+}
+
+.gnb-lulo-opp .opp-intro {
+    max-width: 1047px; /* 327 (title) + 72 (gap) + 648 (text) */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 72px;
+}
+
+.gnb-lulo-opp .opp-text strong {
+    font-weight: 600;
+}
+
+@media screen and (max-width: 1024px) {
+    .gnb-lulo-opp {
+        padding: 0 32px 128px 32px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .gnb-lulo-opp {
+        padding: 44px 24px 104px 24px; /* 76px gap total from hero title (32 + 44) */
+    }
+
+    .gnb-lulo-opp .opp-intro {
+        flex-direction: column;
+        gap: 40px; /* Gap from Figma: approx 40px between title and text */
+        margin-bottom: 0;
+    }
+
+    .gnb-lulo-opp .opp-title {
+        width: 100%;
+        font-size: 24px;
+        line-height: 40px;
+        text-align: left;
+    }
+
+    .gnb-lulo-opp .opp-text {
+        font-size: 20px;
+        line-height: 32px;
+        max-width: 100%;
+    }
+
+    .gnb-lulo-opp .opp-text p {
+        margin-bottom: 32px;
+    }
+
+    .gnb-lulo-opp .opp-text strong {
+        font-weight: 600;
+    }
+}
+
+/* Discovery Grid GNB Lulo */
+.gnb-lulo-discovery-grid {
+    width: 100%;
+    max-width: 1588px; /* Matches Figma Frame Width */
+    margin: 0 auto;
+    padding: 0 92px 160px 92px; /* Figma: px-[92px] */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 33px; /* Vertical gap between rows */
+}
+
+.discovery-img-wrapper {
+    border-radius: 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.discovery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.discovery-row-lg {
+    width: 100%;
+    aspect-ratio: 1404 / 479; /* Preserves desktop proportion fluidly */
+}
+
+.discovery-row-sm {
+    display: grid;
+    /* Precise ratio from Figma widths: 519px and 845px */
+    grid-template-columns: 519fr 845fr; 
+    gap: 33px; /* Horizontal gap between images */
+    width: 100%;
+}
+
+.discovery-img-wrapper.small-left {
+    aspect-ratio: 519 / 480;
+    width: 100%;
+}
+
+.discovery-img-wrapper.small-right {
+    aspect-ratio: 845 / 480;
+    width: 100%;
+}
+
+/* Research Section GNB Lulo */
+.gnb-lulo-research {
+    width: 100%;
+    /* No max-width on parent to allow safe-gap to scale naturally */
+    margin: 0 auto;
+    padding: 0 96px 160px 96px; /* 96px is the minimum safe gap */
+    box-sizing: border-box;
+    color: #0d1327;
+}
+
+.research-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 475px)); /* Limit items to 475px from Figma */
+    column-gap: 119px;
+    row-gap: 85px;
+    max-width: 1069px; /* Total content width: 475 + 119 + 475 */
+    margin: 0 auto; /* Center the grid */
+}
+
+.research-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.research-item-title {
+    font-family: var(--font-heading);
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 40px;
+    margin: 0;
+}
+
+.research-item-desc {
+    font-family: 'Roobert', var(--font-body);
+    font-size: 18px;
+    line-height: 1.77;
+    margin: 0;
+}
+
+@media screen and (max-width: 1100px) {
+    .gnb-lulo-research {
+        padding-left: 96px;
+        padding-right: 96px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .gnb-lulo-discovery-grid {
+        padding: 0 32px 104px 32px;
+        gap: 24px;
+    }
+
+    .discovery-row-lg,
+    .discovery-row-sm {
+        height: auto; /* Reset desktop heights */
+    }
+
+    .discovery-row-sm {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .discovery-img-wrapper.small-left,
+    .discovery-img-wrapper.small-right {
+        width: 100%;
+        height: auto;
+    }
+
+    .gnb-lulo-research {
+        padding: 0 32px 128px 32px;
+    }
+
+    .research-grid {
+        column-gap: 64px;
+        row-gap: 64px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .gnb-lulo-discovery-grid {
+        padding: 0 8px 88px 8px; /* Figma spec */
+        gap: 32px;
+    }
+
+    .discovery-row-lg,
+    .discovery-row-sm {
+        gap: 32px;
+        display: flex;
+        flex-direction: column;
+        aspect-ratio: auto; /* Reset desktop ratios */
+        grid-template-columns: 1fr; /* Reset desktop grid */
+    }
+
+    .discovery-img-wrapper {
+        aspect-ratio: 4 / 3 !important; /* Force consistent 4:3 ratio for all mobile images */
+        height: auto;
+        width: 100%;
+    }
+
+    .discovery-row-sm {
+        gap: 32px;
+    }
+
+    .gnb-lulo-research {
+        padding: 0 24px 160px 24px;
+    }
+
+    .research-grid {
+        grid-template-columns: 1fr;
+        gap: 81px; /* Figma spec mobile */
+    }
+
+    .research-item-title {
+        font-size: 30px; /* Mobile matches desktop size in this spec */
+    }
+}
+
+/* Qualitative Research Section GNB Lulo */
+.gnb-lulo-qualitative {
+    display: grid;
+    grid-template-columns: minmax(96px, 1fr) minmax(auto, 1404px) minmax(96px, 1fr);
+    background-color: #AAC6CC;
+    padding-top: 160px;
+    width: 100%;
+}
+
+.qualitative-content,
+.qualitative-gallery,
+.qualitative-journey,
+.qualitative-vision {
+    grid-column: 2;
+    width: 100%;
+}
+
+.qualitative-content {
+    max-width: 1212px; /* Title (475) + Gap (73) + Body (664) */
+    margin: 0; /* Centered by parent grid */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 73px;
+    padding-bottom: 112px;
+}
+
+.qualitative-title {
+    font-family: var(--font-heading);
+    font-size: 45px;
+    line-height: 64px;
+    font-weight: 400;
+    margin: 0;
+    flex: 0 0 475px; /* Fixed width from Figma for desktop */
+}
+
+.qualitative-body {
+    flex: 1;
+    max-width: 664px; /* Limit body text width */
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.qualitative-body p {
+    font-family: 'Roobert', var(--font-body);
+    font-size: 20px;
+    line-height: 32px;
+    margin: 0;
+}
+
+.qualitative-method {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.method-title {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 32px;
+    margin: 0;
+}
+
+.method-desc {
+    opacity: 0.9;
+}
+
+@media screen and (max-width: 1280px) {
+    .qualitative-content {
+        gap: 48px;
+    }
+    
+    .qualitative-title {
+        flex: 0 0 380px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .gnb-lulo-qualitative {
+        display: block; /* Switch from desktop grid to block for standard padding */
+        padding: 160px 32px 0 32px; /* Match desktop 160px top gap, 0 bottom gap */
+    }
+
+    .qualitative-content {
+        flex-direction: column;
+        gap: 42px;
+        max-width: 100%;
+    }
+
+    .qualitative-title {
+        flex: none;
+        width: 100%;
+        font-size: 36px;
+        line-height: 48px;
+    }
+
+    .qualitative-body {
+        max-width: 100%;
+        gap: 32px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .gnb-lulo-qualitative {
+        padding: 81px 24px 88px 24px; /* Figma mobile specs */
+    }
+
+    .qualitative-content {
+        gap: 42px;
+    }
+
+    .qualitative-title {
+        font-size: 30px; /* Figma mobile */
+        line-height: 40px;
+    }
+
+    .qualitative-body p {
+        font-size: 20px;
+        line-height: 32px;
+    }
+
+    .method-title {
+        font-size: 22px;
+        line-height: 32px;
+    }
+}
+
+/* Qualitative Extended Modules - Precision Desktop */
+.qualitative-gallery {
+    padding-bottom: 112px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 26px; /* Exact Figma horizontal gap */
+    row-gap: 39px;    /* Exact Figma vertical gap */
+    max-width: 1404px; /* Matches Figma content width */
+    margin: 0;
+}
+
+.gallery-item {
+    flex: 0 1 auto;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+/* Precise widths from Figma - adapted for fluid safe-gap scaling */
+.gallery-item.gnb-4 { width: 688px; max-width: calc(50% - 13px); aspect-ratio: 688 / 488; }
+.gallery-item.gnb-5 { width: 685px; max-width: calc(50% - 13px); aspect-ratio: 685 / 488; }
+.gallery-item.gnb-6 { width: 688px; max-width: 100%; aspect-ratio: 688 / 480; }
+
+.qualitative-journey,
+.qualitative-vision {
+    padding-bottom: 107px; /* 107px bottom for Journey */
+    max-width: 1404px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* Gap handled by journey-label margin-bottom */
+}
+
+.qualitative-vision {
+    padding-bottom: 160px; /* 160px bottom for Vision */
+}
+
+.journey-label {
+    font-family: 'Roobert', var(--font-body);
+    font-size: 18px;
+    line-height: normal; /* Roobert standard */
+    color: #0d1327;
+    margin: 0;
+    margin-bottom: 32px; /* Enforced 32px gap for all breakpoints */
+}
+
+.gnb-lulo-journeys {
+    grid-column: 2; /* Center in safe-gap grid */
+    padding-bottom: 96px; /* Precise Figma bottom padding */
+    width: 100%;
+}
+
+.journeys-heading {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 400;
+    line-height: normal;
+    color: #0d1327;
+    margin: 0;
+}
+
+.journeys-divider {
+    width: 100%;
+    height: 1px;
+    background-color: #0d1327;
+    opacity: 1;
+    margin: 22px 0 57px 0; /* Exact Figma gap: 22px top, 57px bottom */
+}
+
+.journeys-points {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; /* Justified to the left */
+    gap: 5%; /* Fluid percentage-based gap */
+    width: 100%;
+}
+
+.journey-point {
+    font-family: var(--font-heading);
+    font-size: clamp(20px, 2.1vw, 30px); /* Fluid scaling to prevent desktop overlap */
+    font-weight: 400;
+    line-height: 1.2;
+    color: #0d1327;
+    text-align: left; /* Left align text justified */
+}
+
+
+
+.journey-img-wrapper {
+    width: 100%;
+    max-width: 1400px; /* Content width in 1588 frame with 92px padding */
+    margin: 0;
+}
+
+.vision-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px; /* Sequential artifacts */
+}
+
+
+
+@media screen and (max-width: 1024px) {
+    /* gnb-lulo-journeys removed here to perfectly inherit the desktop 96px bottom gap */
+
+    .journeys-points {
+        display: flex;
+        flex-direction: row; /* Horizontal on tablet */
+        justify-content: space-between;
+        gap: 15px; /* Proportionate compression gap */
+        flex-wrap: nowrap;
+    }
+
+    .journey-point {
+        line-height: 1.3;
+    }
+
+    .qualitative-journey,
+    .qualitative-vision {
+        padding-left: 0;
+        padding-right: 0;
+        gap: 0; /* Reset desktop gap for precise label padding */
+    }
+
+    .qualitative-gallery {
+        padding-left: 0;
+        padding-right: 0;
+        row-gap: 40px; /* Specific 40px gap for tablet image stacking */
+    }
+
+    .journey-label {
+        /* Spacing handled by global margin-bottom: 32px */
+    }
+
+    .gallery-item.gnb-4,
+    .gallery-item.gnb-5,
+    .gallery-item.gnb-6 {
+        width: 100%;
+        max-width: none; /* Override desktop max-width constraints */
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .gnb-lulo-qualitative {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .qualitative-content {
+        padding: 88px 24px 80px 24px;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .qualitative-gallery {
+        padding: 88px 8px 80px 8px;
+        gap: 32px;
+    }
+
+    .gallery-item.gnb-4,
+    .gallery-item.gnb-5,
+    .gallery-item.gnb-6 {
+        width: 100%;
+        height: auto; /* Maintain original canvas aspect ratio */
+    }
+
+    .qualitative-journey,
+    .qualitative-vision {
+        padding: 0; /* Gaps handled by individual element margins/padding */
+        gap: 0; 
+    }
+
+    .journey-label {
+        width: 100%;
+        max-width: 100%; /* Remove 358px constraint to allow 24px padding-left */
+        padding: 0 0 0 24px; /* Only 24px left gap, bottom gap handled by margin */
+        margin: 0;
+        margin-bottom: 32px;
+        text-align: left;
+    }
+
+    .journey-img-wrapper {
+        padding: 0 8px; /* Exact 8px gap from browser windows for images */
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .vision-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 32px; /* Gap between multiple images in the grid */
+    }
+
+    .gnb-lulo-qualitative {
+        padding-bottom: 0; /* Remove compound padding */
+    }
+
+    .gnb-lulo-journeys {
+        padding: 0 24px 0 24px; /* Eliminating bottom padding to prevent compound gaps */
+        margin-top: 160px; /* Precise top gap to element above */
+        margin-bottom: 88px; /* Precise bottom distance to next section */
+    }
+
+    .journeys-divider {
+        margin: 40px 0 45px 0;
+    }
+
+    .journeys-points {
+        flex-direction: column;
+        gap: 45px; /* Precise Figma mobile gap */
+    }
+
+    .journey-point {
+        font-size: 30px; /* Enforced 30px on mobile */
+        line-height: 40px;
+        text-align: left; /* Left align text on mobile */
+        width: 100%;
+    }
+
+    .journey-point:first-child,
+    .journey-point:last-child {
+        text-align: left; /* Override desktop edge alignments */
+    }
+
+    .journey-point::before {
+        content: "· ";
+        margin-right: 4px;
+    }
+}
+
+/* ==========================================================================
+   Prototypes Section
+   ========================================================================== */
+
+.gnb-prototypes {
+    background-color: #AAC6CC;
+    padding-bottom: 160px;
+    width: 100%;
+}
+
+.gnb-prototypes .container-1400 {
+    width: 100%;
+    max-width: 1592px; /* 1400px maximum width + 2x 96px padded margins */
+    margin: 0 auto;
+    padding: 0 96px; /* Precise safe-margin constraint matching qualitative grid */
+    box-sizing: border-box;
+}
+
+.proto-screen-box {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.proto-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.proto-screen-box.first {
+    margin-bottom: 108px; /* Calculating 154px total gap from Figma */
+}
+
+.proto-label {
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 28px;
+    color: #0d1327;
+    margin-bottom: 46px; /* Precise Figma gap to next image */
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.proto-screen-box.second {
+    background-color: #0d1327; /* Dark background for the UI screenshots */
+}
+
+/* Mobile Prototype Styles */
+.proto-mobile-layout {
+    display: flex;
+    flex-direction: column;
+    padding: 0 8px; /* Precise Figma mobile padding */
+}
+
+.proto-mob-stack {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.proto-mob-stack.first {
+    gap: 32px; /* Precise Figma mobile gap between flow parts */
+    margin-bottom: 95px; /* Large gap before subtitle block */
+}
+
+.proto-mob-stack.second {
+    gap: 26px; /* Precise Figma mobile gap between UI parts */
+}
+
+/* Adjust mobile label position/spacing */
+.proto-mobile-layout .proto-label {
+    margin-bottom: 26px;
+    margin-left: 8px;
+    text-align: left;
+    width: auto;
+}
+
+
+
+/* ==========================================================================
+   Outcomes Section
+   ========================================================================== */
+
+.gnb-outcomes {
+    background-color: #AAC6CC;
+    width: 100%;
+}
+
+.gnb-outcomes .container-1400 {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 96px; /* Precise safe-margin constraint matching qualitative grid */
+    box-sizing: border-box;
+    max-width: 1592px; /* 1400 + 192 */
+}
+
+.outcomes-quote {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 45px;
+    line-height: 64px;
+    color: #0d1327;
+    margin: 0;
+    max-width: 974px;
+    margin-bottom: 80px; /* Precise Figma gap */
+}
+
+.outcomes-header {
+    display: flex;
+    flex-direction: column;
+    gap: 22px; /* Gap from title to divider */
+    margin-bottom: 65px; /* Gap to grid */
+}
+
+.outcomes-title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 26px;
+    line-height: normal;
+    color: #0d1327;
+    margin: 0;
+}
+
+.outcomes-divider {
+    width: 100%;
+    height: 1px;
+    background-color: #0d1327;
+}
+
+.outcomes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 61px;
+    padding-bottom: 160px; /* Exact Figma gap */
+}
+
+.outcome-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.outcome-stat {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 40px;
+    color: #0d1327;
+    margin: 0 0 32px 0;
+    max-width: 426px;
+}
+
+.outcome-desc {
+    font-family: 'Roobert', var(--font-body);
+    font-size: 18px;
+    line-height: 1.77; /* or 32px */
+    color: #0d1327;
+    margin: 0;
+    max-width: 426px;
+}
+
+/* ==========================================================================
+   App Layouts & DS Section
+   ========================================================================== */
+
+.gnb-app-ds {
+    background-color: #AAC6CC;
+    padding-bottom: 160px; /* Exact Figma gap */
+    width: 100%;
+}
+
+.gnb-app-ds .container-1400 {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 96px; /* Match safe minimum baseline */
+    box-sizing: border-box;
+    max-width: 1592px; /* 1400 + 192 */
+}
+
+.app-phones-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start; /* Prevent vertical flex stretching that causes cropping */
+    gap: 32px; /* Figma horizontal gap updated per request */
+    margin-bottom: 175px; /* Figma vertical gap to DS Image */
+    width: 100%;
+}
+
+.app-phone {
+    flex: 1 1 calc(25% - 24px); /* 4 items with 3x32px gaps (96px total) distributed mathematically */
+    max-width: calc(25% - 24px);
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    /* Removed object-fit: cover to stop aspect ratio zoom-cropping */
+}
+
+.ds-img-wrapper {
+    width: 100%;
+}
+
+.ds-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+@media screen and (max-width: 1024px) {
+    .gnb-prototypes .container-1400,
+    .gnb-outcomes .container-1400,
+    .gnb-app-ds .container-1400 {
+        padding: 0 32px; /* Match standard qualitative tablet padding */
+    }
+
+    /* Fincas UI Slider specifications for Tablet Breakpoint */
+    .gnb-app-ds .app-phones-grid.mobile-slider {
+        margin-bottom: 0;
+        gap: 24px !important; /* Fincas precise gap */
+    }
+
+    .gnb-app-ds .app-phones-grid.mobile-slider > .app-phone {
+        max-width: 284px; /* Fincas image width */
+        width: 284px;
+        flex: 0 0 284px;
+    }
+
+    /* Fincas swipe indicator with GNB dark theme color swap & tablet explicit bottom gap */
+    .gnb-app-ds .swipe-indicator.mobile-tablet-only {
+        display: flex !important;
+        justify-content: center;
+        margin: 24px auto 160px auto; /* 160px distance between swipe indicator and the element below */
+        color: #0d1327; /* GNB dark typography */
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .gnb-prototypes .container-1400 {
+        padding: 0; /* Let .proto-mobile-layout handle padding */
+    }
+}
+
+/* Outcomes & App Layouts Mobile Specs */
+@media screen and (max-width: 767px) {
+    /* Outcomes Layout */
+    .gnb-outcomes .container-1400 {
+        padding: 0 24px;
+    }
+    
+    .gnb-outcomes {
+        padding-bottom: 112px;
+    }
+
+    .outcomes-quote {
+        font-size: 24px;
+        line-height: 40px;
+        margin-bottom: 70px;
+    }
+
+    .outcomes-header {
+        gap: 9px;
+        margin-bottom: 65px;
+    }
+
+    .outcomes-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 57px;
+        padding-bottom: 0;
+    }
+
+    .outcome-stat {
+        margin-bottom: 25px; /* Extracted gap from 104px absolute top positioning */
+    }
+
+    /* App Layouts & DS Layout */
+    .gnb-app-ds {
+        padding-bottom: 160px;
+    }
+
+    .gnb-app-ds .container-1400 {
+        padding: 0 24px;
+    }
+
+    /* Target the slider wrapper specifically inside this container */
+    .gnb-app-ds .mobile-slider-wrapper.app-slider-wrapper {
+        width: auto !important;
+        margin-left: -24px !important;
+        margin-right: -24px !important;
+        margin-bottom: 112px; /* Gap separating it from the final DS stack */
+    }
+
+    /* Slider interaction precise overrides (Fincas Standard) */
+    .gnb-app-ds .app-phones-grid.mobile-slider {
+        gap: 24px !important; 
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+        margin-bottom: 0;
+    }
+
+    .gnb-app-ds .app-phones-grid.mobile-slider > .app-phone {
+        flex: 0 0 284px;
+        width: 284px;
+        max-width: 284px; /* Reset flex ratios from desktop grid */
+        height: 600px;    /* Force exact Fincas size parity */
+        object-fit: cover;
+    }
+
+    .gnb-app-ds .swipe-indicator.mobile-tablet-only {
+        color: #0d1327;
+        margin: 24px auto 0 auto;
+    }
+
+    /* DS Mobile Image Stack */
+    .ds-mob-stack {
+        display: flex !important;
+        flex-direction: column;
+        gap: 32px;
+        width: auto; /* Let flex scale out */
+        margin-left: -16px; /* Break 24px container padding down to 8px glass safe-gap */
+        margin-right: -16px;
+    }
+    
+    .ds-img-mob {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+}
+
+.desktop-only {
+    display: block;
+}
+
+.show-desktop-tablet {
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .desktop-only {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .show-desktop-tablet {
+        display: none;
+    }
+}

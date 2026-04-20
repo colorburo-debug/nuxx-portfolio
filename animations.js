@@ -109,6 +109,7 @@ const getBgColor = (data) => {
         if (container.dataset.bodyClass === 'home-page') return '#c3fe0c';
         if (container.dataset.bodyClass.includes('fincas')) return '#f7fbf8';
         if (container.dataset.bodyClass.includes('lauhaus')) return '#f7fbf8';
+        if (container.dataset.bodyClass.includes('gnb-lulo')) return '#f7fbf8';
         if (container.dataset.bodyClass === 'about-page') return '#f7fbf8';
     }
     
