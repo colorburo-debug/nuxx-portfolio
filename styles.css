@@ -1057,12 +1057,12 @@ body.home-page .about-card {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    /* Cards need to align with title (pl-94px) but are 1224px wide */
+    /* Cards need to align with title (pl-94px) but are 1400px wide */
     /* So we can structure the content to match */
     padding-left: 96px;
     /* Align content start */
     padding-right: 96px;
-    /* Though card is only 1224px */
+    /* Though card is only 1400px */
     box-sizing: border-box;
     gap: 40px;
     margin-bottom: 192px;
@@ -1077,7 +1077,7 @@ body.home-page .about-card {
 /* 1. Image */
 .card-image {
     width: 100%;
-    max-width: 1224px;
+    max-width: 1400px;
     height: auto;
     aspect-ratio: 1224 / 720;
     background-color: #d9d9d9;
@@ -1092,7 +1092,7 @@ body.home-page .about-card {
     /* Aggressive fluid gap for tablet transition */
     align-items: flex-start;
     width: 100%;
-    max-width: 1224px;
+    max-width: 1400px;
 }
 
 /* Left Column */
@@ -1342,12 +1342,12 @@ body.home-page .about-card {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    /* Cards need to align with title (pl-94px) but are 1224px wide */
+    /* Cards need to align with title (pl-94px) but are 1400px wide */
     /* So we can structure the content to match */
     padding-left: 96px;
     /* Align content start */
     padding-right: 96px;
-    /* Though card is only 1224px */
+    /* Though card is only 1400px */
     box-sizing: border-box;
     gap: 40px;
     margin-bottom: 192px;
@@ -1357,7 +1357,7 @@ body.home-page .about-card {
 /* 1. Image */
 .card-image {
     width: 100%;
-    max-width: 1224px;
+    max-width: 1400px;
     height: 720px;
     background-color: #d9d9d9;
     border-radius: 10px;
@@ -1370,7 +1370,7 @@ body.home-page .about-card {
     gap: clamp(24px, 20vw - 160px, 120px);
     align-items: flex-start;
     width: 100%;
-    max-width: 1224px;
+    max-width: 1400px;
 }
 
 /* Left Column */
@@ -5787,7 +5787,7 @@ html:has(.fincas-page) {
         align-items: center !important; /* Vertically center text in the remaining space */
         margin-bottom: 0 !important;
         width: 100% !important;
-        max-width: 1224px !important;
+        max-width: 1400px !important;
     }
 
     .interaction-indicator {
@@ -5823,7 +5823,7 @@ html:has(.fincas-page) {
         align-items: center !important;
         margin: 0 auto !important;
         width: 100% !important;
-        max-width: 1224px !important;
+        max-width: 1400px !important;
     }
 
     .interaction-indicator {
@@ -5852,7 +5852,7 @@ html:has(.fincas-page) {
 .hero-intro {
     margin: 0 auto auto auto !important; /* Push down the lower elements */
     width: 100% !important;
-    max-width: 1224px !important;
+    max-width: 1400px !important;
 }
 
 .interaction-indicator {
@@ -5902,7 +5902,7 @@ html:has(.fincas-page) {
 
 .hero-intro {
     width: 100% !important;
-    max-width: 1224px !important;
+    max-width: 1400px !important;
     margin: 0 auto !important;
 }
 
@@ -5926,7 +5926,7 @@ html:has(.fincas-page) {
     align-items: flex-start !important;
     gap: 32px !important;
     width: 100% !important;
-    max-width: 1224px !important;
+    max-width: 1400px !important;
     margin: 0 auto !important;
 }
 
@@ -5991,7 +5991,7 @@ html:has(.fincas-page) {
         justify-content: space-between !important; /* Maintain 2-column layout */
         align-items: flex-start !important; /* Align texts to each other's top */
         width: 100% !important;
-        max-width: 1224px !important;
+        max-width: 1400px !important;
         margin: 0 auto !important; /* CENTERED CONTAINER */
     }
 }
@@ -6041,7 +6041,7 @@ html:has(.fincas-page) {
         justify-content: space-between !important;
         align-items: center !important; /* Now vertically center relative to each other */
         width: 100% !important;
-        max-width: 1224px !important;
+        max-width: 1400px !important;
         margin: 0 auto !important;
         padding-left: 0 !important;
         padding-right: 0 !important;
@@ -6082,7 +6082,7 @@ html:has(.fincas-page) {
 .hero-intro {
     margin: 0 auto !important;
     width: 100% !important;
-    max-width: 1224px !important;
+    max-width: 1400px !important;
     display: flex !important;
     justify-content: center !important; /* Group them in the center */
     gap: 144px !important; /* Standard wide gap while being centered */
@@ -6112,7 +6112,7 @@ html:has(.fincas-page) {
 
     .hero-intro {
         width: 100%;
-        max-width: 1224px;
+        max-width: 1400px;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
@@ -6120,7 +6120,7 @@ html:has(.fincas-page) {
     }
 }
 
-/* Ensure projects also follow the 1224px center at desktop */
+/* Ensure projects also follow the 1400px center at desktop */
 @media screen and (min-width: 1025px) {
     .case-study-card {
         gap: 48px !important;
@@ -6128,7 +6128,7 @@ html:has(.fincas-page) {
     
     .card-image, .card-content-row, .case-actions {
         width: 100% !important;
-        max-width: 1224px !important;
+        max-width: 1400px !important;
     }
 }
 
@@ -6174,7 +6174,7 @@ html:has(.fincas-page) {
         max-width: 65% !important;
     }
 
-    /* 3. Force hero text blocks to hit the 1224px edges */
+    /* 3. Force hero text blocks to hit the 1400px edges */
     .hero-intro {
         display: flex !important;
         flex-direction: row !important;
@@ -6287,7 +6287,7 @@ html:has(.fincas-page) {
         flex-direction: row !important;
         justify-content: space-between !important;
         width: 100% !important;
-        max-width: 1224px !important;
+        max-width: 1400px !important;
         margin: 0 auto !important;
     }
 }
@@ -6433,13 +6433,13 @@ html:has(.fincas-page) {
     }
 }
 
-/* Ensure centering on Desktop remains at 1224px max width */
+/* Ensure centering on Desktop remains at 1400px max width */
 @media screen and (min-width: 1025px) {
     .hero-section {
         align-items: center !important;
     }
     .hero-intro {
-        max-width: 1224px !important;
+        max-width: 1400px !important;
         margin: 0 auto !important;
     }
 }
@@ -6458,7 +6458,7 @@ html:has(.fincas-page) {
     .work-section-title,
     .case-study-card {
         width: 100% !important;
-        max-width: 1224px !important;
+        max-width: 1400px !important;
         margin-left: auto !important;
         margin-right: auto !important;
     }
@@ -6488,7 +6488,7 @@ html:has(.fincas-page) {
     .work-section-title,
     .case-study-card {
         width: 100% !important;
-        max-width: 1224px !important;
+        max-width: 1400px !important;
         margin-left: auto !important;
         margin-right: auto !important;
         padding-left: 0 !important;
@@ -6511,7 +6511,7 @@ html:has(.fincas-page) {
     .work-section-title,
     .case-study-card {
         width: calc(100% - 64px) !important; /* Forces 32px safety gap on both sides */
-        max-width: 1224px !important;
+        max-width: 1400px !important;
         margin-left: auto !important;
         margin-right: auto !important;
     }
@@ -6541,7 +6541,7 @@ html:has(.fincas-page) {
     .work-section-title,
     .case-study-card {
         width: calc(100% - 64px) !important; 
-        max-width: 1224px !important;
+        max-width: 1400px !important;
         margin-left: auto !important;
         margin-right: auto !important;
         text-align: left !important;

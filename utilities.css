@@ -784,7 +784,7 @@
    MASTER LAYOUT UTILITIES (Precision Alignment)
    ========================================================================= */
 
-/* Universal Content Container (Centered 1224px with responsive safety gaps) */
+/* Universal Content Container (Centered 1400px with responsive safety gaps) */
 .content-wrapper {
     width: 100%;
     max-width: 1400px; /* Upgraded to Gold Standard 1400px */
