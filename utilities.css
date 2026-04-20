@@ -165,9 +165,11 @@
     gap: 160px;
 }
 
-/* --- Semantic Case Study Gaps --- */
-.airy-gap { gap: 144px; }
-.wide-gap { gap: 120px; }
+/* --- Golden Spacing Tokens (Lulo Baseline) --- */
+.airy-gap { gap: 144px; }   /* Massive rhythmic gap for qualitative sections */
+.wide-gap { gap: 120px; }   /* Wide gap for text columns and grid data */
+.title-gap { gap: 110px; }  /* Exact gap established for Lulo main titles */
+.standard-gap { gap: 72px; } /* Lulo Opportunity space intro gap */
 
 /* --- Spacing: Padding (8-point scale) --- */
 .p-0 {
@@ -343,11 +345,13 @@
     padding-top: 160px;
 }
 
-/* --- Semantic Boundary Paddings --- */
-.pt-boundary-desktop { padding-top: 160px; }
-.pt-boundary-mobile { padding-top: 112px; }
+/* --- Semantic Boundary Paddings (Section Transitions) --- */
+.pt-boundary-desktop { padding-top: 160px; }   /* 160px - Desktop/Tablet standard vertical rhythm */
+.pt-boundary-mobile { padding-top: 112px; }    /* 112px - Mobile standard vertical rhythm */
 .pb-boundary-desktop { padding-bottom: 160px; }
 .pb-boundary-mobile { padding-bottom: 112px; }
+.pt-title-pocket { padding-top: 198px; }        /* (88 Header + 110 Gap) - Lulo Hero Baseline */
+.pb-title-pocket { padding-bottom: 110px; }     /* 110px Bottom gap - Lulo Hero Baseline */
 
 /* Padding Bottom */
 .pb-8 {
