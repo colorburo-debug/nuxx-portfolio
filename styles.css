@@ -6052,14 +6052,32 @@ html:has(.fincas-page) {
 /* 20. Case Study Hero Stability & Alignment */
 .gnb-lulo-hero {
     padding-top: 160px; /* 88px Header + 72px Gap */
+    padding-bottom: 0; /* Gap owned by the section below */
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    min-height: 100vh;
-    min-height: 100dvh;
     position: relative;
     box-sizing: border-box;
+    width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+    .gnb-lulo-hero {
+        padding-top: 144px;
+        padding-bottom: 0;
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .gnb-lulo-hero {
+        padding-top: 120px;
+        padding-bottom: 0;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
 }
 
 .hero-intro {
@@ -6798,7 +6816,7 @@ body.gnb-lulo-page {
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
-    padding: 64px 96px 120px 96px; 
+    padding: 160px 96px 120px 96px; /* 160px top gap to Title above */
     box-sizing: border-box;
     color: #0d1327;
 }
@@ -6818,13 +6836,13 @@ body.gnb-lulo-page {
 
 @media screen and (max-width: 1024px) {
     .gnb-lulo-opp {
-        padding: 0 32px 128px 32px;
+        padding: 112px 32px 128px 32px; /* 112px mobile/tablet rhythmic gap */
     }
 }
 
 @media screen and (max-width: 767px) {
     .gnb-lulo-opp {
-        padding: 44px 24px 104px 24px; /* 76px gap total from hero title (32 + 44) */
+        padding: 112px 24px 104px 24px; /* 112px mobile rhythmic gap */
     }
 
     .gnb-lulo-opp .opp-intro {
