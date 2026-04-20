@@ -6051,8 +6051,8 @@ html:has(.fincas-page) {
 
 /* 20. Case Study Hero Stability & Alignment */
 .gnb-lulo-hero {
-    padding-top: 160px; /* 88px Header + 72px Gap */
-    padding-bottom: 0; /* Gap owned by the section below */
+    padding-top: 198px; /* 88px Header + 110px Gap requested */
+    padding-bottom: 110px; /* 110px Gap requested below title */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6064,8 +6064,8 @@ html:has(.fincas-page) {
 
 @media screen and (max-width: 1024px) {
     .gnb-lulo-hero {
-        padding-top: 144px;
-        padding-bottom: 0;
+        padding-top: 198px;
+        padding-bottom: 110px;
         padding-left: 32px;
         padding-right: 32px;
     }
@@ -6073,8 +6073,8 @@ html:has(.fincas-page) {
 
 @media screen and (max-width: 767px) {
     .gnb-lulo-hero {
-        padding-top: 120px;
-        padding-bottom: 0;
+        padding-top: 198px;
+        padding-bottom: 110px;
         padding-left: 24px;
         padding-right: 24px;
     }
@@ -6763,7 +6763,7 @@ body.gnb-lulo-page {
     color: #0d1327;
     text-align: center;
     max-width: 1100px;
-    margin: 0 auto 64px auto;
+    margin: 0 auto; /* Removed margins to avoid compound gaps as requested */
     padding: 0 24px;
 }
 
@@ -6780,7 +6780,7 @@ body.gnb-lulo-page {
         font-size: 60px; /* Equivalent to 45pt */
         line-height: 1.16;
         max-width: 850px; /* Adjusted width to keep 2-line layout at larger font size */
-        margin-bottom: 88px;
+        margin: 0 auto; /* No margins for precision */
         text-align: center;
         padding: 0;
     }
@@ -6816,7 +6816,7 @@ body.gnb-lulo-page {
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
-    padding: 160px 96px 120px 96px; /* 160px top gap to Title above */
+    padding: 0 96px 120px 96px; /* Removed top gap as it is now owned by the Hero padding bottom */
     box-sizing: border-box;
     color: #0d1327;
 }
@@ -6836,13 +6836,13 @@ body.gnb-lulo-page {
 
 @media screen and (max-width: 1024px) {
     .gnb-lulo-opp {
-        padding: 112px 32px 128px 32px; /* 112px mobile/tablet rhythmic gap */
+        padding: 0 32px 128px 32px; 
     }
 }
 
 @media screen and (max-width: 767px) {
     .gnb-lulo-opp {
-        padding: 112px 24px 104px 24px; /* 112px mobile rhythmic gap */
+        padding: 0 24px 104px 24px;
     }
 
     .gnb-lulo-opp .opp-intro {
