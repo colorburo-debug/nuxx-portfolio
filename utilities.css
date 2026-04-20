@@ -165,6 +165,10 @@
     gap: 160px;
 }
 
+/* --- Semantic Case Study Gaps --- */
+.airy-gap { gap: 144px; }
+.wide-gap { gap: 120px; }
+
 /* --- Spacing: Padding (8-point scale) --- */
 .p-0 {
     padding: 0px;
@@ -334,6 +338,16 @@
 .pt-128 {
     padding-top: 128px;
 }
+
+.pt-160 {
+    padding-top: 160px;
+}
+
+/* --- Semantic Boundary Paddings --- */
+.pt-boundary-desktop { padding-top: 160px; }
+.pt-boundary-mobile { padding-top: 112px; }
+.pb-boundary-desktop { padding-bottom: 160px; }
+.pb-boundary-mobile { padding-bottom: 112px; }
 
 /* Padding Bottom */
 .pb-8 {

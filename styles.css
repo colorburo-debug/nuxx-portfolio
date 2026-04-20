@@ -6049,31 +6049,17 @@ html:has(.fincas-page) {
     }
 }
 
-/* 19. REFINED 72PX TOP GAP (80px Header + 72px Gap = 152px) */
-.hero-section {
-    padding-top: 152px !important; 
-    transition: padding-top 0.3s ease;
-}
-
-@media screen and (max-width: 1024px) {
-    .hero-section {
-        padding-top: 152px !important;
-    }
-}
-
-@media screen and (max-width: 767px) {
-    .hero-section {
-        padding-top: 152px !important;
-    }
-}
-
-/* 20. Corrected 72px Gap (88px Header Total + 72px = 160px) & Horizontal Centering */
-.hero-section {
-    padding-top: 160px !important; /* Fixed: 8px wrapper padding + 80px pill + 72px gap */
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important; /* Centers the Intro container */
-    text-align: center !important; /* Ensuring text centering if requested */
+/* 20. Case Study Hero Stability & Alignment */
+.gnb-lulo-hero {
+    padding-top: 160px; /* 88px Header + 72px Gap */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    position: relative;
+    box-sizing: border-box;
 }
 
 .hero-intro {
@@ -6103,32 +6089,17 @@ html:has(.fincas-page) {
 
 /* 22. PERFECT ALIGNMENT FIX (Aligning Hero and Projects) */
 @media screen and (min-width: 1025px) {
-    .hero-section, 
-    .case-section-title,
-    .case-study-card {
-        max-width: 1224px !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-        left: 0 !important;
-        transform: none !important;
+    .gnb-lulo-hero {
+        padding-top: 160px;
     }
 
-    .hero-section {
-        padding-top: 152px !important; /* 80px + 72px gap */
-        align-items: center !important;
-    }
-
-    .hero-intro, 
-    .work-section-title,
-    .case-study-card {
-        width: 100% !important;
-        max-width: 1224px !important;
-        margin: 0 !important;
-        display: flex !important;
-        justify-content: space-between !important; /* Force edges to the 1224px boundaries */
-        gap: 0 !important; /* space-between handles the gap */
+    .hero-intro {
+        width: 100%;
+        max-width: 1224px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        gap: 144px; /* Airy Gap */
     }
 }
 
