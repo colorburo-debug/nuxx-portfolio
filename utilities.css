@@ -787,7 +787,7 @@
 /* Universal Content Container (Centered 1224px with responsive safety gaps) */
 .content-wrapper {
     width: 100%;
-    max-width: 1224px;
+    max-width: 1400px; /* Upgraded to Gold Standard 1400px */
     margin-left: auto;
     margin-right: auto;
     box-sizing: border-box;

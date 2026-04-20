@@ -635,9 +635,8 @@ body.home-page .about-card {
 /* --- END ABOUT ME CARD FINALIZED IMPLEMENTATION --- */
 
 .about-card-visuals {
-    flex: 0 1 538px !important; /* Allow shrink for 1224px container */
-    height: 394px !important; /* Fixed height from Figma */
-    max-width: 100% !important;
+    width: 38% !important; /* Percentage weight */
+    height: 394px !important; /* Fixed height from Figma preserved */
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
@@ -648,7 +647,7 @@ body.home-page .about-card {
 }
 
 .about-card-content-wrapper {
-    flex: 0 1 616px !important; /* Allow shrink for 1224px container */
+    width: 52% !important; /* Percentage weight */
     max-width: 100% !important;
     display: flex !important;
     flex-direction: column !important;
@@ -6148,12 +6147,12 @@ html:has(.fincas-page) {
         align-items: center !important;
     }
 
-    /* 2. Unified Width & Centering for content blocks */
+    /* 2. Unified Width & Centering for content blocks (Upgraded to 1400px) */
     .hero-intro, 
     .work-section-title, 
     .case-study-card {
         width: 100% !important;
-        max-width: 1224px !important;
+        max-width: 1400px !important;
         margin-left: auto !important;
         margin-right: auto !important;
         left: 0 !important;
@@ -6162,6 +6161,17 @@ html:has(.fincas-page) {
         padding-left: 0 !important;
         padding-right: 0 !important;
         box-sizing: border-box !important;
+    }
+
+    /* Left/Right Column weights for project cards */
+    .card-left-col {
+        width: 28% !important;
+        max-width: 28% !important;
+    }
+
+    .card-right-col {
+        width: 65% !important;
+        max-width: 65% !important;
     }
 
     /* 3. Force hero text blocks to hit the 1224px edges */
@@ -6178,25 +6188,35 @@ html:has(.fincas-page) {
 
 /* Desktop & General */
 .hero-section {
-    padding-top: 160px !important; /* Calc: Header Wrap 8px + Pill 80px + Gap 72px = 160px */
+    padding-top: 160px !important; /* Gold Standard Top Boundary */
     width: 100% !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    padding-left: 48px !important; /* Safety minimum */
-    padding-right: 48px !important;
+    padding-left: 96px !important; /* Upgraded Desktop Safety Padding */
+    padding-right: 96px !important;
     box-sizing: border-box !important;
 }
 
 .hero-intro {
     width: 100% !important;
-    max-width: 1224px !important;
+    max-width: 1400px !important;
     margin: 0 auto !important;
     display: flex !important;
     flex-direction: row !important;
     justify-content: space-between !important;
     align-items: flex-start !important;
     text-align: left !important;
+}
+
+.hero-intro-left {
+    width: 30% !important; /* Percentage weight for fluidity */
+    max-width: none !important;
+}
+
+.hero-intro-right {
+    width: 62% !important; /* Percentage weight for fluidity */
+    max-width: none !important;
 }
 
 /* Tablet & Mobile Header Height Change */
@@ -7441,8 +7461,6 @@ body.gnb-lulo-page {
     color: #0d1327;
     margin-bottom: 46px; /* Precise Figma gap to next image */
     max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .proto-screen-box.second {
