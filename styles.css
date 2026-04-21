@@ -6734,8 +6734,8 @@ html:has(.gnb-lulo-page) {
 
 body.gnb-lulo-page {
     /* Footer Variables Override */
-    --footer-bg: #090d1b; 
-    --footer-divider: #f7fbf8;
+    --footer-bg: #004155; 
+    --footer-divider: #2b6071;
     --footer-divider-opacity: 1;
     --footer-name-color: rgba(247, 251, 248, 0.7);
     --footer-text-color: #f7fbf8;
@@ -7424,6 +7424,7 @@ body.gnb-lulo-page {
 
 .gnb-prototypes {
     background-color: #AAC6CC;
+    padding-top: 160px; /* Golden Standard entry gap */
     padding-bottom: 160px;
     width: 100%;
 }
@@ -7757,9 +7758,193 @@ body.gnb-lulo-page {
     display: block;
 }
 
+/* --- LULO STRATEGY & SOLUTION SECTION (Node 1472:75 & 1472:92) --- */
+.gnb-lulo-strategy {
+    background-color: #004155;
+    color: #F7FBF8;
+    padding-top: 160px;
+    padding-bottom: 232px; /* Restored specific closing gap as requested */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.gnb-lulo-strategy .container-1400 {
+    width: 100%;
+    max-width: 1592px; /* 1400px + 2x96px margins */
+    margin: 0 auto;
+    padding: 0 96px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.lulo-strategy-title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 45px;
+    line-height: 64px;
+    margin-bottom: 105px;
+    color: #F7FBF8;
+}
+
+.lulo-proto-main-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 45px;
+    width: 100%;
+}
+
+.lulo-proto-row {
+    display: flex;
+    gap: 47px;
+    width: 100% !important;
+    max-width: 1400px !important;
+    margin: 0 auto;
+}
+
+.lulo-proto-card {
+    height: 855px;
+    position: relative;
+    background-color: #002731;
+    overflow: hidden;
+}
+
+.lulo-proto-card.card-left { flex: 1; }
+.lulo-proto-card.card-right { flex: 1; }
+
+.lulo-proto-card.full-width {
+    width: 100% !important;
+    max-width: 1400px !important;
+    height: 855px;
+    margin: 0 auto;
+}
+
+/* Phone Container within Card */
+.lulo-phone-frame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Perfect centering */
+    width: 370px;
+    height: 657px;
+    border: 1px solid #2b6071;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #000;
+}
+
+/* Specific size overrides from Figma (preserving centering) */
+.lulo-phone-frame.card-1 { width: 370px; height: 657px; }
+.lulo-phone-frame.card-2 { width: 301px; height: 656px; }
+.lulo-phone-frame.card-3 { width: 373px; height: 657px; }
+
+.lulo-phone-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Role Block */
+.lulo-role-block {
+    margin-top: 160px; /* Standard separation buffer */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.lulo-role-main-title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 45px;
+    line-height: 64px; /* Precision Figma line-height */
+    text-align: center;
+    max-width: 808px;
+    margin-bottom: 87px;
+    color: #F7FBF8;
+}
+
+.lulo-role-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 119px;
+    width: 100%;
+}
+
+.role-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.role-column.left { gap: 96px; }
+.role-column.right { gap: 64px; }
+
+.role-item {
+    display: flex;
+    flex-direction: column;
+    gap: 32px; /* User requested 32px gap for desktop/tablet */
+}
+
+.role-item-title {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 40px; /* Precision Figma line-height */
+    color: #F7FBF8;
+    margin: 0; /* Resetting margins to prevent compound gaps */
+}
+
+.role-item-desc {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 32px; /* Precision Figma line-height */
+    color: #F7FBF8;
+    max-width: 100%;
+    margin: 0; /* Resetting margins to prevent compound gaps */
+}
+
+
 @media (max-width: 1024px) {
+    .gnb-lulo-strategy .container-1400 {
+        padding: 0 32px;
+    }
+
     .desktop-only {
         display: none;
+    }
+
+    /* Stack Proto Cards Vertically on Tablet */
+    .lulo-proto-row {
+        flex-direction: column;
+        width: 100% !important;
+        gap: 45px !important;
+    }
+
+    .lulo-proto-card.card-left,
+    .lulo-proto-card.card-right {
+        width: 100% !important;
+        flex: none !important;
+    }
+
+    /* Stack Role Pillars for Tablet */
+    .lulo-role-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 74px;
+        width: 100% !important;
+    }
+
+    .role-column {
+        width: 100% !important;
+        gap: 74px !important;
+    }
+
+    .lulo-role-main-title {
+        text-align: left;
+        max-width: 100%;
+        margin-bottom: 74px;
     }
 }
 
@@ -7767,4 +7952,108 @@ body.gnb-lulo-page {
     .show-desktop-tablet {
         display: none;
     }
+
+    /* Mobile Rhythm for Strategy Section (Node 1476:111 + 1476:119) */
+    .gnb-lulo-strategy {
+        padding-top: 117px;
+        padding-bottom: 161px; /* Integrated closing gap for entire section */
+    }
+
+    .gnb-lulo-strategy .container-1400 {
+        padding: 0 24px;
+    }
+
+    .lulo-strategy-title {
+        font-size: 30px;
+        line-height: 40px;
+        margin-bottom: 37px; /* Precision gap Node 1476:111 */
+        text-align: left;
+        max-width: 342px;
+    }
+
+    /* Proto Cards Mobile Stacking */
+    .lulo-proto-main-grid {
+        gap: 37px;
+    }
+
+    .lulo-proto-row {
+        flex-direction: column;
+        gap: 37px !important;
+        width: 100% !important;
+    }
+
+    .lulo-proto-card {
+        width: 100% !important;
+        flex: none !important;
+        height: 648px !important; /* Standard Card Height Node 1476:108 */
+    }
+
+    .lulo-proto-card.card-right {
+        height: 763px !important; /* Taller Card Node 1476:109 */
+    }
+
+    .lulo-proto-card.full-width {
+        height: 648px !important;
+    }
+
+    /* Phone Frames Mobile Sizes */
+    .lulo-phone-frame {
+        width: 284px;
+        height: 504px;
+    }
+
+    .lulo-phone-frame.card-2 {
+        width: 284px;
+        height: 618px;
+    }
+
+    .lulo-phone-frame.card-3 {
+        width: 284px;
+        height: 501px;
+    }
+
+    /* Role Block Mobile */
+    .lulo-role-block {
+        margin-top: 123px;
+        align-items: flex-start;
+    }
+
+    .lulo-role-main-title {
+        font-size: 30px;
+        line-height: 40px;
+        margin-bottom: 74px; /* Precision gap Node 1476:119 */
+        text-align: left;
+        max-width: 342px;
+    }
+
+    .lulo-role-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 74px;
+        width: 100% !important;
+    }
+
+    .role-column {
+        width: 100% !important;
+    }
+
+    .role-column.left,
+    .role-column.right {
+        gap: 74px;
+    }
+
+    .role-item {
+        gap: 8px; /* Precision title-to-body gap */
+    }
+
+    .role-item-title {
+        font-size: 26px;
+        line-height: 40px;
+    }
+
+    .role-item-desc {
+        font-size: 18px;
+        line-height: 1.77;
+    }
 }
+

@@ -1,0 +1,15 @@
+wing: figma_test
+rooms:
+- name: dev_archive
+  description: Files from dev-archive/
+  keywords:
+  - dev_archive
+  - dev-archive
+- name: design
+  description: Files from assets/
+  keywords:
+  - design
+  - assets
+- name: general
+  description: Files that don't fit other rooms
+  keywords: []
