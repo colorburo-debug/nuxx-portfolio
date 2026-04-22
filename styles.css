@@ -3174,9 +3174,17 @@ body.lauhaus-page {
 .lauhaus-hero-img-wrapper {
     width: 100%;
     max-width: 1400px; /* Expanded to match Gold Standard inner width */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* 8px gap between image and caption */
+}
+
+.lauhaus-hero-image-container {
+    width: 100%;
+    height: auto;
     border-radius: 10px;
     overflow: hidden;
-    margin-bottom: 8px;
 }
 
 .hero-image-lg {
@@ -3190,10 +3198,9 @@ body.lauhaus-page {
     font-weight: 500;
     font-size: 14px;
     color: #0d1327;
-    margin: 16px 0 0 0;
+    margin: 0;
     letter-spacing: 0.14px;
     width: 100%;
-    max-width: 1400px;
     text-align: left;
 }
 
@@ -4089,16 +4096,18 @@ body.lauhaus-page {
     /* Side padding handled by .content-wrapper utilities */
 
     .lauhaus-hero {
-        padding: 152px 24px 40px 24px; /* Standardized 24px safe margin */
+        padding: 160px 24px 8px 24px; /* Matched to Fincas mobile padding */
         align-items: flex-start;
     }
 
     .lauhaus-hero-title {
+        font-family: 'Roobert', var(--font-body);
+        font-weight: 500;
         font-size: 30px;
-        line-height: 1.19;
+        line-height: 1.33;
         text-align: left;
-        padding: 0 24px;
-        margin-bottom: 64px;
+        padding: 0; /* Removed redundant padding to keep 24px from parent */
+        margin-bottom: 72px; /* Matched Fincas gap */
         margin-left: 0;
     }
 
@@ -4108,11 +4117,23 @@ body.lauhaus-page {
 
     .lauhaus-hero-img-wrapper {
         border-radius: 0;
-        height: 368px;
-        width: 100%;
-        max-width: 100%;
+        width: 100vw;
+        max-width: 100vw;
+        margin-left: -24px;
+        margin-right: -24px;
         margin-bottom: 0;
         aspect-ratio: auto;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 8px; /* Standardized 8px gap between image and caption */
+    }
+
+    .lauhaus-hero-image-container {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3; /* Matched Fincas hero aspect ratio */
+        overflow: hidden;
     }
 
     .hero-image-lg {
@@ -4122,7 +4143,7 @@ body.lauhaus-page {
     }
 
     .lauhaus-hero-caption {
-        padding: 8px 104px 8px 24px;
+        padding: 8px 24px; /* 24px left padding to offset the -24px parent margin */
         margin-top: 0;
         font-size: 14px;
         line-height: 1.4;

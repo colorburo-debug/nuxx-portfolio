@@ -40,10 +40,13 @@ const initWebGL = () => {
         observer.observe(container);
 
         // Restart the animation loop if it was paused
-        if (!window.isWebGLRunning) {
+        // We force a restart here to resolve a race condition where the previous loop 
+        // might have been in the process of stopping exactly when we re-entered the page.
+        window.isWebGLRunning = false; 
+        requestAnimationFrame(() => {
             window.isWebGLRunning = true;
             if (window.animateWebGL) window.animateWebGL();
-        }
+        });
         return;
     }
 
