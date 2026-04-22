@@ -85,7 +85,7 @@
         padding-right: 96px !important;
         gap: 0 !important;
         width: 100% !important;
-        max-width: 1440px !important;
+        max-width: 1592px !important;
         box-sizing: border-box !important;
     }
 
@@ -1052,17 +1052,12 @@ body.home-page .about-card {
 /* Case Study Card (Global) */
 .case-study-card {
     width: 100%;
-    max-width: 1440px;
-    /* Use 1440px container for alignment context */
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    /* Cards need to align with title (pl-94px) but are 1400px wide */
-    /* So we can structure the content to match */
     padding-left: 96px;
-    /* Align content start */
     padding-right: 96px;
-    /* Though card is only 1400px */
     box-sizing: border-box;
     gap: 40px;
     margin-bottom: 192px;
@@ -1318,13 +1313,12 @@ body.home-page .about-card {
 /* Section Title */
 .work-section-title {
     width: 100%;
-    max-width: 1440px;
-    /* Container max width */
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
     margin: 0 auto;
-    /* Spacing from Figma 119:59 */
     padding-top: 160px;
     padding-bottom: 88px;
     padding-left: 96px;
+    padding-right: 96px;
     box-sizing: border-box;
 
     font-family: 'Roobert', var(--font-body);
@@ -2271,7 +2265,7 @@ body:not(.home-page) #webgl-container {
     gap: 16px;
     padding-left: 96px;
     padding-right: 96px;
-    max-width: 1440px;
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
     margin: 0 auto;
 }
 
@@ -2302,7 +2296,7 @@ body:not(.home-page) #webgl-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 1440px;
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
     margin: 0 auto;
     width: 100%;
     padding: 0 96px;
@@ -2382,7 +2376,7 @@ body:not(.home-page) #webgl-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    max-width: 1440px;
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
     margin: 0 auto;
     padding: 104px 96px 56px 96px;
     text-align: left;
@@ -2425,7 +2419,7 @@ body:not(.home-page) #webgl-container {
 }
 
 .ops-header-title {
-    max-width: 1440px;
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
     margin: 0 auto;
     padding: 144px 96px 64px 96px;
     display: flex;
@@ -2454,7 +2448,7 @@ body:not(.home-page) #webgl-container {
 
 /* Stats Section */
 .designops-page .ops-stats-section {
-    max-width: 1440px;
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
     margin: 0 auto;
     padding: 32px 96px 136px 96px;
     /* Desktop padding */
@@ -2530,7 +2524,7 @@ body:not(.home-page) #webgl-container {
 
 /* Outcome Groups */
 .ops-outcome-group {
-    max-width: 1440px;
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
     margin: 0 auto;
     padding: 64px 96px 88px 96px;
     display: flex;
@@ -3103,7 +3097,7 @@ body.lauhaus-page {
 /* Base utilities for the page */
 .lauhaus-page .width-clamped {
     width: 100%;
-    max-width: 1440px;
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
     margin: 0 auto;
     padding-left: 96px;
     padding-right: 96px;
@@ -3155,8 +3149,12 @@ body.lauhaus-page {
     flex-direction: column;
     align-items: center;
     padding-top: 208px;
-    padding-bottom: 64px;
+    padding-bottom: 0; /* Removed to avoid compound gaps with the section below */
+    padding-left: 96px;
+    padding-right: 96px;
     width: 100%;
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
+    margin: 0 auto;
     box-sizing: border-box;
 }
 
@@ -3167,16 +3165,15 @@ body.lauhaus-page {
     line-height: 1.17;
     color: #0d1327;
     text-align: center;
-    max-width: 925px;
+    max-width: 895px; /* Standardized to match Fincas/Golden Title width */
     margin: 0 auto 96px auto;
     /* visual gap to image */
-    padding: 0 24px;
+    padding: 0;
 }
 
 .lauhaus-hero-img-wrapper {
     width: 100%;
-    max-width: 1056px;
-    /* 1588 - 267*2 gives 1054px, approx 1056px */
+    max-width: 1400px; /* Expanded to match Gold Standard inner width */
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 8px;
@@ -3196,16 +3193,16 @@ body.lauhaus-page {
     margin: 16px 0 0 0;
     letter-spacing: 0.14px;
     width: 100%;
-    max-width: 1056px;
+    max-width: 1400px;
     text-align: left;
 }
 
 /* Opportunity Section */
 .lauhaus-opp {
     width: 100%;
-    max-width: 1440px;
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
     margin: 0 auto;
-    padding: 120px 96px 160px 96px;
+    padding: 128px 96px 160px 96px; /* Standardized top gap to 128px per user request */
     box-sizing: border-box;
     color: #0d1327;
 }
@@ -3380,7 +3377,7 @@ body.lauhaus-page {
     font-family: 'Roobert', var(--font-body);
     font-size: 18px;
     font-weight: 400;
-    margin: 0;
+    margin: 0 0 24px 0; /* Standardized 24px gap to image below */
 }
 
 .journey-block {
@@ -3407,13 +3404,18 @@ body.lauhaus-page {
     height: auto;
     border-radius: 10px;
     display: block;
-    margin-top: 32px;
+    margin-top: 0; /* Removed to avoid compound gaps with the title above */
+}
+
+/* 64px gap between the two large journey boards */
+.journey-img-lg + .journey-img-lg {
+    margin-top: 64px;
 }
 
 .journey-caption {
     font-family: 'Roobert', var(--font-body);
     font-size: 18px;
-    margin: 0 0 32px 0;
+    margin: 0 0 24px 0; /* Standardized 24px gap to image below */
     line-height: 28px;
 }
 
@@ -3437,12 +3439,14 @@ body.lauhaus-page {
     grid-column: 1;
     grid-row: 1;
     padding-top: 80px !important;
+    margin-bottom: 24px; /* Ensure 24px gap to image below */
 }
 
 .storyboard-title {
     grid-column: 2;
     grid-row: 1;
     padding-top: 80px !important;
+    margin-bottom: 24px; /* Ensure 24px gap to image below */
 }
 
 .matrix-img-wrapper {
@@ -3461,7 +3465,7 @@ body.lauhaus-page {
     font-family: 'Roobert', var(--font-body);
     font-size: 18px;
     font-weight: 400;
-    margin: 0 0 32px 0;
+    margin: 0 0 24px 0; /* Standardized 24px gap to image below */
     color: #f7fbf8;
 }
 
@@ -3605,7 +3609,7 @@ body.lauhaus-page {
     }
 
     .lauhaus-hero {
-        padding: 160px 32px 104px 32px;
+        padding: 160px 32px 0 32px; /* Standardized to 0 padding-bottom to match desktop logic */
         align-items: center;
     }
 
@@ -3630,7 +3634,7 @@ body.lauhaus-page {
     }
 
     .lauhaus-opp {
-        padding: 0 32px 128px 32px;
+        padding: 128px 32px 160px 32px; /* Standardized to match desktop 128px top gap */
         color: #0d1327;
     }
 
@@ -3769,12 +3773,17 @@ body.lauhaus-page {
         line-height: 28px !important;
         margin-top: 0;
         padding-top: 0;
-        padding-bottom: 32px;
+        padding-bottom: 0;
+        margin-bottom: 24px; /* Standardized to margin-only 24px */
     }
 
     .journey-img-lg {
         margin-top: 0;
-        margin-bottom: 40px;
+        margin-bottom: 0; /* Removed to avoid compound gaps with the section below */
+    }
+
+    .journey-img-lg + .journey-img-lg {
+        margin-top: 64px; /* Matches desktop gap between boards */
     }
 
     .journey-block {
@@ -3793,8 +3802,8 @@ body.lauhaus-page {
         line-height: 28px !important;
         margin-top: 0;
         padding-top: 0;
-        padding-bottom: 32px;
-        margin-bottom: 0;
+        padding-bottom: 0;
+        margin-bottom: 24px; /* Standardized to margin-only 24px */
     }
 
     .journey-img.margin-t {
@@ -3827,16 +3836,17 @@ body.lauhaus-page {
         line-height: 28px !important;
         padding-top: 0;
         margin-top: 0;
-        margin-bottom: 32px;
+        margin-bottom: 24px; /* Standardized to 24px */
     }
 
     .storyboard-title {
         padding-top: 104px !important;
-        padding-bottom: 32px !important;
+        padding-bottom: 0 !important;
+        margin-bottom: 24px !important; /* Standardized to margin-only 24px */
     }
 
     .matrix-img-wrapper {
-        margin-bottom: 32px;
+        margin-bottom: 32px; /* Gap to conclusion below, not between title and image */
     }
 
     .journey-conclusion {
@@ -4079,7 +4089,7 @@ body.lauhaus-page {
     /* Side padding handled by .content-wrapper utilities */
 
     .lauhaus-hero {
-        padding: 152px 0 40px 0;
+        padding: 152px 24px 40px 24px; /* Standardized 24px safe margin */
         align-items: flex-start;
     }
 
@@ -4136,14 +4146,20 @@ body.lauhaus-page {
         width: 100%;
     }
 
-    .opp-intro {
+    .lauhaus-opp .opp-intro {
         flex-direction: column;
         gap: 24px;
         margin-bottom: 0 !important;
     }
 
+    .opp-text {
+        max-width: 100%;
+    }
+
     .lauhaus-opp {
         margin-bottom: 0 !important;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
         padding-bottom: 128px !important;
     }
 
@@ -4160,6 +4176,7 @@ body.lauhaus-page {
     /* Paps handled by .section-gap-lg utilities */
 
     .plp-header {
+        flex-direction: column !important;
         margin-bottom: 0 !important;
         gap: 40px !important;
     }
@@ -4296,7 +4313,7 @@ body.lauhaus-page {
 
     .journey-caption {
         margin-top: 0 !important;
-        margin-bottom: 40px !important;
+        margin-bottom: 0 !important; /* Relying on parent flex gap: 24px */
         line-height: 28px !important;
         color: #f7fbf8 !important;
         font-size: 18px !important;
@@ -4306,7 +4323,7 @@ body.lauhaus-page {
 
     .journey-grid-title {
         width: 100% !important;
-        margin-bottom: 40px !important;
+        margin-bottom: 0 !important; /* Relying on parent flex gap: 24px */
         font-size: 18px !important;
         line-height: 28px !important;
         padding-left: 16px !important;
@@ -4317,7 +4334,7 @@ body.lauhaus-page {
     .journey-block {
         display: flex !important;
         flex-direction: column !important;
-        gap: 32px !important;
+        gap: 24px !important; /* Standardized 24px internal gap */
         margin-top: 0 !important;
         margin-bottom: 0 !important;
     }
@@ -4328,7 +4345,7 @@ body.lauhaus-page {
     }
 
     .journey-block.block-2 {
-        gap: 32px !important;
+        gap: 24px !important; /* Consolidated to 24px internal gap */
         margin-top: 72px !important;
         margin-bottom: 0 !important;
     }
@@ -4378,25 +4395,7 @@ body.lauhaus-page {
         padding-top: 0 !important;
     }
 
-    .journey-caption {
-        margin-top: 0 !important;
-        margin-bottom: 0 !important;
-        line-height: 28px !important;
-        color: #f7fbf8 !important;
-        font-size: 18px !important;
-        padding-left: 16px !important;
-        padding-right: 16px !important;
-    }
 
-    .journey-grid-title {
-        width: 100% !important;
-        margin-bottom: 0 !important;
-        font-size: 18px !important;
-        line-height: 28px !important;
-        padding-left: 16px !important;
-        padding-right: 16px !important;
-        box-sizing: border-box !important;
-    }
 
     .journey-img-container img {
         width: 100% !important;
@@ -4692,7 +4691,7 @@ html:has(.fincas-page) {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 1440px;
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
     margin: 0 auto;
     padding: 0 24px;
     /* Horizontal mobile padding mapped exactly to block 3 */
@@ -6834,9 +6833,9 @@ body.gnb-lulo-page {
 /* Opportunity Section GNB Lulo */
 .gnb-lulo-opp {
     width: 100%;
-    max-width: 1440px;
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
     margin: 0 auto;
-    padding: 0 96px 120px 96px; /* Removed top gap as it is now owned by the Hero padding bottom */
+    padding: 0 96px 120px 96px; /* Standardized to 96px gaps */
     box-sizing: border-box;
     color: #0d1327;
 }
@@ -6896,9 +6895,9 @@ body.gnb-lulo-page {
 /* Discovery Grid GNB Lulo */
 .gnb-lulo-discovery-grid {
     width: 100%;
-    max-width: 1588px; /* Matches Figma Frame Width */
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
     margin: 0 auto;
-    padding: 0 92px 160px 92px; /* Figma: px-[92px] */
+    padding: 0 96px 160px 96px; /* Standardized to 96px gaps */
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -7428,7 +7427,7 @@ body.gnb-lulo-page {
 
 .gnb-prototypes {
     background-color: #AAC6CC;
-    padding-top: 160px; /* Golden Standard entry gap */
+    padding-top: 0; /* Removing compound gap; 96px distance handled by previous section's padding */
     padding-bottom: 160px;
     width: 100%;
 }
@@ -7661,10 +7660,6 @@ body.gnb-lulo-page {
 }
 
 @media screen and (max-width: 767px) {
-    .gnb-prototypes {
-        padding-top: 0; /* Removing compound gap; 88px distance handled by previous section's margin */
-    }
-
     .gnb-prototypes .container-1400 {
         padding: 0; /* Let .proto-mobile-layout handle padding */
     }
