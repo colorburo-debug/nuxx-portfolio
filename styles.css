@@ -7960,7 +7960,7 @@ body.gnb-lulo-page {
     }
 
     .gnb-lulo-strategy .container-1400 {
-        padding: 0 24px;
+        padding: 0 8px; /* Precision 8px safety gap requested */
     }
 
     .lulo-strategy-title {
@@ -7969,11 +7969,13 @@ body.gnb-lulo-page {
         margin-bottom: 37px; /* Precision gap Node 1476:111 */
         text-align: left;
         max-width: 342px;
+        padding-left: 16px; /* Offset to align with card content if needed, but Figma says 8px safety */
     }
 
     /* Proto Cards Mobile Stacking */
     .lulo-proto-main-grid {
         gap: 37px;
+        width: 100%;
     }
 
     .lulo-proto-row {
@@ -7986,6 +7988,8 @@ body.gnb-lulo-page {
         width: 100% !important;
         flex: none !important;
         height: 648px !important; /* Standard Card Height Node 1476:108 */
+        background-color: #002731 !important;
+        border-radius: 0; /* Figma show sharp edges for the dark container */
     }
 
     .lulo-proto-card.card-right {
@@ -7998,24 +8002,37 @@ body.gnb-lulo-page {
 
     /* Phone Frames Mobile Sizes */
     .lulo-phone-frame {
-        width: 284px;
-        height: 504px;
+        width: 284px !important;
+        height: 504px !important;
+        top: 72px !important; /* Figma Precision */
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        border: 1px solid #2b6071 !important;
+        border-radius: 10px !important;
     }
 
     .lulo-phone-frame.card-2 {
-        width: 284px;
-        height: 618px;
+        height: 618px !important;
     }
 
     .lulo-phone-frame.card-3 {
-        width: 284px;
-        height: 501px;
+        height: 501px !important;
+        top: 74px !important;
+    }
+
+    .lulo-phone-img {
+        object-fit: contain !important; /* Ensure the full GIF screen is visible without clipping */
     }
 
     /* Role Block Mobile */
     .lulo-role-block {
-        margin-top: 123px;
+        padding: 0 16px; /* 8px (container) + 16px = 24px requested gap */
+        margin-top: 120px; /* Precise gap from prototypes */
+        display: flex;
+        flex-direction: column;
         align-items: flex-start;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .lulo-role-main-title {
@@ -8023,7 +8040,7 @@ body.gnb-lulo-page {
         line-height: 40px;
         margin-bottom: 74px; /* Precision gap Node 1476:119 */
         text-align: left;
-        max-width: 342px;
+        max-width: 100%;
     }
 
     .lulo-role-grid {
