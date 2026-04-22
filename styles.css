@@ -4452,7 +4452,7 @@ html:has(.fincas-page) {
 
 .fincas-page {
     /* Footer Variables Override */
-    --footer-bg: #0d1327;
+    --footer-bg: #146a56;
     --footer-divider: #f7fbf8;
     --footer-name-color: rgba(247, 251, 248, 0.7);
     --footer-text-color: #f7fbf8;
