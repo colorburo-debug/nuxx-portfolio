@@ -1866,6 +1866,19 @@ body.home-page .about-card {
         width: 100% !important;
     }
 
+    .link-arrow {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 21px !important;
+        height: 21px !important;
+        margin-right: 16px !important;
+    }
+
+    .site-footer .footer-links .link-arrow {
+        transform: rotate(-45deg) !important;
+    }
+
     /* Force 8px gap for About Me card on mobile */
     .hero-section {
         padding-left: 0 !important;
