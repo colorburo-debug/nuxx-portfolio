@@ -1919,6 +1919,15 @@ body.home-page .about-card {
     background-color: transparent !important;
 }
 
+/* Home Page Custom Footer Gaps (32px Safe Gap) */
+@media (min-width: 768px) {
+    .home-page .site-footer .footer-content {
+        padding-left: 32px !important;
+        padding-right: 32px !important;
+        max-width: none !important;
+    }
+}
+
 /* Ensure WebGL is hidden when not on home-page through CSS as fallback */
 body:not(.home-page) #webgl-container {
     opacity: 0;
