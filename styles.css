@@ -8111,3 +8111,178 @@ body.gnb-lulo-page {
     }
 }
 
+/* ==========================================================================
+   Artifacts Page
+   ========================================================================== */
+
+body.artifacts-page {
+    background-color: var(--color-background, #0a0a0a);
+    color: var(--color-text-primary, #ffffff);
+}
+
+.artifacts-hero-section {
+    padding-top: 180px;
+    padding-bottom: 80px;
+}
+
+.artifacts-intro {
+    max-width: 800px;
+}
+
+.artifacts-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 1.1;
+    margin: 0 0 24px 0;
+    font-weight: 500;
+}
+
+.artifacts-lead {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    line-height: 1.5;
+    color: var(--color-text-secondary, #a0a0a0);
+    margin: 0;
+}
+
+/* Shared Grid Container */
+.artifacts-grid-section {
+    width: 100vw;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Hide horizontal scroll if any */
+}
+
+/* Grids */
+.highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    gap: 0;
+}
+
+.standard-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    width: 100%;
+    gap: 0;
+}
+
+/* Card */
+.artifact-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-sizing: border-box;
+    /* Hover background for the card text area or overall card */
+    transition: background-color 0.4s ease;
+}
+
+.artifact-card:hover {
+    background-color: #111111;
+}
+
+.artifact-asset {
+    width: 100%;
+    /* Highlight assets are wider */
+    aspect-ratio: 4 / 3;
+    background-color: #151515;
+    position: relative;
+    overflow: hidden; /* For scale hover */
+}
+
+.standard-grid .artifact-asset {
+    aspect-ratio: 1 / 1; /* Square for standard */
+}
+
+.artifact-asset.alt-bg {
+    background-color: #1a1a1a;
+}
+
+/* Hover effects for Asset */
+.artifact-placeholder-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.artifact-card:hover .artifact-placeholder-content {
+    transform: scale(1.05); /* Subtle zoom on hover */
+}
+
+/* Text info outside the asset */
+.artifact-info {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background-color: transparent;
+}
+
+.artifact-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px; /* 18pt requested */
+    font-weight: 500;
+    margin: 0;
+    color: #F7FBF8;
+}
+
+.artifact-category {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px; /* 14pt requested */
+    color: #898989;
+    margin: 0;
+    font-weight: 300;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1024px) {
+    /* Tablet: 2 cols for highlights, 4 cols for standard */
+    .highlights-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .standard-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    /* Mobile: 1 col for highlights, 2 cols for standard */
+    .artifacts-hero-section {
+        padding-top: 140px;
+        padding-bottom: 40px;
+    }
+    .highlights-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .standard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .artifact-info {
+        padding: 16px 16px 24px 16px;
+    }
+}
+
+/* ==========================================================================
+   Temporarily Hide Artifacts Links (In Development)
+   ========================================================================== */
+a[href="index.html#artifacts"],
+a[href="#artifacts"],
+a[href="index.html#artifacts"] + .nav-divider,
+a[href="#artifacts"] + .nav-divider {
+    display: none !important;
+}
