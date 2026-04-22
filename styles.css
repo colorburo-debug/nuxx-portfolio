@@ -1737,10 +1737,10 @@ body.home-page .about-card {
         flex-direction: row !important;
         justify-content: space-between !important;
         align-items: center !important;
-        padding: 0 48px !important;
+        padding: 0 96px !important; /* Standardized to 96px safe gap for tablet */
         gap: 0 !important;
         width: 100% !important;
-        max-width: 1440px !important;
+        max-width: 1592px !important; /* Standardized to Gold Standard 1592px */
         box-sizing: border-box !important;
     }
 
