@@ -4134,6 +4134,7 @@ body.lauhaus-page {
         height: auto;
         aspect-ratio: 4 / 3; /* Matched Fincas hero aspect ratio */
         overflow: hidden;
+        border-radius: 0; /* Removed rounded corners on mobile */
     }
 
     .hero-image-lg {
