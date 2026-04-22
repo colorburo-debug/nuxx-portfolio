@@ -1713,14 +1713,14 @@ body.home-page .about-card {
         max-width: 354px;
     }
 
-    /* Vertical Footer Stack (Tablet & Mobile) */
+    /* Tablet Footer (Horizontal) */
     .site-footer {
         background-color: var(--footer-bg) !important;
         width: 100% !important;
         padding: 0 0 96px 0 !important;
         display: flex !important;
         flex-direction: column !important;
-        align-items: flex-start !important;
+        align-items: center !important;
         gap: 0 !important;
     }
 
@@ -1734,11 +1734,13 @@ body.home-page .about-card {
 
     .site-footer .footer-content {
         display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        padding: 0 24px !important;
-        gap: 96px !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0 96px !important; /* Standardized to 96px safe gap for tablet */
+        gap: 0 !important;
         width: 100% !important;
+        max-width: 1592px !important; /* Standardized to Gold Standard 1592px */
         box-sizing: border-box !important;
     }
 
@@ -1751,16 +1753,15 @@ body.home-page .about-card {
 
     .site-footer .footer-links {
         display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 32px !important;
-        width: 100% !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 48px !important;
     }
 
     .site-footer .footer-name {
         font-size: 24px !important;
         color: var(--footer-name-color) !important;
-        margin: 0 0 8px 0 !important;
+        margin: 0 !important;
     }
 
     .site-footer .footer-email {
@@ -1780,12 +1781,7 @@ body.home-page .about-card {
     }
 
     .link-arrow {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: 21px !important;
-        height: 21px !important;
-        margin-right: 16px !important;
+        display: none !important;
     }
 
     .link-arrow svg {
@@ -1811,11 +1807,72 @@ body.home-page .about-card {
         max-width: 100% !important;
     }
 
+    .site-footer {
+        background-color: var(--footer-bg) !important;
+        width: 100% !important;
+        padding: 0 0 96px 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0 !important;
+    }
+
+    .site-footer .footer-divider {
+        width: 100% !important;
+        margin-bottom: 96px !important;
+        background-color: var(--footer-divider) !important;
+        opacity: var(--footer-divider-opacity) !important;
+    }
+
+    .site-footer .footer-content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0 !important;
+        width: 100% !important;
+        padding: 0 24px !important;
+        box-sizing: border-box !important;
+    }
+
+    .site-footer .footer-contact {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        gap: 0 !important;
+        margin-bottom: 72px !important;
+        width: 100% !important;
+    }
+
+    .site-footer .footer-name {
+        font-size: 24px !important;
+        color: var(--footer-name-color) !important;
+        margin-bottom: 8px !important;
+        text-align: left !important;
+    }
+
+    .site-footer .footer-email {
+        font-size: 24px !important;
+        color: var(--footer-text-color) !important;
+        margin-bottom: 0 !important;
+        text-align: left !important;
+    }
+
+    .site-footer .footer-links {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 32px !important;
+        width: 100% !important;
+    }
+
     /* Force 8px gap for About Me card on mobile */
     .hero-section {
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
+
+/* Removed mobile refined overrides */
 }
 
 /* Mobile Reponsive Design (max-width: 768px) */
