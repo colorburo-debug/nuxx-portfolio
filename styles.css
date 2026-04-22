@@ -1907,7 +1907,6 @@ body.home-page .about-card {
     /* Footer Variables Override */
     --footer-bg: #f7fbf8;
     --footer-divider: #090d1b;
-    --footer-divider-opacity: 0.2;
     --footer-name-color: #898989;
     --footer-text-color: #090d1b;
     --footer-link-hover: #0d1327;
@@ -2821,8 +2820,6 @@ body:not(.home-page) #webgl-container {
         --footer-bg: #ffffff !important;
         --footer-text-color: #1e1e1e !important;
         --footer-name-color: #898989 !important;
-        --footer-divider: #1e1e1e !important;
-        --footer-divider-opacity: 0.2 !important;
         --footer-link-hover: #000 !important;
         background-color: #ffffff !important;
         padding-top: 0 !important;
@@ -3083,7 +3080,6 @@ body.lauhaus-page {
     /* Footer Variables Override */
     --footer-bg: #0c775e;
     --footer-divider: #f7fbf8;
-    --footer-divider-opacity: 1;
     --footer-name-color: rgba(247, 251, 248, 0.7);
     --footer-text-color: #f7fbf8;
     --footer-link-hover: #e0e0e0;
@@ -4456,9 +4452,8 @@ html:has(.fincas-page) {
 
 .fincas-page {
     /* Footer Variables Override */
-    --footer-bg: #146A56;
+    --footer-bg: #0d1327;
     --footer-divider: #f7fbf8;
-    --footer-divider-opacity: 1;
     --footer-name-color: rgba(247, 251, 248, 0.7);
     --footer-text-color: #f7fbf8;
     --footer-link-hover: #e0e0e0;
@@ -6678,9 +6673,8 @@ html:has(.fincas-page) {
 */
 @media (max-width: 767px) {
     .designops-footer {
-        --footer-bg: #ffffff !important;
-        --footer-divider: #1e1e1e !important;
-        --footer-divider-opacity: 0.2 !important;
+        --footer-bg: #1e1e1e !important;
+        --footer-divider: #898989 !important;
         --footer-name-color: #898989 !important;
         --footer-text-color: #1e1e1e !important;
         --footer-link-hover: #000 !important;
@@ -6757,7 +6751,6 @@ body.gnb-lulo-page {
     /* Footer Variables Override */
     --footer-bg: #004155; 
     --footer-divider: #2b6071;
-    --footer-divider-opacity: 1;
     --footer-name-color: rgba(247, 251, 248, 0.7);
     --footer-text-color: #f7fbf8;
     --footer-link-hover: #e0e0e0;
