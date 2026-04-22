@@ -7360,6 +7360,10 @@ body.gnb-lulo-page {
         gap: 0; 
     }
 
+    .qualitative-vision.mobile-only {
+        margin-top: 88px; /* Precise top gap Node 1389-190 */
+    }
+
     .journey-label {
         width: 100%;
         max-width: 100%; /* Remove 358px constraint to allow 24px padding-left */
@@ -7657,6 +7661,10 @@ body.gnb-lulo-page {
 }
 
 @media screen and (max-width: 767px) {
+    .gnb-prototypes {
+        padding-top: 0; /* Removing compound gap; 88px distance handled by previous section's margin */
+    }
+
     .gnb-prototypes .container-1400 {
         padding: 0; /* Let .proto-mobile-layout handle padding */
     }
