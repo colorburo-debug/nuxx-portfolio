@@ -1924,7 +1924,8 @@ body.home-page .about-card {
     .home-page .site-footer .footer-content {
         padding-left: 32px !important;
         padding-right: 32px !important;
-        max-width: none !important;
+        max-width: 1464px !important; /* 1400px Content + 32px Gaps */
+        margin: 0 auto !important;
     }
 }
 
