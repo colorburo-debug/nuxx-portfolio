@@ -22,13 +22,18 @@ let isMouseDown = false;
 // We ensure listeners are only bound once globally to prevent memory leaks across page transitions
 let globalListenersBound = false;
 
-const initWebGL = () => {
-    const container = document.getElementById('webgl-container');
+const initWebGL = (explicitContainer) => {
+    const container = explicitContainer || document.getElementById('webgl-container');
     if (!container) return;
 
     if (isInitialized) {
         // PERF: Reuse WebGL Renderer Context completely on return to home page
+        // Ensure we remove it from any previous parent first to avoid DOM conflicts
+        if (renderer.domElement.parentElement) {
+            renderer.domElement.parentElement.removeChild(renderer.domElement);
+        }
         container.appendChild(renderer.domElement);
+        
         if (window.updateWebGLSize) window.updateWebGLSize();
         window.introProgress = 0.0; 
         isVisible = true; // Ensure we start visible to prevent freezing
@@ -39,14 +44,12 @@ const initWebGL = () => {
         }, { rootMargin: "100px" });
         observer.observe(container);
 
-        // Restart the animation loop if it was paused
-        // We force a restart here to resolve a race condition where the previous loop 
-        // might have been in the process of stopping exactly when we re-entered the page.
+        // Restart the animation loop safely
         window.isWebGLRunning = false; 
-        requestAnimationFrame(() => {
+        setTimeout(() => {
             window.isWebGLRunning = true;
             if (window.animateWebGL) window.animateWebGL();
-        });
+        }, 50); // Slight delay to ensure the old loop has definitely processed the 'false' state
         return;
     }
 
@@ -467,11 +470,14 @@ const initWebGL = () => {
 };
 
 // Lifecycle management for Barba.js
-window.initPage = () => {
-    if (document.getElementById('webgl-container')) {
+window.initPage = (containerParent) => {
+    const context = containerParent || document;
+    const container = context.querySelector('#webgl-container');
+    
+    if (container) {
         // Reset animation state for a fresh intro burst every visit
         window.introProgress = 0.0;
-        initWebGL();
+        initWebGL(container);
     } else {
         // Cleanup on pages without webgl
         window.isWebGLRunning = false;

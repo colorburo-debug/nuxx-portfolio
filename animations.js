@@ -190,20 +190,20 @@ barba.init({
     }],
     views: [{
         namespace: 'home',
-        beforeEnter() {
-            if (window.initPage) window.initPage();
+        beforeEnter(data) {
+            if (window.initPage) window.initPage(data.next.container);
             initHeroAnimations();
             initScrollReveals();
         }
     }, {
         namespace: 'about',
-        beforeEnter() {
-            if (window.initPage) window.initPage();
+        beforeEnter(data) {
+            if (window.initPage) window.initPage(data.next.container);
         }
     }, {
         namespace: 'project',
-        beforeEnter() {
-            if (window.initPage) window.initPage();
+        beforeEnter(data) {
+            if (window.initPage) window.initPage(data.next.container);
         }
     }]
 });
