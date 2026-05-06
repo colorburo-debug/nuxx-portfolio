@@ -106,7 +106,7 @@ const getBgColor = (data) => {
     // 1. Check the target container if it exists
     const container = data.next?.container;
     if (container && container.dataset.bodyClass) {
-        if (container.dataset.bodyClass === 'home-page') return '#c3fe0c';
+        if (container.dataset.bodyClass === 'home-page') return '#F7FBF8';
         if (container.dataset.bodyClass.includes('fincas')) return '#f7fbf8';
         if (container.dataset.bodyClass.includes('lauhaus')) return '#f7fbf8';
         if (container.dataset.bodyClass.includes('gnb-lulo')) return '#f7fbf8';
@@ -115,13 +115,13 @@ const getBgColor = (data) => {
     
     // 2. Fallback to trigger link URL
     const url = data.next?.url?.path || "";
-    if (url.includes('index.html') || url === '/' || url.endsWith('/')) return '#c3fe0c';
+    if (url.includes('index.html') || url === '/' || url.endsWith('/')) return '#F7FBF8';
     if (url.includes('about')) return '#f7fbf8';
     if (url.includes('project')) return '#f7fbf8';
 
     // 3. Fallback to namespace
     const colors = {
-        'home': '#c3fe0c',
+        'home': '#F7FBF8',
         'about': '#f7fbf8',
         'project': '#f7fbf8'
     };

@@ -2,14 +2,14 @@
 
 :root {
     /* Colors */
-    --color-bg-primary: #c3fe0c;
-    /* Chartreuse Background */
-    --color-accent: #090d1b;
-    /* Dark Navy Accent */
-    --color-text-primary: #090d1b;
-    /* Dark text for chartreuse bg */
-    --color-text-secondary: #090d1b;
-    /* Dark text */
+    --color-bg-primary: #F7FBF8;
+    /* Hero Light Background */
+    --color-accent: #1E1E1E;
+    /* Dark Navy/Black Accent */
+    --color-text-primary: #1E1E1E;
+    /* Dark text for light bg */
+    --color-text-secondary: #6F6F6F;
+    /* Grey text for location */
     --color-card-bg: #f7fbf8;
     /* Off-white for card */
     --color-card-text: #090d1b;
@@ -222,7 +222,7 @@ body {
    Home Page: Top overscroll is chartreuse, bottom is dark green 
 */
 body.home-page {
-    background-color: #1E1E1E !important;
+    background-color: #F7FBF8 !important;
 }
 
 #page-transition-curtain {
@@ -356,10 +356,10 @@ a {
 }
 
 .header-pill {
-    background-color: #BFFD00;
+    background-color: #1E1E1E;
     border-radius: 5px;
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
-    height: 80px;
+    box-shadow: none;
+    height: 64px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -369,26 +369,26 @@ a {
     transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
-/* Inverted Header State (for light sections) */
+/* Inverted Header State (for dark sections) */
 .header-pill.header-inverted {
-    background-color: #1E1E1E !important;
-}
-
-.header-pill.header-inverted .nav-link {
-    color: #F7FBF8 !important;
-}
-
-.header-pill.header-inverted .nuxx-logo-img {
-    filter: invert(1) brightness(2); /* Brighter white for the logo */
-}
-
-.header-pill.header-inverted .menu-line {
     background-color: #F7FBF8 !important;
 }
 
+.header-pill.header-inverted .nav-link {
+    color: #1E1E1E !important;
+}
+
+.header-pill.header-inverted .nuxx-logo-img {
+    filter: none !important; /* Back to original dark logo */
+}
+
+.header-pill.header-inverted .menu-line {
+    background-color: #1E1E1E !important;
+}
+
 .brand {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     flex-shrink: 0;
 }
 
@@ -396,6 +396,7 @@ a {
     width: 100%;
     height: 100%;
     display: block;
+    filter: invert(1) brightness(2); /* White by default for dark pill */
 }
 
 .header-nav-desktop {
@@ -409,7 +410,7 @@ a {
     font-weight: 600;
     font-size: 18px;
     line-height: 1.35;
-    color: #1e1e1e;
+    color: #F7FBF8;
     text-decoration: none;
     position: relative;
     padding-bottom: 2px;
@@ -586,9 +587,8 @@ body.home-page .about-card {
     font-weight: 600; /* SemiBold */
     font-size: 22px;
     line-height: 1.44;
-    color: #F7FBF8;
+    color: #1E1E1E;
     margin: 0 0 4px 0; /* Applied 4px bottom margin from mobile standard */
-
 }
 
 .hero-location {
@@ -610,7 +610,7 @@ body.home-page .about-card {
     font-weight: 500; /* Medium */
     font-size: 22px;
     line-height: 1.68;
-    color: #F7FBF8;
+    color: #1E1E1E;
     margin: 0;
 }
 
@@ -760,8 +760,8 @@ body.home-page .about-card {
 /* Mobile - Artboard 390px */
 @media (max-width: 767px) {
     .about-card {
-        padding: 64px 24px 64px 24px !important; /* Top and bottom gaps set to 64px */
-        gap: 64px !important; /* Spacing between the image and the content block */
+        padding: 54px 24px 64px 24px !important; /* Top gap reduced by 15% (64px -> 54px) */
+        gap: 20px !important; /* Spacing between the image and the content block set to 20px */
         width: 100% !important;
         max-width: none !important;
         min-height: auto !important;
@@ -856,7 +856,7 @@ body.home-page .about-card {
         font-size: 22px;
         line-height: 1.44;
         font-weight: 600;
-        color: #F7FBF8;
+        color: #1E1E1E;
     }
 
     .hero-location {
@@ -876,7 +876,7 @@ body.home-page .about-card {
         font-size: 18px;
         line-height: 1.77;
         font-weight: 500;
-        color: #F7FBF8;
+        color: #1E1E1E;
     }
 
 /* Removed mobile overrides */
@@ -1028,7 +1028,7 @@ body.home-page .about-card {
 
 /* Work Highlights Section */
 .work-highlights {
-    background-color: #F7FBF8;
+    background-color: #1E1E1E;
     position: relative;
     padding-bottom: 160px; /* Increased to absorb footer top padding */
     z-index: 10;
@@ -1046,7 +1046,7 @@ body.home-page .about-card {
     font-weight: 400;
     font-size: 40px;
     line-height: 64px;
-    color: #1E1E1E;
+    color: #F7FBF8 !important;
 }
 
 /* Case Study Card (Global) */
@@ -1106,7 +1106,7 @@ body.home-page .about-card {
     font-weight: 400;
     font-size: 40px;
     line-height: 50px;
-    color: #1E1E1E;
+    color: #F7FBF8 !important;
     margin: 0;
     font-family: 'Unbounded', sans-serif;
 }
@@ -1116,7 +1116,7 @@ body.home-page .about-card {
     font-weight: 500;
     font-size: 16px;
     line-height: 32px;
-    color: #6F6F6F;
+    color: #898989;
     margin: 0;
 }
 
@@ -1135,7 +1135,7 @@ body.home-page .about-card {
     font-size: 18px;
     line-height: 1.77;
     /* ~32px */
-    color: #1E1E1E;
+    color: #F7FBF8 !important;
     margin: 0;
     min-height: 110px;
     /* Align with Figma */
@@ -1155,7 +1155,7 @@ body.home-page .about-card {
     width: 100%;
     max-width: 354px;
     height: 72px;
-    border: 2px solid #1E1E1E;
+    border: 1px solid #F7FBF8 !important;
     border-radius: 6px;
     padding: 16px 32px;
     display: flex;
@@ -1165,8 +1165,8 @@ body.home-page .about-card {
     gap: 40px;
     text-decoration: none;
     transition: all 0.2s ease;
-    background: transparent;
-    color: #1E1E1E;
+    background: transparent !important;
+    color: #F7FBF8 !important;
     box-sizing: border-box;
 }
 
@@ -1181,20 +1181,20 @@ body.home-page .about-card {
 }
 
 .action-btn:hover {
-    background: #1E1E1E;
-    border-color: #1E1E1E;
+    background: #F7FBF8 !important;
+    border: none !important;
 }
 
 .action-btn:hover .action-text-top {
-    color: #F7FBF8;
+    color: #1E1E1E !important;
 }
 
 .action-btn:hover .action-text-bottom {
-    color: #6F6F6F;
+    color: #6F6F6F !important;
 }
 
 .action-btn:hover .action-arrow svg {
-    color: #F7FBF8;
+    color: #1E1E1E !important;
 }
 
 .action-text-top {
@@ -1202,7 +1202,7 @@ body.home-page .about-card {
     font-weight: 500;
     font-size: 18px;
     line-height: 1.2;
-    color: #1E1E1E;
+    color: #F7FBF8 !important;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1213,7 +1213,7 @@ body.home-page .about-card {
     font-weight: 500;
     font-size: 14px;
     line-height: 1.2;
-    color: #6F6F6F;
+    color: #6F6F6F !important;
 }
 
 .action-arrow {
@@ -1227,7 +1227,7 @@ body.home-page .about-card {
     display: block;
     width: 100%;
     height: 100%;
-    color: inherit;
+    color: #F7FBF8 !important;
 }
 
 /* Mobile Responsiveness */
@@ -2074,8 +2074,8 @@ body:not(.home-page) #webgl-container {
 }
 
 .location-pill {
-    background-color: #c3fe0c;
-    color: #090d1b;
+    background-color: #1E1E1E;
+    color: #F7FBF8;
     font-family: 'Roobert', var(--font-body);
     font-weight: 600;
     font-size: 16px;
@@ -5626,7 +5626,7 @@ html:has(.fincas-page) {
         font-weight: 600 !important;
         font-size: 22px !important;
         line-height: 1.44 !important;
-        color: #F7FBF8 !important;
+        color: #1E1E1E !important;
         margin: 0 !important;
     }
     .hero-location {
@@ -5642,7 +5642,7 @@ html:has(.fincas-page) {
         font-weight: 500 !important;
         font-size: 18px !important;
         line-height: 1.77 !important;
-        color: #F7FBF8 !important;
+        color: #1E1E1E !important;
         margin: 0 !important;
     }
 }

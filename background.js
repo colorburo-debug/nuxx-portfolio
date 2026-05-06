@@ -176,8 +176,8 @@ const initWebGL = () => {
             uIsMouseDown: { value: 0.0 }, 
             uMorphFactor: { value: 0.0 }, 
             uIntroProgress: { value: 0.0 }, // Governs smooth transition
-            uColor1: { value: new THREE.Color('#BFFD00') },
-            uColor2: { value: new THREE.Color('#c3fe0c') },
+            uColor1: { value: new THREE.Color('#1E1E1E') },
+            uColor2: { value: new THREE.Color('#1E1E1E') },
             uPixelRatio: { value: renderer.getPixelRatio() }
         },
         vertexShader: `
