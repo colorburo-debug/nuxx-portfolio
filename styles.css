@@ -2074,8 +2074,8 @@ body:not(.home-page) #webgl-container {
 }
 
 .location-pill {
-    background-color: #1E1E1E;
-    color: #F7FBF8;
+    background-color: #c3fe0c;
+    color: #090d1b;
     font-family: 'Roobert', var(--font-body);
     font-weight: 600;
     font-size: 16px;
