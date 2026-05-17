@@ -98,6 +98,29 @@ const initWebGL = (explicitContainer) => {
         linewidth: 1 
     });
 
+    // Injects a custom GPU-accelerated spotlight gradient using onBeforeCompile.
+    // This provides high-contrast, intense line lighting in the center of the stage
+    // while beautifully fading the left and right edges of the lines into the background.
+    material.onBeforeCompile = (shader) => {
+        shader.vertexShader = 'varying vec3 vWorldPosition;\n' + shader.vertexShader;
+        shader.vertexShader = shader.vertexShader.replace(
+            '#include <begin_vertex>',
+            `#include <begin_vertex>
+            vWorldPosition = (modelMatrix * vec4(position, 1.0)).xyz;`
+        );
+
+        shader.fragmentShader = 'varying vec3 vWorldPosition;\n' + shader.fragmentShader;
+        shader.fragmentShader = shader.fragmentShader.replace(
+            'vec4 diffuseColor = vec4( color, opacity );',
+            `vec4 diffuseColor = vec4( color, opacity );
+            // Calculate horizontal distance from center of composition (X=0)
+            float distFromCenter = abs(vWorldPosition.x);
+            // Spotlight is fully lit inside 5 units, and fades out seamlessly towards 18 units
+            float spotlight = smoothstep(18.0, 5.0, distFromCenter);
+            diffuseColor.a *= spotlight;`
+        );
+    };
+
     for (let r = 0; r < numLines; r++) {
         const geometry = new THREE.BufferGeometry();
         const positions = new Float32Array(pointsPerLine * 3);
