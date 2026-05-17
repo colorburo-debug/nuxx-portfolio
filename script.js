@@ -52,9 +52,9 @@ const initCursor = () => {
         });
 
         const tick = () => {
-            // 0.15 is the sweet spot for smooth, premium-feeling trailing lag
-            reticleX += (mouseX - reticleX) * 0.15;
-            reticleY += (mouseY - reticleY) * 0.15;
+            // Increased to 0.30 to reduce the "heavy" lag feeling by 50%, making it feel very snappy and responsive
+            reticleX += (mouseX - reticleX) * 0.30;
+            reticleY += (mouseY - reticleY) * 0.30;
             reticle.style.left = `${reticleX}px`;
             reticle.style.top = `${reticleY}px`;
             requestAnimationFrame(tick);
