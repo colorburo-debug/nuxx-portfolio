@@ -284,7 +284,23 @@ const humanSpline = [
     [ 8.0, -1.0],
     [11.0,  1.0],
     [20.0,  1.0]
-];
+// Precomputed Spline Point Arrays for maximum rendering performance on mobile and desktop
+const precomputedDog = [];
+const precomputedFrog = [];
+const precomputedHuman = [];
+
+function precomputeSplines() {
+    precomputedDog.length = 0;
+    precomputedFrog.length = 0;
+    precomputedHuman.length = 0;
+    for (let c = 0; c < pointsPerLine; c++) {
+        const t = c / (pointsPerLine - 1);
+        precomputedDog.push(getCatmullRomPoint(t, animalSpline));
+        precomputedFrog.push(getCatmullRomPoint(t, frogSpline));
+        precomputedHuman.push(getCatmullRomPoint(t, humanSpline));
+    }
+}
+precomputeSplines();
 
         // Theme Toggle Listener
         const themeBtn = document.getElementById('theme-toggle');
@@ -378,29 +394,28 @@ const humanSpline = [
 
                 // --- STATE 1: Continuous Line Animal (Upright facing camera) ---
                 const t = c / (pointsPerLine - 1);
-                const splinePt = getCatmullRomPoint(t, animalSpline);
                 
                 // Tighter noise (reduced by 10%) for a crisper sketch line
                 const sketchNoiseX = Math.sin(r * 12.3 + c * 0.1) * 0.135;
                 const sketchNoiseY = Math.cos(r * 8.7 - c * 0.1) * 0.135;
                 const sketchNoiseZ = Math.sin(r * 5.1 + c * 0.05) * 0.27; // 3D depth volume
 
-
+                // --- Fetch Precomputed Spline Coordinates (Fast Lookup) ---
+                const splinePt1 = precomputedDog[c];
+                const splinePt2 = precomputedFrog[c];
+                const splinePt3 = precomputedHuman[c];
 
                 // --- STATE 1: Continuous Line Animal (Dog) ---
-                const splinePt1 = getCatmullRomPoint(t, animalSpline);
                 const anim1X = (splinePt1.x * scale) + 1.0 + mX + sketchNoiseX;
                 const anim1Y = (-splinePt1.z * scale) - 2.5 + mY + sketchNoiseY;  
                 const anim1Z = 0 + sketchNoiseZ; 
 
                 // --- STATE 2: Continuous Line Animal (Frog) ---
-                const splinePt2 = getCatmullRomPoint(t, frogSpline);
                 const anim2X = (splinePt2.x * scale) + 1.0 + mX + sketchNoiseX;
                 const anim2Y = (-splinePt2.z * scale) - 2.5 + mY + sketchNoiseY; 
                 const anim2Z = 0 + sketchNoiseZ; 
 
                 // --- STATE 3: Continuous Line Human (Optical Illusion) ---
-                const splinePt3 = getCatmullRomPoint(t, humanSpline);
                 const anim3X = (splinePt3.x * scale) + 1.0 + mX + sketchNoiseX;
                 // Shifted Y up by an additional 2.0 units (10%) specifically for the Human sketch
                 const anim3Y = (-splinePt3.z * scale) - 0.5 + mY + sketchNoiseY; 
