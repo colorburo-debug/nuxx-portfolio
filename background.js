@@ -284,6 +284,8 @@ const humanSpline = [
     [ 8.0, -1.0],
     [11.0,  1.0],
     [20.0,  1.0]
+];
+
 // Precomputed Spline Point Arrays for maximum rendering performance on mobile and desktop
 const precomputedDog = [];
 const precomputedFrog = [];
