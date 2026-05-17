@@ -115,8 +115,9 @@ const initWebGL = (explicitContainer) => {
             `vec4 diffuseColor = vec4( color, opacity );
             // Calculate horizontal distance from center of composition (X=0)
             float distFromCenter = abs(vWorldPosition.x);
-            // Spotlight is fully lit inside 5 units, and fades out seamlessly towards 18 units
-            float spotlight = smoothstep(18.0, 5.0, distFromCenter);
+            // Spotlight is fully lit inside 16 units (covering the entire animal sketch area),
+            // and fades out seamlessly towards 36 units at the far left/right edges of the screen.
+            float spotlight = smoothstep(36.0, 16.0, distFromCenter);
             diffuseColor.a *= spotlight;`
         );
     };
@@ -518,6 +519,15 @@ const humanSpline = [
         const targetBgColor = isDarkMode ? darkBgColor : lightBgColor;
         const targetLineColor = isDarkMode ? darkLineColor : lightLineColor;
         
+        // Dynamic fog boundaries based on state to ensure maximum animal contrast
+        // As the sketch morphs in, we smoothly push the fog far away to restore 100% absolute, deep line contrast!
+        const globalAnimalWeight = Math.min(1.0, Math.max(0.0, Math.max(dogMorphFactor, frogMorphFactor, humanMorphFactor)));
+        const targetFogNear = (1.0 - globalAnimalWeight) * 16.0 + globalAnimalWeight * 100.0;
+        const targetFogFar = (1.0 - globalAnimalWeight) * 32.0 + globalAnimalWeight * 200.0;
+        
+        scene.fog.near += (targetFogNear - scene.fog.near) * 0.1;
+        scene.fog.far += (targetFogFar - scene.fog.far) * 0.1;
+
         scene.background.lerp(targetBgColor, 0.05);
         scene.fog.color.copy(scene.background);
         material.color.lerp(targetLineColor, 0.05);
