@@ -1,77 +1,74 @@
-// WebGL Background with Three.js - Antigravity Style (Liftoff Intro & Scroll Parallax & Bokeh & Vortex)
-let renderer, scene, camera, clock, particles, raycaster, hitPlane;
+// WebGL Background with Three.js - True Continuous Vector Lines (Nature & Toucan Topography)
+let renderer, scene, camera, clock, raycaster, hitPlane;
+let linesArray = []; // Stores our true THREE.Line objects
 let isInitialized = false;
 
-// Global Animation & Lifecycle Tracking
+// Global State
 window.accumTime = 0;
 window.smoothedScrollY = 0;
-window.introProgress = 0.0; // Tracks the smooth majestic load bloom
-window.isWebGLRunning = true; // Tracks the animation loop
-let isVisible = true; 
+window.introProgress = 0.0;
+window.isWebGLRunning = true;
+let isVisible = true;
 
-// Interactive Morph State
-let isMorphing = false;
-let targetMorphFactor = 0.0;
-
-// Mouse Tracking Variables
+// Interaction State
+let currentState = 0; 
+let dogMorphFactor = 0.0;
+let frogMorphFactor = 0.0;
+let humanMorphFactor = 0.0;
+let cameraSweep = 0.0;
+let targetCameraSweep = 0.0;
 let mouse2D = new THREE.Vector2(-9999, -9999);
 let targetMouse = new THREE.Vector3(9999, 9999, 9999);
 let currentMouse = new THREE.Vector3(9999, 9999, 9999);
 let isMouseDown = false;
 
-// We ensure listeners are only bound once globally to prevent memory leaks across page transitions
+// Theme State Variables
+let isDarkMode = false;
+const lightBgColor = new THREE.Color(0xF7FBF8);
+const darkBgColor = new THREE.Color(0x1E1E1E);
+const lightLineColor = new THREE.Color(0x1E1E1E);
+const darkLineColor = new THREE.Color(0xF7FBF8);
+
+let smoothMouseDown = 0.0;
 let globalListenersBound = false;
+
+// Fabric Grid Data
+const numLines = 110;
+const pointsPerLine = 250; // Increased resolution for perfectly smooth continuous curves
 
 const initWebGL = (explicitContainer) => {
     const container = explicitContainer || document.getElementById('webgl-container');
     if (!container) return;
 
     if (isInitialized) {
-        // PERF: Reuse WebGL Renderer Context completely on return to home page
-        // Ensure we remove it from any previous parent first to avoid DOM conflicts
-        if (renderer.domElement.parentElement) {
-            renderer.domElement.parentElement.removeChild(renderer.domElement);
-        }
+        if (renderer.domElement.parentElement) renderer.domElement.parentElement.removeChild(renderer.domElement);
         container.appendChild(renderer.domElement);
-        
         if (window.updateWebGLSize) window.updateWebGLSize();
         window.introProgress = 0.0; 
-        isVisible = true; // Ensure we start visible to prevent freezing
-        
-        // RE-OBSERVE: The container was replaced by Barba, so we need a new observation path
-        const observer = new IntersectionObserver((entries) => {
-            isVisible = entries[0].isIntersecting;
-        }, { rootMargin: "100px" });
-        observer.observe(container);
-
-        // Restart the animation loop safely
+        isVisible = true; 
         window.isWebGLRunning = false; 
-        setTimeout(() => {
-            window.isWebGLRunning = true;
-            if (window.animateWebGL) window.animateWebGL();
-        }, 50); // Slight delay to ensure the old loop has definitely processed the 'false' state
+        setTimeout(() => { window.isWebGLRunning = true; if (window.animateWebGL) window.animateWebGL(); }, 50);
         return;
     }
 
-    // --- Scene Setup ---
+    // --- Scene Setup (Light Theme) ---
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 5;
+    const bgColor = '#F7FBF8'; 
+    scene.background = new THREE.Color(bgColor);
+    // Pushed fog further back so the upright animal is perfectly clear
+    scene.fog = new THREE.Fog(bgColor, 12.0, 48.0); 
+    
+    camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(0, 3.5, 6);
 
-    renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     const updateSize = () => {
-        // ALWAYS target the latest container in the DOM to avoid closure stale-ness
         const currentContainer = document.getElementById('webgl-container');
         if (!currentContainer) return;
-        
-        const width = currentContainer.clientWidth;
-        const height = currentContainer.clientHeight;
-        if (!width || !height) return;
-        
-        renderer.setSize(width, height);
-        camera.aspect = width / height;
+        renderer.setSize(currentContainer.clientWidth, currentContainer.clientHeight);
+        camera.aspect = currentContainer.clientWidth / currentContainer.clientHeight;
         camera.updateProjectionMatrix();
     };
     updateSize();
@@ -80,388 +77,453 @@ const initWebGL = (explicitContainer) => {
 
     // --- Interaction Setup ---
     raycaster = new THREE.Raycaster();
-    const hitPlaneGeometry = new THREE.PlaneGeometry(100, 100);
-    const hitMaterial = new THREE.MeshBasicMaterial({ visible: false });
-    hitPlane = new THREE.Mesh(hitPlaneGeometry, hitMaterial);
+    hitPlane = new THREE.Mesh(
+        new THREE.PlaneGeometry(200, 200), 
+        new THREE.MeshBasicMaterial({ visible: false })
+    );
+    hitPlane.rotation.x = -Math.PI / 2;
     scene.add(hitPlane);
 
-    // --- Particle System ---
-    const particleCount = 4500; // Increased density for a solid morphological figure
-    const geometry = new THREE.BufferGeometry();
-    
-    // Attributes
-    const positions = new Float32Array(particleCount * 3);
-    const targetPositions = new Float32Array(particleCount * 3);
-    const randoms = new Float32Array(particleCount * 3);
-    const scales = new Float32Array(particleCount);
-
-    for (let i = 0; i < particleCount; i++) {
-        // Initial chaotic positions spread across a wide area
-        positions[i * 3 + 0] = (Math.random() - 0.5) * 20;
-        positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
-        positions[i * 3 + 2] = (Math.random() - 0.5) * 4;
-
-        // --- DEFAULT FORM: THE NUXX ENTITY (5-Node Core + Halo) ---
-        let baseTx = 0, baseTy = 0, baseTz = 0;
-        const nodeDist = 2.4; // Tighter cluster, bringing entities into the center
-        const nodeRadius = 0.8; // Compacted nodes
-        
-        if (i < 3000) {
-            const nodeIndex = i % 5;
-            // The core nodes form a strict "X" pattern, popping slightly forward
-            if (nodeIndex === 0) { baseTx = 0; baseTy = 0; baseTz = 1.0; } 
-            if (nodeIndex === 1) { baseTx = -nodeDist; baseTy = nodeDist; baseTz = -0.5; } 
-            if (nodeIndex === 2) { baseTx = nodeDist; baseTy = nodeDist; baseTz = -0.5; } 
-            if (nodeIndex === 3) { baseTx = -nodeDist; baseTy = -nodeDist; baseTz = -0.5; } 
-            if (nodeIndex === 4) { baseTx = nodeDist; baseTy = -nodeDist; baseTz = -0.5; } 
-
-            const pointIndex = Math.floor(i / 5);
-            const totalInNode = 600;
-            const phi = Math.acos(1 - 2 * (pointIndex + 0.5) / totalInNode);
-            const theta = Math.PI * (1 + Math.sqrt(5)) * pointIndex; 
-            const rn = nodeRadius * (0.85 + 0.15 * Math.random()); 
-            
-            baseTx += rn * Math.sin(phi) * Math.cos(theta);
-            baseTy += rn * Math.sin(phi) * Math.sin(theta);
-            baseTz += rn * Math.cos(phi);
-        } else {
-            // Ethereal Halo encompassing the central structure tightly
-            const ringIndex = i - 3000;
-            const totalRing = 1500;
-            const angle = (ringIndex / totalRing) * Math.PI * 2;
-            const ringRadius = 5.0 + (Math.random() - 0.5) * 1.2; // tighter radius (from 7.5 to 5)
-            
-            baseTx = Math.cos(angle) * ringRadius;
-            baseTy = Math.sin(angle) * ringRadius;
-            baseTz = Math.sin(angle * 4) * 1.5 + (Math.random() - 0.5);
-        }
-        
-        // Slightly disrupt perfect symmetry to feel natural
-        positions[i * 3 + 0] = baseTx + (Math.random() - 0.5) * 0.1;
-        positions[i * 3 + 1] = baseTy + (Math.random() - 0.5) * 0.1;
-        positions[i * 3 + 2] = baseTz + (Math.random() - 0.5) * 0.1;
-
-        // --- TARGET FORM: 3D TORUS KNOT (Sacred Geometry) ---
-        const t2 = (i / particleCount) * Math.PI * 2 * 10; // 10 loops
-        const p2 = 3;
-        const q2 = 4;
-        const R2 = 3.5; 
-        const r2 = 1.2; 
-        
-        const jitter = 0.15;
-        const jx = (Math.random() - 0.5) * jitter;
-        const jy = (Math.random() - 0.5) * jitter;
-        const jz = (Math.random() - 0.5) * jitter;
-
-        targetPositions[i * 3 + 0] = (R2 + r2 * Math.cos(q2 * t2)) * Math.cos(p2 * t2) * 0.6 + jx;
-        targetPositions[i * 3 + 1] = (R2 + r2 * Math.cos(q2 * t2)) * Math.sin(p2 * t2) * 0.6 + jy;
-        targetPositions[i * 3 + 2] = (r2 * Math.sin(q2 * t2)) * 0.6 + jz;
-
-        // Random values for individualized motion
-        randoms[i * 3 + 0] = Math.random();
-        randoms[i * 3 + 1] = Math.random();
-        randoms[i * 3 + 2] = Math.random();
-
-        // Scale variations mostly small with occasional larger dots
-        scales[i] = 1.0 + Math.random() * 2.5;
-    }
-
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute('aTargetPos', new THREE.BufferAttribute(targetPositions, 3));
-    geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 3));
-    geometry.setAttribute('aScale', new THREE.BufferAttribute(scales, 1));
-
-    const material = new THREE.ShaderMaterial({
-        uniforms: {
-            uTime: { value: 0 },
-            uScrollOffset: { value: 0 }, 
-            uMouse: { value: new THREE.Vector3(9999, 9999, 9999) },
-            uIsMouseDown: { value: 0.0 }, 
-            uMorphFactor: { value: 0.0 }, 
-            uIntroProgress: { value: 0.0 }, // Governs smooth transition
-            uColor1: { value: new THREE.Color('#1E1E1E') },
-            uColor2: { value: new THREE.Color('#1E1E1E') },
-            uPixelRatio: { value: renderer.getPixelRatio() }
-        },
-        vertexShader: `
-            uniform float uTime;
-            uniform float uPixelRatio;
-            uniform vec3 uMouse;
-            uniform float uScrollOffset;
-            uniform float uIsMouseDown;
-            uniform float uMorphFactor;
-            uniform float uIntroProgress;
-            
-            attribute vec3 aTargetPos;
-            attribute vec3 aRandom;
-            attribute float aScale;
-            
-            varying vec3 vRandom;
-            varying float vScale;
-            varying float vDepth; 
-
-            void main() {
-                vRandom = aRandom;
-                vScale = aScale;
-
-                vec3 entityPos = position;
-                vec3 knotPos = aTargetPos;
-
-                // --- GLOBAL ANIMATION SEQUENCES ---
-                float st = uTime * 0.4;
-                
-                // Entity Animation (Slow majestic rotation)
-                mat2 rotEntityXZ = mat2(cos(st * 0.8), -sin(st * 0.8), sin(st * 0.8), cos(st * 0.8));
-                mat2 rotEntityXY = mat2(cos(st * 0.4), -sin(st * 0.4), sin(st * 0.4), cos(st * 0.4));
-                entityPos.xz *= rotEntityXZ;
-                entityPos.xy *= rotEntityXY;
-                
-                float nodePulse = 1.0 + sin(uTime * 2.0 + vRandom.x * 3.14) * 0.05;
-                entityPos *= nodePulse;
-                entityPos.y += sin(uTime * 1.5 + position.x * 0.2) * 0.3; // Gentle wave
-
-                // Knot Animation (Tighter spin to contrast the massive entity)
-                mat2 rotKnotY = mat2(cos(st * 1.5), -sin(st * 1.5), sin(st * 1.5), cos(st * 1.5));
-                knotPos.xz *= rotKnotY;
-                knotPos.y += sin(uTime * 2.0 + aTargetPos.y * 0.5) * 0.2;
-
-                // --- MORPHING MIX ---
-                float morphEase = smoothstep(0.0, 1.0, uMorphFactor);
-                // Elastic snap based on particle randomness for visual flair
-                float elasticMorph = mix(morphEase, smoothstep(0.0, 1.2, uMorphFactor * (1.0 + aRandom.y * 0.5)), morphEase);
-                
-                vec3 finalPos = mix(entityPos, knotPos, elasticMorph);
-
-                // --- INTERACTION / VORTEX ---
-                // Vortex is always active, allowing users to disrupt both the entity and the knot
-                float dist = distance(finalPos.xy, uMouse.xy);
-                float influenceRadius = mix(4.0, 8.0, uIsMouseDown); 
-                
-                float influence = smoothstep(influenceRadius, 0.0, dist);
-                if (influence > 0.0) {
-                    vec2 dir = normalize(finalPos.xy - uMouse.xy + 0.001);
-                    float pushFactor = mix(0.5, -2.5, uIsMouseDown * influence);
-                    vec2 swirlDir = vec2(-dir.y, dir.x); 
-                    float swirlFactor = mix(0.8, 8.0, uIsMouseDown * influence); // Intense spinning
-                    
-                    finalPos.xy += dir * influence * pushFactor;
-                    finalPos.xy += swirlDir * influence * swirlFactor;
-                    float depthPush = mix(1.0, -3.0, uIsMouseDown);
-                    finalPos.z -= influence * depthPush; 
-                }
-
-                // Add scroll parallax naturally
-                finalPos.y += uScrollOffset * 0.5;
-
-                // Intro Spatial Bloom (Particles drift in elegantly from a scattered burst)
-                float introScale = mix(2.2, 1.0, smoothstep(0.0, 1.0, uIntroProgress));
-                finalPos *= introScale;
-
-                // Add slight intro rotation so it settles elegantly
-                float introRot = mix(1.0, 0.0, smoothstep(0.0, 1.0, uIntroProgress)) * 0.5;
-                mat2 rotIntro = mat2(cos(introRot), -sin(introRot), sin(introRot), cos(introRot));
-                finalPos.xz *= rotIntro;
-
-                vec4 mvPosition = modelViewMatrix * vec4(finalPos, 1.0);
-                vDepth = -mvPosition.z; 
-                
-                float baseSize = mix(9.0, 11.0, morphEase); 
-                baseSize += uIsMouseDown * influence * 12.0; 
-                
-                gl_PointSize = aScale * baseSize * uPixelRatio * (1.0 / vDepth);
-                gl_Position = projectionMatrix * mvPosition;
-            }
-        `,
-        fragmentShader: `
-            uniform float uTime;
-            uniform float uIntroProgress;
-            uniform vec3 uColor1;
-            uniform vec3 uColor2;
-            
-            varying vec3 vRandom;
-            varying float vScale;
-            varying float vDepth;
-
-            vec3 getGradient(float t) {
-                // Two-color gradient interpolation
-                return mix(uColor1, uColor2, t);
-            }
-
-            void main() {
-                vec2 uv = gl_PointCoord - 0.5;
-                float dist = length(uv);
-                
-                // Perfect, soft circles
-                if (dist > 0.5) discard;
-                
-                // Depth of Field (Simulated Camera Bokeh)
-                // Focal plane is roughly at 4.5
-                float focusDist = 4.5;
-                float blurAmount = smoothstep(0.0, 3.0, abs(vDepth - focusDist));
-                
-                // Particles completely out of focus have much softer, blurred edges
-                float edgeSoftness = mix(0.1, 0.45, blurAmount);
-                float alpha = smoothstep(0.5, 0.5 - edgeSoftness, dist);
-                
-                if (alpha < 0.01) discard;
-
-                // Derive the internal gradient strictly from coordinates 
-                float gradientInput = (uv.x + uv.y + 0.5) * 0.5;
-                vec3 finalColor = getGradient(clamp(gradientInput, 0.0, 1.0));
-                
-                // Dim particles gracefully as they get incredibly far away
-                float depthFade = 1.0 - smoothstep(5.5, 8.0, vDepth);
-                
-                // Soft pulse over time
-                float pulse = 0.8 + 0.2 * sin(uTime * 0.5 + vRandom.x * 6.28);
-                
-                // Majestic Intro fade
-                float introFade = smoothstep(0.1, 0.9, uIntroProgress);
-
-                gl_FragColor = vec4(finalColor, alpha * pulse * depthFade * introFade);
-            }
-        `,
+    // --- Generate True Continuous Lines ---
+    const material = new THREE.LineBasicMaterial({
+        color: 0x1E1E1E, 
         transparent: true,
-        depthWrite: false,
-        blending: THREE.NormalBlending
+        opacity: 0.0,
+        linewidth: 1 
     });
 
-    particles = new THREE.Points(geometry, material);
-    scene.add(particles);
+    for (let r = 0; r < numLines; r++) {
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(pointsPerLine * 3);
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        
+        const line = new THREE.Line(geometry, material);
+        scene.add(line);
+        linesArray.push(line);
+    }
 
     clock = new THREE.Clock();
-    
-    // Force visibility to true immediately if we are on the homepage to prevent 'frozen' state
     isVisible = true;
 
-    const observer = new IntersectionObserver((entries) => {
-        isVisible = entries[0].isIntersecting;
-    }, { rootMargin: "100px" });
+    const observer = new IntersectionObserver((entries) => { isVisible = entries[0].isIntersecting; }, { rootMargin: "100px" });
     observer.observe(container);
 
-    const animate = () => {
-        // PERFORMANCE: If container is gone or we paused manually, shut down the loop entirely 
-        // to save CPU/GPU overhead on other pages. Memory is preserved.
-        if (!document.getElementById('webgl-container') || !window.isWebGLRunning) {
-            window.isWebGLRunning = false; 
-            return; 
+// Spline logic for Continuous Line Art
+function getCatmullRomPoint(t, points) {
+    const p = points.length - 1;
+    const tScaled = t * p;
+    const i = Math.floor(tScaled);
+    const frac = tScaled - i;
+    
+    const p0 = points[Math.max(0, i - 1)];
+    const p1 = points[i];
+    const p2 = points[Math.min(p, i + 1)];
+    const p3 = points[Math.min(p, i + 2)];
+    
+    const t2 = frac * frac;
+    const t3 = t2 * frac;
+    
+    const x = 0.5 * ((2 * p1[0]) + (-p0[0] + p2[0]) * frac + (2 * p0[0] - 5 * p1[0] + 4 * p2[0] - p3[0]) * t2 + (-p0[0] + 3 * p1[0] - 3 * p2[0] + p3[0]) * t3);
+    const z = 0.5 * ((2 * p1[1]) + (-p0[1] + p2[1]) * frac + (2 * p0[1] - 5 * p1[1] + 4 * p2[1] - p3[1]) * t2 + (-p0[1] + 3 * p1[1] - 3 * p2[1] + p3[1]) * t3);
+    
+    return {x, z};
+}
+
+// The detailed, cute sitting puppy path with floppy ear and wagging tail
+const animalSpline = [
+    [-20, -7.2],  // Enter from sky
+    [-8, -7.2],   // Approach nose horizontally
+    
+    // --- Head & Nose ---
+    [-4.5, -7.2], // Nose tip
+    [-4.0, -7.5], // Bridge
+    [-3.0, -8.0], // Forehead
+    [-2.0, -8.5], // Head top
+    
+    // --- Ear ---
+    [-1.5, -8.5], // Ear front base
+    [-1.0, -5.0], // Ear tip (long drop)
+    [-0.5, -5.0], // Ear tip back
+    [-0.8, -8.0], // Ear back base
+    
+    // --- Back ---
+    [0.0, -6.5],  // Upper back
+    [1.5, -4.0],  // Mid back
+    [2.5, -2.0],  // Lower back / Butt
+    
+    // --- Tail ---
+    [3.5, -2.0],  // Tail sweep right
+    [4.5, -4.5],  // Tail up
+    [4.0, -5.5],  // Tail tip
+    [3.5, -4.5],  // Tail down
+    [2.8, -2.0],  // Tail base
+    
+    // --- Sitting Back Leg ---
+    [1.0, -2.0],  // Back toe (moving left)
+    
+    // --- High Knee & Belly ---
+    [0.5, -3.0],  // Shin
+    [-0.2, -4.8], // Knee peak (high and rounded)
+    [-1.0, -4.0], // Belly curve
+    [-1.5, -2.8], // Belly lowest point
+    
+    // --- Chest to Throat ---
+    [-2.2, -4.5], // Chest up
+    [-2.6, -6.5], // Throat peak
+    
+    // --- Front Leg ---
+    [-3.0, -4.0], // Leg down
+    [-3.5, -2.0], // Front toe
+    [-2.5, -2.0], // Front heel
+    
+    // --- Exit ---
+    [0.0, -2.0],  // Sweep right along floor
+    [8, -2.0],
+    [20, -2.0]
+];
+
+// The elegant single-stroke Frog path
+const frogSpline = [
+    [-20, -5],
+    [-8, -5],
+    // Long back leg extending down-left
+    [-5, -2],    // Toe
+    [-4, -2.5],
+    [-2, -4],    // Knee
+    [-3, -5],    // Hip
+    // Arched back
+    [-1, -7],
+    [1, -7.5],   // Neck
+    // Eye
+    [1.5, -8.5],
+    [2, -7.5],
+    // Snout
+    [3.5, -6.5],
+    [2.5, -5],   // Throat
+    // Front Legs tucked
+    [1.5, -4],
+    [1, -2],     // Paw 1
+    [1.5, -2.5],
+    [2, -4],
+    [2.5, -3],   // Paw 2
+    // Belly
+    [1, -4.5],
+    [-1, -5],
+    [-2, -5],    // Meet hip
+    [8, -5],
+    [20, -5]
+];
+
+// The stunning single-stroke Optical Illusion Faces (Horizontal Arrangement)
+const humanSpline = [
+    // Enter from far left
+    [-20.0, -7.0],
+    [-12.0, -7.0],
+    [-9.0,  -5.0],
+    
+    // --- LEFT FACE (Looking Down/Right) ---
+    [-6.5, -3.3], // Forehead
+    [-5.0, -2.1], // Brow ridge
+    [-4.5, -2.4], // Eye socket
+    [-4.0, -2.1], // Nose bridge
+    [-3.5, -1.5], // Nose tip
+    [-3.0, -1.9], // Under nose
+    [-2.8, -1.7], // Upper lip
+    [-2.5, -2.0], // Mouth line
+    [-2.2, -1.8], // Lower lip
+    [-1.7, -2.2], // Under lip
+    [-1.0, -1.7], // Chin
+    
+    // --- TRANSITION (Neck / Space) ---
+    [-0.5, -3.0], // Center point
+    
+    // --- RIGHT FACE (Looking Up/Left) ---
+    [ 0.0, -4.3], // Chin
+    [ 0.7, -3.8], // Under lip
+    [ 1.2, -4.2], // Lower lip
+    [ 1.5, -4.0], // Mouth line
+    [ 1.8, -4.3], // Upper lip
+    [ 2.0, -4.1], // Under nose
+    [ 2.5, -4.5], // Nose tip
+    [ 3.0, -3.9], // Nose bridge
+    [ 3.5, -3.6], // Eye socket
+    [ 4.0, -3.9], // Brow ridge
+    [ 5.5, -2.7], // Forehead
+    
+    // Exit far right
+    [ 8.0, -1.0],
+    [11.0,  1.0],
+    [20.0,  1.0]
+];
+
+        // Theme Toggle Listener
+        const themeBtn = document.getElementById('theme-toggle');
+        if (themeBtn) {
+            themeBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent morph toggle from triggering
+                isDarkMode = !isDarkMode;
+                themeBtn.classList.toggle('is-dark', isDarkMode);
+                
+                // Toggle a specific class on the body to style the header appropriately in the Dark Hero
+                document.body.classList.toggle('hero-dark-mode', isDarkMode);
+            });
         }
 
+    const animate = () => {
+        if (!document.getElementById('webgl-container') || !window.isWebGLRunning) {
+            window.isWebGLRunning = false; return; 
+        }
         requestAnimationFrame(animate);
-        
-        // Skip all math and GPU rendering if the canvas is off-screen
         if (!isVisible) return;
 
-        // Limit delta so pausing tabs doesn't break the animation mathematically
         const dt = Math.min(clock.getDelta(), 0.1);
-
-        // 1. MAJESTIC INTRO ANIMATION 
-        // Elegant ease-out over roughly 2.5 seconds
         window.introProgress += (1.0 - window.introProgress) * 0.8 * dt;
-        material.uniforms.uIntroProgress.value = window.introProgress;
+        
+        material.opacity = window.introProgress * 1.0;
+        
+        window.accumTime += dt * 0.8; 
 
-        window.accumTime += dt * 0.8; // Stable, continuous time without the initial violent burst
-        material.uniforms.uTime.value = window.accumTime;
-
-        // 2. PARALLAX SCROLL LOGIC
         const targetScrollY = window.scrollY || document.documentElement.scrollTop || 0;
         window.smoothedScrollY += (targetScrollY - window.smoothedScrollY) * 5.0 * dt;
-        material.uniforms.uScrollOffset.value = window.smoothedScrollY * 0.015;
 
-        // 3. ENHANCED VORTEX LOGIC
-        let targetMouseDown = isMouseDown && !isMorphing ? 1.0 : 0.0;
-        let vortexEase = targetMouseDown === 1.0 ? 0.2 : 0.05;
-        material.uniforms.uIsMouseDown.value += (targetMouseDown - material.uniforms.uIsMouseDown.value) * vortexEase;
+        let targetMouseDown = isMouseDown ? 1.0 : 0.0;
+        smoothMouseDown += (targetMouseDown - smoothMouseDown) * 0.1;
+        
+        // Dynamic Brush Speed (Ease-In / Ease-Out)
+        const getSpeed = (factor) => {
+            const progress = Math.max(0, Math.min(1, factor / 1.2));
+            // Slowed down by ~5% for an even more deliberate, majestic pace
+            return 0.003 + Math.sin(progress * Math.PI) * 0.016; 
+        };
 
-        // 3.5 MORPHING LOGIC
-        let morphEase = isMorphing ? 0.03 : 0.02; 
-        material.uniforms.uMorphFactor.value += (targetMorphFactor - material.uniforms.uMorphFactor.value) * morphEase;
+        if (currentState === 1) dogMorphFactor = Math.min(1.2, dogMorphFactor + getSpeed(dogMorphFactor));
+        else dogMorphFactor = Math.max(0.0, dogMorphFactor - getSpeed(dogMorphFactor));
 
-        // 4. ELEGANT CAMERA TRACKING
-        let targetCameraZ = 6.0; // Fixed elegant distance to wrap the centered entity perfectly
-        camera.position.z += (targetCameraZ - camera.position.z) * 5.0 * dt;
+        if (currentState === 2) frogMorphFactor = Math.min(1.2, frogMorphFactor + getSpeed(frogMorphFactor));
+        else frogMorphFactor = Math.max(0.0, frogMorphFactor - getSpeed(frogMorphFactor));
 
-        let baseCameraY = Math.cos(window.accumTime * 0.05) * 0.2; // Slow gentle floating observation
-        camera.position.y = baseCameraY - (window.smoothedScrollY * 0.001);
-        camera.position.x = Math.sin(window.accumTime * 0.06) * 0.3;
-        camera.lookAt(scene.position);
+        if (currentState === 3) humanMorphFactor = Math.min(1.2, humanMorphFactor + getSpeed(humanMorphFactor));
+        else humanMorphFactor = Math.max(0.0, humanMorphFactor - getSpeed(humanMorphFactor));
 
-        particles.rotation.y = window.accumTime * 0.05;
-        particles.rotation.z = window.accumTime * 0.02;
+        const introRise = (1.0 - Math.min(Math.max(window.introProgress, 0), 1)) * -4.0;
+        const desktopOffset = window.innerWidth >= 1025 ? 1.0 : 0.0; // Moves 3D geometry up ~10% visually on desktop only
+        const influenceRadius = 4.5 + 2.0 * smoothMouseDown;
 
-        // 5. MOUSE HANDLING & VORTEX
-        // Optimized to only raycast if the mouse is actively on screen
+        for (let r = 0; r < numLines; r++) {
+            const line = linesArray[r];
+            const positions = line.geometry.attributes.position.array;
+            
+            const zBase = 4.0 - (r / numLines) * 32.0; 
+            
+            for (let c = 0; c < pointsPerLine; c++) {
+                const xBase = -20.0 + (c / pointsPerLine) * 40.0; 
+                
+                let fX = xBase;
+                let fZ = zBase;
+                let fY = 0;
+
+                // --- STATE 0: Lifeless Waves (Abstract Silk Ocean) ---
+                const wave1 = Math.sin(fX * 0.3 + window.accumTime * 0.8 + fZ * 0.15);
+                const wave2 = Math.cos(fZ * 0.4 - window.accumTime * 0.5 + fX * 0.1);
+                let silkY = (wave1 + wave2) * 0.5;
+
+                // --- STATE 1: Continuous Line Animal (Upright facing camera) ---
+                const t = c / (pointsPerLine - 1);
+                const splinePt = getCatmullRomPoint(t, animalSpline);
+                
+                // Tighter noise for a crisper sketch line
+                const sketchNoiseX = Math.sin(r * 12.3 + c * 0.1) * 0.15;
+                const sketchNoiseY = Math.cos(r * 8.7 - c * 0.1) * 0.15;
+                const sketchNoiseZ = Math.sin(r * 5.1 + c * 0.05) * 0.3; // 3D depth volume
+
+                // Responsive Viewport Scaling
+                const isMobile = window.innerWidth < 768;
+                const isTablet = window.innerWidth >= 768 && window.innerWidth <= 1024;
+                
+                const scale = isMobile ? 0.55 : (isTablet ? 0.75 : 1.0); 
+                
+                let mY = 0.0;
+                let mX = 0.0;
+                
+                if (isMobile) {
+                    mY = 3.5;  // ~10% upward shift
+                    mX = -0.5; // ~5% leftward shift
+                } else if (isTablet) {
+                    mY = 2.8;  // ~8% upward shift
+                    mX = 0.0;  // Centered horizontally
+                }
+
+                // --- STATE 1: Continuous Line Animal (Dog) ---
+                const splinePt1 = getCatmullRomPoint(t, animalSpline);
+                const anim1X = (splinePt1.x * scale) + 1.0 + mX + sketchNoiseX;
+                const anim1Y = (-splinePt1.z * scale) - 2.5 + mY + sketchNoiseY;  
+                const anim1Z = 0 + sketchNoiseZ; 
+
+                // --- STATE 2: Continuous Line Animal (Frog) ---
+                const splinePt2 = getCatmullRomPoint(t, frogSpline);
+                const anim2X = (splinePt2.x * scale) + 1.0 + mX + sketchNoiseX;
+                const anim2Y = (-splinePt2.z * scale) - 2.5 + mY + sketchNoiseY; 
+                const anim2Z = 0 + sketchNoiseZ; 
+
+                // --- STATE 3: Continuous Line Human (Optical Illusion) ---
+                const splinePt3 = getCatmullRomPoint(t, humanSpline);
+                const anim3X = (splinePt3.x * scale) + 1.0 + mX + sketchNoiseX;
+                // Shifted Y up by an additional 2.0 units (10%) specifically for the Human sketch
+                const anim3Y = (-splinePt3.z * scale) - 0.5 + mY + sketchNoiseY; 
+                const anim3Z = 0 + sketchNoiseZ;
+
+                // Convert global linear weights into a tighter, deliberate "Brush Stroke" effect
+                let rawDog = Math.max(0, Math.min(1, (dogMorphFactor - t * 0.8) / 0.4));
+                let rawFrog = Math.max(0, Math.min(1, (frogMorphFactor - t * 0.8) / 0.4));
+                let rawHuman = Math.max(0, Math.min(1, (humanMorphFactor - t * 0.8) / 0.4));
+
+                // Apply Quintic "Smootherstep" easing to the vertices. 
+                // This curve has zero acceleration at start/end, making the motion incredibly buttery and fluid.
+                const smootherstep = (x) => x * x * x * (x * (x * 6 - 15) + 10);
+                
+                const localDogMorph = smootherstep(rawDog);
+                const localFrogMorph = smootherstep(rawFrog);
+                const localHumanMorph = smootherstep(rawHuman);
+
+                // Prevent coordinate addition glitches by normalizing overlapping weights
+                let wDog = localDogMorph;
+                let wFrog = localFrogMorph;
+                let wHuman = localHumanMorph;
+                const totalAnimalWeight = wDog + wFrog + wHuman;
+
+                if (totalAnimalWeight > 1.0) {
+                    wDog /= totalAnimalWeight;
+                    wFrog /= totalAnimalWeight;
+                    wHuman /= totalAnimalWeight;
+                }
+
+                // Blend between all states based on normalized staggered weights
+                const waveWeight = Math.max(0, 1.0 - (wDog + wFrog + wHuman));
+                
+                fX = fX * waveWeight + anim1X * wDog + anim2X * wFrog + anim3X * wHuman;
+                fZ = fZ * waveWeight + anim1Z * wDog + anim2Z * wFrog + anim3Z * wHuman;
+                fY = silkY * waveWeight + anim1Y * wDog + anim2Y * wFrog + anim3Y * wHuman;
+
+                // Organic Idle Breathing for Animals
+                const breathingY = Math.sin(window.accumTime * 2.0 + t * Math.PI) * 0.2 * (1.0 - waveWeight);
+                fY += breathingY;
+                
+                fY += introRise + desktopOffset;
+
+                // --- INTERACTION: Soft Magnetic Lift (Hover) ---
+                if (currentMouse.x !== 9999) {
+                    const dx = fX - currentMouse.x;
+                    const dz = fZ - currentMouse.z;
+                    const distSq = dx*dx + dz*dz;
+                    const radiusSq = influenceRadius * influenceRadius;
+
+                    if (distSq < radiusSq) {
+                        // Smooth bell curve (Gaussian) to prevent jagged line distortion
+                        const inf = Math.exp(-distSq / (radiusSq * 0.15)); 
+                        
+                        // Gently lift the lines UP to meet the cursor, like plucking a string
+                        // Multiply by waveWeight so hover ONLY works on the first state (fabric lines)
+                        const liftHeight = (2.5 + smoothMouseDown * 2.0) * waveWeight;
+                        fY += inf * liftHeight;
+                    }
+                }
+
+                fY -= window.smoothedScrollY * 0.005;
+
+                positions[c * 3] = fX;
+                positions[c * 3 + 1] = fY;
+                positions[c * 3 + 2] = fZ;
+            }
+            line.geometry.attributes.position.needsUpdate = true;
+        }
+
+        // --- CAMERA CINEMATICS ---
+        // State 0: High up, looking down at the horizon
+        const camY_0 = 3.5;
+        const camZ_0 = 6.0;
+        const lookY_0 = 0.0;
+        const lookZ_0 = -5.0;
+
+        // State 1: Eye-level, pulled back to see the entire sweeping sketch
+        const camY_1 = 0.5;
+        const camZ_1 = 22.0; 
+        const lookY_1 = 0.0;
+        const lookZ_1 = 0.0;
+
+        // Both animal states use the same camera framing
+        const animalWeight = Math.min(1.0, dogMorphFactor + frogMorphFactor + humanMorphFactor);
+        const currentCamY = camY_0 * (1.0 - animalWeight) + camY_1 * animalWeight;
+        const currentCamZ = camZ_0 * (1.0 - animalWeight) + camZ_1 * animalWeight;
+        const currentLookY = lookY_0 * (1.0 - animalWeight) + lookY_1 * animalWeight;
+        const currentLookZ = lookZ_0 * (1.0 - animalWeight) + lookZ_1 * animalWeight;
+
+        // Smooth camera velocity: ease outward smoothly, then drift back gracefully
+        cameraSweep += (targetCameraSweep - cameraSweep) * 0.06;
+        targetCameraSweep += (0.0 - targetCameraSweep) * 0.02;
+
+        camera.position.x = Math.sin(window.accumTime * 0.1) * 0.4 + cameraSweep;
+        camera.position.y = currentCamY + Math.cos(window.accumTime * 0.1) * 0.2;
+        camera.position.z = currentCamZ;
+        camera.lookAt(0, currentLookY, currentLookZ);
+
+        // Smoothly interpolate theme colors
+        const targetBgColor = isDarkMode ? darkBgColor : lightBgColor;
+        const targetLineColor = isDarkMode ? darkLineColor : lightLineColor;
+        
+        scene.background.lerp(targetBgColor, 0.05);
+        scene.fog.color.copy(scene.background);
+        material.color.lerp(targetLineColor, 0.05);
+
         if (mouse2D.x !== -9999) {
             raycaster.setFromCamera(mouse2D, camera);
             const intersects = raycaster.intersectObject(hitPlane);
-            
-            if (intersects.length > 0) {
-                targetMouse.copy(intersects[0].point);
-            } else {
-                targetMouse.set(9999, 9999, 9999);
-            }
+            if (intersects.length > 0) targetMouse.copy(intersects[0].point);
+            else targetMouse.set(9999, 9999, 9999);
         } else {
             targetMouse.set(9999, 9999, 9999);
         }
 
-        currentMouse.lerp(targetMouse, 0.05);
-        material.uniforms.uMouse.value.copy(currentMouse);
-
+        currentMouse.lerp(targetMouse, 0.08);
         renderer.render(scene, camera);
     };
 
-    window.animateWebGL = animate; // Store globally to allow restart
+    window.animateWebGL = animate;
     animate();
 
-    // Event Listeners
     const handleMouseMove = (e) => {
         const currentContainer = document.getElementById('webgl-container');
         if (!currentContainer) return;
         const rect = currentContainer.getBoundingClientRect();
-        
         let clientX = e.clientX ?? e.touches?.[0]?.clientX;
         let clientY = e.clientY ?? e.touches?.[0]?.clientY;
         if (clientX === undefined) return;
-        
         mouse2D.x = ((clientX - rect.left) / rect.width) * 2 - 1;
         mouse2D.y = -((clientY - rect.top) / rect.height) * 2 + 1;
     };
 
-    const handleMouseLeave = () => {
-        mouse2D.set(-9999, -9999); 
-        isMouseDown = false;
-    };
+    const handleMouseLeave = () => { mouse2D.set(-9999, -9999); isMouseDown = false; };
 
     if (!globalListenersBound) {
         window.addEventListener('mousemove', handleMouseMove, { passive: true });
         window.addEventListener('mouseleave', handleMouseLeave, { passive: true });
         
-        // Vortex Trigger Listeners (Vortex triggers on down, Morph toggles on click)
         const handleDown = () => { isMouseDown = true; };
         const handleUp = () => { isMouseDown = false; };
         
-        // The Morph Toggle
         const toggleMorph = (e) => {
-            // Prevent morph when interacting with links or buttons
             if (e && e.target && (e.target.closest('a') || e.target.closest('button'))) return;
+            currentState = (currentState + 1) % 4; // Toggle between 0 (Waves), 1 (Dog), 2 (Frog), 3 (Human)
             
-            isMorphing = !isMorphing;
-            targetMorphFactor = isMorphing ? 1.0 : 0.0;
+            // Trigger cinematic camera sweep on click (eased outward)
+            targetCameraSweep = 16.0; 
         };
 
         window.addEventListener('click', toggleMorph, { passive: true });
-        
         window.addEventListener('mousedown', handleDown, { passive: true });
         window.addEventListener('mouseup', handleUp, { passive: true });
-        window.addEventListener('touchstart', (e) => { 
-            handleMouseMove(e); 
-            handleDown(); 
-        }, { passive: true });
+        window.addEventListener('touchstart', (e) => { handleMouseMove(e); handleDown(); }, { passive: true });
         window.addEventListener('touchend', handleUp, { passive: true });
-        
-        window.addEventListener('resize', () => {
-            if (window.updateWebGLSize) window.updateWebGLSize();
-        });
+        window.addEventListener('resize', () => { if (window.updateWebGLSize) window.updateWebGLSize(); });
 
         globalListenersBound = true;
     }
@@ -469,25 +531,19 @@ const initWebGL = (explicitContainer) => {
     isInitialized = true;
 };
 
-// Lifecycle management for Barba.js
 window.initPage = (containerParent) => {
     const context = containerParent || document;
     const container = context.querySelector('#webgl-container');
-    
     if (container) {
-        // Reset animation state for a fresh intro burst every visit
         window.introProgress = 0.0;
         initWebGL(container);
     } else {
-        // Cleanup on pages without webgl
         window.isWebGLRunning = false;
     }
 };
 
-// Expose globally
 window.initWebGL = initWebGL;
 
-// Run if on homepage initially
 if (document.getElementById('webgl-container')) {
     initWebGL();
 }

@@ -366,6 +366,7 @@ a {
     align-items: center;
     padding: 0 24px;
     box-sizing: border-box;
+    position: relative; /* Added to support absolute centering of the theme toggle */
     transition: background-color 0.4s ease, border-color 0.4s ease;
 }
 
@@ -399,9 +400,170 @@ a {
     filter: invert(1) brightness(2); /* White by default for dark pill */
 }
 
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+}
+
+.theme-reference-toggle {
+    background: #333333; /* Dark pill */
+    border: none;
+    border-radius: 30px;
+    cursor: none; 
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 68px;
+    height: 36px;
+    transition: background-color 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.centered-toggle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.theme-ref-thumb {
+    width: 28px;
+    height: 28px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    position: absolute;
+    left: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.4s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.icon-sun {
+    color: #333333;
+    position: absolute;
+    transition: opacity 0.3s ease, transform 0.4s ease;
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+.icon-moon {
+    color: #FFFFFF;
+    position: absolute;
+    transition: opacity 0.3s ease, transform 0.4s ease;
+    opacity: 0;
+    transform: rotate(-45deg);
+}
+
+/* Dark Mode State */
+.theme-reference-toggle.is-dark {
+    background: #F7FBF8; /* Light pill */
+}
+
+.theme-reference-toggle.is-dark .theme-ref-thumb {
+    transform: translateX(32px);
+    background-color: #1E1E1E; /* Black thumb */
+}
+
+.theme-reference-toggle.is-dark .icon-sun {
+    opacity: 0;
+    transform: rotate(45deg);
+}
+
+.theme-reference-toggle.is-dark .icon-moon {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+/* Interactive States */
+@media (hover: hover) and (pointer: fine) {
+    .theme-reference-toggle.centered-toggle:hover {
+        transform: translateX(-50%) scale(1.05);
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.15), 0 4px 12px rgba(0,0,0,0.2);
+    }
+}
+
+.theme-reference-toggle.centered-toggle:active {
+    transform: translateX(-50%) scale(0.92);
+}
+
+.theme-reference-toggle:active .theme-ref-thumb {
+    width: 32px;
+}
+.theme-reference-toggle.is-dark:active .theme-ref-thumb {
+    transform: translateX(28px);
+}
+
+/* Mobile Friendly Adjustments */
+@media screen and (max-width: 767px) {
+    .theme-reference-toggle {
+        width: 60px;
+        height: 32px;
+    }
+    .theme-ref-thumb {
+        width: 24px;
+        height: 24px;
+    }
+    .theme-reference-toggle.is-dark .theme-ref-thumb {
+        transform: translateX(28px);
+    }
+    .theme-reference-toggle.is-dark:active .theme-ref-thumb {
+        transform: translateX(24px);
+    }
+    .icon-sun, .icon-moon {
+        transform: scale(0.85); /* Slightly scale down icons */
+    }
+    .theme-reference-toggle.is-dark .icon-sun {
+        transform: scale(0.85) rotate(45deg);
+    }
+    .theme-reference-toggle.is-dark .icon-moon {
+        transform: scale(0.85) rotate(0deg);
+    }
+}
+
+/* Hide the toggle when scrolled past the hero */
+.header-past-hero .theme-reference-toggle {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translate(-50%, -10px) scale(0.9) !important;
+}
+
+/* Custom Header State when Dark Hero is Active */
+body.hero-dark-mode .nav-link {
+    color: #F7FBF8 !important; 
+}
+
+body.hero-dark-mode .nav-link:hover {
+    color: #F7FBF8 !important; 
+}
+
+body.hero-dark-mode .nav-link::after {
+    background-color: #F7FBF8 !important;
+}
+
+/* Custom Hero Text State when Dark Hero is Active */
+body.hero-dark-mode .hero-name,
+body.hero-dark-mode .hero-main-description {
+    color: #F7FBF8 !important;
+    transition: color 0.4s ease;
+}
+
+/* Custom Interaction Indicator State when Dark Hero is Active */
+body.hero-dark-mode .interaction-indicator svg rect {
+    stroke: #F7FBF8;
+    transition: stroke 0.4s ease, fill 0.4s ease;
+}
+
+body.hero-dark-mode .interaction-indicator svg rect.scroll-wheel-anim {
+    fill: #F7FBF8;
+    stroke: none;
+}
+
 .header-nav-desktop {
     display: flex;
-    gap: 64px;
+    gap: 48px;
     align-items: center;
 }
 
@@ -436,7 +598,20 @@ a {
 }
 
 .nav-link:hover {
-    color: #000;
+    color: #ffffff !important;
+}
+
+.nav-link::after {
+    background-color: currentColor;
+}
+
+/* Fix for when the header inverses to Light mode (scrolling down to work section) */
+.header-pill.header-inverted .nav-link:hover {
+    color: #000000 !important;
+}
+
+.header-pill.header-inverted .nav-link::after {
+    background-color: #1E1E1E !important;
 }
 
 .mobile-menu-toggle {
@@ -548,6 +723,7 @@ a {
     align-items: flex-start;
     width: 100%;
     margin: 92px auto 0 auto;
+    padding-top: 120px; /* Reduced 25% */
     padding-bottom: 96px;
     box-sizing: border-box;
     position: relative;
@@ -1618,7 +1794,7 @@ body.home-page .about-card {
     /* Responsive Hero Section */
     .hero-section {
         margin-top: 80px;
-        padding: 48px 32px 96px 32px;
+        padding: 90px 32px 96px 32px; /* Proportional 25% reduction for tablet */
     }
 
     .hero-intro {
@@ -5609,7 +5785,7 @@ html:has(.fincas-page) {
         left: 0 !important;
         width: 100% !important;
         height: auto !important;
-        padding: 32px 24px 8px 24px !important;
+        padding: 90px 24px 8px 24px !important; /* Proportional 25% reduction for mobile */
         display: flex !important;
         flex-direction: column !important;
         gap: 32px !important;
@@ -6050,18 +6226,18 @@ html:has(.fincas-page) {
 
 /* 19. FINAL OVERRIDE: 72PX TOP GAP (152PX TOTAL) ACROSS ALL BREAKPOINTS */
 .hero-section {
-    padding-top: 152px !important; /* 80px header + 72px gap */
+    padding-top: 120px !important; /* Reduced 25% */
 }
 
 @media screen and (max-width: 1024px) {
     .hero-section {
-        padding-top: 152px !important;
+        padding-top: 120px !important;
     }
 }
 
 /* 20. ENSURING HORIZONTAL CENTERING & 72PX GAP */
 .hero-section {
-    padding-top: 152px !important; /* Header 80 + Gap 72 */
+    padding-top: 120px !important; /* Reduced 25% */
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important; /* Horizontal center */
@@ -6223,7 +6399,7 @@ html:has(.fincas-page) {
 
 /* Desktop & General */
 .hero-section {
-    padding-top: 160px !important; /* Gold Standard Top Boundary */
+    padding-top: 120px !important; /* Reduced 25% */
     width: 100% !important;
     display: flex !important;
     flex-direction: column !important;
@@ -6257,7 +6433,7 @@ html:has(.fincas-page) {
 /* Tablet & Mobile Header Height Change */
 @media screen and (max-width: 1024px) {
     .hero-section {
-        padding-top: 144px !important; /* Calc: Header Wrap 8px + Pill 64px + Gap 72px = 144px */
+        padding-top: 108px !important; /* Reduced 25% */
         padding-left: 24px !important;
         padding-right: 24px !important;
     }
@@ -6280,13 +6456,13 @@ html:has(.fincas-page) {
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important; /* FORCES TOP ALIGNMENT: Stops vertical jumping on resize */
-    padding-top: 160px !important; /* Math: 88px (Header + Wrap) + 72px (Gap) */
+    padding-top: 120px !important; /* Reduced 25% */
     position: relative !important;
 }
 
 @media screen and (max-width: 1024px) {
     .hero-section {
-        padding-top: 144px !important; /* Math: 72px (Header + Wrap) + 72px (Gap) */
+        padding-top: 108px !important; /* Reduced 25% */
     }
 }
 
@@ -6314,7 +6490,7 @@ html:has(.fincas-page) {
 /* DESKTOP (88px Header + 72px Gap = 160px Total Padding) */
 @media screen and (min-width: 1025px) {
     .hero-section {
-        padding-top: 160px !important;
+        padding-top: 120px !important;
     }
     
     .hero-intro {
@@ -6330,7 +6506,7 @@ html:has(.fincas-page) {
 /* TABLET & MOBILE (72px Header + 72px Gap = 144px Total Padding) */
 @media screen and (max-width: 1024px) {
     .hero-section {
-        padding-top: 144px !important;
+        padding-top: 108px !important;
     }
     
     .hero-intro {
@@ -6360,13 +6536,13 @@ html:has(.fincas-page) {
 /* Precise Top Gap (Accounting for Header height differences) */
 @media screen and (min-width: 1025px) {
     .hero-section {
-        padding-top: 160px !important; /* 88px Header + 72px Gap */
+        padding-top: 120px !important; /* Reduced 25% */
     }
 }
 
 @media screen and (max-width: 1024px) {
     .hero-section {
-        padding-top: 144px !important; /* 72px Header + 72px Gap */
+        padding-top: 108px !important; /* Reduced 25% */
     }
 }
 

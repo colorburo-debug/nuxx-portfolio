@@ -80,6 +80,14 @@ const handleHeaderScroll = () => {
     } else {
         header.classList.remove('header-inverted');
     }
+
+    // Hide theme toggle when the header is about to reach the Work section
+    // We trigger the fade out when the header is within 150px of the work section
+    if (workRect.top - headerRect.bottom <= 150) {
+        header.classList.add('header-past-hero');
+    } else {
+        header.classList.remove('header-past-hero');
+    }
 };
 
 // ─── initPage ───────────────────────────────────────────────
