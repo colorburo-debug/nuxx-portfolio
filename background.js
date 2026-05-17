@@ -24,6 +24,7 @@ let isMouseDown = false;
 
 // Theme State Variables
 let isDarkMode = false;
+let rippleTime = 999.0; // Dynamic theme transition physical ripple timer
 const lightBgColor = new THREE.Color(0xF7FBF8);
 const darkBgColor = new THREE.Color(0x1E1E1E);
 const lightLineColor = new THREE.Color(0x1E1E1E);
@@ -269,6 +270,9 @@ const humanSpline = [
                 isDarkMode = !isDarkMode;
                 themeBtn.classList.toggle('is-dark', isDarkMode);
                 
+                // Trigger a physical dynamic wave ripple across the fabric mesh
+                rippleTime = 0.0;
+                
                 // Toggle a specific class on the body to style the header appropriately in the Dark Hero
                 document.body.classList.toggle('hero-dark-mode', isDarkMode);
             });
@@ -283,6 +287,9 @@ const humanSpline = [
 
         const dt = Math.min(clock.getDelta(), 0.1);
         window.introProgress += (1.0 - window.introProgress) * 0.8 * dt;
+        
+        // Progress the physical theme-change ripple timer
+        if (rippleTime < 5.0) rippleTime += dt;
         
         material.opacity = window.introProgress * 1.0;
         
@@ -349,10 +356,10 @@ const humanSpline = [
                 const t = c / (pointsPerLine - 1);
                 const splinePt = getCatmullRomPoint(t, animalSpline);
                 
-                // Tighter noise for a crisper sketch line
-                const sketchNoiseX = Math.sin(r * 12.3 + c * 0.1) * 0.15;
-                const sketchNoiseY = Math.cos(r * 8.7 - c * 0.1) * 0.15;
-                const sketchNoiseZ = Math.sin(r * 5.1 + c * 0.05) * 0.3; // 3D depth volume
+                // Tighter noise (reduced by 10%) for a crisper sketch line
+                const sketchNoiseX = Math.sin(r * 12.3 + c * 0.1) * 0.135;
+                const sketchNoiseY = Math.cos(r * 8.7 - c * 0.1) * 0.135;
+                const sketchNoiseZ = Math.sin(r * 5.1 + c * 0.05) * 0.27; // 3D depth volume
 
 
 
@@ -409,7 +416,18 @@ const humanSpline = [
 
                 // Organic Idle Breathing for Animals
                 const breathingY = Math.sin(window.accumTime * 2.0 + t * Math.PI) * 0.2 * (1.0 - waveWeight);
-                fY += breathingY;
+                
+                // Expanding physical radial ring ripple when theme is toggled
+                let themeRipple = 0;
+                if (rippleTime < 4.0) {
+                    const distToCenter = Math.sqrt(fX*fX + fZ*fZ);
+                    const waveSpeed = 8.0;
+                    const waveFrequency = 1.0;
+                    const decay = Math.exp(-rippleTime * 1.5);
+                    themeRipple = Math.sin(distToCenter * waveFrequency - rippleTime * waveSpeed) * decay * 1.2;
+                }
+                
+                fY += breathingY + themeRipple;
                 
                 fY += introRise;
 

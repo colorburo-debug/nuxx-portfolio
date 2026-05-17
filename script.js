@@ -30,11 +30,36 @@ const initCursor = () => {
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
     if (reticle && !isTouchDevice) {
-        // Move the cursor dot — only attach once to document
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let reticleX = mouseX;
+        let reticleY = mouseY;
+        let hasMoved = false;
+
+        // Hide cursor initial state until mouse moves to prevent weird jumping/centering on load
+        reticle.style.opacity = '0';
+        reticle.style.transition = 'transform 0.25s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s ease';
+
         document.addEventListener('mousemove', (e) => {
-            reticle.style.left = `${e.clientX}px`;
-            reticle.style.top = `${e.clientY}px`;
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            if (!hasMoved) {
+                reticleX = mouseX;
+                reticleY = mouseY;
+                reticle.style.opacity = '1';
+                hasMoved = true;
+            }
         });
+
+        const tick = () => {
+            // 0.15 is the sweet spot for smooth, premium-feeling trailing lag
+            reticleX += (mouseX - reticleX) * 0.15;
+            reticleY += (mouseY - reticleY) * 0.15;
+            reticle.style.left = `${reticleX}px`;
+            reticle.style.top = `${reticleY}px`;
+            requestAnimationFrame(tick);
+        };
+        tick();
     }
 };
 
