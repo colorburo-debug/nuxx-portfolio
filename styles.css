@@ -1101,7 +1101,12 @@ body.home-page .about-card {
     padding: 0;
     border: none;
     background: none;
-    align-self: flex-end;
+}
+
+.interaction-indicator svg {
+    /* Scale the scroll mouse indicator down by exactly 15% in all breakpoints */
+    transform: scale(0.85) !important;
+    transform-origin: center center !important;
 }
 
 .action-icon {
