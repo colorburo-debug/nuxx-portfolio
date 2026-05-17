@@ -448,7 +448,7 @@ const humanSpline = [
                     const waveSpeed = 8.0;
                     const waveFrequency = 1.0;
                     const decay = Math.exp(-rippleTime * 1.5);
-                    themeRipple = Math.sin(distToCenter * waveFrequency - rippleTime * waveSpeed) * decay * 0.6;
+                    themeRipple = Math.sin(distToCenter * waveFrequency - rippleTime * waveSpeed) * decay * 0.6 * waveWeight;
                 }
                 
                 fY += breathingY + themeRipple;
