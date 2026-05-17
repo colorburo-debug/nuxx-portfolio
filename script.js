@@ -52,9 +52,9 @@ const initCursor = () => {
         });
 
         const tick = () => {
-            // Increased to 0.30 to reduce the "heavy" lag feeling by 50%, making it feel very snappy and responsive
-            reticleX += (mouseX - reticleX) * 0.30;
-            reticleY += (mouseY - reticleY) * 0.30;
+            // Increased to 0.50 to reduce the "heaviness" by another 30%, making the cursor feel extremely light and snappy
+            reticleX += (mouseX - reticleX) * 0.50;
+            reticleY += (mouseY - reticleY) * 0.50;
             reticle.style.left = `${reticleX}px`;
             reticle.style.top = `${reticleY}px`;
             requestAnimationFrame(tick);
