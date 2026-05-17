@@ -33,8 +33,10 @@ let smoothMouseDown = 0.0;
 let globalListenersBound = false;
 
 // Fabric Grid Data
-const numLines = 110;
-const pointsPerLine = 250; // Increased resolution for perfectly smooth continuous curves
+// Dynamically reduce geometry on mobile to drastically improve CPU performance
+const isMobileDevice = window.innerWidth < 768 || /Mobi|Android/i.test(navigator.userAgent);
+const numLines = isMobileDevice ? 55 : 110;
+const pointsPerLine = isMobileDevice ? 120 : 250; // High resolution on desktop, optimized on mobile
 
 const initWebGL = (explicitContainer) => {
     const container = explicitContainer || document.getElementById('webgl-container');
@@ -55,14 +57,16 @@ const initWebGL = (explicitContainer) => {
     scene = new THREE.Scene();
     const bgColor = '#F7FBF8'; 
     scene.background = new THREE.Color(bgColor);
-    // Pushed fog further back so the upright animal is perfectly clear
-    scene.fog = new THREE.Fog(bgColor, 12.0, 48.0); 
+    // Pulled fog closer to create a smooth horizon fade for the fabric lines.
+    // Animals sit at Z=0 (distance 6), so starting fog at 10 keeps them perfectly clear!
+    scene.fog = new THREE.Fog(bgColor, 10.0, 28.0); 
     
     camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
     camera.position.set(0, 3.5, 6);
 
     renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // Cap pixel ratio to 1 on mobile to save GPU fill-rate, max 2 on desktop
+    renderer.setPixelRatio(isMobileDevice ? 1 : Math.min(window.devicePixelRatio, 2));
 
     const updateSize = () => {
         const currentContainer = document.getElementById('webgl-container');
@@ -306,8 +310,21 @@ const humanSpline = [
         else humanMorphFactor = Math.max(0.0, humanMorphFactor - getSpeed(humanMorphFactor));
 
         const introRise = (1.0 - Math.min(Math.max(window.introProgress, 0), 1)) * -4.0;
-        const desktopOffset = window.innerWidth >= 1025 ? 1.0 : 0.0; // Moves 3D geometry up ~10% visually on desktop only
+        // Apply a downward shift of ~10% on desktop specifically for the fabric wave state
+        const winW = window.innerWidth;
+        const desktopFabricOffset = winW >= 1025 ? -1.0 : 0.0; 
         const influenceRadius = 4.5 + 2.0 * smoothMouseDown;
+
+        // Evaluate viewport scales ONCE per frame instead of 27,500 times inside the loop
+        const isMobile = winW < 768;
+        const isTablet = winW >= 768 && winW <= 1024;
+        const scale = isMobile ? 0.55 : (isTablet ? 0.75 : 1.0); 
+        let mY = 0.0, mX = 0.0;
+        if (isMobile) {
+            mY = 3.5;  mX = -0.5;
+        } else if (isTablet) {
+            mY = 2.8;  mX = 0.0;
+        }
 
         for (let r = 0; r < numLines; r++) {
             const line = linesArray[r];
@@ -325,7 +342,7 @@ const humanSpline = [
                 // --- STATE 0: Lifeless Waves (Abstract Silk Ocean) ---
                 const wave1 = Math.sin(fX * 0.3 + window.accumTime * 0.8 + fZ * 0.15);
                 const wave2 = Math.cos(fZ * 0.4 - window.accumTime * 0.5 + fX * 0.1);
-                let silkY = (wave1 + wave2) * 0.5;
+                let silkY = ((wave1 + wave2) * 0.5) + desktopFabricOffset;
 
                 // --- STATE 1: Continuous Line Animal (Upright facing camera) ---
                 const t = c / (pointsPerLine - 1);
@@ -336,22 +353,7 @@ const humanSpline = [
                 const sketchNoiseY = Math.cos(r * 8.7 - c * 0.1) * 0.15;
                 const sketchNoiseZ = Math.sin(r * 5.1 + c * 0.05) * 0.3; // 3D depth volume
 
-                // Responsive Viewport Scaling
-                const isMobile = window.innerWidth < 768;
-                const isTablet = window.innerWidth >= 768 && window.innerWidth <= 1024;
-                
-                const scale = isMobile ? 0.55 : (isTablet ? 0.75 : 1.0); 
-                
-                let mY = 0.0;
-                let mX = 0.0;
-                
-                if (isMobile) {
-                    mY = 3.5;  // ~10% upward shift
-                    mX = -0.5; // ~5% leftward shift
-                } else if (isTablet) {
-                    mY = 2.8;  // ~8% upward shift
-                    mX = 0.0;  // Centered horizontally
-                }
+
 
                 // --- STATE 1: Continuous Line Animal (Dog) ---
                 const splinePt1 = getCatmullRomPoint(t, animalSpline);
@@ -408,7 +410,7 @@ const humanSpline = [
                 const breathingY = Math.sin(window.accumTime * 2.0 + t * Math.PI) * 0.2 * (1.0 - waveWeight);
                 fY += breathingY;
                 
-                fY += introRise + desktopOffset;
+                fY += introRise;
 
                 // --- INTERACTION: Soft Magnetic Lift (Hover) ---
                 if (currentMouse.x !== 9999) {
@@ -422,8 +424,8 @@ const humanSpline = [
                         const inf = Math.exp(-distSq / (radiusSq * 0.15)); 
                         
                         // Gently lift the lines UP to meet the cursor, like plucking a string
-                        // Multiply by waveWeight so hover ONLY works on the first state (fabric lines)
-                        const liftHeight = (2.5 + smoothMouseDown * 2.0) * waveWeight;
+                        // Multiply by (1.0 - waveWeight) so hover ONLY works on the animal states, skipping the fabric lines
+                        const liftHeight = (2.5 + smoothMouseDown * 2.0) * (1.0 - waveWeight);
                         fY += inf * liftHeight;
                     }
                 }
