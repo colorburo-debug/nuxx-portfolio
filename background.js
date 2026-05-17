@@ -429,6 +429,10 @@ const humanSpline = [
                 
                 fY += breathingY + themeRipple;
                 
+                // Shift the sketches upwards by ~10% (1.0 unit) specifically on desktop when in a sketching state
+                const desktopSketchOffset = (winW >= 1025) ? 1.0 : 0.0;
+                fY += desktopSketchOffset * (1.0 - waveWeight);
+                
                 fY += introRise;
 
                 // --- INTERACTION: Soft Magnetic Lift (Hover) ---
