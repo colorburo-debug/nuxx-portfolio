@@ -58,8 +58,9 @@ const initWebGL = (explicitContainer) => {
     const bgColor = '#F7FBF8'; 
     scene.background = new THREE.Color(bgColor);
     // Pulled fog closer to create a smooth horizon fade for the fabric lines.
-    // Animals sit at Z=0 (distance 6), so starting fog at 10 keeps them perfectly clear!
-    scene.fog = new THREE.Fog(bgColor, 10.0, 28.0); 
+    // Animals sit at Z=0 (distance 6). Wide sketches can have a diagonal distance up to ~14.
+    // Starting fog at 16.0 guarantees the entire sketch remains intensely contrasted!
+    scene.fog = new THREE.Fog(bgColor, 16.0, 32.0); 
     
     camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
     camera.position.set(0, 3.5, 6);
