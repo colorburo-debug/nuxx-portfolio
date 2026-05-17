@@ -417,7 +417,7 @@ const humanSpline = [
                 // Organic Idle Breathing for Animals
                 const breathingY = Math.sin(window.accumTime * 2.0 + t * Math.PI) * 0.2 * (1.0 - waveWeight);
                 
-                // Expanding physical radial ring ripple when theme is toggled (amplitude reduced by 50% to 0.6 for subtle elegance)
+                // Expanding physical radial ring ripple when theme is toggled
                 let themeRipple = 0;
                 if (rippleTime < 4.0) {
                     const distToCenter = Math.sqrt(fX*fX + fZ*fZ);
@@ -429,8 +429,8 @@ const humanSpline = [
                 
                 fY += breathingY + themeRipple;
                 
-                // Shift the sketches upwards by 3% (0.3 units) specifically on desktop when in a sketching state
-                const desktopSketchOffset = (winW >= 1025) ? 0.3 : 0.0;
+                // Shift the sketches upwards by ~10% (1.0 unit) specifically on desktop when in a sketching state
+                const desktopSketchOffset = (winW >= 1025) ? 1.0 : 0.0;
                 fY += desktopSketchOffset * (1.0 - waveWeight);
                 
                 fY += introRise;
