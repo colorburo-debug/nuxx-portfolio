@@ -111,6 +111,7 @@ const getBgColor = (data) => {
         if (container.dataset.bodyClass.includes('lauhaus')) return '#f7fbf8';
         if (container.dataset.bodyClass.includes('gnb-lulo')) return '#f7fbf8';
         if (container.dataset.bodyClass === 'about-page') return '#f7fbf8';
+        if (container.dataset.bodyClass.includes('artifacts')) return '#111516';
     }
     
     // 2. Fallback to trigger link URL
@@ -118,16 +119,18 @@ const getBgColor = (data) => {
     if (url.includes('index.html') || url === '/' || url.endsWith('/')) return '#F7FBF8';
     if (url.includes('about')) return '#f7fbf8';
     if (url.includes('project')) return '#f7fbf8';
-
+    if (url.includes('artifacts')) return '#111516';
+ 
     // 3. Fallback to namespace
     const colors = {
         'home': '#F7FBF8',
         'about': '#f7fbf8',
-        'project': '#f7fbf8'
+        'project': '#f7fbf8',
+        'artifacts': '#111516'
     };
     return colors[data.next?.namespace] || '#1e1e1e';
 };
-
+ 
 barba.init({
     transitions: [{
         name: 'curtain-transition',
@@ -141,22 +144,22 @@ barba.init({
                 translateX: '-100%',
                 opacity: 1
             });
-
+ 
             // 2. Animate CURTAIN IN (from Left to Center)
             await gsap.to('#page-transition-curtain', {
                 translateX: '0%',
                 duration: 0.6,
                 ease: "power3.inOut"
             });
-
+ 
             // Fade out WebGL if leaving home
             if (data.current.namespace === 'home') {
                 gsap.to('#webgl-container', { opacity: 0, duration: 0.3 });
             }
-
+ 
             // Hide OLD content immediately once covered
             gsap.set(data.current.container, { opacity: 0 });
-
+ 
             done();
         },
         async enter(data) {
@@ -165,25 +168,28 @@ barba.init({
             if (bodyClass) {
                 document.body.className = bodyClass;
             }
-
+            if (data.next.namespace === 'home' && window.isDarkMode) {
+                document.body.classList.add('hero-dark-mode');
+            }
+ 
             // Ensure body background matches next color
             gsap.set('body', { backgroundColor: getBgColor(data) });
-
+ 
             // Reset scroll position while curtain is up
             window.scrollTo(0, 0);
-
+ 
             // Fade in WebGL if entering home
             if (data.next.namespace === 'home') {
                 gsap.to('#webgl-container', { opacity: 1, duration: 0.5 });
             }
-
+ 
             // 4. Animate CURTAIN OUT (from Center to Right)
             await gsap.to('#page-transition-curtain', {
                 translateX: '100%',
                 duration: 0.6,
                 ease: "power3.inOut"
             });
-
+ 
             // Reset curtain for next time
             gsap.set('#page-transition-curtain', { translateX: '-100%' });
         }
@@ -202,6 +208,11 @@ barba.init({
         }
     }, {
         namespace: 'project',
+        beforeEnter(data) {
+            if (window.initPage) window.initPage(data.next.container);
+        }
+    }, {
+        namespace: 'artifacts',
         beforeEnter(data) {
             if (window.initPage) window.initPage(data.next.container);
         }

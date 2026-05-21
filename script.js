@@ -63,13 +63,14 @@ const initCursor = () => {
     }
 };
 
-const updateCursorHover = () => {
+const updateCursorHover = (containerParent) => {
     const reticle = document.getElementById('cursor-reticle');
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
     if (reticle && !isTouchDevice) {
         // Re-query interactive elements after page transition
-        const interactiveElements = document.querySelectorAll(
+        const context = containerParent || document;
+        const interactiveElements = context.querySelectorAll(
             'a, button, .action-btn, .mobile-menu-toggle, .about-cta-pill, .interaction-indicator'
         );
         interactiveElements.forEach(el => {
@@ -115,20 +116,134 @@ const handleHeaderScroll = () => {
     }
 };
 
+// ─── initArtifacts ──────────────────────────────────────────
+const initArtifacts = (containerParent) => {
+    const context = containerParent || document;
+    const layout = context.querySelector('.artifacts-layout');
+    if (!layout) return;
+
+    const navItems = context.querySelectorAll('.artifacts-menu-item');
+
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const targetId = item.getAttribute('data-target');
+            const targetPanel = document.getElementById(targetId);
+            const activePanel = document.querySelector('.artifacts-panel.active');
+
+            if (!targetPanel || targetPanel === activePanel) return;
+
+            // Update active states on menu items
+            navItems.forEach(nav => nav.classList.remove('active'));
+            item.classList.add('active');
+
+            if (window.gsap) {
+                // Smooth crossfade with GSAP
+                window.gsap.to(activePanel, {
+                    opacity: 0,
+                    y: 10,
+                    duration: 0.25,
+                    onComplete: () => {
+                        activePanel.classList.remove('active');
+                        targetPanel.classList.add('active');
+                        window.gsap.fromTo(targetPanel, 
+                            { opacity: 0, y: -10 },
+                            { opacity: 1, y: 0, duration: 0.35 }
+                        );
+                    }
+                });
+            } else {
+                activePanel.classList.remove('active');
+                targetPanel.classList.add('active');
+            }
+        });
+    });
+
+    // Video auto-playback & interaction controller
+    const videos = context.querySelectorAll('.artifact-video');
+    videos.forEach(video => {
+        const container = video.closest('.video-player-mockup');
+        const progressBar = container ? container.querySelector('.progress-filled') : null;
+
+        // Prevent autoplay from fighting with manual pauses
+        let userPaused = false;
+
+        const updatePlayStateClass = () => {
+            if (video.paused) {
+                container.classList.remove('playing');
+            } else {
+                container.classList.add('playing');
+            }
+        };
+
+        if (container) {
+            container.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (video.paused) {
+                    userPaused = false;
+                    video.play().catch(err => console.warn("Video play error:", err));
+                } else {
+                    userPaused = true;
+                    video.pause();
+                }
+                updatePlayStateClass();
+            });
+        }
+
+        video.addEventListener('timeupdate', () => {
+            if (progressBar && video.duration) {
+                const percent = (video.currentTime / video.duration) * 100;
+                progressBar.style.width = `${percent}%`;
+            }
+        });
+
+        video.addEventListener('play', updatePlayStateClass);
+        video.addEventListener('pause', updatePlayStateClass);
+
+        // Play/Pause when entering/leaving viewport
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (!userPaused) {
+                            video.play().catch(err => {
+                                console.warn("Autoplay blocked by browser policy:", err);
+                            });
+                        }
+                    } else {
+                        video.pause();
+                    }
+                });
+            }, {
+                threshold: 0.3 // Play when 30% visible
+            });
+            observer.observe(video);
+        } else {
+            // Autoplay fallback
+            video.autoplay = true;
+            video.play().catch(err => console.warn("Autoplay fallback blocked:", err));
+        }
+    });
+};
+
 // ─── initPage ───────────────────────────────────────────────
 // Called by Barba.js beforeEnter hooks in animations.js.
-const initPage = () => {
+const initPage = (containerParent) => {
     console.log('Nuxx Page Initialized');
 
     // Always reset menu state on page enter
     closeMobileMenu();
 
     // Re-bind hover events for the new page content
-    updateCursorHover();
+    updateCursorHover(containerParent);
+
+    // Init artifacts page tabs if present
+    initArtifacts(containerParent);
 
     // Re-bind WebGL lifecycle
-    if (document.getElementById('webgl-container')) {
-        if (window.initWebGL) window.initWebGL();
+    const context = containerParent || document;
+    const webglContainer = context.querySelector('#webgl-container');
+    if (webglContainer) {
+        if (window.initWebGL) window.initWebGL(webglContainer);
     } else {
         window.isWebGLRunning = false;
     }

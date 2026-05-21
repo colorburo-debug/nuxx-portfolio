@@ -24,6 +24,10 @@ let isMouseDown = false;
 
 // Theme State Variables
 let isDarkMode = false;
+Object.defineProperty(window, 'isDarkMode', {
+    get: () => isDarkMode,
+    set: (val) => { isDarkMode = val; }
+});
 let rippleTime = 999.0; // Dynamic theme transition physical ripple timer
 const lightBgColor = new THREE.Color(0xF7FBF8);
 const darkBgColor = new THREE.Color(0x1E1E1E);
@@ -42,6 +46,14 @@ const pointsPerLine = isMobileDevice ? 120 : 250; // High resolution on desktop,
 const initWebGL = (explicitContainer) => {
     const container = explicitContainer || document.getElementById('webgl-container');
     if (!container) return;
+
+    // Sync theme toggle button and body classes based on isDarkMode state
+    const context = container.closest('[data-barba="container"]') || document;
+    const themeBtn = context.querySelector('#theme-toggle');
+    if (themeBtn) {
+        themeBtn.classList.toggle('is-dark', isDarkMode);
+    }
+    document.body.classList.toggle('hero-dark-mode', isDarkMode);
 
     if (isInitialized) {
         if (renderer.domElement.parentElement) renderer.domElement.parentElement.removeChild(renderer.domElement);
@@ -304,21 +316,7 @@ function precomputeSplines() {
 }
 precomputeSplines();
 
-        // Theme Toggle Listener
-        const themeBtn = document.getElementById('theme-toggle');
-        if (themeBtn) {
-            themeBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // Prevent morph toggle from triggering
-                isDarkMode = !isDarkMode;
-                themeBtn.classList.toggle('is-dark', isDarkMode);
-                
-                // Trigger a physical dynamic wave ripple across the fabric mesh
-                rippleTime = 0.0;
-                
-                // Toggle a specific class on the body to style the header appropriately in the Dark Hero
-                document.body.classList.toggle('hero-dark-mode', isDarkMode);
-            });
-        }
+
 
     const animate = () => {
         if (!document.getElementById('webgl-container') || !window.isWebGLRunning) {
@@ -586,7 +584,7 @@ precomputeSplines();
         const handleUp = () => { isMouseDown = false; };
         
         const toggleMorph = (e) => {
-            if (e && e.target && (e.target.closest('a') || e.target.closest('button'))) return;
+            if (e && e.target && (e.target.closest('a') || e.target.closest('button') || e.target.closest('#theme-toggle'))) return;
             currentState = (currentState + 1) % 4; // Toggle between 0 (Waves), 1 (Dog), 2 (Frog), 3 (Human)
             
             // Trigger cinematic camera sweep on click (eased outward)
@@ -599,6 +597,22 @@ precomputeSplines();
         window.addEventListener('touchstart', (e) => { handleMouseMove(e); handleDown(); }, { passive: true });
         window.addEventListener('touchend', handleUp, { passive: true });
         window.addEventListener('resize', () => { if (window.updateWebGLSize) window.updateWebGLSize(); });
+
+        // Delegated theme toggle listener (survives page transitions)
+        document.addEventListener('click', (e) => {
+            const themeBtn = e.target.closest('#theme-toggle');
+            if (themeBtn) {
+                e.stopPropagation(); // Prevent morph toggle from triggering
+                isDarkMode = !isDarkMode;
+                themeBtn.classList.toggle('is-dark', isDarkMode);
+                
+                // Trigger a physical dynamic wave ripple across the fabric mesh
+                rippleTime = 0.0;
+                
+                // Toggle a specific class on the body to style the header appropriately in the Dark Hero
+                document.body.classList.toggle('hero-dark-mode', isDarkMode);
+            }
+        });
 
         globalListenersBound = true;
     }
