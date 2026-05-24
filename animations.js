@@ -130,7 +130,6 @@ const getBgColor = (data) => {
     };
     return colors[data.next?.namespace] || '#1e1e1e';
 };
- 
 barba.init({
     transitions: [{
         name: 'curtain-transition',
