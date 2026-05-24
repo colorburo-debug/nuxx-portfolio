@@ -642,6 +642,21 @@ body.hero-dark-mode .webgl-vignette {
     background-color: var(--color-bg-primary);
 }
 
+/* Tablet & Mobile Responsive Header */
+@media (max-width: 1024px) {
+    .header-pill {
+        padding: 0 16px;
+    }
+
+    .header-nav-desktop {
+        display: none;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
+    }
+}
+
 /* Mobile Menu Overlay */
 .mobile-menu-overlay {
     position: fixed;

@@ -1055,28 +1055,6 @@ body.home-page .about-card {
 /* Responsive */
 /* Tablet Responsive Design (max-width: 1024px) */
 @media (max-width: 1024px) {
-    .header-wrapper {
-        padding: 8px;
-    }
-
-    .header-pill {
-        height: 64px;
-        padding: 0 16px;
-    }
-
-    .brand {
-        width: 40px;
-        height: 40px;
-    }
-
-    .header-nav-desktop {
-        display: none;
-    }
-
-    .mobile-menu-toggle {
-        display: flex;
-    }
-
     /* Responsive Hero Section */
     .hero-section {
         margin-top: 80px;
@@ -1350,27 +1328,7 @@ body.home-page .about-card {
 /* Removed mobile refined overrides */
 }
 
-/* Mobile Reponsive Design (max-width: 768px) */
-@media (max-width: 640px) {
 
-    /* Header & Nav */
-    .header-wrapper {
-        padding: 8px;
-    }
-
-/* Mobile Nav Toggle Overrides if needed, but they are handled in global block */
-
-
-
-
-    /* Footer Styles */
-
-
-
-    /* New Footer Styles */
-
-    /* Footer Styles - Standardized in consolidated block above */
-}
 
 
 /* --- PAGE SPECIFIC & OVERRIDE BLOCKS --- */
