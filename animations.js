@@ -168,21 +168,6 @@ barba.init({
             const bodyClass = data.next.container.dataset.bodyClass;
             if (bodyClass) {
                 document.body.className = bodyClass;
-                
-                // Swap page-specific stylesheet dynamically
-                let stylesheetName = '';
-                if (bodyClass === 'home-page') stylesheetName = 'home.css';
-                else if (bodyClass.includes('fincas')) stylesheetName = 'project-fincas.css';
-                else if (bodyClass.includes('lauhaus')) stylesheetName = 'project-lauhaus.css';
-                else if (bodyClass.includes('gnb-lulo')) stylesheetName = 'project-lulo.css';
-                else if (bodyClass.includes('designops')) stylesheetName = 'designops.css';
-                else if (bodyClass === 'about-page') stylesheetName = 'about.css';
-                else if (bodyClass.includes('artifacts')) stylesheetName = 'artifacts.css';
-
-                const pageStyleLink = document.getElementById('page-style');
-                if (pageStyleLink && stylesheetName) {
-                    pageStyleLink.href = `css/${stylesheetName}?v=cachebust102`;
-                }
             }
             if (data.next.namespace === 'home' && window.isDarkMode) {
                 document.body.classList.add('hero-dark-mode');
