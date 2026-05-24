@@ -28,25 +28,13 @@ A modern, geometric, and interactive portfolio website designed to showcase prod
 ```text
 ├── index.html           # Main portfolio landing page
 ├── about.html           # Dedicated About Me page
-├── artifacts.html       # Artifacts page
-├── project-fincas.html  # Fincas Case Study page
-├── project-gnb-lulo.html# GNB Lulo Bank Case Study page
-├── project-lauhaus.html # LaHaus Case Study page
-├── css/                 # Directory containing modular CSS files
-│   ├── global.css       # Global resets, themes, variables, and common sections
-│   ├── home.css         # Homepage-specific layouts and interactions
-│   ├── about.css        # About page-specific layout styles
-│   ├── case-studies.css # Shared case studies section layout styles
-│   ├── project-lauhaus.css # LaHaus PLP page-specific styles
-│   ├── project-fincas.css  # Fincas page-specific styles
-│   ├── project-lulo.css    # Lulo page-specific styles
-│   ├── artifacts.css    # Artifacts page-specific styles
-│   └── designops.css    # Design Operations legacy page styles
-├── utilities.css        # Shared global styling tokens and atomic utility classes
+├── styles.css           # Core styling, variables, and responsive media queries
 ├── script.js            # DOM interactions (Mobile Nav, Modals, Parallax elements)
 ├── background.js        # Three.js WebGL animation logic
-├── assets/              # Directory containing graphics and imagery assets
-└── dev-archive/         # Archive of legacy designs and experiments
+├── face_depth.png       # Displacement map texture used for the WebGL face morph
+├── nuxx-logo.svg        # Scalable Vector Graphic of the brand logo
+├── assets/              # Directory containing additional graphics (e.g., Sellos.svg)
+└── Cover *.jpg          # Case study thumbnail imagery
 ```
 
 ## Setup & Running Locally
