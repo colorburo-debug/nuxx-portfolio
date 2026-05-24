@@ -1,0 +1,316 @@
+/* --- About Me Page Styles --- */
+.about-page {
+    /* Footer Variables Override */
+    --footer-bg: var(--color-bg-primary);
+    --footer-divider: var(--color-card-text);
+    --footer-name-color: #898989;
+    --footer-text-color: var(--color-card-text);
+    --footer-link-hover: var(--color-bg-navy);
+    background-color: var(--color-bg-primary) !important;
+    color: var(--color-card-text);
+}
+
+/* Override body background to be light */
+.about-page .main-container {
+    background-color: transparent !important;
+}
+
+/* Home Page Custom Footer Gaps (32px Safe Gap) */
+@media (min-width: 768px) {
+    .home-page .site-footer .footer-content {
+        padding-left: 32px !important;
+        padding-right: 32px !important;
+        max-width: 1464px !important; /* 1400px Content + 32px Gaps */
+        margin: 0 auto !important;
+    }
+}
+
+/* Ensure WebGL is hidden when not on home-page through CSS as fallback */
+body:not(.home-page) #webgl-container {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Make sure nuxx logo is black in about page */
+.about-page .nuxx-logo-img {
+    filter: invert(1);
+    /* Assuming original is white */
+}
+
+/* About Hero */
+.about-hero-section {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Force specific 160px visual gap strictly from the bottom edge of the header for Desktop */
+@media (min-width: 1025px) {
+    .about-hero-section {
+        margin-top: 88px; /* Clears the 80px fixed header + 8px wrapper padding */
+        padding-top: 160px !important; /* The requested 160px gap */
+    }
+}
+
+.about-hero-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 88px;
+    margin-top: 56px;
+}
+
+@media (min-width: 1025px) {
+    .about-hero-content {
+        margin-top: 0 !important; /* Neutralizes old margins so gap is perfectly accurate */
+    }
+}
+
+.about-title-col {
+    flex-shrink: 0;
+}
+
+.about-title-large {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 400;
+    font-size: var(--text-5xl);
+    line-height: 64px;
+    margin: 0;
+    color: var(--color-card-text);
+}
+
+.about-desc-col {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    max-width: 737px;
+}
+
+.about-lead {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500;
+    font-size: var(--text-2xl);
+    line-height: 40px;
+    margin: 0;
+    color: var(--color-card-text);
+}
+
+.about-body p {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 400;
+    font-size: var(--text-base);
+    line-height: 1.77;
+    margin: 0 0 32px 0;
+    color: var(--color-card-text);
+}
+
+.about-body p:last-child {
+    margin-bottom: 0;
+}
+
+/* Professional Path Section */
+.professional-path-section {
+    padding-bottom: 104px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.professional-path-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 400;
+    font-size: 45px;
+    line-height: 64px;
+    margin: 0 0 32px 0;
+}
+
+.path-divider-thick {
+    width: 100%;
+    height: 4px;
+    background-color: var(--color-bg-navy);
+    margin-bottom: 8px;
+}
+
+.path-divider-thin {
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-bg-navy);
+    margin: 8px 0;
+    opacity: 0.2;
+}
+
+/* Experience Items */
+.experience-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.experience-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0;
+    min-height: 140px;
+    box-sizing: border-box;
+}
+
+.experience-left {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 878px;
+}
+
+.location-pill {
+    background-color: #c3fe0c;
+    color: var(--color-card-text);
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    line-height: 24px;
+    padding: 0 8px;
+    border-radius: 3.09px;
+    letter-spacing: 1.28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    height: 24px;
+    text-transform: uppercase;
+}
+
+.experience-role {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 600;
+    font-size: var(--text-2xl);
+    line-height: 1.2;
+    margin: 0;
+    color: var(--color-card-text);
+}
+
+.experience-desc {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 400;
+    font-size: var(--text-lg);
+    line-height: 32px;
+    margin: 0;
+    color: var(--color-bg-navy);
+}
+
+.experience-right {
+    display: flex;
+    align-items: center;
+}
+
+.experience-date {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    letter-spacing: 1.28px;
+    color: var(--color-card-text);
+    text-transform: uppercase;
+    text-align: right;
+}
+
+/* Custom Header for About Page */
+
+.about-page .header-pill {
+    background-color: var(--color-bg-dark) !important;
+}
+
+.about-page .header-nav-desktop .nav-link,
+.designops-page .header-nav-desktop .nav-link {
+    color: var(--color-bg-primary) !important;
+}
+
+.about-page .header-nav-desktop .nav-link:hover,
+.designops-page .header-nav-desktop .nav-link:hover {
+    color: #ffffff !important;
+}
+
+.about-page .nuxx-logo-img,
+.designops-page .nuxx-logo-img {
+    filter: invert(1) brightness(100) !important;
+}
+
+/* About Footer - Standardized */
+
+/* Menu toggle lines in mobile for about and designops page */
+.about-page .mobile-menu-toggle .menu-line,
+.designops-page .mobile-menu-toggle .menu-line {
+    background-color: var(--color-bg-primary) !important;
+}
+
+/* Responsive adjustments for Tablet/Mobile */
+@media (max-width: 1024px) {
+    .about-hero-content {
+        flex-direction: column;
+        gap: 40px;
+        margin-top: 40px;
+    }
+
+    .about-desc-col {
+        max-width: 100%;
+    }
+
+    /* Side paddings handled by .content-wrapper */
+
+
+    .experience-item {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 24px;
+        padding: 32px 0;
+    }
+
+    .experience-right {
+        align-self: flex-start;
+    }
+
+    .experience-date {
+        text-align: left;
+    }
+}
+
+@media (max-width: 640px) {
+    .about-hero-section {
+        padding-top: 104px;
+    }
+
+    .about-title-large {
+        font-size: var(--text-4xl);
+        line-height: 52px;
+    }
+
+    .about-lead {
+        font-size: var(--text-xl);
+        line-height: 36px;
+    }
+
+    .about-body p {
+        font-size: var(--text-base);
+    }
+
+    /* Side paddings handled by .content-wrapper */
+
+
+    .professional-path-title {
+        font-size: var(--text-2xl);
+        line-height: 40px;
+        margin-bottom: 24px;
+    }
+
+    .experience-role {
+        font-size: var(--text-xl);
+    }
+
+    .experience-desc {
+        font-size: var(--text-base);
+        line-height: 28px;
+    }
+
+    .experience-item {
+        padding: 24px 0;
+    }
+}

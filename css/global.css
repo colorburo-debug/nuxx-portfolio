@@ -1,0 +1,731 @@
+@import url('../utilities.css');
+
+:root {
+    /* Colors (Base Tokens) */
+    --color-bg-primary: #F7FBF8;     /* Hero Light Green Background */
+    --color-bg-dark: #1E1E1E;        /* Dark Navy/Black Accent / Section BG */
+    --color-bg-navy: #0D1327;        /* Case Study Dark Blue BG */
+    --color-bg-white: #FFFFFF;       /* Pure White BG */
+    
+    --color-accent: #1E1E1E;         /* Dark Navy/Black Accent */
+    --color-text-primary: #1E1E1E;   /* Dark text for light bg */
+    --color-text-secondary: #6F6F6F; /* Grey text for location */
+    --color-text-light: #FFFFFF;     /* Text on dark sections */
+    --color-card-bg: #F7FBF8;        /* Off-white for card */
+    --color-card-text: #090D1B;      /* Dark text for card */
+    --color-dark-section: #1E1E1E;   /* Section Background */
+
+    /* Fonts */
+    --font-heading: 'Unbounded', sans-serif;
+    --font-body: 'Outfit', sans-serif;
+
+    /* Typography Scale */
+    --text-xs: 14px;
+    --text-sm: 16px;
+    --text-base: 18px;
+    --text-lg: 20px;
+    --text-xl: 24px;
+    --text-2xl: 30px;
+    --text-3xl: 36px;
+    --text-4xl: 40px;
+    --text-5xl: 50px;
+    --text-6xl: 60px;
+
+    /* Spacing */
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 32px;
+    --spacing-xl: 64px;
+
+    /* Global Footer Variables (Default Dark) */
+    --footer-bg: #1E1E1E;
+    --footer-divider: #898989;
+    --footer-divider-opacity: 0.3;
+    --footer-name-color: #898989;
+    --footer-text-color: #F7FBF8;
+    --footer-link-hover: #E0E0E0;
+}
+
+
+/* FORCE DESKTOP FOOTER FIX (High Specificity - Top Injection) */
+@media (min-width: 1025px) {
+    .site-footer {
+        background-color: var(--footer-bg) !important;
+        position: relative !important;
+        z-index: 99 !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        padding-top: 0 !important;
+        padding-bottom: 48px !important;
+        box-sizing: border-box !important;
+    }
+
+    .footer-divider {
+        width: 100% !important;
+        height: 1px !important;
+        background-color: var(--footer-divider) !important;
+        opacity: var(--footer-divider-opacity) !important;
+        margin-bottom: 48px !important;
+        display: block !important;
+    }
+
+    .site-footer .footer-content {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding-left: 96px !important;
+        padding-right: 96px !important;
+        gap: 0 !important;
+        width: 100% !important;
+        max-width: 1592px !important;
+        box-sizing: border-box !important;
+    }
+
+    .site-footer .footer-contact {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        width: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        gap: 8px !important;
+    }
+
+    .site-footer .footer-links {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 72px !important;
+        width: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .footer-link,
+    .footer-link-social,
+    .footer-email {
+        display: inline-block !important;
+        padding-left: 0 !important;
+        width: auto !important;
+        color: var(--footer-text-color) !important;
+        font-family: var(--font-body) !important;
+        font-size: var(--text-xl) !important;
+        text-decoration: none !important;
+        line-height: 1.35 !important;
+        position: relative !important;
+        padding-bottom: 2px !important;
+        transition: color 0.3s ease !important;
+    }
+
+    .footer-link:hover,
+    .footer-link-social:hover,
+    .footer-email:hover {
+        color: var(--footer-link-hover) !important;
+    }
+
+    .footer-link::after,
+    .footer-link-social::after,
+    .footer-email::after {
+        content: '' !important;
+        position: absolute !important;
+        bottom: -2px !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 1.5px !important;
+        background-color: var(--footer-link-hover) !important;
+        transform: scaleX(0) !important;
+        transform-origin: right !important;
+        transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1) !important;
+    }
+
+    .footer-link:hover::after,
+    .footer-link-social:hover::after,
+    .footer-email:hover::after {
+        transform: scaleX(1) !important;
+        transform-origin: left !important;
+    }
+
+    .footer-name {
+        color: var(--footer-name-color) !important;
+        font-family: var(--font-body) !important;
+        font-size: var(--text-xl) !important;
+        line-height: 1.24 !important;
+        margin: 0 !important;
+    }
+
+    .footer-email {
+        line-height: 1.24 !important;
+    }
+
+    .link-arrow {
+        display: none !important;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#webgl-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Stretches dynamically to the exact edge of the next dark section */
+    height: 100%; 
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 1s cubic-bezier(0.27, 0, 0.51, 1);
+    opacity: 1; 
+}
+
+/* Fades the peripheral edges of the WebGL container into the background color to focus the light on the center sketches */
+.webgl-vignette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(circle, transparent 20%, var(--color-bg-primary) 95%);
+    transition: background 0.4s ease;
+}
+
+/* Spacer to maintain the exact design heights previously set for the hero frame */
+.hero-spacer {
+    width: 100%;
+    height: 700px;
+    position: relative;
+    z-index: 10;
+}
+
+@media (max-width: 1024px) {
+    .hero-spacer {
+        height: 500px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero-spacer {
+        height: 450px;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: var(--color-bg-dark);
+    transition: background-color 0.8s cubic-bezier(0.27, 0, 0.51, 1);
+}
+
+body {
+    transition: background-color 0.8s cubic-bezier(0.27, 0, 0.51, 1);
+}
+
+/* 
+   Home Page: Top overscroll is chartreuse, bottom is dark green 
+*/
+body.home-page {
+    background-color: var(--color-bg-primary) !important;
+}
+
+#page-transition-curtain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10000;
+    pointer-events: none;
+    transform: translateX(-100%);
+    background-color: var(--color-bg-dark);
+}
+
+/* LaHaus Page: All-white overscroll */
+html:has(.designops-page) {
+    background-color: var(--color-bg-primary) !important;
+}
+
+/* On mobile, override with pure white so no tinted gap appears */
+@media (max-width: 767px) {
+    html:has(.designops-page) {
+        background-color: #ffffff !important;
+    }
+}
+
+body {
+    margin: 0;
+    -webkit-overflow-scrolling: touch;
+    /* Ensure smooth momentum scroll */
+}
+
+.main-container {
+    width: 100%;
+    overflow-x: hidden;
+    /* Constrain horizontal overflow only on the wrapper */
+    position: relative;
+}
+
+body.designops-page {
+    background-color: var(--color-bg-primary) !important;
+}
+
+/* Main container */
+.main-container {
+    background-color: transparent !important;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Body Background Logic:
+   Top (Hero): Green (#c3fe0c) to back the WebGL and Text.
+   Bottom (Rest): Dark (#1e1e1e) to prevent green bleed in footer gap.
+*/
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-body);
+    /* Gradient REMOVED: Body is solid Green (#c3fe0c) for Section 1 background */
+    background-color: var(--color-bg-primary);
+    background-image: none;
+    /* background: linear-gradient(...) removed */
+    color: var(--color-card-text);
+    width: 100vw;
+    overflow-x: hidden;
+    position: relative;
+    /* Ensure body is a positioning context if needed */
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    cursor: none;
+    /* Custom cursor */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: none;
+    /* Custom cursor override */
+}
+
+/* Custom Cursor (Dot) */
+#cursor-reticle {
+    width: 8px;
+    height: 8px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+    transition: transform 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Hide custom cursor on touch devices */
+@media (hover: none) and (pointer: coarse) {
+    #cursor-reticle {
+        display: none !important;
+    }
+}
+
+/* #webgl-container second definition removed — consolidated above */
+
+/* Consistently define .main-container as full width */
+.main-container {
+    position: relative;
+    width: 100%;
+    /* max-width: 1440px moved to individual sections to allow full-width backgrounds */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Global Header & Overlay Nav */
+.header-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 8px;
+    /* updated from 16px to 8px */
+    box-sizing: border-box;
+    z-index: 100;
+}
+
+.header-pill {
+    background-color: var(--color-bg-dark);
+    border-radius: 5px;
+    box-shadow: none;
+    height: 64px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    box-sizing: border-box;
+    position: relative; /* Added to support absolute centering of the theme toggle */
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+/* Inverted Header State (for dark sections) */
+.header-pill.header-inverted {
+    background-color: var(--color-bg-primary) !important;
+}
+
+.header-pill.header-inverted .nav-link {
+    color: var(--color-bg-dark) !important;
+}
+
+.header-pill.header-inverted .nuxx-logo-img {
+    filter: none !important; /* Back to original dark logo */
+}
+
+.header-pill.header-inverted .menu-line {
+    background-color: var(--color-bg-dark) !important;
+}
+
+.brand {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+.nuxx-logo-img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    filter: invert(1) brightness(2); /* White by default for dark pill */
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+}
+
+.theme-reference-toggle {
+    background: #333333; /* Dark pill */
+    border: none;
+    border-radius: 30px;
+    cursor: none; 
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 68px;
+    height: 36px;
+    transition: background-color 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.centered-toggle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.theme-ref-thumb {
+    width: 28px;
+    height: 28px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    position: absolute;
+    left: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.4s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.icon-sun {
+    color: #333333;
+    position: absolute;
+    transition: opacity 0.3s ease, transform 0.4s ease;
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+.icon-moon {
+    color: #FFFFFF;
+    position: absolute;
+    transition: opacity 0.3s ease, transform 0.4s ease;
+    opacity: 0;
+    transform: rotate(-45deg);
+}
+
+/* Dark Mode State */
+.theme-reference-toggle.is-dark {
+    background: var(--color-bg-primary); /* Light pill */
+}
+
+.theme-reference-toggle.is-dark .theme-ref-thumb {
+    transform: translateX(32px);
+    background-color: var(--color-bg-dark); /* Black thumb */
+}
+
+.theme-reference-toggle.is-dark .icon-sun {
+    opacity: 0;
+    transform: rotate(45deg);
+}
+
+.theme-reference-toggle.is-dark .icon-moon {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+/* Interactive States */
+@media (hover: hover) and (pointer: fine) {
+    .theme-reference-toggle.centered-toggle:hover {
+        transform: translateX(-50%) scale(1.05);
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.15), 0 4px 12px rgba(0,0,0,0.2);
+    }
+}
+
+.theme-reference-toggle.centered-toggle:active {
+    transform: translateX(-50%) scale(0.92);
+}
+
+.theme-reference-toggle:active .theme-ref-thumb {
+    width: 32px;
+}
+.theme-reference-toggle.is-dark:active .theme-ref-thumb {
+    transform: translateX(28px);
+}
+
+/* Mobile Friendly Adjustments */
+@media screen and (max-width: 767px) {
+    .theme-reference-toggle {
+        width: 60px;
+        height: 32px;
+    }
+    .theme-ref-thumb {
+        width: 24px;
+        height: 24px;
+    }
+    .theme-reference-toggle.is-dark .theme-ref-thumb {
+        transform: translateX(28px);
+    }
+    .theme-reference-toggle.is-dark:active .theme-ref-thumb {
+        transform: translateX(24px);
+    }
+    .icon-sun, .icon-moon {
+        transform: scale(0.85); /* Slightly scale down icons */
+    }
+    .theme-reference-toggle.is-dark .icon-sun {
+        transform: scale(0.85) rotate(45deg);
+    }
+    .theme-reference-toggle.is-dark .icon-moon {
+        transform: scale(0.85) rotate(0deg);
+    }
+}
+
+/* Hide the toggle when scrolled past the hero */
+.header-past-hero .theme-reference-toggle {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translate(-50%, -10px) scale(0.9) !important;
+}
+
+/* Custom Header State when Dark Hero is Active */
+body.hero-dark-mode .nav-link {
+    color: var(--color-bg-primary) !important; 
+}
+
+body.hero-dark-mode .nav-link:hover {
+    color: var(--color-bg-primary) !important; 
+}
+
+body.hero-dark-mode .nav-link::after {
+    background-color: var(--color-bg-primary) !important;
+}
+
+/* Custom Hero Text State when Dark Hero is Active */
+body.hero-dark-mode .hero-name,
+body.hero-dark-mode .hero-main-description {
+    color: var(--color-bg-primary) !important;
+    transition: color 0.4s ease;
+}
+
+/* Custom Interaction Indicator State when Dark Hero is Active */
+body.hero-dark-mode .interaction-indicator svg rect {
+    stroke: var(--color-bg-primary);
+    transition: stroke 0.4s ease, fill 0.4s ease;
+}
+
+body.hero-dark-mode .interaction-indicator svg rect.scroll-wheel-anim {
+    fill: var(--color-bg-primary);
+    stroke: none;
+}
+
+body.hero-dark-mode .webgl-vignette {
+    background: radial-gradient(circle, transparent 20%, var(--color-bg-dark) 95%);
+}
+
+.header-nav-desktop {
+    display: flex;
+    gap: 48px;
+    align-items: center;
+}
+
+.nav-link {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 600;
+    font-size: var(--text-base);
+    line-height: 1.35;
+    color: var(--color-bg-primary);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.nav-link:hover {
+    color: #ffffff !important;
+}
+
+.nav-link::after {
+    background-color: currentColor;
+}
+
+/* Fix for when the header inverses to Light mode (scrolling down to work section) */
+.header-pill.header-inverted .nav-link:hover {
+    color: #000000 !important;
+}
+
+.header-pill.header-inverted .nav-link::after {
+    background-color: var(--color-bg-dark) !important;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    flex-direction: column;
+    gap: 8px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.menu-line {
+    width: 26px;
+    height: 3px;
+    background-color: var(--color-bg-primary);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-bg-dark);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Center links vertically */
+    box-sizing: border-box;
+    transform: translateY(-100%);
+    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    overflow: hidden;
+    /* Prevent overflow/scrolling */
+}
+
+.mobile-menu-overlay.active {
+    transform: translateY(0);
+}
+
+.mobile-menu-close {
+    position: absolute;
+    top: 32px;
+    right: 24px; /* Updated to 24px */
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 201;
+}
+
+.close-line {
+    position: absolute;
+    width: 25px;
+    height: 3px;
+    background-color: #eeeff3;
+}
+
+.close-line.line-1 {
+    transform: rotate(45deg);
+}
+
+.close-line.line-2 {
+    transform: rotate(-45deg);
+}
+
+.mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    padding: 0 24px; /* Updated to 24px */
+}
+
+.mobile-nav-item {
+    font-family: 'Roobert', sans-serif;
+    font-size: var(--text-5xl);
+    line-height: 1.35;
+    color: #eeeff3;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-nav-item .nav-arrow {
+    flex-shrink: 0;
+}
+
+.nav-divider {
+    height: 1px;
+    width: 100%;
+    background-color: rgba(238, 239, 243, 0.2);
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+/* Hero Section - Restored and Refined */

@@ -1,0 +1,861 @@
+/* ========================================================================= */
+/* LAHAUS DESIGN OPS PAGE STYLES                                            */
+/* ========================================================================= */
+
+.designops-page {
+    background-color: var(--color-bg-primary) !important;
+    color: var(--color-bg-navy);
+}
+
+.designops-page .header-pill {
+    background-color: var(--color-bg-dark);
+    /* Dark header for this page */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Back Button */
+.back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    cursor: none;
+    transition: transform 0.2s ease;
+}
+
+.back-button:hover {
+    transform: scale(1.1);
+}
+
+.light-text {
+    color: #eeeff3 !important;
+}
+
+.bg-light {
+    background-color: var(--color-bg-primary) !important;
+}
+
+.designops-page .ops-hero-section {
+    padding-top: 192px;
+    padding-bottom: 88px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    padding-left: 96px;
+    padding-right: 96px;
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
+    margin: 0 auto;
+}
+
+.ops-hero-title {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500;
+    font-size: 55px;
+    /* Desktop size */
+    line-height: 1.17;
+    margin: 0 auto;
+    max-width: 924px;
+    text-align: center;
+}
+
+.ops-hero-subtitle {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 32px;
+    margin: 0 auto;
+    max-width: 593px;
+    color: var(--color-bg-navy);
+    text-align: center;
+}
+
+/* Internal Visual/Legend */
+.ops-visual-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 96px;
+    /* Desktop side padding */
+}
+
+.ops-image-container {
+    width: 100%;
+    max-width: 1000px;
+    /* Constrain wide diagram */
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.ops-main-diagram {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.desktop-img {
+    display: block;
+}
+
+.mobile-img {
+    display: none;
+}
+
+.ops-legend {
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    /* Space between legend items */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 40px 0;
+}
+
+.legend-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+}
+
+.legend-dot {
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.dot-leads {
+    background-color: #F07777;
+}
+
+.dot-designers {
+    background-color: #F5C568;
+}
+
+.dot-coe {
+    background-color: #686EF5;
+}
+
+.legend-text {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500;
+    font-size: var(--text-lg);
+    color: var(--color-bg-navy);
+}
+
+/* Description Text Section */
+.designops-page .ops-description-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
+    margin: 0 auto;
+    padding: 104px 96px 56px 96px;
+    text-align: left;
+    gap: 24px;
+}
+
+.ops-desc-title,
+.ops-desc-text {
+    max-width: 728px;
+    margin: 0;
+}
+
+.ops-desc-title {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500;
+    font-size: var(--text-2xl);
+    line-height: 40px;
+    margin: 0;
+    width: 100%;
+}
+
+.ops-desc-text {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 400;
+    font-size: var(--text-lg);
+    line-height: 32px;
+    margin: 0;
+    width: 100%;
+}
+
+/* Background divider wrapper for bottom sections */
+.ops-bg-wrapper {
+    position: relative;
+    padding-top: 48px;
+    /* Add some padding before title */
+    background-color: #ffffff;
+    border-top: 1px solid var(--color-bg-dark);
+    width: 100%;
+    /* To overlay webgl if any */
+}
+
+.ops-header-title {
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
+    margin: 0 auto;
+    padding: 144px 96px 64px 96px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.ops-highlights-title {
+    padding: 80px 96px 40px 96px;
+    /* Aligned with Outcome Group (94px) */
+    width: 100%;
+}
+
+.ops-section-main-title {
+    max-width: 1158px;
+    width: 100%;
+}
+
+.ops-section-main-title {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500;
+    font-size: var(--text-5xl);
+    line-height: 58px;
+    color: var(--color-bg-navy);
+    margin: 0;
+}
+
+/* Stats Section */
+.designops-page .ops-stats-section {
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
+    margin: 0 auto;
+    padding: 32px 96px 136px 96px;
+    /* Desktop padding */
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    justify-content: flex-start;
+}
+
+.stats-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.ops-heading {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+    margin: 0;
+    line-height: 50px;
+}
+
+.stats-boxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 16px 24px;
+    /* Row Gap / Col Gap */
+}
+
+.stats-col-single {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.stat-box {
+    background-color: white;
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    padding: 16px 8px 16px 16px;
+    /* Consistent inner padding */
+    border: 1px solid rgba(13, 19, 39, 0.5);
+    border-radius: 4px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Specific Box widths for desktop */
+.box-product.box-wide {
+    width: 250px;
+}
+
+.box-product.box-half {
+    width: 200px;
+}
+
+.box-company.box-full {
+    width: 320px;
+}
+
+.stat-label {
+    font-family: 'Roobert', var(--font-body);
+    font-size: var(--text-base);
+    line-height: 23px;
+    color: var(--color-bg-navy);
+    margin-left: 0;
+    white-space: nowrap;
+}
+
+
+/* Outcome Groups */
+.ops-outcome-group {
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
+    margin: 0 auto;
+    padding: 64px 96px 88px 96px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease-in-out;
+}
+
+.ops-outcome-group:last-of-type {
+    padding-bottom: 152px;
+}
+
+.ops-outcome-header {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+.ops-outcome-title {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 50px;
+    margin: 0;
+    color: var(--color-bg-navy);
+}
+
+.ops-outcome-divider {
+    height: 3px;
+    background-color: var(--color-bg-navy);
+    /* Fallback line color */
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 48px;
+}
+
+.bg-gradient-blue {
+    background: linear-gradient(90deg, #686ef5 0%, #88c5f8 100%);
+}
+
+.bg-gradient-purple {
+    background: linear-gradient(90deg, #a958fa 0%, #d88ffa 100%);
+}
+
+.ops-outcome-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 120px;
+    /* Space between the two columns */
+    padding: 0;
+    /* Flush left with the title and headers */
+}
+
+.ops-outcome-col {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.outcome-item {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 48px;
+    padding: 0;
+}
+
+.outcome-item.mb-0 {
+    margin-bottom: 0;
+}
+
+.outcome-item-title {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 600;
+    font-size: var(--text-lg);
+    line-height: 24px;
+    margin: 0;
+}
+
+.outcome-item-desc {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 400;
+    font-size: var(--text-lg);
+    line-height: 32px;
+    margin: 0;
+}
+
+.outcome-note {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 600;
+    font-size: var(--text-xs);
+    line-height: 28px;
+    margin: 0;
+    margin-top: 16px;
+}
+
+.desktop-only {
+    display: inline;
+}
+
+/* Override Footer */
+.designops-footer .footer-divider {
+    background-color: var(--color-bg-dark) !important;
+    opacity: 0.3 !important;
+}
+
+.designops-footer {
+    background-color: var(--color-bg-primary) !important;
+    /* Footer bg matches page */
+}
+
+/* text-dark classes for footer */
+.text-dark {
+    color: var(--color-bg-dark) !important;
+    position: relative !important;
+    padding-bottom: 2px !important;
+    transition: color 0.3s ease !important;
+}
+
+.text-dark:hover {
+    color: #000 !important;
+}
+
+.text-dark::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: -2px !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 1.5px !important;
+    background-color: var(--color-bg-dark) !important;
+    transform: scaleX(0) !important;
+    transform-origin: right !important;
+    transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1) !important;
+}
+
+.text-dark:hover::after {
+    transform: scaleX(1) !important;
+    transform-origin: left !important;
+}
+
+/* Responsive Adjustments */
+
+@media (max-width: 1024px) {
+
+    /* Tablet Adjustments for LaHaus Design Ops */
+
+    /* 1. Hero Section */
+    .designops-page .ops-hero-section {
+        padding-left: 32px;
+        padding-right: 32px;
+        align-items: center;
+        text-align: center;
+        padding-top: 176px;
+        /* Based on pt-75 but including header space */
+        padding-bottom: 64px;
+        gap: 40px;
+    }
+
+    .designops-page .ops-hero-title {
+        font-size: 55px;
+        /* Sizing from Node 501:512 */
+        line-height: 1.17;
+        text-align: center;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .designops-page .ops-hero-subtitle {
+        text-align: center;
+        max-width: 568px;
+        margin: 0 auto;
+    }
+
+    /* Highlights Title Layout */
+    .designops-page .ops-header-title {
+        padding: 64px 32px 32px 32px;
+    }
+
+    .designops-page .ops-highlights-title {
+        padding: 112px 104px 64px 32px;
+        width: 100%;
+        text-align: left;
+    }
+
+    .designops-page .ops-section-main-title {
+        font-size: var(--text-5xl);
+        line-height: 58px;
+        text-align: left;
+        width: 100%;
+    }
+
+    .ops-hero-subtitle {
+        font-size: 22px;
+        /* Sizing from Node 501:513 */
+    }
+
+    /* 2. Visual Section (Legend Circles) */
+    .ops-legend {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 24px;
+        justify-content: center;
+        padding-top: 16px;
+        padding-bottom: 32px;
+    }
+
+    /* 3. Description Section */
+    .ops-description-section {
+        padding: 48px 32px 64px 32px;
+    }
+
+    /* 4. Stats Section (Product / Company) */
+    .ops-stats-section {
+        padding: 40px 32px 136px 32px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0px;
+    }
+
+    .stats-col {
+        width: 100%;
+        gap: 0;
+    }
+
+    .ops-heading {
+        margin-bottom: 24px;
+        width: 100%;
+    }
+
+    /* Product Grid: Row on Tablet, wrapping as needed */
+    .stats-boxes {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 16px 16px;
+        margin-bottom: 32px;
+    }
+
+    .box-product.box-wide {
+        width: auto;
+        min-width: 192px;
+    }
+
+    .box-product.box-half {
+        width: auto;
+        min-width: 128px;
+    }
+
+    /* Company Column: Horizontal on Tablet, stacked on Mobile */
+    .stats-col-single {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 16px 16px;
+        width: 100%;
+    }
+
+    .box-company.box-full {
+        width: auto;
+        min-width: 272px;
+        height: auto;
+    }
+
+    .designops-page .stat-label {
+        white-space: nowrap;
+    }
+
+    /* 5. Outcomes Section */
+    .ops-outcome-group {
+        padding: 64px 32px 88px 32px;
+        /* Tablet margin offsets */
+    }
+
+    .ops-outcome-header {
+        margin-bottom: 0px;
+    }
+
+    .ops-outcome-grid {
+        flex-direction: column;
+        gap: 64px;
+    }
+
+    .desktop-only {
+        display: none;
+    }
+
+    /* 6. Footer Adjustments — designops tablet fix */
+    /* Same fix as mobile: the 56px padding-top from the global .site-footer tablet
+       rule creates a gray/tinted band between the white ops-bg-wrapper and the
+       footer divider. We remove it and set the background to pure white to match. */
+    .designops-footer {
+        --footer-bg: #ffffff !important;
+        --footer-text-color: var(--color-bg-dark) !important;
+        --footer-name-color: #898989 !important;
+        --footer-link-hover: #000 !important;
+        background-color: #ffffff !important;
+        padding-top: 0 !important;
+    }
+
+    .designops-footer .footer-name {
+        color: #898989 !important;
+    }
+
+    .designops-footer .footer-email,
+    .designops-footer .footer-link,
+    .designops-footer .footer-link-social {
+        color: var(--color-bg-dark) !important;
+    }
+
+    .designops-footer .footer-divider {
+        background-color: var(--color-bg-dark) !important;
+        opacity: 0.3 !important;
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    /* Mobile styles overrides */
+    .designops-page .ops-hero-section {
+        padding-top: 136px;
+        padding-bottom: 64px;
+        padding-left: 24px;
+        padding-right: 24px;
+        align-items: center;
+        text-align: center;
+        gap: 32px;
+    }
+
+    .designops-page .ops-hero-title {
+        font-size: var(--text-2xl);
+        line-height: 1.19;
+        text-align: center;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .designops-page .ops-hero-subtitle {
+        font-size: var(--text-xl);
+        line-height: 1.5;
+        text-align: center;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .ops-visual-section {
+        padding: 0 8px;
+        /* Mobile edge padding */
+    }
+
+    .desktop-img {
+        display: none;
+    }
+
+    .mobile-img {
+        display: block;
+        width: 100%;
+    }
+
+    .ops-visual-section .ops-image-container {
+        margin-bottom: 0;
+    }
+
+    .ops-legend {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 16px 24px;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 24px 8px 56px 8px;
+        width: 100%;
+    }
+
+    .legend-dot {
+        width: 24px;
+        height: 24px;
+    }
+
+    .legend-text {
+        font-size: var(--text-sm);
+    }
+
+    .designops-page .ops-description-section {
+        padding: 48px 24px 64px 24px;
+        align-items: flex-start;
+        text-align: left;
+        gap: 40px;
+    }
+
+    .designops-page .ops-desc-title {
+        font-size: var(--text-xl);
+        line-height: 1.5;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .designops-page .ops-desc-text {
+        font-size: var(--text-base);
+        line-height: 1.77;
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .designops-page .ops-header-title {
+        padding: 64px 24px 32px 24px;
+    }
+
+    .designops-page .ops-highlights-title {
+        padding: 80px 24px 48px 24px;
+        text-align: left;
+    }
+
+    .designops-page .ops-section-main-title {
+        font-size: var(--text-2xl);
+        line-height: 1.19;
+        text-align: left;
+        width: 100%;
+        margin: 0;
+    }
+
+    .designops-page .ops-stats-section {
+        padding: 64px 24px 80px 24px;
+        flex-direction: column;
+        gap: 40px;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .designops-page .stats-col {
+        width: 100%;
+        gap: 0;
+        align-items: flex-start;
+    }
+
+    .designops-page .ops-heading {
+        margin-bottom: 24px;
+        text-align: left;
+        line-height: 1.2;
+    }
+
+    .designops-page .stats-boxes {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 16px 16px;
+        justify-content: flex-start;
+    }
+
+    .designops-page .stats-col-single {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 16px 16px;
+        align-items: flex-start;
+    }
+
+    .designops-page .box-product.box-wide {
+        width: max-content;
+        min-width: 192px;
+        box-sizing: border-box;
+        justify-content: flex-start;
+    }
+
+    .designops-page .box-product.box-half {
+        width: max-content;
+        min-width: 128px;
+        box-sizing: border-box;
+        justify-content: flex-start;
+    }
+
+    .designops-page .box-company.box-full {
+        width: 100%;
+        max-width: 272px;
+        box-sizing: border-box;
+        justify-content: flex-start;
+    }
+
+    .designops-page .stat-box {
+        padding: 16px 16px 16px 16px;
+    }
+
+    .designops-page .stat-label {
+        font-size: var(--text-base);
+        margin-left: 0;
+        white-space: nowrap;
+        text-align: left;
+    }
+
+    .ops-outcome-group {
+        padding: 64px 24px 88px 24px;
+    }
+
+    .ops-outcome-group:last-of-type {
+        padding-bottom: 128px;
+    }
+
+    .ops-outcome-header {
+        margin-left: -24px;
+        margin-right: -24px;
+        width: calc(100% + 48px);
+        margin-bottom: 0px;
+    }
+
+    .ops-outcome-title {
+        padding-left: 24px;
+    }
+
+    .ops-outcome-grid {
+        padding: 0;
+    }
+
+    .outcome-col-title {
+        font-size: var(--text-2xl);
+    }
+
+    .outcome-item-desc {
+        font-size: var(--text-base);
+        line-height: 1.77;
+    }
+
+    /* Fix: The main container is transparent, letting the body background
+       (#f7fbf8) show through the gap after the white ops-bg-wrapper ends.
+       Setting the main container to white on mobile makes the entire background
+       uniform, eliminating the visible color boundary above the footer divider. */
+    body.designops-page {
+        background-color: #ffffff !important;
+    }
+
+    body.designops-page main.ops-main,
+    .designops-page .ops-main {
+        background-color: #ffffff !important;
+    }
+
+    .designops-page .ops-bg-wrapper {
+        flex-grow: 1;
+        padding-bottom: 0 !important;
+    }
+
+    .designops-footer {
+        margin-top: 0 !important;
+    }
+}

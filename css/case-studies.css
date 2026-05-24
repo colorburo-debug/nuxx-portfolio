@@ -1,0 +1,122 @@
+/* 20. Case Study Hero Stability & Alignment */
+.gnb-lulo-hero {
+    padding-top: 198px !important; /* 88px Header + 110px Gap */
+    padding-bottom: 0 !important; /* Gap now handled by title margin for better enforcement */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+@media screen and (max-width: 1024px) {
+    .gnb-lulo-hero {
+        padding-top: 198px !important;
+        padding-bottom: 0 !important;
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .gnb-lulo-hero {
+        padding-top: 198px !important;
+        padding-bottom: 0 !important;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
+
+.hero-intro {
+    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: 1400px !important;
+    display: flex !important;
+    justify-content: center !important; /* Group them in the center */
+    gap: 144px !important; /* Standard wide gap while being centered */
+    text-align: left !important; /* Keep text aligned left within centered blocks */
+}
+
+@media screen and (max-width: 1024px) {
+    .hero-intro {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 32px !important;
+    }
+    
+    .hero-intro-left, .hero-intro-right {
+        width: 100% !important;
+        max-width: 600px !important; /* Constrain for readability when centered */
+    }
+}
+
+
+/* 22. PERFECT ALIGNMENT FIX (Aligning Hero and Projects) */
+@media screen and (min-width: 1025px) {
+    .gnb-lulo-hero {
+        padding-top: 160px;
+    }
+
+    .hero-intro {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        gap: 144px; /* Airy Gap */
+    }
+}
+
+/* Ensure projects also follow the 1400px center at desktop */
+@media screen and (min-width: 1025px) {
+    .case-study-card {
+        gap: 48px !important;
+    }
+    
+    .card-image, .card-content-row, .case-actions {
+        width: 100% !important;
+        max-width: 1400px !important;
+    }
+}
+
+
+/* --- SHARED CASE STUDY LAYOUTS --- */
+
+/* --- Universal Scroll Indicator Styles --- */
+.interaction-indicator {
+    /* Base styles were already positioned, simply adding the wheel animation */
+    /* Remove original button pulse animation for the cleaner Mouse UX */
+    animation: none !important;
+}
+
+.scroll-wheel-anim {
+    animation: scrollMouseWheel 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+    transform-origin: center;
+}
+
+@keyframes scrollMouseWheel {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    30% {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    31% {
+        transform: translateY(-8px);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+

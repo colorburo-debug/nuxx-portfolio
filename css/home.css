@@ -1,0 +1,2156 @@
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin: 92px auto 0 auto;
+    padding-top: 120px; /* Reduced 25% */
+    padding-bottom: 96px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 10;
+    overflow: visible !important;
+}
+
+/* Fix for 'Flash of Unstyled Content' (FOUC). Hides elements while JS loads GSAP. */
+body.home-page .hero-name,
+body.home-page .hero-location,
+body.home-page .hero-main-description,
+body.home-page .interaction-indicator,
+body.home-page .about-card {
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.hero-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 32px;
+    margin: 0 0 0 0; /* Margin removed to allow container flow */
+}
+
+.hero-intro-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0; 
+    flex-shrink: 0;
+
+    width: 331px;
+}
+
+.hero-name {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 600; /* SemiBold */
+    font-size: 22px;
+    line-height: 1.44;
+    color: var(--color-bg-dark);
+    margin: 0 0 4px 0; /* Applied 4px bottom margin from mobile standard */
+}
+
+.hero-location {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500; /* Medium */
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.hero-intro-right {
+    flex: 0 1 670px; /* Allows the description to shrink gracefully after the gap hits 32px */
+    max-width: 670px;
+}
+
+.hero-main-description {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500; /* Medium */
+    font-size: 22px;
+    line-height: 1.68;
+    color: var(--color-bg-dark);
+    margin: 0;
+}
+
+/* About Me Card - REBUILT for FIGMA PRECISION (Desktop, Tablet, Mobile) */
+.about-card {
+    background-color: var(--color-text-secondary) !important;
+    border-radius: 10px !important;
+    margin: -146px auto 96px auto !important; /* Overlap by 146px to match Figma, 96px bottom gap */
+    display: flex !important;
+    flex-direction: row-reverse !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 16px 56px 14px 56px !important;
+    gap: 56px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    position: relative !important;
+    min-height: 424px !important;
+    z-index: 20 !important;
+}
+
+/* --- END ABOUT ME CARD FINALIZED IMPLEMENTATION --- */
+
+.about-card-visuals {
+    width: 38% !important; /* Percentage weight */
+    height: 394px !important; /* Fixed height from Figma preserved */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    transform: none !important;
+}
+
+.about-card-content-wrapper {
+    width: 52% !important; /* Percentage weight */
+    max-width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 56px !important;
+    align-items: flex-start !important;
+}
+
+.about-card-title {
+    font-family: 'Roobert', var(--font-body) !important;
+    font-weight: 400 !important; /* Regular in Figma code */
+    font-size: 34px !important;
+    line-height: 1.4 !important; /* 47.6px from Figma */
+    color: var(--color-bg-primary) !important;
+    margin: 0 !important;
+    text-align: left !important;
+}
+
+.about-card-title .strikethrough {
+    text-decoration: line-through !important;
+    text-decoration-thickness: 1px !important;
+}
+
+.about-cta-pill {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 442px !important;
+    height: 64px !important;
+    background-color: var(--color-bg-primary) !important;
+    border: 2px solid var(--color-bg-primary) !important; /* border-2 in Figma code */
+    border-radius: 100px !important;
+    padding: 0 40px !important;
+    box-sizing: border-box !important;
+    color: var(--color-bg-dark) !important;
+    font-family: 'Roobert', var(--font-body) !important;
+    font-weight: 500 !important;
+    font-size: var(--text-lg) !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.about-cta-pill:hover {
+    background-color: var(--color-bg-dark) !important;
+    color: var(--color-bg-primary) !important;
+}
+
+.cta-icon-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 17px !important;
+    height: 15px !important;
+    pointer-events: none !important;
+}
+
+.cta-icon-wrapper svg {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+}
+
+.vector-image {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important; /* Best to show the whole graphic clearly */
+}
+
+/* Tablet - Artboard 744px */
+@media (max-width: 1024px) {
+    .about-card {
+        flex-direction: column !important;
+        padding: 89px 48px 89px 48px !important; /* Bottom gap matched to 89px top gap */
+        gap: 57px !important;
+        width: 100% !important;
+        max-width: none !important; 
+        min-height: auto !important;
+        margin-top: 120px !important;
+        margin-bottom: 96px !important;
+    }
+
+    .about-card-visuals {
+        flex: 0 1 auto !important;
+        width: 100% !important;
+        max-width: 526px !important;
+        order: 1 !important; /* Visuals TOP */
+        margin-bottom: 0 !important;
+    }
+
+    .about-card-content-wrapper {
+        flex: 0 1 auto !important;
+        max-width: 584px !important;
+        width: 100% !important;
+        align-items: flex-start !important;
+        order: 2 !important; /* Content BOTTOM */
+        gap: 56px !important;
+    }
+
+    .about-card-title {
+        font-size: 34px !important;
+        text-align: left !important; /* Aligned left in Tablet content frame */
+    }
+
+    .about-cta-pill {
+        width: 100% !important;
+        max-width: 584px !important;
+        height: 72px !important;
+    }
+}
+
+/* Mobile - Artboard 390px */
+@media (max-width: 767px) {
+    .about-card {
+        padding: 54px 24px 64px 24px !important; /* Top gap reduced by 15% (64px -> 54px) */
+        gap: 20px !important; /* Spacing between the image and the content block set to 20px */
+        width: 100% !important;
+        max-width: none !important;
+        min-height: auto !important;
+        margin-top: 100px !important;
+        margin-bottom: 88px !important;
+    }
+
+    .about-card-visuals {
+        width: 100% !important;
+        max-width: none !important;
+        height: auto !important; /* Removed fixed height to eliminate internal gaps and use the exact 20px gap below */
+    }
+
+    .about-card-content-wrapper {
+        width: 100% !important;
+        max-width: none !important;
+        padding: 0 !important;
+        gap: 51px !important;
+    }
+
+    .about-card-title {
+        font-size: var(--text-xl) !important;
+        line-height: 37px !important; /* ~154% */
+    }
+
+    .about-cta-pill {
+        width: 100% !important;
+        max-width: none !important;
+        height: 64px !important;
+        font-size: var(--text-sm) !important;
+        padding: 0 25px !important;
+    }
+}
+
+@media (max-width: 1250px) and (min-width: 1025px) {
+    /* Removed intermediate desktop overrides */
+}
+
+.about-card-visuals img {
+    display: block;
+}
+
+@media (max-width: 1024px) {
+    .hero-section {
+        padding-top: 400px;
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .hero-intro {
+        flex-direction: column;
+        gap: 32px;
+        margin-bottom: 120px;
+    }
+
+    .hero-intro-right {
+        max-width: 100%;
+    }
+
+/* Removed tablet overrides */
+}
+
+@media (max-width: 767px) {
+    .hero-section {
+        padding-top: 0;
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 96px;
+        position: relative;
+    }
+
+    .hero-intro {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 32px 24px;
+        margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        box-sizing: border-box;
+    }
+
+    .hero-intro-left {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 4px; 
+    }
+
+    .hero-name {
+        font-size: 22px;
+        line-height: 1.44;
+        font-weight: 600;
+        color: var(--color-bg-dark);
+    }
+
+    .hero-location {
+        font-size: 22px;
+        line-height: 1.4;
+        font-weight: 500;
+        color: var(--color-text-secondary);
+    }
+
+    .hero-intro-right {
+        width: 100%;
+        max-width: none;
+        margin-top: 0;
+    }
+
+    .hero-main-description {
+        font-size: var(--text-base);
+        line-height: 1.77;
+        font-weight: 500;
+        color: var(--color-bg-dark);
+    }
+
+/* Removed mobile overrides */
+}
+
+.about-cta-pill:hover {
+    background-color: var(--color-bg-primary);
+    color: var(--color-card-text);
+}
+
+/* Consolidated with main CTA block */
+
+/* If svg is down arrow, -90 makes it right. */
+
+.interaction-indicator {
+    /* Styles for the anchor button on the right of hero text */
+    /* Node 52:635 - 20% Size Reduction */
+    width: 44px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Match SVG size */
+    border-radius: 22px;
+    /* Optional: Ensure circular hit area matches SVG */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    animation: pulse-scale 3s infinite ease-in-out;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.interaction-indicator svg {
+    /* Scale the scroll mouse indicator down by exactly 15% in all breakpoints */
+    transform: scale(0.85) !important;
+    transform-origin: center center !important;
+}
+
+.action-icon {
+    width: 16px;
+    height: 16px;
+    transform: rotate(0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.anchor-icon-desktop {
+    display: block;
+}
+
+.anchor-icon-mobile {
+    display: none;
+}
+
+@keyframes bob-down {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(4px);
+    }
+}
+
+@keyframes swipe-hint {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-4px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse-swipe {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.interaction-indicator:hover {
+    transform: scale(1.1);
+    animation-play-state: paused;
+}
+
+.interaction-indicator:hover .anchor-arrow {
+    animation: bob-down 1s infinite ease-in-out;
+    transform-origin: center;
+}
+
+/* Variant: Outlined (Project launch platform) */
+.card-outlined {
+    background-color: transparent;
+    border: 1px solid #898989;
+}
+
+.card-outlined .action-title {
+    color: var(--color-bg-primary);
+    /* White text */
+}
+
+.card-outlined .action-icon {
+    color: var(--color-bg-primary);
+}
+
+.card-outlined:hover {
+    border-color: var(--color-bg-primary);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Variant: Filled (Design operations) */
+.card-filled {
+    background-color: var(--color-bg-primary);
+    border: 1px solid #ffffff;
+}
+
+.card-filled .action-title {
+    color: var(--color-card-text);
+    /* Dark text */
+}
+
+.card-filled .action-icon {
+    color: var(--color-card-text);
+}
+
+.card-filled:hover {
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ... existing styles ... */
+
+/* Dark Section Wrapper (Work Highlights + Footer) */
+.dark-section-wrapper {
+    background-color: var(--color-dark-section);
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+/* Work Highlights Section */
+.work-highlights {
+    background-color: var(--color-bg-dark);
+    position: relative;
+    padding-bottom: 160px; /* Increased to absorb footer top padding */
+    z-index: 10;
+}
+
+/* Section Title */
+.work-section-title {
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 128px;
+    padding-bottom: 128px;
+    /* padding-left removed since content-wrapper handles side gaps */
+
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 400;
+    font-size: var(--text-4xl);
+    line-height: 64px;
+    color: var(--color-bg-primary) !important;
+}
+
+/* Case Study Card (Global) */
+.case-study-card {
+    width: 100%;
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding-left: 96px;
+    padding-right: 96px;
+    box-sizing: border-box;
+    gap: 40px;
+    margin-bottom: 192px;
+    /* Updated gap to 192px per user request */
+}
+
+/* Prevent dark gap bleeding on the last card so Work Highlights background flawlessly touches footer */
+.case-study-card:last-of-type {
+    margin-bottom: 0 !important;
+}
+
+/* 1. Image */
+.card-image {
+    width: 100%;
+    max-width: 1400px;
+    height: auto;
+    aspect-ratio: 1224 / 720;
+    background-color: #d9d9d9;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* 2. Content Row */
+.card-content-row {
+    display: flex;
+    gap: clamp(24px, 20vw - 160px, 120px);
+    /* Aggressive fluid gap for tablet transition */
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1400px;
+}
+
+/* Left Column */
+.card-left-col {
+    width: clamp(240px, 39.6vw - 165px, 405px);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* Reduced by 50% from 12px per user request */
+    flex-shrink: 0;
+}
+
+.case-title {
+    font-family: var(--font-heading);
+    /* Unbounded */
+    font-weight: 400;
+    font-size: var(--text-4xl);
+    line-height: 50px;
+    color: var(--color-bg-primary) !important;
+    margin: 0;
+    font-family: 'Unbounded', sans-serif;
+}
+
+.case-subtitle {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500;
+    font-size: var(--text-sm);
+    line-height: 32px;
+    color: #898989;
+    margin: 0;
+}
+
+/* Right Column */
+.card-right-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    /* Default gap */
+}
+
+.case-description {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 400;
+    font-size: var(--text-base);
+    line-height: 1.77;
+    /* ~32px */
+    color: var(--color-bg-primary) !important;
+    margin: 0;
+    min-height: 110px;
+    /* Align with Figma */
+    max-width: 100%;
+}
+
+/* Actions */
+.case-actions {
+    display: flex;
+    gap: clamp(16px, 2vw, 32px);
+    /* Fluid gap */
+    flex-wrap: nowrap;
+    /* Keep side-by-side on desktop */
+}
+
+.action-btn {
+    width: 100%;
+    max-width: 354px;
+    height: 72px;
+    border: 1px solid var(--color-bg-primary) !important;
+    border-radius: 6px;
+    padding: 16px 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 40px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    background: transparent !important;
+    color: var(--color-bg-primary) !important;
+    box-sizing: border-box;
+}
+
+.action-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+    flex: 1;
+    overflow: hidden;
+}
+
+.action-btn:hover {
+    background: var(--color-bg-primary) !important;
+    border: none !important;
+}
+
+.action-btn:hover .action-text-top {
+    color: var(--color-bg-dark) !important;
+}
+
+.action-btn:hover .action-text-bottom {
+    color: var(--color-text-secondary) !important;
+}
+
+.action-btn:hover .action-arrow svg {
+    color: var(--color-bg-dark) !important;
+}
+
+.action-text-top {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500;
+    font-size: var(--text-base);
+    line-height: 1.2;
+    color: var(--color-bg-primary) !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.action-text-bottom {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500;
+    font-size: var(--text-xs);
+    line-height: 1.2;
+    color: var(--color-text-secondary) !important;
+}
+
+.action-arrow {
+    flex-shrink: 0;
+    width: 16px;
+    height: 14px;
+    display: block;
+}
+
+.action-arrow svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: var(--color-bg-primary) !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 640px) {
+    .work-section-title {
+        /* Node 119:61 */
+        padding-top: 48px;
+        padding-bottom: 40px;
+        padding-left: 0;
+        text-align: center;
+        margin: 0;
+        font-size: var(--text-2xl);
+        line-height: 64px;
+    }
+
+    .case-study-card {
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+        max-width: 100%;
+        gap: 24px;
+        margin-bottom: 64px;
+    }
+
+    .card-image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
+        /* Node 119:62 */
+        border-radius: 8px;
+    }
+
+    .card-content-row {
+        width: 100%;
+        padding-left: 24px;
+        padding-right: 24px;
+        box-sizing: border-box;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+    }
+
+    /* Left Column Mobile */
+    .card-left-col {
+        width: 100%;
+        gap: 8px;
+    }
+
+    .case-title {
+        font-size: var(--text-xl);
+        /* Adjust for mobile */
+        line-height: 1.2;
+    }
+
+    /* Right Column Mobile */
+    .case-description {
+        font-size: var(--text-sm);
+        min-height: auto;
+    }
+
+    .case-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .action-btn {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Redundant Mobile About Card styles removed to allow primary implementation at line 837 to take precedence */
+}
+
+.tag:hover {
+    background-color: var(--color-card-text);
+    color: var(--color-card-bg);
+}
+
+
+
+
+/* Section Title */
+.work-section-title {
+    width: 100%;
+    max-width: 1592px; /* Standardized to Gold Standard 1592px */
+    margin: 0 auto;
+    padding-top: 160px;
+    padding-bottom: 88px;
+    padding-left: 96px;
+    padding-right: 96px;
+    box-sizing: border-box;
+
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 400;
+    font-size: var(--text-4xl);
+    line-height: 64px;
+    color: var(--color-bg-dark);
+}
+
+/* Case Study Card (Global) */
+.case-study-card {
+    width: 100%;
+    max-width: 1440px;
+    /* Use 1440px container for alignment context */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    /* Cards need to align with title (pl-94px) but are 1400px wide */
+    /* So we can structure the content to match */
+    padding-left: 96px;
+    /* Align content start */
+    padding-right: 96px;
+    /* Though card is only 1400px */
+    box-sizing: border-box;
+    gap: 40px;
+    margin-bottom: 192px;
+    /* Updated gap to 192px per user request */
+}
+
+/* 1. Image */
+.card-image {
+    width: 100%;
+    max-width: 1400px;
+    height: 824px; /* Proportional 1.7:1 ratio for the new 1400px width */
+    background-color: #d9d9d9;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* 2. Content Row */
+.card-content-row {
+    display: flex;
+    gap: clamp(24px, 20vw - 160px, 120px);
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1400px;
+}
+
+/* Left Column */
+.card-left-col {
+    width: clamp(240px, 39.6vw - 165px, 405px);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.case-title {
+    font-family: var(--font-heading);
+    /* Unbounded */
+    font-weight: 400;
+    font-size: var(--text-4xl);
+    line-height: 50px;
+    color: var(--color-bg-dark);
+    margin: 0;
+    font-family: 'Unbounded', sans-serif;
+}
+
+.case-subtitle {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500;
+    font-size: var(--text-sm);
+    line-height: 32px;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+/* Right Column */
+.card-right-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    /* Default gap */
+}
+
+.case-description {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 400;
+    font-size: var(--text-base);
+    line-height: 1.77;
+    /* ~32px */
+    color: var(--color-bg-dark);
+    margin: 0;
+    min-height: 110px;
+    /* Align with Figma */
+    max-width: 100%;
+}
+
+/* Actions */
+.case-actions {
+    display: flex;
+    gap: clamp(16px, 2vw, 32px);
+    flex-wrap: nowrap;
+}
+
+.action-btn {
+    width: 100%;
+    max-width: 354px;
+    height: 72px;
+    border: 2px solid var(--color-bg-dark);
+    border-radius: 6px;
+    padding: 16px 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 40px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    background: transparent;
+    color: var(--color-bg-dark);
+    box-sizing: border-box;
+}
+
+.action-text-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+    flex: 1;
+    overflow: hidden;
+}
+
+.action-btn:hover {
+    background: var(--color-bg-dark);
+    border-color: var(--color-bg-dark);
+}
+
+.action-btn:hover .action-text-top {
+    color: var(--color-bg-primary);
+}
+
+.action-btn:hover .action-text-bottom {
+    color: var(--color-text-secondary);
+}
+
+.action-btn:hover .action-arrow svg {
+    color: var(--color-bg-primary);
+}
+
+.action-text-top {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500;
+    font-size: var(--text-base);
+    line-height: 1.2;
+    color: var(--color-bg-dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.action-text-bottom {
+    font-family: 'Roobert', var(--font-body);
+    font-weight: 500;
+    font-size: var(--text-xs);
+    line-height: 1.2;
+    color: var(--color-text-secondary);
+}
+
+.action-arrow {
+    flex-shrink: 0;
+    width: 16px;
+    height: 14px;
+    display: block;
+}
+
+.action-arrow svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: var(--color-bg-dark);
+}
+
+.action-btn:hover .action-arrow svg {
+    color: var(--color-bg-primary);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 640px) {
+    .work-section-title {
+        /* Node 119:61 */
+        padding-top: 48px;
+        padding-bottom: 40px;
+        padding-left: 24px;
+        padding-right: 24px;
+        text-align: center;
+        margin: 0;
+        font-size: var(--text-2xl);
+        line-height: 64px;
+    }
+
+    .case-study-card {
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+        max-width: 100%;
+        gap: 24px;
+        margin-bottom: 136px;
+    }
+
+    .card-image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
+        /* Node 119:62 */
+        border-radius: 8px;
+    }
+
+    .card-content-row {
+        width: 100%;
+        padding-left: 24px;
+        padding-right: 24px;
+        box-sizing: border-box;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+    }
+
+    /* Left Column Mobile */
+    .card-left-col {
+        width: 100%;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px;
+    }
+
+    .case-title {
+        font-size: var(--text-xl);
+        /* Adjust for mobile */
+        line-height: 1.2;
+    }
+
+    /* Right Column Mobile */
+    .case-description {
+        font-size: var(--text-sm);
+        min-height: auto;
+    }
+
+    .case-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+        align-items: flex-start;
+    }
+
+    .action-btn {
+        width: 100% !important;
+        max-width: 100%;
+    }
+}
+
+/* Specific threshold for CTAs taking 100% below 670px */
+@media (max-width: 670px) {
+    .action-btn {
+        width: 100% !important;
+        max-width: 100%;
+    }
+}
+
+/* Responsive */
+/* Tablet Responsive Design (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .header-wrapper {
+        padding: 8px;
+    }
+
+    .header-pill {
+        height: 64px;
+        padding: 0 16px;
+    }
+
+    .brand {
+        width: 40px;
+        height: 40px;
+    }
+
+    .header-nav-desktop {
+        display: none;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
+    /* Responsive Hero Section */
+    .hero-section {
+        margin-top: 80px;
+        padding: 90px 32px 96px 32px; /* Proportional 25% reduction for tablet */
+    }
+
+    .hero-intro {
+        flex-direction: column;
+        gap: 40px;
+        margin-bottom: 0; /* Margin removed for container flow */
+    }
+
+    .hero-intro-right {
+        max-width: 100%;
+    }
+
+    /* Conflict Resolution: Removed redundant tabletish about-card styles */
+    .hero-top-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 40px;
+    }
+
+    .interaction-indicator {
+        align-self: center;
+        margin-top: 40px;
+    }
+
+    /* Tablet Sellos Overrides */
+    .about-sellos {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        width: 388px;
+        height: 388px;
+        margin: 0 auto 48px auto;
+        order: -1;
+    }
+
+    /* Conflict Resolution: Removed redundant mobile about-card styles causing clumping */
+
+    /* Work Highlights */
+    /* Work Highlights and Footer Wrapper */
+    .dark-section-wrapper {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .work-section-title {
+        padding-left: 32px;
+        padding-right: 32px;
+        padding-top: 96px;
+        padding-bottom: 88px;
+    }
+
+    .case-study-card {
+        padding-left: 32px;
+        padding-right: 32px;
+        max-width: 100%;
+        margin-bottom: 120px;
+        /* Updated per user request */
+        gap: 40px;
+    }
+
+    .card-image {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
+    }
+
+    .card-content-row {
+        flex-direction: column;
+        width: 100%;
+        gap: 40px;
+    }
+
+    .card-left-col {
+        width: 100%;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        gap: 8px !important;
+    }
+
+    .case-actions {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 24px;
+    }
+
+    .action-btn {
+        width: 100%;
+        max-width: 354px;
+    }
+
+    /* Tablet Footer (Horizontal) */
+    .site-footer {
+        background-color: var(--footer-bg) !important;
+        width: 100% !important;
+        padding: 0 0 96px 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0 !important;
+    }
+
+    .site-footer .footer-divider {
+        width: 100% !important;
+        height: 1px !important;
+        background-color: var(--footer-divider) !important;
+        opacity: var(--footer-divider-opacity) !important;
+        margin-bottom: 96px !important;
+    }
+
+    .site-footer .footer-content {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0 32px !important; /* Standardized to 32px safe gap for tablet */
+        gap: 0 !important;
+        width: 100% !important;
+        max-width: 1592px !important; /* Standardized to Gold Standard 1592px */
+        box-sizing: border-box !important;
+    }
+
+    .site-footer .footer-contact {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+    }
+
+    .site-footer .footer-links {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 48px !important;
+    }
+
+    .site-footer .footer-name {
+        font-size: var(--text-xl) !important;
+        color: var(--footer-name-color) !important;
+        margin: 0 !important;
+    }
+
+    .site-footer .footer-email {
+        font-size: var(--text-xl) !important;
+        color: var(--footer-text-color) !important;
+        margin: 0 !important;
+        text-decoration: none !important;
+    }
+
+    .footer-link,
+    .footer-link-social {
+        font-size: var(--text-xl) !important;
+        display: flex !important;
+        align-items: center !important;
+        color: var(--footer-text-color) !important;
+        text-decoration: none !important;
+    }
+
+    .link-arrow {
+        display: none !important;
+    }
+
+    .link-arrow svg {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .site-footer .footer-links .link-arrow {
+        transform: rotate(-45deg) !important;
+    }
+}
+
+/* Mobile Footer (Vertical) */
+@media (max-width: 767px) {
+    .case-actions {
+        flex-direction: column !important;
+        gap: 16px !important;
+        width: 100% !important;
+    }
+
+    .action-btn {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .site-footer {
+        background-color: var(--footer-bg) !important;
+        width: 100% !important;
+        padding: 0 0 96px 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0 !important;
+    }
+
+    .site-footer .footer-divider {
+        width: 100% !important;
+        margin-bottom: 96px !important;
+        background-color: var(--footer-divider) !important;
+        opacity: var(--footer-divider-opacity) !important;
+    }
+
+    .site-footer .footer-content {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0 !important;
+        width: 100% !important;
+        padding: 0 24px !important;
+        box-sizing: border-box !important;
+    }
+
+    .site-footer .footer-contact {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        gap: 0 !important;
+        margin-bottom: 72px !important;
+        width: 100% !important;
+    }
+
+    .site-footer .footer-name {
+        font-size: var(--text-xl) !important;
+        color: var(--footer-name-color) !important;
+        margin-bottom: 8px !important;
+        text-align: left !important;
+    }
+
+    .site-footer .footer-email {
+        font-size: var(--text-xl) !important;
+        color: var(--footer-text-color) !important;
+        margin-bottom: 0 !important;
+        text-align: left !important;
+    }
+
+    .site-footer .footer-links {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 32px !important;
+        width: 100% !important;
+    }
+
+    .link-arrow {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 21px !important;
+        height: 21px !important;
+        margin-right: 16px !important;
+    }
+
+    .site-footer .footer-links .link-arrow {
+        transform: rotate(-45deg) !important;
+    }
+
+    /* Force 8px gap for About Me card on mobile */
+    .hero-section {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+/* Removed mobile refined overrides */
+}
+
+/* Mobile Reponsive Design (max-width: 768px) */
+@media (max-width: 640px) {
+
+    /* Header & Nav */
+    .header-wrapper {
+        padding: 8px;
+    }
+
+/* Mobile Nav Toggle Overrides if needed, but they are handled in global block */
+
+
+
+
+    /* Footer Styles */
+
+
+
+    /* New Footer Styles */
+
+    /* Footer Styles - Standardized in consolidated block above */
+}
+
+
+/* --- PAGE SPECIFIC & OVERRIDE BLOCKS --- */
+
+/* 10. Missing Animations */
+@keyframes pulse-scale {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes bob-down {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+}
+
+/* 11. Interaction Indicator Placement (Desktop, Tablet, Mobile) */
+.hero-section {
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    padding-bottom: 48px !important; /* Space for the indicator */
+}
+
+.interaction-indicator {
+    position: relative !important;
+    align-self: center !important;
+    margin-top: auto !important;
+    margin-bottom: 0 !important;
+    z-index: 101 !important;
+}
+
+/* Tablet Overrides */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        min-height: 100vh !important;
+        padding-bottom: 32px !important;
+        padding-top: 120px !important; /* Adjust for fixed header */
+        margin-top: 0 !important;
+    }
+    
+    .hero-intro {
+        margin-bottom: 0 !important;
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+    }
+}
+
+/* Mobile Overrides */
+@media screen and (max-width: 767px) {
+    .hero-section {
+        min-height: 100vh !important;
+        padding-top: 80px !important;
+        padding-bottom: 24px !important;
+    }
+    
+    .hero-intro {
+        position: relative !important; /* Reset from absolute if applied */
+        padding: 0 24px !important;
+        margin-top: 40px !important;
+    }
+}
+
+/* 12. Unifying Scroll Helper Position (Desktop & Tablet) */
+@media screen and (min-width: 768px) {
+    .hero-section {
+        min-height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        padding-bottom: 48px !important;
+        padding-top: 92px !important; /* Standardized top margin */
+        box-sizing: border-box !important;
+        margin-top: 0 !important;
+    }
+
+    .hero-intro {
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: row !important; /* Keep desktop row layout */
+        justify-content: space-between !important;
+        align-items: center !important; /* Vertically center text in the remaining space */
+        margin-bottom: 0 !important;
+        width: 100% !important;
+        max-width: 1400px !important;
+    }
+
+    .interaction-indicator {
+        position: absolute !important;
+        bottom: 48px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
+        display: flex !important;
+    }
+}
+
+/* 13. Unifying Scroll Helper Position (Desktop & Tablet) - Clean Override */
+@media screen and (min-width: 768px) {
+    .hero-section {
+        min-height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        padding-bottom: 64px !important;
+        padding-top: 56px !important;
+        box-sizing: border-box !important;
+        margin-top: 80px !important;
+        padding-left: 96px !important;
+        padding-right: 96px !important;
+    }
+
+    .hero-intro {
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: 1400px !important;
+    }
+
+    .interaction-indicator {
+        position: absolute !important;
+        bottom: 64px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
+        display: flex !important;
+        z-index: 100 !important;
+    }
+}
+
+/* 14. Scroll Helper Placement (100px gap above About Card) */
+.hero-section {
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    padding-top: 92px !important;
+    padding-bottom: 96px !important;
+    box-sizing: border-box !important;
+}
+
+.hero-intro {
+    margin: 0 auto auto auto !important; /* Push down the lower elements */
+    width: 100% !important;
+    max-width: 1400px !important;
+}
+
+.interaction-indicator {
+    position: relative !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 0 auto 100px auto !important; /* THE EXACT 100PX GAP */
+    display: flex !important;
+    z-index: 100 !important;
+}
+
+/* Removed desktop max-width override */
+
+
+/* Tablet & Mobile Consistency */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 80px !important;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+    
+    .hero-intro {
+        margin-top: 40px !important;
+        flex-direction: column !important;
+        gap: 32px !important;
+    }
+
+    .interaction-indicator {
+        margin-bottom: 100px !important;
+    }
+}
+
+/* 15. GUARANTEED FOLD VISIBILITY FOR SCROLL HELPER */
+.hero-section {
+    position: relative !important;
+    height: 100vh !important; /* Forces exact viewport height */
+    height: 100dvh !important; /* Dynamic view height for mobile browsers */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important; /* Centers intro text in the remaining space */
+    padding-top: 80px !important;
+    padding-bottom: 120px !important; /* Safe zone for the absolute helper */
+    box-sizing: border-box !important;
+    margin: 0 !important;
+}
+
+.hero-intro {
+    width: 100% !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+}
+
+.interaction-indicator {
+    position: absolute !important;
+    bottom: 32px !important; /* Pinned 32px from the bottom of the phone screen */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+    z-index: 100 !important;
+    display: flex !important;
+}
+
+/* Removed late overrides */
+
+/* 16. Restoring Hero Text Gaps & Alignment */
+.hero-intro {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 32px !important;
+    width: 100% !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+}
+
+@media screen and (max-width: 1024px) {
+    .hero-intro {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 32px !important;
+    }
+}
+
+.hero-intro-left {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important; /* Space between name and location */
+    width: 331px !important;
+    flex-shrink: 0 !important;
+}
+
+.hero-intro-right {
+    flex: 0 1 670px !important;
+    max-width: 670px !important;
+}
+
+/* Ensure mobile specific overrides don't break horizontal gap on larger mobile */
+@media screen and (max-width: 767px) {
+    .hero-intro-left, .hero-intro-right {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* 17. Final Spacing Adjustments for Hero Text Top Gap (Desktop) */
+@media screen and (min-width: 1025px) {
+    .hero-section {
+        padding-top: 112px !important; /* Fixed Header 80px + 32px requested gap */
+        justify-content: flex-start !important;
+        align-items: center !important;
+    }
+
+    .hero-intro {
+        margin-top: 0 !important; /* Remove any existing margin */
+        padding-top: 0 !important;
+    }
+}
+
+
+/* --- PAGE SPECIFIC & OVERRIDE BLOCKS --- */
+
+/* 23. DEFINITIVE ALIGNMENT HARMONY (Desktop) */
+@media screen and (min-width: 1025px) {
+    /* 1. Reset all parent section paddings that could cause offsets */
+    .hero-section, 
+    .dark-section-wrapper,
+    .work-highlights {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    /* 2. Unified Width & Centering for content blocks (Upgraded to 1400px) */
+    .hero-intro, 
+    .work-section-title, 
+    .case-study-card {
+        width: 100% !important;
+        max-width: 1400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        left: 0 !important;
+        right: 0 !important;
+        transform: none !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Left/Right Column weights for project cards */
+    .card-left-col {
+        width: 28% !important;
+        max-width: 28% !important;
+    }
+
+    .card-right-col {
+        width: 65% !important;
+        max-width: 65% !important;
+    }
+
+    /* 3. Force hero text blocks to hit the 1400px edges */
+    .hero-intro {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+    }
+
+    /* removed about-card padding override */
+}
+
+/* 24. ULTIMATE HERO GAP & CENTERING (72px Precision) */
+
+/* Desktop & General */
+.hero-section {
+    padding-top: 120px !important; /* Reduced 25% */
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding-left: 96px !important; /* Upgraded Desktop Safety Padding */
+    padding-right: 96px !important;
+    box-sizing: border-box !important;
+}
+
+.hero-intro {
+    width: 100% !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+}
+
+.hero-intro-left {
+    width: 30% !important; /* Percentage weight for fluidity */
+    max-width: none !important;
+}
+
+.hero-intro-right {
+    width: 62% !important; /* Percentage weight for fluidity */
+    max-width: none !important;
+}
+
+/* Tablet & Mobile Header Height Change */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 108px !important; /* Reduced 25% */
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+    
+    .hero-intro {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 32px !important;
+    }
+    
+    .hero-intro-left, .hero-intro-right {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* 25. VERTICAL STABILITY (Anchoring Top Text) */
+.hero-section {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; /* FORCES TOP ALIGNMENT: Stops vertical jumping on resize */
+    padding-top: 120px !important; /* Reduced 25% */
+    position: relative !important;
+}
+
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 108px !important; /* Reduced 25% */
+    }
+}
+
+/* 26. HERO FULL VIEWPORT HEIGHT (Ensures indicator at fold bottom) */
+.hero-section {
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; /* FIXED POSITION from the top header */
+}
+
+/* 27. FINAL HERO RESOLUTION - UNIFYING 72PX GAP & HORIZONTAL CENTERING */
+.hero-section {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* GLOBAL HORIZONTAL CENTERING */
+    justify-content: flex-start !important; /* GLOBAL VERTICAL STABILITY (Anchored Top) */
+    min-height: 100vh !important;
+    background: none !important;
+    box-sizing: border-box !important;
+}
+
+/* DESKTOP (88px Header + 72px Gap = 160px Total Padding) */
+@media screen and (min-width: 1025px) {
+    .hero-section {
+        padding-top: 120px !important;
+    }
+    
+    .hero-intro {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        max-width: 1400px !important;
+        margin: 0 auto !important;
+    }
+}
+
+/* TABLET & MOBILE (72px Header + 72px Gap = 144px Total Padding) */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 108px !important;
+    }
+    
+    .hero-intro {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important; /* Center text blocks horizontally when stacked */
+        text-align: center !important;
+        gap: 32px !important;
+        width: 100% !important;
+        max-width: 670px !important; /* Constrain description width for better look */
+        margin: 0 auto !important;
+    }
+}
+
+/* 28. TOTAL VERTICAL STACK STABILITY (Unifying all breakpoints) */
+.hero-section {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; /* ALWAYS ANCHORED TO TOP */
+    align-items: center !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+}
+
+/* Precise Top Gap (Accounting for Header height differences) */
+@media screen and (min-width: 1025px) {
+    .hero-section {
+        padding-top: 120px !important; /* Reduced 25% */
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 108px !important; /* Reduced 25% */
+    }
+}
+
+/* Ensure the intro container doesn't have any centering margins */
+.hero-intro {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Keep indicator at the bottom fold without pushing top text */
+.interaction-indicator {
+    position: absolute !important;
+    bottom: 32px !important;
+}
+
+/* 29. THE ABSOLUTE ANCHOR FIX (Tablet & Mobile) */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        justify-content: flex-start !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .hero-intro {
+        flex: none !important; /* CRITICAL: Stops the container from stretching to fill the screen */
+        height: auto !important; /* CRITICAL: Keeps name and description together at the top */
+        justify-content: flex-start !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    /* Ensure children don't push each other away */
+    .hero-intro-left, .hero-intro-right {
+        flex: none !important;
+        margin: 0 !important;
+    }
+}
+
+/* 30. MOBILE & TABLET LEFT ALIGNMENT (Hero Text) */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        align-items: flex-start !important; /* Align the container to the left boundary */
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+
+    .hero-intro {
+        align-items: flex-start !important; /* Left align stacked blocks */
+        text-align: left !important; /* Left align individual text lines */
+        margin-left: 0 !important; /* Remove centering margin */
+        max-width: 100% !important;
+    }
+}
+
+/* 31. PRECISE SIDE GAPS (Tablet: 32px, Mobile: 24px) */
+
+/* Base Hero Section structure for all breakpoints */
+.hero-section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important; 
+    box-sizing: border-box !important;
+}
+
+.hero-intro {
+    width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* TABLET BREAKPOINT (768px to 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .hero-section {
+        padding-left: 32px !important;
+        padding-right: 32px !important;
+    }
+    
+    .hero-intro {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+/* MOBILE BREAKPOINT (Up to 767px) */
+@media screen and (max-width: 767px) {
+    .hero-section {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+    
+    .hero-intro {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+/* Ensure centering on Desktop remains at 1400px max width */
+@media screen and (min-width: 1025px) {
+    .hero-section {
+        align-items: center !important;
+    }
+    .hero-intro {
+        max-width: 1400px !important;
+        margin: 0 auto !important;
+    }
+}
+
+/* 32. FLUID DESKTOP SAFETY GAPS (32px Minimum side gap) */
+@media screen and (min-width: 1025px) {
+    .hero-section, 
+    .work-highlights {
+        padding-left: 32px !important;
+        padding-right: 32px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Keep the internal content width limited but allow the padding to protect the edges */
+    .hero-intro, 
+    .work-section-title,
+    .case-study-card {
+        width: 100% !important;
+        max-width: 1400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+/* Specific fix for Case Study Cards to ensure they don't lose the 32px buffer */
+@media screen and (min-width: 1025px) {
+    .case-study-card {
+        padding-left: 0 !important; /* Content centered by its own max-width logic */
+        padding-right: 0 !important;
+    }
+}
+
+/* 33. GLOBAL SIDE BUFFER (32px Desktop Safety + 32px Tablet Unified) */
+
+/* Apply to all major landing page sections */
+@media screen and (min-width: 768px) {
+    .hero-section,
+    .work-highlights {
+        padding-left: 32px !important;
+        padding-right: 32px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Keep content centered but protected by the 32px padding */
+    .hero-intro, 
+    .work-section-title,
+    .case-study-card {
+        width: 100% !important;
+        max-width: 1400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+/* Maintain the 24px Mobile override for consistency */
+@media screen and (max-width: 767px) {
+    .hero-section,
+    .work-highlights {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+}
+
+/* 34. DESKTOP PROTECTION (32px Minimum Gap Before Breakpoint) */
+@media screen and (min-width: 1025px) {
+    .hero-intro, 
+    .work-section-title,
+    .case-study-card {
+        width: calc(100% - 64px) !important; /* Forces 32px safety gap on both sides */
+        max-width: 1400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+/* 36. BREAKPOINT-SPECIFIC HORIZONTAL GAPS (CLEAN RESET) */
+
+/* 1. Desktop Breakpoint (1025px and up) */
+@media screen and (min-width: 1025px) {
+    .hero-section, 
+    .dark-section-wrapper,
+    .work-highlights {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .hero-section {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important; 
+    }
+
+    .hero-intro, 
+    .about-card, 
+    .work-section-title,
+    .case-study-card {
+        width: calc(100% - 64px) !important; 
+        max-width: 1400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-align: left !important;
+    }
+
+    .hero-intro {
+        margin-bottom: 0 !important; 
+    }
+
+    .interaction-indicator {
+        display: flex !important;
+        position: relative !important; 
+        margin: 40px auto 48px auto !important; /* Reduced top margin to fix mobile position */
+        align-self: center !important;
+        left: auto !important; 
+        right: auto !important;
+        transform: none !important; 
+        z-index: 101 !important;
+    }
+
+    .case-study-card {
+        margin-bottom: 160px !important;
+    }
+}
+
+/* 2. Tablet Breakpoint (768px to 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .hero-section,
+    .about-section,
+    .work-highlights {
+        padding-left: 32px !important; /* The 32px Tablet gap */
+        padding-right: 32px !important;
+    }
+
+    .hero-intro, 
+    .about-card,
+    .work-section-title,
+    .case-study-card {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
+/* 3. Mobile Breakpoint (767px and below) */
+@media screen and (max-width: 767px) {
+    .hero-section {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+
+    .work-highlights {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .about-section {
+        padding-left: 8px !important; /* Specific 8px gap for About Card */
+        padding-right: 8px !important;
+    }
+
+    .hero-intro, 
+    .about-card,
+    .work-section-title,
+    .case-study-card {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    /* Portfolio Cases Mobile Gaps */
+    .work-section-title {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+        box-sizing: border-box !important;
+    }
+
+    .case-study-card {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        gap: 24px !important; /* Gap between image and text */
+    }
+
+    .card-image {
+        width: calc(100% - 16px) !important;
+        margin-left: 8px !important;
+        margin-right: 8px !important;
+        border-radius: 8px !important;
+    }
+
+    .card-content-row {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+        box-sizing: border-box !important;
+    }
+}
