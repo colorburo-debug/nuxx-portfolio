@@ -112,7 +112,7 @@ const getBgColor = (data) => {
         if (container.dataset.bodyClass.includes('gnb-lulo')) return '#f7fbf8';
         if (container.dataset.bodyClass.includes('designops')) return '#f7fbf8';
         if (container.dataset.bodyClass === 'about-page') return '#f7fbf8';
-        if (container.dataset.bodyClass.includes('artifacts')) return '#111516';
+        // if (container.dataset.bodyClass.includes('artifacts')) return '#111516';
     }
     
     // 2. Fallback to trigger link URL
@@ -120,14 +120,14 @@ const getBgColor = (data) => {
     if (url.includes('index.html') || url === '/' || url.endsWith('/')) return '#F7FBF8';
     if (url.includes('about')) return '#f7fbf8';
     if (url.includes('project')) return '#f7fbf8';
-    if (url.includes('artifacts')) return '#111516';
+    // if (url.includes('artifacts')) return '#111516';
  
     // 3. Fallback to namespace
     const colors = {
         'home': '#F7FBF8',
         'about': '#f7fbf8',
-        'project': '#f7fbf8',
-        'artifacts': '#111516'
+        'project': '#f7fbf8'
+        // 'artifacts': '#111516'
     };
     return colors[data.next?.namespace] || '#1e1e1e';
 };
@@ -212,12 +212,12 @@ barba.init({
         beforeEnter(data) {
             if (window.initPage) window.initPage(data.next.container);
         }
-    }, {
+    }/*, {
         namespace: 'artifacts',
         beforeEnter(data) {
             if (window.initPage) window.initPage(data.next.container);
         }
-    }]
+    }*/]
 });
 
 // Initial Load
