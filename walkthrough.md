@@ -78,9 +78,8 @@ To keep the animations perfectly framed and centered without colliding with over
 
 ---
 
-## 7. CSS Architecture & Rollback to Monolithic styles.css
-To resolve layout bugs and header styling breakages during page transitions (driven by Barba.js DOM swaps), the modular stylesheet setup was reverted back to a single monolithic stylesheet:
-* **Styles Re-Consolidation:** The styles for the Gemini Chats explorer page (previously `css/project-gemini.css`) were appended to the bottom of [styles.css](file:///Users/jorgegarcia/Antigravity%20Projects/nuxx-portfolio/styles.css).
-* **HTML Pages Update:** All active portfolio HTML pages are configured to point directly to `<link rel="stylesheet" href="styles.css?v=cachebust103">`.
-* **Animations Update:** Dynamic loading and swapping of CSS files in [animations.js](file:///Users/jorgegarcia/Antigravity%20Projects/nuxx-portfolio/animations.js) was disabled, ensuring the browser uses the preloaded, cached monolithic stylesheet across transitions.
-
+## 7. CSS Architecture & Modular imports
+To maintain clean structure and resolve layout issues, the styles have been modularized into separate CSS files located under the `css/` folder. The main `styles.css` imports these sub-stylesheets using `@import` rules:
+* **Styles Modularization:** Split page-specific and component-specific styles into separate files (e.g., `css/global.css`, `css/home_hero.css`, `css/about.css`, `css/project-gemini.css`, and `css/artifacts.css`).
+* **Main Stylesheet Imports:** The monolithic `styles.css` now acts as a central hub importing all these modules via `@import` rules, which avoids the need to dynamically swap stylesheets in `animations.js` and ensures seamless page transitions under Barba.js.
+* **Stand-alone Assets Integration:** Staged and synchronized all SVGs, videos, and images under `assets/artifacts/` to keep the Artifacts section completely independent.
