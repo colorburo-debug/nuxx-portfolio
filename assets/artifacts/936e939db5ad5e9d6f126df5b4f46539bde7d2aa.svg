@@ -1,0 +1,38 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 186.353 186.353" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 2139">
+<g id="Ellipse 4508" filter="url(#filter0_f_1704_154)">
+<circle cx="93.1764" cy="93.1764" r="80.6544" fill="var(--fill-0, black)"/>
+<circle cx="93.1764" cy="93.1764" r="81.1544" stroke="url(#paint0_linear_1704_154)" stroke-opacity="0.5"/>
+</g>
+<g id="Ellipse 4507" filter="url(#filter1_fg_1704_154)">
+<circle cx="93.1764" cy="93.1764" r="81.1544" stroke="url(#paint1_linear_1704_154)"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_f_1704_154" x="8.37269" y="8.37269" width="169.608" height="169.608" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="1.57468" result="effect1_foregroundBlur_1704_154"/>
+</filter>
+<filter id="filter1_fg_1704_154" x="0" y="1.19209e-07" width="186.353" height="186.353" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="5.76103" result="effect1_foregroundBlur_1704_154"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.99900001287460327 0.99900001287460327" numOctaves="3" seed="2403" />
+<feDisplacementMap in="effect1_foregroundBlur_1704_154" scale="1.5362741947174072" xChannelSelector="R" yChannelSelector="G" result="displacedImage" width="100%" height="100%" />
+<feMerge result="effect2_texture_1704_154">
+<feMergeNode in="displacedImage"/>
+</feMerge>
+</filter>
+<linearGradient id="paint0_linear_1704_154" x1="93.1764" y1="12.5221" x2="93.1764" y2="173.831" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="0.475962" stop-color="white"/>
+<stop offset="1" stop-color="#999999" stop-opacity="0.1"/>
+</linearGradient>
+<linearGradient id="paint1_linear_1704_154" x1="93.1764" y1="12.5221" x2="93.1764" y2="173.831" gradientUnits="userSpaceOnUse">
+<stop stop-color="#F7FBF8"/>
+<stop offset="0.746767" stop-color="#F7FBF8" stop-opacity="0.3"/>
+<stop offset="0.919181" stop-color="#535353" stop-opacity="0.05"/>
+</linearGradient>
+</defs>
+</svg>

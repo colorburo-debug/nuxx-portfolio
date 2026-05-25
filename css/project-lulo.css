@@ -1,6 +1,6 @@
 /* --- PROJECT GNB LULO PAGE --- */
 html:has(.gnb-lulo-page) {
-    background-color: var(--color-bg-primary) !important;
+    background-color: #f7fbf8 !important;
 }
 
 body.gnb-lulo-page {
@@ -8,9 +8,9 @@ body.gnb-lulo-page {
     --footer-bg: #004155; 
     --footer-divider: #2b6071;
     --footer-name-color: rgba(247, 251, 248, 0.7);
-    --footer-text-color: var(--color-bg-primary);
+    --footer-text-color: #f7fbf8;
     --footer-link-hover: #e0e0e0;
-    background-color: var(--color-bg-primary) !important;
+    background-color: #f7fbf8 !important;
 }
 
 .gnb-lulo-main {
@@ -19,11 +19,11 @@ body.gnb-lulo-page {
 
 /* Header Overrides for GNB Lulo */
 .gnb-lulo-page .header-pill {
-    background-color: var(--color-bg-dark) !important;
+    background-color: #1e1e1e !important;
 }
 
 .gnb-lulo-page .header-nav-desktop .nav-link {
-    color: var(--color-bg-primary) !important;
+    color: #f7fbf8 !important;
 }
 
 .gnb-lulo-page .header-nav-desktop .nav-link:hover {
@@ -50,7 +50,7 @@ body.gnb-lulo-page {
     font-weight: 400;
     font-size: 70px;
     line-height: 1.17;
-    color: var(--color-bg-navy);
+    color: #0d1327;
     text-align: center;
     max-width: 1100px;
     margin: 0 auto 110px auto !important; /* Enforced 110px bottom gap */
@@ -67,7 +67,7 @@ body.gnb-lulo-page {
     }
 
     .gnb-lulo-hero-title {
-        font-size: var(--text-6xl); /* Equivalent to 45pt */
+        font-size: 60px; /* Equivalent to 45pt */
         line-height: 1.16;
         max-width: 850px; /* Adjusted width to keep 2-line layout at larger font size */
         margin: 0 auto 110px auto !important; /* Enforced 110px bottom gap */
@@ -85,7 +85,7 @@ body.gnb-lulo-page {
     }
 
     .gnb-lulo-hero-title {
-        font-size: var(--text-3xl);
+        font-size: 36px;
         font-weight: 400;
         line-height: 44px;
         margin: 0 auto 110px auto !important; /* Enforced 110px bottom gap */
@@ -108,7 +108,7 @@ body.gnb-lulo-page {
     margin: 0 auto;
     padding: 0 96px 120px 96px; /* Standardized to 96px gaps */
     box-sizing: border-box;
-    color: var(--color-bg-navy);
+    color: #0d1327;
 }
 
 .gnb-lulo-opp .opp-intro {
@@ -143,13 +143,13 @@ body.gnb-lulo-page {
 
     .gnb-lulo-opp .opp-title {
         width: 100%;
-        font-size: var(--text-xl);
+        font-size: 24px;
         line-height: 40px;
         text-align: left;
     }
 
     .gnb-lulo-opp .opp-text {
-        font-size: var(--text-lg);
+        font-size: 20px;
         line-height: 32px;
         max-width: 100%;
     }
@@ -218,7 +218,7 @@ body.gnb-lulo-page {
     margin: 0 auto;
     padding: 0 96px 160px 96px; /* 96px is the minimum safe gap */
     box-sizing: border-box;
-    color: var(--color-bg-navy);
+    color: #0d1327;
 }
 
 .research-grid {
@@ -238,7 +238,7 @@ body.gnb-lulo-page {
 
 .research-item-title {
     font-family: var(--font-heading);
-    font-size: var(--text-2xl);
+    font-size: 30px;
     font-weight: 400;
     line-height: 40px;
     margin: 0;
@@ -246,7 +246,7 @@ body.gnb-lulo-page {
 
 .research-item-desc {
     font-family: 'Roobert', var(--font-body);
-    font-size: var(--text-base);
+    font-size: 18px;
     line-height: 1.77;
     margin: 0;
 }
@@ -325,7 +325,7 @@ body.gnb-lulo-page {
     }
 
     .research-item-title {
-        font-size: var(--text-2xl); /* Mobile matches desktop size in this spec */
+        font-size: 30px; /* Mobile matches desktop size in this spec */
     }
 }
 
@@ -375,7 +375,7 @@ body.gnb-lulo-page {
 
 .qualitative-body p {
     font-family: 'Roobert', var(--font-body);
-    font-size: var(--text-lg);
+    font-size: 20px;
     line-height: 32px;
     margin: 0;
 }
@@ -423,7 +423,7 @@ body.gnb-lulo-page {
     .qualitative-title {
         flex: none;
         width: 100%;
-        font-size: var(--text-3xl);
+        font-size: 36px;
         line-height: 48px;
     }
 
@@ -443,12 +443,12 @@ body.gnb-lulo-page {
     }
 
     .qualitative-title {
-        font-size: var(--text-2xl); /* Figma mobile */
+        font-size: 30px; /* Figma mobile */
         line-height: 40px;
     }
 
     .qualitative-body p {
-        font-size: var(--text-lg);
+        font-size: 20px;
         line-height: 32px;
     }
 
@@ -497,9 +497,9 @@ body.gnb-lulo-page {
 
 .journey-label {
     font-family: 'Roobert', var(--font-body);
-    font-size: var(--text-base);
+    font-size: 18px;
     line-height: normal; /* Roobert standard */
-    color: var(--color-bg-navy);
+    color: #0d1327;
     margin: 0;
     margin-bottom: 32px; /* Enforced 32px gap for all breakpoints */
 }
@@ -515,14 +515,14 @@ body.gnb-lulo-page {
     font-size: 26px;
     font-weight: 400;
     line-height: normal;
-    color: var(--color-bg-navy);
+    color: #0d1327;
     margin: 0;
 }
 
 .journeys-divider {
     width: 100%;
     height: 1px;
-    background-color: var(--color-bg-navy);
+    background-color: #0d1327;
     opacity: 1;
     margin: 22px 0 57px 0; /* Exact Figma gap: 22px top, 57px bottom */
 }
@@ -540,7 +540,7 @@ body.gnb-lulo-page {
     font-size: clamp(20px, 2.1vw, 30px); /* Fluid scaling to prevent desktop overlap */
     font-weight: 400;
     line-height: 1.2;
-    color: var(--color-bg-navy);
+    color: #0d1327;
     text-align: left; /* Left align text justified */
 }
 
@@ -675,7 +675,7 @@ body.gnb-lulo-page {
     }
 
     .journey-point {
-        font-size: var(--text-2xl); /* Enforced 30px on mobile */
+        font-size: 30px; /* Enforced 30px on mobile */
         line-height: 40px;
         text-align: left; /* Left align text on mobile */
         width: 100%;
@@ -731,15 +731,15 @@ body.gnb-lulo-page {
 
 .proto-label {
     font-family: var(--font-body);
-    font-size: var(--text-base);
+    font-size: 18px;
     line-height: 28px;
-    color: var(--color-bg-navy);
+    color: #0d1327;
     margin-bottom: 46px; /* Precise Figma gap to next image */
     max-width: 1400px;
 }
 
 .proto-screen-box.second {
-    background-color: var(--color-bg-navy); /* Dark background for the UI screenshots */
+    background-color: #0d1327; /* Dark background for the UI screenshots */
 }
 
 /* Mobile Prototype Styles */
@@ -796,7 +796,7 @@ body.gnb-lulo-page {
     font-weight: 400;
     font-size: 45px;
     line-height: 64px;
-    color: var(--color-bg-navy);
+    color: #0d1327;
     margin: 0;
     max-width: 974px;
     margin-bottom: 80px; /* Precise Figma gap */
@@ -814,14 +814,14 @@ body.gnb-lulo-page {
     font-weight: 400;
     font-size: 26px;
     line-height: normal;
-    color: var(--color-bg-navy);
+    color: #0d1327;
     margin: 0;
 }
 
 .outcomes-divider {
     width: 100%;
     height: 1px;
-    background-color: var(--color-bg-navy);
+    background-color: #0d1327;
 }
 
 .outcomes-grid {
@@ -839,18 +839,18 @@ body.gnb-lulo-page {
 .outcome-stat {
     font-family: var(--font-heading);
     font-weight: 400;
-    font-size: var(--text-2xl);
+    font-size: 30px;
     line-height: 40px;
-    color: var(--color-bg-navy);
+    color: #0d1327;
     margin: 0 0 32px 0;
     max-width: 426px;
 }
 
 .outcome-desc {
     font-family: 'Roobert', var(--font-body);
-    font-size: var(--text-base);
+    font-size: 18px;
     line-height: 1.77; /* or 32px */
-    color: var(--color-bg-navy);
+    color: #0d1327;
     margin: 0;
     max-width: 426px;
 }
@@ -926,7 +926,7 @@ body.gnb-lulo-page {
         display: flex !important;
         justify-content: center;
         margin: 24px auto 160px auto; /* 160px distance between swipe indicator and the element below */
-        color: var(--color-bg-navy); /* GNB dark typography */
+        color: #0d1327; /* GNB dark typography */
     }
 }
 
@@ -948,7 +948,7 @@ body.gnb-lulo-page {
     }
 
     .outcomes-quote {
-        font-size: var(--text-xl);
+        font-size: 24px;
         line-height: 40px;
         margin-bottom: 70px;
     }
@@ -1003,7 +1003,7 @@ body.gnb-lulo-page {
     }
 
     .gnb-app-ds .swipe-indicator.mobile-tablet-only {
-        color: var(--color-bg-navy);
+        color: #0d1327;
         margin: 24px auto 0 auto;
     }
 
@@ -1032,13 +1032,10 @@ body.gnb-lulo-page {
     display: block;
 }
 
-
-/* --- LULO STRATEGY & NEOBANK STYLES --- */
-
 /* --- LULO STRATEGY & SOLUTION SECTION (Node 1472:75 & 1472:92) --- */
 .gnb-lulo-strategy {
     background-color: #004155;
-    color: var(--color-bg-primary);
+    color: #F7FBF8;
     padding-top: 160px;
     padding-bottom: 232px; /* Restored specific closing gap as requested */
     width: 100%;
@@ -1061,7 +1058,7 @@ body.gnb-lulo-page {
     font-size: 45px;
     line-height: 64px;
     margin-bottom: 105px;
-    color: var(--color-bg-primary);
+    color: #F7FBF8;
 }
 
 .lulo-proto-main-grid {
@@ -1139,7 +1136,7 @@ body.gnb-lulo-page {
     text-align: center;
     max-width: 808px;
     margin-bottom: 87px;
-    color: var(--color-bg-primary);
+    color: #F7FBF8;
 }
 
 .lulo-role-grid {
@@ -1166,18 +1163,18 @@ body.gnb-lulo-page {
 .role-item-title {
     font-family: var(--font-heading);
     font-weight: 400;
-    font-size: var(--text-2xl);
+    font-size: 30px;
     line-height: 40px; /* Precision Figma line-height */
-    color: var(--color-bg-primary);
+    color: #F7FBF8;
     margin: 0; /* Resetting margins to prevent compound gaps */
 }
 
 .role-item-desc {
     font-family: 'Roobert', var(--font-body);
     font-weight: 400;
-    font-size: var(--text-base);
+    font-size: 18px;
     line-height: 32px; /* Precision Figma line-height */
-    color: var(--color-bg-primary);
+    color: #F7FBF8;
     max-width: 100%;
     margin: 0; /* Resetting margins to prevent compound gaps */
 }
@@ -1241,7 +1238,7 @@ body.gnb-lulo-page {
     }
 
     .lulo-strategy-title {
-        font-size: var(--text-2xl);
+        font-size: 30px;
         line-height: 40px;
         margin-bottom: 37px; /* Precision gap Node 1476:111 */
         text-align: left;
@@ -1313,7 +1310,7 @@ body.gnb-lulo-page {
     }
 
     .lulo-role-main-title {
-        font-size: var(--text-2xl);
+        font-size: 30px;
         line-height: 40px;
         margin-bottom: 74px; /* Precision gap Node 1476:119 */
         text-align: left;
@@ -1346,9 +1343,7 @@ body.gnb-lulo-page {
     }
 
     .role-item-desc {
-        font-size: var(--text-base);
+        font-size: 18px;
         line-height: 1.77;
     }
 }
-
-/* ==========================================================================

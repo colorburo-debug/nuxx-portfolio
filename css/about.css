@@ -1,13 +1,13 @@
 /* --- About Me Page Styles --- */
 .about-page {
     /* Footer Variables Override */
-    --footer-bg: var(--color-bg-primary);
-    --footer-divider: var(--color-card-text);
+    --footer-bg: #f7fbf8;
+    --footer-divider: #090d1b;
     --footer-name-color: #898989;
-    --footer-text-color: var(--color-card-text);
-    --footer-link-hover: var(--color-bg-navy);
-    background-color: var(--color-bg-primary) !important;
-    color: var(--color-card-text);
+    --footer-text-color: #090d1b;
+    --footer-link-hover: #0d1327;
+    background-color: #f7fbf8 !important;
+    color: #090d1b;
 }
 
 /* Override body background to be light */
@@ -74,10 +74,10 @@ body:not(.home-page) #webgl-container {
 .about-title-large {
     font-family: 'Unbounded', sans-serif;
     font-weight: 400;
-    font-size: var(--text-5xl);
+    font-size: 50px;
     line-height: 64px;
     margin: 0;
-    color: var(--color-card-text);
+    color: #090d1b;
 }
 
 .about-desc-col {
@@ -90,19 +90,19 @@ body:not(.home-page) #webgl-container {
 .about-lead {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
-    font-size: var(--text-2xl);
+    font-size: 30px;
     line-height: 40px;
     margin: 0;
-    color: var(--color-card-text);
+    color: #090d1b;
 }
 
 .about-body p {
     font-family: 'Roobert', var(--font-body);
     font-weight: 400;
-    font-size: var(--text-base);
+    font-size: 18px;
     line-height: 1.77;
     margin: 0 0 32px 0;
-    color: var(--color-card-text);
+    color: #090d1b;
 }
 
 .about-body p:last-child {
@@ -127,14 +127,14 @@ body:not(.home-page) #webgl-container {
 .path-divider-thick {
     width: 100%;
     height: 4px;
-    background-color: var(--color-bg-navy);
+    background-color: #0d1327;
     margin-bottom: 8px;
 }
 
 .path-divider-thin {
     width: 100%;
     height: 1px;
-    background-color: var(--color-bg-navy);
+    background-color: #0d1327;
     margin: 8px 0;
     opacity: 0.2;
 }
@@ -163,10 +163,10 @@ body:not(.home-page) #webgl-container {
 
 .location-pill {
     background-color: #c3fe0c;
-    color: var(--color-card-text);
+    color: #090d1b;
     font-family: 'Roobert', var(--font-body);
     font-weight: 600;
-    font-size: var(--text-sm);
+    font-size: 16px;
     line-height: 24px;
     padding: 0 8px;
     border-radius: 3.09px;
@@ -182,19 +182,19 @@ body:not(.home-page) #webgl-container {
 .experience-role {
     font-family: 'Roobert', var(--font-body);
     font-weight: 600;
-    font-size: var(--text-2xl);
+    font-size: 30px;
     line-height: 1.2;
     margin: 0;
-    color: var(--color-card-text);
+    color: #090d1b;
 }
 
 .experience-desc {
     font-family: 'Roobert', var(--font-body);
     font-weight: 400;
-    font-size: var(--text-lg);
+    font-size: 20px;
     line-height: 32px;
     margin: 0;
-    color: var(--color-bg-navy);
+    color: #0d1327;
 }
 
 .experience-right {
@@ -205,9 +205,9 @@ body:not(.home-page) #webgl-container {
 .experience-date {
     font-family: 'Roobert', var(--font-body);
     font-weight: 600;
-    font-size: var(--text-sm);
+    font-size: 16px;
     letter-spacing: 1.28px;
-    color: var(--color-card-text);
+    color: #090d1b;
     text-transform: uppercase;
     text-align: right;
 }
@@ -215,12 +215,12 @@ body:not(.home-page) #webgl-container {
 /* Custom Header for About Page */
 
 .about-page .header-pill {
-    background-color: var(--color-bg-dark) !important;
+    background-color: #1e1e1e !important;
 }
 
 .about-page .header-nav-desktop .nav-link,
 .designops-page .header-nav-desktop .nav-link {
-    color: var(--color-bg-primary) !important;
+    color: #f7fbf8 !important;
 }
 
 .about-page .header-nav-desktop .nav-link:hover,
@@ -238,7 +238,7 @@ body:not(.home-page) #webgl-container {
 /* Menu toggle lines in mobile for about and designops page */
 .about-page .mobile-menu-toggle .menu-line,
 .designops-page .mobile-menu-toggle .menu-line {
-    background-color: var(--color-bg-primary) !important;
+    background-color: #f7fbf8 !important;
 }
 
 /* Responsive adjustments for Tablet/Mobile */
@@ -279,34 +279,34 @@ body:not(.home-page) #webgl-container {
     }
 
     .about-title-large {
-        font-size: var(--text-4xl);
+        font-size: 40px;
         line-height: 52px;
     }
 
     .about-lead {
-        font-size: var(--text-xl);
+        font-size: 24px;
         line-height: 36px;
     }
 
     .about-body p {
-        font-size: var(--text-base);
+        font-size: 18px;
     }
 
     /* Side paddings handled by .content-wrapper */
 
 
     .professional-path-title {
-        font-size: var(--text-2xl);
+        font-size: 30px;
         line-height: 40px;
         margin-bottom: 24px;
     }
 
     .experience-role {
-        font-size: var(--text-xl);
+        font-size: 24px;
     }
 
     .experience-desc {
-        font-size: var(--text-base);
+        font-size: 18px;
         line-height: 28px;
     }
 

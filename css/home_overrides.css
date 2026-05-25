@@ -1,0 +1,342 @@
+/* 10. Missing Animations */
+@keyframes pulse-scale {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes bob-down {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+}
+
+/* 11. Interaction Indicator Placement (Desktop, Tablet, Mobile) */
+.hero-section {
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    padding-bottom: 48px !important; /* Space for the indicator */
+}
+
+.interaction-indicator {
+    position: relative !important;
+    align-self: center !important;
+    margin-top: auto !important;
+    margin-bottom: 0 !important;
+    z-index: 101 !important;
+}
+
+/* Tablet Overrides */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        min-height: 100vh !important;
+        padding-bottom: 32px !important;
+        padding-top: 120px !important; /* Adjust for fixed header */
+        margin-top: 0 !important;
+    }
+    
+    .hero-intro {
+        margin-bottom: 0 !important;
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+    }
+}
+
+/* Mobile Overrides */
+@media screen and (max-width: 767px) {
+    .hero-section {
+        min-height: 100vh !important;
+        padding-top: 80px !important;
+        padding-bottom: 24px !important;
+    }
+    
+    .hero-intro {
+        position: relative !important; /* Reset from absolute if applied */
+        padding: 0 24px !important;
+        margin-top: 40px !important;
+    }
+}
+
+/* 12. Unifying Scroll Helper Position (Desktop & Tablet) */
+@media screen and (min-width: 768px) {
+    .hero-section {
+        min-height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        padding-bottom: 48px !important;
+        padding-top: 92px !important; /* Standardized top margin */
+        box-sizing: border-box !important;
+        margin-top: 0 !important;
+    }
+
+    .hero-intro {
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: row !important; /* Keep desktop row layout */
+        justify-content: space-between !important;
+        align-items: center !important; /* Vertically center text in the remaining space */
+        margin-bottom: 0 !important;
+        width: 100% !important;
+        max-width: 1400px !important;
+    }
+
+    .interaction-indicator {
+        position: absolute !important;
+        bottom: 48px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
+        display: flex !important;
+    }
+}
+
+/* 13. Unifying Scroll Helper Position (Desktop & Tablet) - Clean Override */
+@media screen and (min-width: 768px) {
+    .hero-section {
+        min-height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        padding-bottom: 64px !important;
+        padding-top: 56px !important;
+        box-sizing: border-box !important;
+        margin-top: 80px !important;
+        padding-left: 96px !important;
+        padding-right: 96px !important;
+    }
+
+    .hero-intro {
+        flex: 1 !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        max-width: 1400px !important;
+    }
+
+    .interaction-indicator {
+        position: absolute !important;
+        bottom: 64px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
+        display: flex !important;
+        z-index: 100 !important;
+    }
+}
+
+/* 14. Scroll Helper Placement (100px gap above About Card) */
+.hero-section {
+    min-height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    padding-top: 92px !important;
+    padding-bottom: 96px !important;
+    box-sizing: border-box !important;
+}
+
+.hero-intro {
+    margin: 0 auto auto auto !important; /* Push down the lower elements */
+    width: 100% !important;
+    max-width: 1400px !important;
+}
+
+.interaction-indicator {
+    position: relative !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 0 auto 100px auto !important; /* THE EXACT 100PX GAP */
+    display: flex !important;
+    z-index: 100 !important;
+}
+
+/* Removed desktop max-width override */
+
+
+/* Tablet & Mobile Consistency */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 80px !important;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+    
+    .hero-intro {
+        margin-top: 40px !important;
+        flex-direction: column !important;
+        gap: 32px !important;
+    }
+
+    .interaction-indicator {
+        margin-bottom: 100px !important;
+    }
+}
+
+/* 15. GUARANTEED FOLD VISIBILITY FOR SCROLL HELPER */
+.hero-section {
+    position: relative !important;
+    height: 100vh !important; /* Forces exact viewport height */
+    height: 100dvh !important; /* Dynamic view height for mobile browsers */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important; /* Centers intro text in the remaining space */
+    padding-top: 80px !important;
+    padding-bottom: 120px !important; /* Safe zone for the absolute helper */
+    box-sizing: border-box !important;
+    margin: 0 !important;
+}
+
+.hero-intro {
+    width: 100% !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+}
+
+.interaction-indicator {
+    position: absolute !important;
+    bottom: 32px !important; /* Pinned 32px from the bottom of the phone screen */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    margin: 0 !important;
+    z-index: 100 !important;
+    display: flex !important;
+}
+
+/* Removed late overrides */
+
+/* 16. Restoring Hero Text Gaps & Alignment */
+.hero-intro {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 32px !important;
+    width: 100% !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+}
+
+@media screen and (max-width: 1024px) {
+    .hero-intro {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 32px !important;
+    }
+}
+
+.hero-intro-left {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important; /* Space between name and location */
+    width: 331px !important;
+    flex-shrink: 0 !important;
+}
+
+.hero-intro-right {
+    flex: 0 1 670px !important;
+    max-width: 670px !important;
+}
+
+/* Ensure mobile specific overrides don't break horizontal gap on larger mobile */
+@media screen and (max-width: 767px) {
+    .hero-intro-left, .hero-intro-right {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* 17. Final Spacing Adjustments for Hero Text Top Gap (Desktop) */
+@media screen and (min-width: 1025px) {
+    .hero-section {
+        padding-top: 112px !important; /* Fixed Header 80px + 32px requested gap */
+        justify-content: flex-start !important;
+        align-items: center !important;
+    }
+
+    .hero-intro {
+        margin-top: 0 !important; /* Remove any existing margin */
+        padding-top: 0 !important;
+    }
+}
+
+/* 18. THE 128PX TOP GAP & DESKTOP CENTERING */
+.hero-section {
+    padding-top: 208px !important; /* 80px fixed header + 128px requested gap */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Horizontally center hero content */
+    min-height: 100vh !important;
+    box-sizing: border-box !important;
+    justify-content: flex-start !important; /* Anchor text to the top gap */
+}
+
+@media screen and (min-width: 1025px) {
+    .hero-intro {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important; /* Maintain 2-column layout */
+        align-items: flex-start !important; /* Align texts to each other's top */
+        width: 100% !important;
+        max-width: 1400px !important;
+        margin: 0 auto !important; /* CENTERED CONTAINER */
+    }
+}
+
+/* Ensure tablet & mobile also have the 128px gap */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 208px !important;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+
+    .hero-intro {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 32px !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+    }
+}
+
+/* 19. FINAL OVERRIDE: 72PX TOP GAP (152PX TOTAL) ACROSS ALL BREAKPOINTS */
+.hero-section {
+    padding-top: 120px !important; /* Reduced 25% */
+}
+
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 120px !important;
+    }
+}
+
+/* 20. ENSURING HORIZONTAL CENTERING & 72PX GAP */
+.hero-section {
+    padding-top: 120px !important; /* Reduced 25% */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Horizontal center */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+@media screen and (min-width: 1025px) {
+    .hero-intro {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important; /* Now vertically center relative to each other */
+        width: 100% !important;
+        max-width: 1400px !important;
+        margin: 0 auto !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}

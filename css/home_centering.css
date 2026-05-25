@@ -1,0 +1,508 @@
+/* 23. DEFINITIVE ALIGNMENT HARMONY (Desktop) */
+@media screen and (min-width: 1025px) {
+    /* 1. Reset all parent section paddings that could cause offsets */
+    .hero-section, 
+    .dark-section-wrapper,
+    .work-highlights {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    /* 2. Unified Width & Centering for content blocks (Upgraded to 1400px) */
+    .hero-intro, 
+    .work-section-title, 
+    .case-study-card {
+        width: 100% !important;
+        max-width: 1400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        left: 0 !important;
+        right: 0 !important;
+        transform: none !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Left/Right Column weights for project cards */
+    .card-left-col {
+        width: 28% !important;
+        max-width: 28% !important;
+    }
+
+    .card-right-col {
+        width: 65% !important;
+        max-width: 65% !important;
+    }
+
+    /* 3. Force hero text blocks to hit the 1400px edges */
+    .hero-intro {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+    }
+
+    /* removed about-card padding override */
+}
+
+/* 24. ULTIMATE HERO GAP & CENTERING (72px Precision) */
+
+/* Desktop & General */
+.hero-section {
+    padding-top: 120px !important; /* Reduced 25% */
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding-left: 96px !important; /* Upgraded Desktop Safety Padding */
+    padding-right: 96px !important;
+    box-sizing: border-box !important;
+}
+
+.hero-intro {
+    width: 100% !important;
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+}
+
+.hero-intro-left {
+    width: 30% !important; /* Percentage weight for fluidity */
+    max-width: none !important;
+}
+
+.hero-intro-right {
+    width: 62% !important; /* Percentage weight for fluidity */
+    max-width: none !important;
+}
+
+/* Tablet & Mobile Header Height Change */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 108px !important; /* Reduced 25% */
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+    
+    .hero-intro {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        gap: 32px !important;
+    }
+    
+    .hero-intro-left, .hero-intro-right {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* 25. VERTICAL STABILITY (Anchoring Top Text) */
+.hero-section {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; /* FORCES TOP ALIGNMENT: Stops vertical jumping on resize */
+    padding-top: 120px !important; /* Reduced 25% */
+    position: relative !important;
+}
+
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 108px !important; /* Reduced 25% */
+    }
+}
+
+/* 26. HERO FULL VIEWPORT HEIGHT (Ensures indicator at fold bottom) */
+.hero-section {
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; /* FIXED POSITION from the top header */
+}
+
+/* 27. FINAL HERO RESOLUTION - UNIFYING 72PX GAP & HORIZONTAL CENTERING */
+.hero-section {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* GLOBAL HORIZONTAL CENTERING */
+    justify-content: flex-start !important; /* GLOBAL VERTICAL STABILITY (Anchored Top) */
+    min-height: 100vh !important;
+    background: none !important;
+    box-sizing: border-box !important;
+}
+
+/* DESKTOP (88px Header + 72px Gap = 160px Total Padding) */
+@media screen and (min-width: 1025px) {
+    .hero-section {
+        padding-top: 120px !important;
+    }
+    
+    .hero-intro {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        max-width: 1400px !important;
+        margin: 0 auto !important;
+    }
+}
+
+/* TABLET & MOBILE (72px Header + 72px Gap = 144px Total Padding) */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 108px !important;
+    }
+    
+    .hero-intro {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important; /* Center text blocks horizontally when stacked */
+        text-align: center !important;
+        gap: 32px !important;
+        width: 100% !important;
+        max-width: 670px !important; /* Constrain description width for better look */
+        margin: 0 auto !important;
+    }
+}
+
+/* 28. TOTAL VERTICAL STACK STABILITY (Unifying all breakpoints) */
+.hero-section {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important; /* ALWAYS ANCHORED TO TOP */
+    align-items: center !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+}
+
+/* Precise Top Gap (Accounting for Header height differences) */
+@media screen and (min-width: 1025px) {
+    .hero-section {
+        padding-top: 120px !important; /* Reduced 25% */
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 108px !important; /* Reduced 25% */
+    }
+}
+
+/* Ensure the intro container doesn't have any centering margins */
+.hero-intro {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* Keep indicator at the bottom fold without pushing top text */
+.interaction-indicator {
+    position: absolute !important;
+    bottom: 32px !important;
+}
+
+/* 29. THE ABSOLUTE ANCHOR FIX (Tablet & Mobile) */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        justify-content: flex-start !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .hero-intro {
+        flex: none !important; /* CRITICAL: Stops the container from stretching to fill the screen */
+        height: auto !important; /* CRITICAL: Keeps name and description together at the top */
+        justify-content: flex-start !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    /* Ensure children don't push each other away */
+    .hero-intro-left, .hero-intro-right {
+        flex: none !important;
+        margin: 0 !important;
+    }
+}
+
+/* 30. MOBILE & TABLET LEFT ALIGNMENT (Hero Text) */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        align-items: flex-start !important; /* Align the container to the left boundary */
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+
+    .hero-intro {
+        align-items: flex-start !important; /* Left align stacked blocks */
+        text-align: left !important; /* Left align individual text lines */
+        margin-left: 0 !important; /* Remove centering margin */
+        max-width: 100% !important;
+    }
+}
+
+/* 31. PRECISE SIDE GAPS (Tablet: 32px, Mobile: 24px) */
+
+/* Base Hero Section structure for all breakpoints */
+.hero-section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important; 
+    box-sizing: border-box !important;
+}
+
+.hero-intro {
+    width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* TABLET BREAKPOINT (768px to 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .hero-section {
+        padding-left: 32px !important;
+        padding-right: 32px !important;
+    }
+    
+    .hero-intro {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+/* MOBILE BREAKPOINT (Up to 767px) */
+@media screen and (max-width: 767px) {
+    .hero-section {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+    
+    .hero-intro {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+/* Ensure centering on Desktop remains at 1400px max width */
+@media screen and (min-width: 1025px) {
+    .hero-section {
+        align-items: center !important;
+    }
+    .hero-intro {
+        max-width: 1400px !important;
+        margin: 0 auto !important;
+    }
+}
+
+/* 32. FLUID DESKTOP SAFETY GAPS (32px Minimum side gap) */
+@media screen and (min-width: 1025px) {
+    .hero-section, 
+    .work-highlights {
+        padding-left: 32px !important;
+        padding-right: 32px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Keep the internal content width limited but allow the padding to protect the edges */
+    .hero-intro, 
+    .work-section-title,
+    .case-study-card {
+        width: 100% !important;
+        max-width: 1400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+/* Specific fix for Case Study Cards to ensure they don't lose the 32px buffer */
+@media screen and (min-width: 1025px) {
+    .case-study-card {
+        padding-left: 0 !important; /* Content centered by its own max-width logic */
+        padding-right: 0 !important;
+    }
+}
+
+/* 33. GLOBAL SIDE BUFFER (32px Desktop Safety + 32px Tablet Unified) */
+
+/* Apply to all major landing page sections */
+@media screen and (min-width: 768px) {
+    .hero-section,
+    .work-highlights {
+        padding-left: 32px !important;
+        padding-right: 32px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Keep content centered but protected by the 32px padding */
+    .hero-intro, 
+    .work-section-title,
+    .case-study-card {
+        width: 100% !important;
+        max-width: 1400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+/* Maintain the 24px Mobile override for consistency */
+@media screen and (max-width: 767px) {
+    .hero-section,
+    .work-highlights {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+}
+
+/* 34. DESKTOP PROTECTION (32px Minimum Gap Before Breakpoint) */
+@media screen and (min-width: 1025px) {
+    .hero-intro, 
+    .work-section-title,
+    .case-study-card {
+        width: calc(100% - 64px) !important; /* Forces 32px safety gap on both sides */
+        max-width: 1400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+/* 36. BREAKPOINT-SPECIFIC HORIZONTAL GAPS (CLEAN RESET) */
+
+/* 1. Desktop Breakpoint (1025px and up) */
+@media screen and (min-width: 1025px) {
+    .hero-section, 
+    .dark-section-wrapper,
+    .work-highlights {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .hero-section {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important; 
+    }
+
+    .hero-intro, 
+    .about-card, 
+    .work-section-title,
+    .case-study-card {
+        width: calc(100% - 64px) !important; 
+        max-width: 1400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        text-align: left !important;
+    }
+
+    .hero-intro {
+        margin-bottom: 0 !important; 
+    }
+
+    .interaction-indicator {
+        display: flex !important;
+        position: relative !important; 
+        margin: 40px auto 48px auto !important; /* Reduced top margin to fix mobile position */
+        align-self: center !important;
+        left: auto !important; 
+        right: auto !important;
+        transform: none !important; 
+        z-index: 101 !important;
+    }
+
+    .case-study-card {
+        margin-bottom: 160px !important;
+    }
+}
+
+/* 2. Tablet Breakpoint (768px to 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .hero-section,
+    .about-section,
+    .work-highlights {
+        padding-left: 32px !important; /* The 32px Tablet gap */
+        padding-right: 32px !important;
+    }
+
+    .hero-intro, 
+    .about-card,
+    .work-section-title,
+    .case-study-card {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
+/* 3. Mobile Breakpoint (767px and below) */
+@media screen and (max-width: 767px) {
+    .hero-section {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+
+    .work-highlights {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .about-section {
+        padding-left: 8px !important; /* Specific 8px gap for About Card */
+        padding-right: 8px !important;
+    }
+
+    .hero-intro, 
+    .about-card,
+    .work-section-title,
+    .case-study-card {
+        width: 100% !important;
+        max-width: none !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    /* Portfolio Cases Mobile Gaps */
+    .work-section-title {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+        box-sizing: border-box !important;
+    }
+
+    .case-study-card {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        gap: 24px !important; /* Gap between image and text */
+    }
+
+    .card-image {
+        width: calc(100% - 16px) !important;
+        margin-left: 8px !important;
+        margin-right: 8px !important;
+        border-radius: 8px !important;
+    }
+
+    .card-content-row {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+        box-sizing: border-box !important;
+    }
+}

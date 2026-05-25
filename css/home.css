@@ -1,3 +1,4 @@
+/* Hero Section - Restored and Refined */
 .hero-section {
     display: flex;
     flex-direction: column;
@@ -44,7 +45,7 @@ body.home-page .about-card {
     font-weight: 600; /* SemiBold */
     font-size: 22px;
     line-height: 1.44;
-    color: var(--color-bg-dark);
+    color: #1E1E1E;
     margin: 0 0 4px 0; /* Applied 4px bottom margin from mobile standard */
 }
 
@@ -53,7 +54,7 @@ body.home-page .about-card {
     font-weight: 500; /* Medium */
     font-size: 22px;
     line-height: 1.4;
-    color: var(--color-text-secondary);
+    color: #6F6F6F;
     margin: 0;
 }
 
@@ -67,13 +68,13 @@ body.home-page .about-card {
     font-weight: 500; /* Medium */
     font-size: 22px;
     line-height: 1.68;
-    color: var(--color-bg-dark);
+    color: #1E1E1E;
     margin: 0;
 }
 
 /* About Me Card - REBUILT for FIGMA PRECISION (Desktop, Tablet, Mobile) */
 .about-card {
-    background-color: var(--color-text-secondary) !important;
+    background-color: #6F6F6F !important;
     border-radius: 10px !important;
     margin: -146px auto 96px auto !important; /* Overlap by 146px to match Figma, 96px bottom gap */
     display: flex !important;
@@ -117,7 +118,7 @@ body.home-page .about-card {
     font-weight: 400 !important; /* Regular in Figma code */
     font-size: 34px !important;
     line-height: 1.4 !important; /* 47.6px from Figma */
-    color: var(--color-bg-primary) !important;
+    color: #F7FBF8 !important;
     margin: 0 !important;
     text-align: left !important;
 }
@@ -133,22 +134,22 @@ body.home-page .about-card {
     justify-content: space-between !important;
     width: 442px !important;
     height: 64px !important;
-    background-color: var(--color-bg-primary) !important;
-    border: 2px solid var(--color-bg-primary) !important; /* border-2 in Figma code */
+    background-color: #F7FBF8 !important;
+    border: 2px solid #F7FBF8 !important; /* border-2 in Figma code */
     border-radius: 100px !important;
     padding: 0 40px !important;
     box-sizing: border-box !important;
-    color: var(--color-bg-dark) !important;
+    color: #1E1E1E !important;
     font-family: 'Roobert', var(--font-body) !important;
     font-weight: 500 !important;
-    font-size: var(--text-lg) !important;
+    font-size: 20px !important;
     text-decoration: none !important;
     transition: all 0.3s ease !important;
 }
 
 .about-cta-pill:hover {
-    background-color: var(--color-bg-dark) !important;
-    color: var(--color-bg-primary) !important;
+    background-color: #1E1E1E !important;
+    color: #F7FBF8 !important;
 }
 
 .cta-icon-wrapper {
@@ -240,7 +241,7 @@ body.home-page .about-card {
     }
 
     .about-card-title {
-        font-size: var(--text-xl) !important;
+        font-size: 24px !important;
         line-height: 37px !important; /* ~154% */
     }
 
@@ -248,7 +249,7 @@ body.home-page .about-card {
         width: 100% !important;
         max-width: none !important;
         height: 64px !important;
-        font-size: var(--text-sm) !important;
+        font-size: 16px !important;
         padding: 0 25px !important;
     }
 }
@@ -313,14 +314,14 @@ body.home-page .about-card {
         font-size: 22px;
         line-height: 1.44;
         font-weight: 600;
-        color: var(--color-bg-dark);
+        color: #1E1E1E;
     }
 
     .hero-location {
         font-size: 22px;
         line-height: 1.4;
         font-weight: 500;
-        color: var(--color-text-secondary);
+        color: #6f6f6f;
     }
 
     .hero-intro-right {
@@ -330,18 +331,18 @@ body.home-page .about-card {
     }
 
     .hero-main-description {
-        font-size: var(--text-base);
+        font-size: 18px;
         line-height: 1.77;
         font-weight: 500;
-        color: var(--color-bg-dark);
+        color: #1E1E1E;
     }
 
 /* Removed mobile overrides */
 }
 
 .about-cta-pill:hover {
-    background-color: var(--color-bg-primary);
-    color: var(--color-card-text);
+    background-color: #f7fbf8;
+    color: #090d1b;
 }
 
 /* Consolidated with main CTA block */
@@ -445,32 +446,32 @@ body.home-page .about-card {
 }
 
 .card-outlined .action-title {
-    color: var(--color-bg-primary);
+    color: #f7fbf8;
     /* White text */
 }
 
 .card-outlined .action-icon {
-    color: var(--color-bg-primary);
+    color: #f7fbf8;
 }
 
 .card-outlined:hover {
-    border-color: var(--color-bg-primary);
+    border-color: #f7fbf8;
     background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* Variant: Filled (Design operations) */
 .card-filled {
-    background-color: var(--color-bg-primary);
+    background-color: #f7fbf8;
     border: 1px solid #ffffff;
 }
 
 .card-filled .action-title {
-    color: var(--color-card-text);
+    color: #090d1b;
     /* Dark text */
 }
 
 .card-filled .action-icon {
-    color: var(--color-card-text);
+    color: #090d1b;
 }
 
 .card-filled:hover {
@@ -490,7 +491,7 @@ body.home-page .about-card {
 
 /* Work Highlights Section */
 .work-highlights {
-    background-color: var(--color-bg-dark);
+    background-color: #1E1E1E;
     position: relative;
     padding-bottom: 160px; /* Increased to absorb footer top padding */
     z-index: 10;
@@ -506,9 +507,9 @@ body.home-page .about-card {
 
     font-family: 'Roobert', var(--font-body);
     font-weight: 400;
-    font-size: var(--text-4xl);
+    font-size: 40px;
     line-height: 64px;
-    color: var(--color-bg-primary) !important;
+    color: #F7FBF8 !important;
 }
 
 /* Case Study Card (Global) */
@@ -566,9 +567,9 @@ body.home-page .about-card {
     font-family: var(--font-heading);
     /* Unbounded */
     font-weight: 400;
-    font-size: var(--text-4xl);
+    font-size: 40px;
     line-height: 50px;
-    color: var(--color-bg-primary) !important;
+    color: #F7FBF8 !important;
     margin: 0;
     font-family: 'Unbounded', sans-serif;
 }
@@ -576,7 +577,7 @@ body.home-page .about-card {
 .case-subtitle {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
-    font-size: var(--text-sm);
+    font-size: 16px;
     line-height: 32px;
     color: #898989;
     margin: 0;
@@ -594,10 +595,10 @@ body.home-page .about-card {
 .case-description {
     font-family: 'Roobert', var(--font-body);
     font-weight: 400;
-    font-size: var(--text-base);
+    font-size: 18px;
     line-height: 1.77;
     /* ~32px */
-    color: var(--color-bg-primary) !important;
+    color: #F7FBF8 !important;
     margin: 0;
     min-height: 110px;
     /* Align with Figma */
@@ -617,7 +618,7 @@ body.home-page .about-card {
     width: 100%;
     max-width: 354px;
     height: 72px;
-    border: 1px solid var(--color-bg-primary) !important;
+    border: 1px solid #F7FBF8 !important;
     border-radius: 6px;
     padding: 16px 32px;
     display: flex;
@@ -628,7 +629,7 @@ body.home-page .about-card {
     text-decoration: none;
     transition: all 0.2s ease;
     background: transparent !important;
-    color: var(--color-bg-primary) !important;
+    color: #F7FBF8 !important;
     box-sizing: border-box;
 }
 
@@ -643,28 +644,28 @@ body.home-page .about-card {
 }
 
 .action-btn:hover {
-    background: var(--color-bg-primary) !important;
+    background: #F7FBF8 !important;
     border: none !important;
 }
 
 .action-btn:hover .action-text-top {
-    color: var(--color-bg-dark) !important;
+    color: #1E1E1E !important;
 }
 
 .action-btn:hover .action-text-bottom {
-    color: var(--color-text-secondary) !important;
+    color: #6F6F6F !important;
 }
 
 .action-btn:hover .action-arrow svg {
-    color: var(--color-bg-dark) !important;
+    color: #1E1E1E !important;
 }
 
 .action-text-top {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
-    font-size: var(--text-base);
+    font-size: 18px;
     line-height: 1.2;
-    color: var(--color-bg-primary) !important;
+    color: #F7FBF8 !important;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -673,9 +674,9 @@ body.home-page .about-card {
 .action-text-bottom {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
-    font-size: var(--text-xs);
+    font-size: 14px;
     line-height: 1.2;
-    color: var(--color-text-secondary) !important;
+    color: #6F6F6F !important;
 }
 
 .action-arrow {
@@ -689,7 +690,7 @@ body.home-page .about-card {
     display: block;
     width: 100%;
     height: 100%;
-    color: var(--color-bg-primary) !important;
+    color: #F7FBF8 !important;
 }
 
 /* Mobile Responsiveness */
@@ -701,7 +702,7 @@ body.home-page .about-card {
         padding-left: 0;
         text-align: center;
         margin: 0;
-        font-size: var(--text-2xl);
+        font-size: 30px;
         line-height: 64px;
     }
 
@@ -739,14 +740,14 @@ body.home-page .about-card {
     }
 
     .case-title {
-        font-size: var(--text-xl);
+        font-size: 24px;
         /* Adjust for mobile */
         line-height: 1.2;
     }
 
     /* Right Column Mobile */
     .case-description {
-        font-size: var(--text-sm);
+        font-size: 16px;
         min-height: auto;
     }
 
@@ -785,9 +786,9 @@ body.home-page .about-card {
 
     font-family: 'Roobert', var(--font-body);
     font-weight: 400;
-    font-size: var(--text-4xl);
+    font-size: 40px;
     line-height: 64px;
-    color: var(--color-bg-dark);
+    color: #1E1E1E;
 }
 
 /* Case Study Card (Global) */
@@ -842,9 +843,9 @@ body.home-page .about-card {
     font-family: var(--font-heading);
     /* Unbounded */
     font-weight: 400;
-    font-size: var(--text-4xl);
+    font-size: 40px;
     line-height: 50px;
-    color: var(--color-bg-dark);
+    color: #1E1E1E;
     margin: 0;
     font-family: 'Unbounded', sans-serif;
 }
@@ -852,9 +853,9 @@ body.home-page .about-card {
 .case-subtitle {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
-    font-size: var(--text-sm);
+    font-size: 16px;
     line-height: 32px;
-    color: var(--color-text-secondary);
+    color: #6F6F6F;
     margin: 0;
 }
 
@@ -870,10 +871,10 @@ body.home-page .about-card {
 .case-description {
     font-family: 'Roobert', var(--font-body);
     font-weight: 400;
-    font-size: var(--text-base);
+    font-size: 18px;
     line-height: 1.77;
     /* ~32px */
-    color: var(--color-bg-dark);
+    color: #1E1E1E;
     margin: 0;
     min-height: 110px;
     /* Align with Figma */
@@ -891,7 +892,7 @@ body.home-page .about-card {
     width: 100%;
     max-width: 354px;
     height: 72px;
-    border: 2px solid var(--color-bg-dark);
+    border: 2px solid #1E1E1E;
     border-radius: 6px;
     padding: 16px 32px;
     display: flex;
@@ -902,7 +903,7 @@ body.home-page .about-card {
     text-decoration: none;
     transition: all 0.2s ease;
     background: transparent;
-    color: var(--color-bg-dark);
+    color: #1E1E1E;
     box-sizing: border-box;
 }
 
@@ -917,28 +918,28 @@ body.home-page .about-card {
 }
 
 .action-btn:hover {
-    background: var(--color-bg-dark);
-    border-color: var(--color-bg-dark);
+    background: #1E1E1E;
+    border-color: #1E1E1E;
 }
 
 .action-btn:hover .action-text-top {
-    color: var(--color-bg-primary);
+    color: #F7FBF8;
 }
 
 .action-btn:hover .action-text-bottom {
-    color: var(--color-text-secondary);
+    color: #6F6F6F;
 }
 
 .action-btn:hover .action-arrow svg {
-    color: var(--color-bg-primary);
+    color: #F7FBF8;
 }
 
 .action-text-top {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
-    font-size: var(--text-base);
+    font-size: 18px;
     line-height: 1.2;
-    color: var(--color-bg-dark);
+    color: #1E1E1E;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -947,9 +948,9 @@ body.home-page .about-card {
 .action-text-bottom {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
-    font-size: var(--text-xs);
+    font-size: 14px;
     line-height: 1.2;
-    color: var(--color-text-secondary);
+    color: #6F6F6F;
 }
 
 .action-arrow {
@@ -963,11 +964,11 @@ body.home-page .about-card {
     display: block;
     width: 100%;
     height: 100%;
-    color: var(--color-bg-dark);
+    color: #1E1E1E;
 }
 
 .action-btn:hover .action-arrow svg {
-    color: var(--color-bg-primary);
+    color: #F7FBF8;
 }
 
 /* Mobile Responsiveness */
@@ -980,7 +981,7 @@ body.home-page .about-card {
         padding-right: 24px;
         text-align: center;
         margin: 0;
-        font-size: var(--text-2xl);
+        font-size: 30px;
         line-height: 64px;
     }
 
@@ -1020,14 +1021,14 @@ body.home-page .about-card {
     }
 
     .case-title {
-        font-size: var(--text-xl);
+        font-size: 24px;
         /* Adjust for mobile */
         line-height: 1.2;
     }
 
     /* Right Column Mobile */
     .case-description {
-        font-size: var(--text-sm);
+        font-size: 16px;
         min-height: auto;
     }
 
@@ -1055,6 +1056,28 @@ body.home-page .about-card {
 /* Responsive */
 /* Tablet Responsive Design (max-width: 1024px) */
 @media (max-width: 1024px) {
+    .header-wrapper {
+        padding: 8px;
+    }
+
+    .header-pill {
+        height: 64px;
+        padding: 0 16px;
+    }
+
+    .brand {
+        width: 40px;
+        height: 40px;
+    }
+
+    .header-nav-desktop {
+        display: none;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
     /* Responsive Hero Section */
     .hero-section {
         margin-top: 80px;
@@ -1199,13 +1222,13 @@ body.home-page .about-card {
     }
 
     .site-footer .footer-name {
-        font-size: var(--text-xl) !important;
+        font-size: 24px !important;
         color: var(--footer-name-color) !important;
         margin: 0 !important;
     }
 
     .site-footer .footer-email {
-        font-size: var(--text-xl) !important;
+        font-size: 24px !important;
         color: var(--footer-text-color) !important;
         margin: 0 !important;
         text-decoration: none !important;
@@ -1213,7 +1236,7 @@ body.home-page .about-card {
 
     .footer-link,
     .footer-link-social {
-        font-size: var(--text-xl) !important;
+        font-size: 24px !important;
         display: flex !important;
         align-items: center !important;
         color: var(--footer-text-color) !important;
@@ -1285,14 +1308,14 @@ body.home-page .about-card {
     }
 
     .site-footer .footer-name {
-        font-size: var(--text-xl) !important;
+        font-size: 24px !important;
         color: var(--footer-name-color) !important;
         margin-bottom: 8px !important;
         text-align: left !important;
     }
 
     .site-footer .footer-email {
-        font-size: var(--text-xl) !important;
+        font-size: 24px !important;
         color: var(--footer-text-color) !important;
         margin-bottom: 0 !important;
         text-align: left !important;
@@ -1328,7 +1351,27 @@ body.home-page .about-card {
 /* Removed mobile refined overrides */
 }
 
+/* Mobile Reponsive Design (max-width: 768px) */
+@media (max-width: 640px) {
 
+    /* Header & Nav */
+    .header-wrapper {
+        padding: 8px;
+    }
+
+/* Mobile Nav Toggle Overrides if needed, but they are handled in global block */
+
+
+
+
+    /* Footer Styles */
+
+
+
+    /* New Footer Styles */
+
+    /* Footer Styles - Standardized in consolidated block above */
+}
 
 
 /* --- PAGE SPECIFIC & OVERRIDE BLOCKS --- */
@@ -1598,6 +1641,81 @@ body.home-page .about-card {
     .hero-intro {
         margin-top: 0 !important; /* Remove any existing margin */
         padding-top: 0 !important;
+    }
+}
+
+/* 18. THE 128PX TOP GAP & DESKTOP CENTERING */
+.hero-section {
+    padding-top: 208px !important; /* 80px fixed header + 128px requested gap */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Horizontally center hero content */
+    min-height: 100vh !important;
+    box-sizing: border-box !important;
+    justify-content: flex-start !important; /* Anchor text to the top gap */
+}
+
+@media screen and (min-width: 1025px) {
+    .hero-intro {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important; /* Maintain 2-column layout */
+        align-items: flex-start !important; /* Align texts to each other's top */
+        width: 100% !important;
+        max-width: 1400px !important;
+        margin: 0 auto !important; /* CENTERED CONTAINER */
+    }
+}
+
+/* Ensure tablet & mobile also have the 128px gap */
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 208px !important;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+
+    .hero-intro {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 32px !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+    }
+}
+
+/* 19. FINAL OVERRIDE: 72PX TOP GAP (152PX TOTAL) ACROSS ALL BREAKPOINTS */
+.hero-section {
+    padding-top: 120px !important; /* Reduced 25% */
+}
+
+@media screen and (max-width: 1024px) {
+    .hero-section {
+        padding-top: 120px !important;
+    }
+}
+
+/* 20. ENSURING HORIZONTAL CENTERING & 72PX GAP */
+.hero-section {
+    padding-top: 120px !important; /* Reduced 25% */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Horizontal center */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+@media screen and (min-width: 1025px) {
+    .hero-intro {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important; /* Now vertically center relative to each other */
+        width: 100% !important;
+        max-width: 1400px !important;
+        margin: 0 auto !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 }
 

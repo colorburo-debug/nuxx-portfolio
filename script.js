@@ -239,10 +239,7 @@ const initPage = (containerParent) => {
     // Init artifacts page tabs if present
     initArtifacts(containerParent);
 
-    // Init Gemini Chats page if present
-    if (typeof window.initGeminiChats === 'function') {
-        window.initGeminiChats(containerParent);
-    }
+
 
     // Re-bind WebGL lifecycle
     const context = containerParent || document;

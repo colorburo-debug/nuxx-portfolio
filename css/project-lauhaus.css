@@ -1,18 +1,16 @@
-/* --- LAUHAUS STYLES --- */
-
 /* --- PROJECT LAUHAUS PAGE --- */
 html:has(.lauhaus-page) {
-    background-color: var(--color-bg-primary) !important;
+    background-color: #f7fbf8 !important;
 }
 
 body.lauhaus-page {
     /* Footer Variables Override */
     --footer-bg: #0c775e;
-    --footer-divider: var(--color-bg-primary);
+    --footer-divider: #f7fbf8;
     --footer-name-color: rgba(247, 251, 248, 0.7);
-    --footer-text-color: var(--color-bg-primary);
+    --footer-text-color: #f7fbf8;
     --footer-link-hover: #e0e0e0;
-    background-color: var(--color-bg-primary) !important;
+    background-color: #f7fbf8 !important;
 }
 
 .lauhaus-main {
@@ -31,11 +29,11 @@ body.lauhaus-page {
 
 /* Header Overrides */
 .lauhaus-page .header-pill {
-    background-color: var(--color-bg-dark) !important;
+    background-color: #1e1e1e !important;
 }
 
 .lauhaus-page .header-nav-desktop .nav-link {
-    color: var(--color-bg-primary) !important;
+    color: #f7fbf8 !important;
 }
 
 .lauhaus-page .header-nav-desktop .nav-link:hover {
@@ -52,14 +50,14 @@ body.lauhaus-page {
     font-size: 26px;
     font-weight: 400;
     line-height: 50px;
-    color: var(--color-bg-primary);
+    color: #f7fbf8;
     margin: 0;
 }
 
 .desktop-heading-line {
     width: 100%;
     height: 2px;
-    background-color: var(--color-bg-primary);
+    background-color: #f7fbf8;
     margin-top: 40px;
     margin-bottom: 64px;
 }
@@ -86,9 +84,9 @@ body.lauhaus-page {
 .lauhaus-hero-title {
     font-family: 'Roobert', var(--font-body);
     font-weight: 400;
-    font-size: var(--text-6xl);
+    font-size: 60px;
     line-height: 1.17;
-    color: var(--color-bg-navy);
+    color: #0d1327;
     text-align: center;
     max-width: 895px; /* Standardized to match Fincas/Golden Title width */
     margin: 0 auto 96px auto;
@@ -121,8 +119,8 @@ body.lauhaus-page {
 .lauhaus-hero-caption {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
-    font-size: var(--text-xs);
-    color: var(--color-bg-navy);
+    font-size: 14px;
+    color: #0d1327;
     margin: 0;
     letter-spacing: 0.14px;
     width: 100%;
@@ -136,7 +134,7 @@ body.lauhaus-page {
     margin: 0 auto;
     padding: 128px 96px 160px 96px; /* Standardized top gap to 128px per user request */
     box-sizing: border-box;
-    color: var(--color-bg-navy);
+    color: #0d1327;
 }
 
 .lauhaus-opp .opp-intro {
@@ -151,7 +149,7 @@ body.lauhaus-page {
 
 .opp-title {
     font-family: var(--font-heading);
-    font-size: var(--text-2xl);
+    font-size: 30px;
     font-weight: 400;
     line-height: 40px;
     margin: 0;
@@ -161,7 +159,7 @@ body.lauhaus-page {
 
 .opp-text {
     font-family: 'Roobert', var(--font-body);
-    font-size: var(--text-lg);
+    font-size: 20px;
     line-height: 32px;
     max-width: 648px;
 }
@@ -190,7 +188,7 @@ body.lauhaus-page {
 
 .opp-item-title {
     font-family: var(--font-heading);
-    font-size: var(--text-lg);
+    font-size: 20px;
     font-weight: 500;
     line-height: 30px;
     margin: 0;
@@ -198,7 +196,7 @@ body.lauhaus-page {
 
 .opp-item-desc {
     font-family: 'Roobert', var(--font-body);
-    font-size: var(--text-lg);
+    font-size: 20px;
     line-height: 32px;
     margin: 0;
 }
@@ -208,7 +206,7 @@ body.lauhaus-page {
     background-color: #0c775e;
     width: 100%;
     position: relative;
-    color: var(--color-bg-primary);
+    color: #f7fbf8;
     padding-bottom: 240px;
 }
 
@@ -228,7 +226,7 @@ body.lauhaus-page {
 
 .plp-title {
     font-family: var(--font-heading);
-    font-size: var(--text-5xl);
+    font-size: 50px;
     font-weight: 400;
     line-height: 64px;
     width: 355px;
@@ -243,7 +241,7 @@ body.lauhaus-page {
 
 .plp-text {
     font-family: 'Roobert', var(--font-body);
-    font-size: var(--text-lg);
+    font-size: 20px;
     line-height: 32px;
     max-width: 641px;
 }
@@ -288,7 +286,7 @@ body.lauhaus-page {
 
 .stat-title {
     font-family: var(--font-heading);
-    font-size: var(--text-2xl);
+    font-size: 30px;
     font-weight: 400;
     line-height: 40px;
     margin: 0;
@@ -296,7 +294,7 @@ body.lauhaus-page {
 
 .stat-desc {
     font-family: 'Roobert', var(--font-body);
-    font-size: var(--text-base);
+    font-size: 18px;
     line-height: 1.77;
     margin: 0;
 }
@@ -307,7 +305,7 @@ body.lauhaus-page {
 
 .journey-title {
     font-family: 'Roobert', var(--font-body);
-    font-size: var(--text-base);
+    font-size: 18px;
     font-weight: 400;
     margin: 0 0 24px 0; /* Standardized 24px gap to image below */
 }
@@ -346,7 +344,7 @@ body.lauhaus-page {
 
 .journey-caption {
     font-family: 'Roobert', var(--font-body);
-    font-size: var(--text-base);
+    font-size: 18px;
     margin: 0 0 24px 0; /* Standardized 24px gap to image below */
     line-height: 28px;
 }
@@ -395,10 +393,10 @@ body.lauhaus-page {
 
 .journey-grid-title {
     font-family: 'Roobert', var(--font-body);
-    font-size: var(--text-base);
+    font-size: 18px;
     font-weight: 400;
     margin: 0 0 24px 0; /* Standardized 24px gap to image below */
-    color: var(--color-bg-primary);
+    color: #f7fbf8;
 }
 
 
@@ -416,18 +414,18 @@ body.lauhaus-page {
 
 .journey-conclusion {
     font-family: 'Roobert', var(--font-body);
-    font-size: var(--text-base);
+    font-size: 18px;
     line-height: 1.77;
     max-width: 508px;
     margin: 48px 0 0 0;
-    color: var(--color-bg-primary);
+    color: #f7fbf8;
     grid-column: 1 / span 2;
     grid-row: 3;
 }
 
 .lauhaus-divider {
     height: 16px;
-    background-image: url('../assets/common/background-pattern.svg');
+    background-image: url('../assets/')common/background-pattern.svg');
     background-size: cover;
     background-repeat: repeat-x;
     margin: 112px auto;
@@ -448,14 +446,14 @@ body.lauhaus-page {
 
 .showcase-main-title {
     font-family: 'Roobert', var(--font-body);
-    font-size: var(--text-2xl);
+    font-size: 30px;
     font-weight: 500;
     margin: 0 0 64px 0;
 }
 
 .showcase-title-md {
     font-family: 'Roobert', var(--font-body);
-    font-size: var(--text-2xl);
+    font-size: 30px;
     font-weight: 500;
     margin: 0 0 64px 0;
 }
@@ -567,7 +565,7 @@ body.lauhaus-page {
 
     .lauhaus-opp {
         padding: 128px 32px 160px 32px; /* Standardized to match desktop 128px top gap */
-        color: var(--color-bg-navy);
+        color: #0d1327;
     }
 
     .opp-intro {
@@ -579,14 +577,14 @@ body.lauhaus-page {
     .opp-title {
         width: 280px;
         flex-shrink: 0;
-        font-size: var(--text-2xl);
+        font-size: 30px;
         line-height: 40px;
     }
 
     .opp-text {
         flex: 1;
         max-width: 648px;
-        font-size: var(--text-lg);
+        font-size: 20px;
         line-height: 32px;
     }
 
@@ -605,13 +603,13 @@ body.lauhaus-page {
     }
 
     .opp-item-title {
-        font-size: var(--text-lg);
+        font-size: 20px;
         line-height: 44px;
         font-weight: 500;
     }
 
     .opp-item-desc {
-        font-size: var(--text-lg);
+        font-size: 20px;
         line-height: 32px;
     }
 
@@ -638,12 +636,12 @@ body.lauhaus-page {
     }
 
     .stat-title {
-        font-size: var(--text-2xl);
+        font-size: 30px;
         line-height: 40px;
     }
 
     .stat-desc {
-        font-size: var(--text-base);
+        font-size: 18px;
         line-height: 1.77;
     }
 
@@ -701,7 +699,7 @@ body.lauhaus-page {
     }
 
     .journey-title {
-        font-size: var(--text-base) !important;
+        font-size: 18px !important;
         line-height: 28px !important;
         margin-top: 0;
         padding-top: 0;
@@ -730,7 +728,7 @@ body.lauhaus-page {
     }
 
     .journey-caption {
-        font-size: var(--text-base) !important;
+        font-size: 18px !important;
         line-height: 28px !important;
         margin-top: 0;
         padding-top: 0;
@@ -764,7 +762,7 @@ body.lauhaus-page {
     }
 
     .journey-grid-title {
-        font-size: var(--text-base) !important;
+        font-size: 18px !important;
         line-height: 28px !important;
         padding-top: 0;
         margin-top: 0;
@@ -782,7 +780,7 @@ body.lauhaus-page {
     }
 
     .journey-conclusion {
-        font-size: var(--text-base) !important;
+        font-size: 18px !important;
         line-height: 1.77 !important;
         max-width: 563px;
         margin-top: 0;
@@ -903,7 +901,7 @@ body.lauhaus-page {
         display: flex !important;
         margin: 0;
         z-index: 20;
-        color: var(--color-bg-primary) !important;
+        color: #F7FBF8 !important;
         animation: pulse-swipe 2s infinite ease-in-out;
     }
 }
@@ -952,9 +950,9 @@ body.lauhaus-page {
         align-items: center;
         justify-content: center;
         gap: 8px;
-        color: var(--color-bg-primary);
+        color: #F7FBF8;
         font-family: 'Roobert', var(--font-body);
-        font-size: var(--text-xs);
+        font-size: 14px;
         font-weight: 500;
         pointer-events: none;
         animation: pulse-swipe 2s infinite ease-in-out;
@@ -1028,7 +1026,7 @@ body.lauhaus-page {
     .lauhaus-hero-title {
         font-family: 'Roobert', var(--font-body);
         font-weight: 500;
-        font-size: var(--text-2xl);
+        font-size: 30px;
         line-height: 1.33;
         text-align: left;
         padding: 0; /* Removed redundant padding to keep 24px from parent */
@@ -1071,7 +1069,7 @@ body.lauhaus-page {
     .lauhaus-hero-caption {
         padding: 8px 24px; /* 24px left padding to offset the -24px parent margin */
         margin-top: 0;
-        font-size: var(--text-xs);
+        font-size: 14px;
         line-height: 1.4;
         letter-spacing: 0.14px;
         align-self: flex-start;
@@ -1115,7 +1113,7 @@ body.lauhaus-page {
     }
 
     .plp-title {
-        font-size: var(--text-4xl);
+        font-size: 40px;
         line-height: 52px;
         width: auto;
     }
@@ -1230,7 +1228,7 @@ body.lauhaus-page {
         width: 100%;
         margin: 8px 0 32px 0;
         border: none;
-        border-top: 1px solid var(--color-bg-primary);
+        border-top: 1px solid #f7fbf8;
     }
 
     .journey-section {
@@ -1262,8 +1260,8 @@ body.lauhaus-page {
         margin-top: 0 !important;
         margin-bottom: 0 !important; /* Relying on parent flex gap: 24px */
         line-height: 28px !important;
-        color: var(--color-bg-primary) !important;
-        font-size: var(--text-base) !important;
+        color: #f7fbf8 !important;
+        font-size: 18px !important;
         padding-left: 16px !important;
         padding-right: 16px !important;
     }
@@ -1271,7 +1269,7 @@ body.lauhaus-page {
     .journey-grid-title {
         width: 100% !important;
         margin-bottom: 0 !important; /* Relying on parent flex gap: 24px */
-        font-size: var(--text-base) !important;
+        font-size: 18px !important;
         line-height: 28px !important;
         padding-left: 16px !important;
         padding-right: 16px !important;
@@ -1365,50 +1363,5 @@ body.lauhaus-page {
     .storyboard-img-wrapper {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
-    }
-}
-
-/* ==========================================================================
-
-/* --- LAUHAUS STYLES --- */
-
-/* 39. DESIGN OPS FOOTER — MOBILE FIX */
-/* 
-   The global site-footer mobile rule uses var(--footer-text-color) which defaults 
-   to white (from the dark homepage theme). The designops-footer has a white background,
-   making white text invisible. This block overrides those colors ONLY on mobile.
-*/
-@media (max-width: 767px) {
-    .designops-footer {
-        --footer-bg: var(--color-bg-dark) !important;
-        --footer-divider: #898989 !important;
-        --footer-name-color: #898989 !important;
-        --footer-text-color: var(--color-bg-dark) !important;
-        --footer-link-hover: #000 !important;
-        background-color: #ffffff !important;
-        /* Remove top padding so the divider line connects directly
-           to the white content section above — no visible gap */
-        padding-top: 0 !important;
-    }
-
-    .designops-footer .footer-name {
-        color: #898989 !important;
-    }
-
-    .designops-footer .footer-email,
-    .designops-footer .footer-link,
-    .designops-footer .footer-link-social {
-        color: var(--color-bg-dark) !important;
-    }
-
-    .designops-footer .footer-email:hover,
-    .designops-footer .footer-link:hover,
-    .designops-footer .footer-link-social:hover {
-        color: #000 !important;
-    }
-
-    .designops-footer .footer-divider {
-        background-color: var(--color-bg-dark) !important;
-        opacity: 0.3 !important;
     }
 }

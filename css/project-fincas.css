@@ -1,22 +1,23 @@
+/* ==========================================================================
    FINCAS CASE STUDY STYLES (Blocks 1 & 2)
    Mobile-First, 8px Grid System
    ========================================================================== */
 
 /* Base Page Overrides */
 html:has(.fincas-page) {
-    background-color: var(--color-bg-primary) !important;
+    background-color: #F7FBF8 !important;
     /* Match background context for scrolling momentum */
 }
 
 .fincas-page {
     /* Footer Variables Override */
     --footer-bg: #146a56;
-    --footer-divider: var(--color-bg-primary);
+    --footer-divider: #f7fbf8;
     --footer-name-color: rgba(247, 251, 248, 0.7);
-    --footer-text-color: var(--color-bg-primary);
+    --footer-text-color: #f7fbf8;
     --footer-link-hover: #e0e0e0;
-    background-color: var(--color-bg-primary);
-    color: var(--color-bg-navy);
+    background-color: #F7FBF8;
+    color: #0d1327;
 }
 
 .fincas-container {
@@ -25,11 +26,11 @@ html:has(.fincas-page) {
 
 /* Header Overrides */
 .fincas-page .header-pill {
-    background-color: var(--color-bg-dark) !important;
+    background-color: #1e1e1e !important;
 }
 
 .fincas-page .header-nav-desktop .nav-link {
-    color: var(--color-bg-primary) !important;
+    color: #f7fbf8 !important;
 }
 
 .fincas-page .header-nav-desktop .nav-link:hover {
@@ -64,9 +65,9 @@ html:has(.fincas-page) {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
     /* Medium */
-    font-size: var(--text-2xl);
+    font-size: 30px;
     line-height: 1.33;
-    color: var(--color-bg-navy);
+    color: #0d1327;
     margin: 0;
     width: 100%;
     /* Max-width on mobile was artificially restricted; removed to allow full use of available space */
@@ -101,10 +102,10 @@ html:has(.fincas-page) {
 .fincas-hero-caption {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
-    font-size: var(--text-xs);
+    font-size: 14px;
     line-height: 1.4;
     letter-spacing: 0.14px;
-    color: var(--color-bg-navy);
+    color: #0d1327;
     margin: 0;
     text-align: left;
     width: 100%;
@@ -128,9 +129,9 @@ html:has(.fincas-page) {
     font-family: 'Unbounded', sans-serif;
     font-weight: 400;
     /* Regular */
-    font-size: var(--text-2xl);
+    font-size: 30px;
     line-height: 30px;
-    color: var(--color-bg-navy);
+    color: #0d1327;
     margin: 0;
     width: 100%;
 }
@@ -138,9 +139,9 @@ html:has(.fincas-page) {
 .fincas-overview-content {
     font-family: 'Roobert', var(--font-body);
     font-weight: 400;
-    font-size: var(--text-lg);
+    font-size: 20px;
     line-height: 32px;
-    color: var(--color-bg-navy);
+    color: #0d1327;
     margin: 0;
     width: 100%;
 }
@@ -189,9 +190,9 @@ html:has(.fincas-page) {
 .fincas-col-title {
     font-family: 'Unbounded', var(--font-heading);
     font-weight: 500;
-    font-size: var(--text-2xl);
+    font-size: 30px;
     line-height: 1.43;
-    color: var(--color-bg-navy);
+    color: #0d1327;
     margin: 0;
 }
 
@@ -219,7 +220,7 @@ html:has(.fincas-page) {
     gap: 24px;
     padding-bottom: 56px;
     margin-bottom: 56px;
-    border-bottom: 1px solid var(--color-bg-navy);
+    border-bottom: 1px solid #0d1327;
 }
 
 /* Remove border and bottom margin from the last item in a column */
@@ -232,25 +233,25 @@ html:has(.fincas-page) {
 .fincas-stat-number {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
-    font-size: var(--text-3xl);
+    font-size: 36px;
     line-height: 1;
     /* Match visual tightness of Figma */
-    color: var(--color-bg-navy);
+    color: #0d1327;
     margin: 0;
 }
 
 /* The small text modifier (e.g., '2eq tons' next to '7.4B CO') */
 .text-small {
-    font-size: var(--text-xl);
+    font-size: 24px;
 }
 
 .fincas-stat-desc {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
-    font-size: var(--text-lg);
+    font-size: 20px;
     line-height: 1.6;
     /* 32px line height / 20px font-size */
-    color: var(--color-bg-navy);
+    color: #0d1327;
     margin: 0;
 }
 
@@ -276,9 +277,9 @@ html:has(.fincas-page) {
 .fincas-brand-title {
     font-family: 'Unbounded', var(--font-heading);
     font-weight: 400;
-    font-size: var(--text-2xl);
+    font-size: 30px;
     line-height: 1;
-    color: var(--color-bg-navy);
+    color: #0d1327;
     /* Changed from #16503e based on mobile spec */
     margin: 0 0 72px 0;
     /* 72px bottom margin to map to node 829:8468 spacing to the logo */
@@ -332,7 +333,7 @@ html:has(.fincas-page) {
    ========================================================================== */
 .fincas-insetting {
     background-color: #146a56;
-    color: var(--color-bg-primary);
+    color: #f7fbf8;
     overflow: hidden;
     /* For breaking out horizontal sliders if needed */
 }
@@ -347,7 +348,7 @@ html:has(.fincas-page) {
 .insetting-title {
     margin: 0;
     font-family: var(--font-heading);
-    font-size: var(--text-4xl);
+    font-size: 40px;
     line-height: 1.3;
     font-weight: 400;
 }
@@ -355,7 +356,7 @@ html:has(.fincas-page) {
 .insetting-desc {
     margin: 0;
     font-family: 'Roobert', sans-serif;
-    font-size: var(--text-lg);
+    font-size: 20px;
     line-height: 1.6;
 }
 
@@ -369,14 +370,14 @@ html:has(.fincas-page) {
     font-size: 26px;
     font-weight: 400;
     line-height: 50px;
-    color: var(--color-bg-primary);
+    color: #f7fbf8;
     margin: 0;
 }
 
 .iv-line {
     width: 100%;
     height: 2px;
-    background-color: var(--color-bg-primary);
+    background-color: #f7fbf8;
     margin-top: 40px;
     margin-bottom: 64px;
 }
@@ -393,7 +394,7 @@ html:has(.fincas-page) {
 
 .iv-title {
     font-family: var(--font-heading);
-    font-size: var(--text-2xl);
+    font-size: 30px;
     line-height: 40px;
     font-weight: 400;
     margin: 0;
@@ -401,7 +402,7 @@ html:has(.fincas-page) {
 
 .iv-desc {
     font-family: 'Roobert', sans-serif;
-    font-size: var(--text-base);
+    font-size: 18px;
     line-height: 1.77;
     margin: 0;
 }
@@ -457,7 +458,7 @@ html:has(.fincas-page) {
 
 .id-main-title {
     font-family: var(--font-heading);
-    font-size: var(--text-2xl);
+    font-size: 30px;
     line-height: 1.33;
     font-weight: 400;
     margin: 0;
@@ -469,7 +470,7 @@ html:has(.fincas-page) {
 
 .id-title {
     font-family: var(--font-heading);
-    font-size: var(--text-2xl);
+    font-size: 30px;
     line-height: 1.33;
     font-weight: 400;
     margin: 0;
@@ -477,7 +478,7 @@ html:has(.fincas-page) {
 
 .id-desc {
     font-family: 'Roobert', sans-serif;
-    font-size: var(--text-base);
+    font-size: 18px;
     line-height: 1.77;
     margin: 0;
 }
@@ -501,7 +502,7 @@ html:has(.fincas-page) {
 
 .impact-title {
     font-family: var(--font-heading);
-    font-size: var(--text-2xl);
+    font-size: 30px;
     line-height: 1.54;
     font-weight: 400;
     margin: 0;
@@ -509,7 +510,7 @@ html:has(.fincas-page) {
 
 .impact-subtitle {
     font-family: var(--font-body);
-    font-size: var(--text-lg);
+    font-size: 20px;
     line-height: 32px;
     margin: 0;
 }
@@ -527,7 +528,7 @@ html:has(.fincas-page) {
 
 .im-text {
     font-family: var(--font-body);
-    font-size: var(--text-lg);
+    font-size: 20px;
     line-height: 32px;
     font-weight: 500;
 }
@@ -598,7 +599,7 @@ html:has(.fincas-page) {
     }
 
     .fincas-brand-title {
-        font-size: var(--text-4xl);
+        font-size: 40px;
         line-height: 1.28;
         text-align: left;
         /* Explicitly overrides the mobile centered text */
@@ -652,7 +653,7 @@ html:has(.fincas-page) {
     }
 
     .insetting-title {
-        font-size: var(--text-5xl);
+        font-size: 50px;
         /* Tablet spec */
         line-height: 64px;
     }
@@ -706,7 +707,7 @@ html:has(.fincas-page) {
 
     .insetting-disruptive {
         background-color: var(--fincas-viridian);
-        color: var(--color-bg-primary);
+        color: #f7fbf8;
         padding: 120px 64px 0 64px;
     }
 
@@ -716,7 +717,7 @@ html:has(.fincas-page) {
     }
 
     .id-main-title {
-        font-size: var(--text-5xl);
+        font-size: 50px;
         line-height: 64px;
         margin: 0;
     }
@@ -733,14 +734,14 @@ html:has(.fincas-page) {
     }
 
     .id-title {
-        font-size: var(--text-2xl);
+        font-size: 30px;
         line-height: 40px;
         margin-bottom: 0;
         /* Reset margin to use id-item gap */
     }
 
     .id-desc {
-        font-size: var(--text-base);
+        font-size: 18px;
         line-height: 1.77;
     }
 
@@ -760,7 +761,7 @@ html:has(.fincas-page) {
     }
 
     .impact-title {
-        font-size: var(--text-2xl);
+        font-size: 30px;
         line-height: 48px;
     }
 
@@ -804,7 +805,7 @@ html:has(.fincas-page) {
     .fincas-hero-title {
         font-family: 'Roobert', var(--font-body);
         font-weight: 500;
-        font-size: var(--text-6xl);
+        font-size: 60px;
         line-height: 1.17;
         text-align: center;
         max-width: 895px; /* Hero headline maintains readability width */
@@ -890,7 +891,7 @@ html:has(.fincas-page) {
     }
 
     .fincas-brand-title {
-        font-size: var(--text-5xl);
+        font-size: 50px;
         line-height: 1.28;
         /* 64px / 50px */
         text-align: left;
@@ -953,7 +954,7 @@ html:has(.fincas-page) {
     }
 
     .insetting-title {
-        font-size: var(--text-5xl);
+        font-size: 50px;
         line-height: 1.28;
         max-width: 600px;
     }
@@ -1035,7 +1036,7 @@ html:has(.fincas-page) {
     }
 
     .id-main-title {
-        font-size: var(--text-5xl);
+        font-size: 50px;
         line-height: 1.28;
     }
 
@@ -1082,12 +1083,12 @@ html:has(.fincas-page) {
     }
 
     .impact-title {
-        font-size: var(--text-5xl);
+        font-size: 50px;
         line-height: 64px;
     }
 
     .impact-subtitle {
-        font-size: var(--text-2xl);
+        font-size: 30px;
         line-height: 40px;
     }
 
@@ -1165,7 +1166,7 @@ html:has(.fincas-page) {
         font-weight: 600 !important;
         font-size: 22px !important;
         line-height: 1.44 !important;
-        color: var(--color-bg-dark) !important;
+        color: #1E1E1E !important;
         margin: 0 !important;
     }
     .hero-location {
@@ -1173,15 +1174,15 @@ html:has(.fincas-page) {
         font-weight: 500 !important;
         font-size: 22px !important;
         line-height: 1.4 !important;
-        color: var(--color-text-secondary) !important;
+        color: #6f6f6f !important;
         margin: 0 !important;
     }
     .hero-main-description {
         font-family: 'Roobert', sans-serif !important;
         font-weight: 500 !important;
-        font-size: var(--text-base) !important;
+        font-size: 18px !important;
         line-height: 1.77 !important;
-        color: var(--color-bg-dark) !important;
+        color: #1E1E1E !important;
         margin: 0 !important;
     }
 }

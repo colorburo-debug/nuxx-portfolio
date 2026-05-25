@@ -3,12 +3,12 @@
 /* ========================================================================= */
 
 .designops-page {
-    background-color: var(--color-bg-primary) !important;
-    color: var(--color-bg-navy);
+    background-color: #f7fbf8 !important;
+    color: #0d1327;
 }
 
 .designops-page .header-pill {
-    background-color: var(--color-bg-dark);
+    background-color: #1e1e1e;
     /* Dark header for this page */
 }
 
@@ -40,7 +40,7 @@
 }
 
 .bg-light {
-    background-color: var(--color-bg-primary) !important;
+    background-color: #f7fbf8 !important;
 }
 
 .designops-page .ops-hero-section {
@@ -75,7 +75,7 @@
     line-height: 32px;
     margin: 0 auto;
     max-width: 593px;
-    color: var(--color-bg-navy);
+    color: #0d1327;
     text-align: center;
 }
 
@@ -155,8 +155,8 @@
 .legend-text {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
-    font-size: var(--text-lg);
-    color: var(--color-bg-navy);
+    font-size: 20px;
+    color: #0d1327;
 }
 
 /* Description Text Section */
@@ -180,7 +180,7 @@
 .ops-desc-title {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
-    font-size: var(--text-2xl);
+    font-size: 30px;
     line-height: 40px;
     margin: 0;
     width: 100%;
@@ -189,7 +189,7 @@
 .ops-desc-text {
     font-family: 'Roobert', var(--font-body);
     font-weight: 400;
-    font-size: var(--text-lg);
+    font-size: 20px;
     line-height: 32px;
     margin: 0;
     width: 100%;
@@ -201,7 +201,7 @@
     padding-top: 48px;
     /* Add some padding before title */
     background-color: #ffffff;
-    border-top: 1px solid var(--color-bg-dark);
+    border-top: 1px solid #1E1E1E;
     width: 100%;
     /* To overlay webgl if any */
 }
@@ -228,9 +228,9 @@
 .ops-section-main-title {
     font-family: 'Roobert', var(--font-body);
     font-weight: 500;
-    font-size: var(--text-5xl);
+    font-size: 50px;
     line-height: 58px;
-    color: var(--color-bg-navy);
+    color: #0d1327;
     margin: 0;
 }
 
@@ -302,9 +302,9 @@
 
 .stat-label {
     font-family: 'Roobert', var(--font-body);
-    font-size: var(--text-base);
+    font-size: 18px;
     line-height: 23px;
-    color: var(--color-bg-navy);
+    color: #0d1327;
     margin-left: 0;
     white-space: nowrap;
 }
@@ -338,12 +338,12 @@
     font-size: 26px;
     line-height: 50px;
     margin: 0;
-    color: var(--color-bg-navy);
+    color: #0d1327;
 }
 
 .ops-outcome-divider {
     height: 3px;
-    background-color: var(--color-bg-navy);
+    background-color: #0d1327;
     /* Fallback line color */
     width: 100%;
     margin-top: 8px;
@@ -388,7 +388,7 @@
 .outcome-item-title {
     font-family: 'Roobert', var(--font-body);
     font-weight: 600;
-    font-size: var(--text-lg);
+    font-size: 20px;
     line-height: 24px;
     margin: 0;
 }
@@ -396,7 +396,7 @@
 .outcome-item-desc {
     font-family: 'Roobert', var(--font-body);
     font-weight: 400;
-    font-size: var(--text-lg);
+    font-size: 20px;
     line-height: 32px;
     margin: 0;
 }
@@ -404,7 +404,7 @@
 .outcome-note {
     font-family: 'Roobert', var(--font-body);
     font-weight: 600;
-    font-size: var(--text-xs);
+    font-size: 14px;
     line-height: 28px;
     margin: 0;
     margin-top: 16px;
@@ -416,18 +416,18 @@
 
 /* Override Footer */
 .designops-footer .footer-divider {
-    background-color: var(--color-bg-dark) !important;
+    background-color: #1e1e1e !important;
     opacity: 0.3 !important;
 }
 
 .designops-footer {
-    background-color: var(--color-bg-primary) !important;
+    background-color: #f7fbf8 !important;
     /* Footer bg matches page */
 }
 
 /* text-dark classes for footer */
 .text-dark {
-    color: var(--color-bg-dark) !important;
+    color: #1e1e1e !important;
     position: relative !important;
     padding-bottom: 2px !important;
     transition: color 0.3s ease !important;
@@ -444,7 +444,7 @@
     left: 0 !important;
     width: 100% !important;
     height: 1.5px !important;
-    background-color: var(--color-bg-dark) !important;
+    background-color: #1e1e1e !important;
     transform: scaleX(0) !important;
     transform-origin: right !important;
     transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1) !important;
@@ -500,7 +500,7 @@
     }
 
     .designops-page .ops-section-main-title {
-        font-size: var(--text-5xl);
+        font-size: 50px;
         line-height: 58px;
         text-align: left;
         width: 100%;
@@ -608,7 +608,7 @@
        footer divider. We remove it and set the background to pure white to match. */
     .designops-footer {
         --footer-bg: #ffffff !important;
-        --footer-text-color: var(--color-bg-dark) !important;
+        --footer-text-color: #1e1e1e !important;
         --footer-name-color: #898989 !important;
         --footer-link-hover: #000 !important;
         background-color: #ffffff !important;
@@ -622,11 +622,11 @@
     .designops-footer .footer-email,
     .designops-footer .footer-link,
     .designops-footer .footer-link-social {
-        color: var(--color-bg-dark) !important;
+        color: #1e1e1e !important;
     }
 
     .designops-footer .footer-divider {
-        background-color: var(--color-bg-dark) !important;
+        background-color: #1e1e1e !important;
         opacity: 0.3 !important;
     }
 
@@ -646,7 +646,7 @@
     }
 
     .designops-page .ops-hero-title {
-        font-size: var(--text-2xl);
+        font-size: 30px;
         line-height: 1.19;
         text-align: center;
         max-width: 100%;
@@ -654,7 +654,7 @@
     }
 
     .designops-page .ops-hero-subtitle {
-        font-size: var(--text-xl);
+        font-size: 24px;
         line-height: 1.5;
         text-align: center;
         max-width: 100%;
@@ -695,7 +695,7 @@
     }
 
     .legend-text {
-        font-size: var(--text-sm);
+        font-size: 16px;
     }
 
     .designops-page .ops-description-section {
@@ -706,14 +706,14 @@
     }
 
     .designops-page .ops-desc-title {
-        font-size: var(--text-xl);
+        font-size: 24px;
         line-height: 1.5;
         max-width: 100%;
         margin: 0;
     }
 
     .designops-page .ops-desc-text {
-        font-size: var(--text-base);
+        font-size: 18px;
         line-height: 1.77;
         max-width: 100%;
         margin: 0;
@@ -729,7 +729,7 @@
     }
 
     .designops-page .ops-section-main-title {
-        font-size: var(--text-2xl);
+        font-size: 30px;
         line-height: 1.19;
         text-align: left;
         width: 100%;
@@ -799,7 +799,7 @@
     }
 
     .designops-page .stat-label {
-        font-size: var(--text-base);
+        font-size: 18px;
         margin-left: 0;
         white-space: nowrap;
         text-align: left;
@@ -829,11 +829,11 @@
     }
 
     .outcome-col-title {
-        font-size: var(--text-2xl);
+        font-size: 30px;
     }
 
     .outcome-item-desc {
-        font-size: var(--text-base);
+        font-size: 18px;
         line-height: 1.77;
     }
 
@@ -857,5 +857,58 @@
 
     .designops-footer {
         margin-top: 0 !important;
+    }
+}
+
+
+
+/* --- DESIGN OPERATIONS STYLES --- */
+
+/* 38. PROJECT MASTER STABILITY GUARD */
+/* 
+   THE HERO SECTION AND INTERACTION INDICATOR LAYOUTS ARE FINAL.
+   DO NOT MODIFY THE VERTICAL STACKING, CENTERING, OR MARGINS 
+   IN THE HERO OR ABOUT CARD WITHOUT CONSULTING THE STABILITY RECORD.
+   VERIFIED STATE: HERO (100VH), INDICATOR (CENTERED, RELATIVE), ABOUT (OVERLAP: -146PX).
+*/
+
+/* 39. DESIGN OPS FOOTER — MOBILE FIX */
+/* 
+   The global site-footer mobile rule uses var(--footer-text-color) which defaults 
+   to white (from the dark homepage theme). The designops-footer has a white background,
+   making white text invisible. This block overrides those colors ONLY on mobile.
+*/
+@media (max-width: 767px) {
+    .designops-footer {
+        --footer-bg: #1e1e1e !important;
+        --footer-divider: #898989 !important;
+        --footer-name-color: #898989 !important;
+        --footer-text-color: #1e1e1e !important;
+        --footer-link-hover: #000 !important;
+        background-color: #ffffff !important;
+        /* Remove top padding so the divider line connects directly
+           to the white content section above — no visible gap */
+        padding-top: 0 !important;
+    }
+
+    .designops-footer .footer-name {
+        color: #898989 !important;
+    }
+
+    .designops-footer .footer-email,
+    .designops-footer .footer-link,
+    .designops-footer .footer-link-social {
+        color: #1e1e1e !important;
+    }
+
+    .designops-footer .footer-email:hover,
+    .designops-footer .footer-link:hover,
+    .designops-footer .footer-link-social:hover {
+        color: #000 !important;
+    }
+
+    .designops-footer .footer-divider {
+        background-color: #1e1e1e !important;
+        opacity: 0.3 !important;
     }
 }

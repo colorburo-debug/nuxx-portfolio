@@ -1,23 +1,28 @@
 @import url('../utilities.css');
 
 :root {
-    /* Colors (Base Tokens) */
-    --color-bg-primary: #F7FBF8;     /* Hero Light Green Background */
-    --color-bg-dark: #1E1E1E;        /* Dark Navy/Black Accent / Section BG */
-    --color-bg-navy: #0D1327;        /* Case Study Dark Blue BG */
-    --color-bg-white: #FFFFFF;       /* Pure White BG */
-    
-    --color-accent: #1E1E1E;         /* Dark Navy/Black Accent */
-    --color-text-primary: #1E1E1E;   /* Dark text for light bg */
-    --color-text-secondary: #6F6F6F; /* Grey text for location */
-    --color-text-light: #FFFFFF;     /* Text on dark sections */
-    --color-card-bg: #F7FBF8;        /* Off-white for card */
-    --color-card-text: #090D1B;      /* Dark text for card */
-    --color-dark-section: #1E1E1E;   /* Section Background */
+    /* Colors */
+    --color-bg-primary: #F7FBF8;
+    /* Hero Light Background */
+    --color-accent: #1E1E1E;
+    /* Dark Navy/Black Accent */
+    --color-text-primary: #1E1E1E;
+    /* Dark text for light bg */
+    --color-text-secondary: #6F6F6F;
+    /* Grey text for location */
+    --color-card-bg: #f7fbf8;
+    /* Off-white for card */
+    --color-card-text: #090d1b;
+    /* Dark text for card */
+    --color-dark-section: #1e1e1e;
+    /* Node 26:333 Background */
+    --color-light-text: #ffffff;
+    /* Text on dark section */
 
     /* Fonts */
     --font-heading: 'Unbounded', sans-serif;
     --font-body: 'Outfit', sans-serif;
+    /* Substitution for Roobert */
 
     /* Typography Scale */
     --text-xs: 14px;
@@ -38,12 +43,12 @@
     --spacing-xl: 64px;
 
     /* Global Footer Variables (Default Dark) */
-    --footer-bg: #1E1E1E;
+    --footer-bg: #1e1e1e;
     --footer-divider: #898989;
     --footer-divider-opacity: 0.3;
     --footer-name-color: #898989;
-    --footer-text-color: #F7FBF8;
-    --footer-link-hover: #E0E0E0;
+    --footer-text-color: #f7fbf8;
+    --footer-link-hover: #e0e0e0;
 }
 
 
@@ -113,7 +118,7 @@
         width: auto !important;
         color: var(--footer-text-color) !important;
         font-family: var(--font-body) !important;
-        font-size: var(--text-xl) !important;
+        font-size: 24px !important;
         text-decoration: none !important;
         line-height: 1.35 !important;
         position: relative !important;
@@ -152,7 +157,7 @@
     .footer-name {
         color: var(--footer-name-color) !important;
         font-family: var(--font-body) !important;
-        font-size: var(--text-xl) !important;
+        font-size: 24px !important;
         line-height: 1.24 !important;
         margin: 0 !important;
     }
@@ -192,7 +197,7 @@
     height: 100%;
     pointer-events: none;
     z-index: 1;
-    background: radial-gradient(circle, transparent 20%, var(--color-bg-primary) 95%);
+    background: radial-gradient(circle, transparent 20%, #F7FBF8 95%);
     transition: background 0.4s ease;
 }
 
@@ -218,7 +223,7 @@
 
 html {
     scroll-behavior: smooth;
-    background-color: var(--color-bg-dark);
+    background-color: #1e1e1e;
     transition: background-color 0.8s cubic-bezier(0.27, 0, 0.51, 1);
 }
 
@@ -230,7 +235,7 @@ body {
    Home Page: Top overscroll is chartreuse, bottom is dark green 
 */
 body.home-page {
-    background-color: var(--color-bg-primary) !important;
+    background-color: #F7FBF8 !important;
 }
 
 #page-transition-curtain {
@@ -242,12 +247,12 @@ body.home-page {
     z-index: 10000;
     pointer-events: none;
     transform: translateX(-100%);
-    background-color: var(--color-bg-dark);
+    background-color: #1E1E1E;
 }
 
 /* LaHaus Page: All-white overscroll */
 html:has(.designops-page) {
-    background-color: var(--color-bg-primary) !important;
+    background-color: #f7fbf8 !important;
 }
 
 /* On mobile, override with pure white so no tinted gap appears */
@@ -271,7 +276,7 @@ body {
 }
 
 body.designops-page {
-    background-color: var(--color-bg-primary) !important;
+    background-color: #f7fbf8 !important;
 }
 
 /* Main container */
@@ -297,7 +302,7 @@ body {
     background-color: var(--color-bg-primary);
     background-image: none;
     /* background: linear-gradient(...) removed */
-    color: var(--color-card-text);
+    color: #090d1b;
     width: 100vw;
     overflow-x: hidden;
     position: relative;
@@ -364,7 +369,7 @@ a {
 }
 
 .header-pill {
-    background-color: var(--color-bg-dark);
+    background-color: #1E1E1E;
     border-radius: 5px;
     box-shadow: none;
     height: 64px;
@@ -380,11 +385,11 @@ a {
 
 /* Inverted Header State (for dark sections) */
 .header-pill.header-inverted {
-    background-color: var(--color-bg-primary) !important;
+    background-color: #F7FBF8 !important;
 }
 
 .header-pill.header-inverted .nav-link {
-    color: var(--color-bg-dark) !important;
+    color: #1E1E1E !important;
 }
 
 .header-pill.header-inverted .nuxx-logo-img {
@@ -392,7 +397,7 @@ a {
 }
 
 .header-pill.header-inverted .menu-line {
-    background-color: var(--color-bg-dark) !important;
+    background-color: #1E1E1E !important;
 }
 
 .brand {
@@ -467,12 +472,12 @@ a {
 
 /* Dark Mode State */
 .theme-reference-toggle.is-dark {
-    background: var(--color-bg-primary); /* Light pill */
+    background: #F7FBF8; /* Light pill */
 }
 
 .theme-reference-toggle.is-dark .theme-ref-thumb {
     transform: translateX(32px);
-    background-color: var(--color-bg-dark); /* Black thumb */
+    background-color: #1E1E1E; /* Black thumb */
 }
 
 .theme-reference-toggle.is-dark .icon-sun {
@@ -540,37 +545,37 @@ a {
 
 /* Custom Header State when Dark Hero is Active */
 body.hero-dark-mode .nav-link {
-    color: var(--color-bg-primary) !important; 
+    color: #F7FBF8 !important; 
 }
 
 body.hero-dark-mode .nav-link:hover {
-    color: var(--color-bg-primary) !important; 
+    color: #F7FBF8 !important; 
 }
 
 body.hero-dark-mode .nav-link::after {
-    background-color: var(--color-bg-primary) !important;
+    background-color: #F7FBF8 !important;
 }
 
 /* Custom Hero Text State when Dark Hero is Active */
 body.hero-dark-mode .hero-name,
 body.hero-dark-mode .hero-main-description {
-    color: var(--color-bg-primary) !important;
+    color: #F7FBF8 !important;
     transition: color 0.4s ease;
 }
 
 /* Custom Interaction Indicator State when Dark Hero is Active */
 body.hero-dark-mode .interaction-indicator svg rect {
-    stroke: var(--color-bg-primary);
+    stroke: #F7FBF8;
     transition: stroke 0.4s ease, fill 0.4s ease;
 }
 
 body.hero-dark-mode .interaction-indicator svg rect.scroll-wheel-anim {
-    fill: var(--color-bg-primary);
+    fill: #F7FBF8;
     stroke: none;
 }
 
 body.hero-dark-mode .webgl-vignette {
-    background: radial-gradient(circle, transparent 20%, var(--color-bg-dark) 95%);
+    background: radial-gradient(circle, transparent 20%, #1E1E1E 95%);
 }
 
 .header-nav-desktop {
@@ -582,9 +587,9 @@ body.hero-dark-mode .webgl-vignette {
 .nav-link {
     font-family: 'Roobert', var(--font-body);
     font-weight: 600;
-    font-size: var(--text-base);
+    font-size: 18px;
     line-height: 1.35;
-    color: var(--color-bg-primary);
+    color: #F7FBF8;
     text-decoration: none;
     position: relative;
     padding-bottom: 2px;
@@ -623,7 +628,7 @@ body.hero-dark-mode .webgl-vignette {
 }
 
 .header-pill.header-inverted .nav-link::after {
-    background-color: var(--color-bg-dark) !important;
+    background-color: #1E1E1E !important;
 }
 
 .mobile-menu-toggle {
@@ -639,22 +644,7 @@ body.hero-dark-mode .webgl-vignette {
 .menu-line {
     width: 26px;
     height: 3px;
-    background-color: var(--color-bg-primary);
-}
-
-/* Tablet & Mobile Responsive Header */
-@media (max-width: 1024px) {
-    .header-pill {
-        padding: 0 16px;
-    }
-
-    .header-nav-desktop {
-        display: none;
-    }
-
-    .mobile-menu-toggle {
-        display: flex;
-    }
+    background-color: #F7FBF8;
 }
 
 /* Mobile Menu Overlay */
@@ -664,7 +654,7 @@ body.hero-dark-mode .webgl-vignette {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: var(--color-bg-dark);
+    background-color: #1e1e1e;
     z-index: 200;
     display: flex;
     flex-direction: column;
@@ -719,7 +709,7 @@ body.hero-dark-mode .webgl-vignette {
 
 .mobile-nav-item {
     font-family: 'Roobert', sans-serif;
-    font-size: var(--text-5xl);
+    font-size: 50px;
     line-height: 1.35;
     color: #eeeff3;
     text-decoration: none;
@@ -742,5 +732,3 @@ body.hero-dark-mode .webgl-vignette {
     margin-top: 24px;
     margin-bottom: 24px;
 }
-
-/* Hero Section - Restored and Refined */
