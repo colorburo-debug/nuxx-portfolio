@@ -151,10 +151,14 @@ const initArtifacts = (containerParent) => {
             const targetHash = targetId.replace('panel-', '');
             
             // Update URL hash without page jump
-            if (window.history.pushState) {
-                window.history.pushState(null, null, `#${targetHash}`);
-            } else {
-                window.location.hash = targetHash;
+            try {
+                if (window.history.pushState) {
+                    window.history.pushState(null, null, `#${targetHash}`);
+                } else {
+                    window.location.hash = targetHash;
+                }
+            } catch (e) {
+                // Ignore DOMException on file:// protocols
             }
 
             const targetPanel = document.getElementById(targetId);
