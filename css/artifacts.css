@@ -241,7 +241,7 @@ body.artifacts-page {
     height: auto;
     border-radius: 10px;
     display: block;
-    background-color: #1a1a1a;
+    background-color: transparent;
 }
 
 /* Full Bleed Media Card (No padding) */
