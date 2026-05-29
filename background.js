@@ -42,8 +42,8 @@ let globalListenersBound = false;
 // Fabric Grid Data
 // Dynamically reduce geometry on mobile to drastically improve CPU performance
 const isMobileDevice = window.innerWidth < 768 || /Mobi|Android/i.test(navigator.userAgent);
-const numLines = isMobileDevice ? 55 : 110;
-const pointsPerLine = isMobileDevice ? 120 : 250; // High resolution on desktop, optimized on mobile
+const numLines = isMobileDevice ? 35 : 85;
+const pointsPerLine = isMobileDevice ? 85 : 180; // High resolution on desktop, optimized on mobile
 
 const initWebGL = (explicitContainer) => {
     const container = explicitContainer || document.getElementById('webgl-container');
