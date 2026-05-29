@@ -62,14 +62,14 @@ const initWebGL = (explicitContainer) => {
         return;
     }
 
-    // --- Scene Setup (Light Theme) ---
+    // --- Scene Setup ---
     scene = new THREE.Scene();
-    const bgColor = '#F7FBF8'; 
-    scene.background = new THREE.Color(bgColor);
+    const initialBgColor = isDarkMode ? darkBgColor : lightBgColor; 
+    scene.background = initialBgColor.clone();
     // Pulled fog closer to create a smooth horizon fade for the fabric lines.
     // Animals sit at Z=0 (distance 6). Wide sketches can have a diagonal distance up to ~14.
     // Starting fog at 16.0 guarantees the entire sketch remains intensely contrasted!
-    scene.fog = new THREE.Fog(bgColor, 16.0, 32.0); 
+    scene.fog = new THREE.Fog(initialBgColor.clone(), 16.0, 32.0); 
     
     camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
     camera.position.set(0, 3.5, 6);
@@ -101,8 +101,9 @@ const initWebGL = (explicitContainer) => {
     scene.add(hitPlane);
 
     // --- Generate True Continuous Lines ---
+    const initialLineColor = isDarkMode ? darkLineColor : lightLineColor;
     const material = new THREE.LineBasicMaterial({
-        color: 0x1E1E1E, 
+        color: initialLineColor.clone(), 
         transparent: true,
         opacity: 0.0,
         linewidth: 1 
