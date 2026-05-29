@@ -93,7 +93,9 @@ const handleHeaderScroll = () => {
 
     if (!header || !workSection) {
         // Reset if no work section present on current page
-        if (header) header.classList.remove('header-inverted');
+        if (header && !document.body.classList.contains('artifacts-page')) {
+            header.classList.remove('header-inverted');
+        }
         return;
     }
 
@@ -124,9 +126,37 @@ const initArtifacts = (containerParent) => {
 
     const navItems = context.querySelectorAll('.artifacts-menu-item');
 
+    // Helper to switch instantly (used on load)
+    const switchPanelInstantly = (targetId) => {
+        const targetPanel = document.getElementById(targetId);
+        const activePanel = document.querySelector('.artifacts-panel.active');
+        if (!targetPanel || targetPanel === activePanel) return;
+
+        navItems.forEach(nav => {
+            if (nav.getAttribute('data-target') === targetId) {
+                nav.classList.add('active');
+            } else {
+                nav.classList.remove('active');
+            }
+        });
+
+        if (activePanel) activePanel.classList.remove('active');
+        targetPanel.classList.add('active');
+    };
+
     navItems.forEach(item => {
-        item.addEventListener('click', () => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
             const targetId = item.getAttribute('data-target');
+            const targetHash = targetId.replace('panel-', '');
+            
+            // Update URL hash without page jump
+            if (window.history.pushState) {
+                window.history.pushState(null, null, `#${targetHash}`);
+            } else {
+                window.location.hash = targetHash;
+            }
+
             const targetPanel = document.getElementById(targetId);
             const activePanel = document.querySelector('.artifacts-panel.active');
 
@@ -157,6 +187,15 @@ const initArtifacts = (containerParent) => {
             }
         });
     });
+
+    // Handle initial load from URL hash
+    if (window.location.hash) {
+        const hash = window.location.hash.substring(1);
+        const targetId = `panel-${hash}`;
+        if (document.getElementById(targetId)) {
+            switchPanelInstantly(targetId);
+        }
+    }
 
     // Video auto-playback & interaction controller
     const videos = context.querySelectorAll('.artifact-video');
