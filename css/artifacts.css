@@ -107,7 +107,8 @@ body.artifacts-page {
     font-family: 'Roobert', var(--font-body);
     line-height: 1.77;
     cursor: pointer;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 .artifacts-nav-item.active {
@@ -121,6 +122,36 @@ body.artifacts-page {
 
 .artifacts-nav-item:not(.active):hover {
     color: #a0a0a0;
+}
+
+/* --- Desktop Left Accent Bar --- */
+@media (min-width: 1025px) {
+    .artifacts-nav-item {
+        padding-left: 0;
+    }
+    
+    .artifacts-nav-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%) scaleY(0);
+        width: 3px;
+        height: 18px;
+        background-color: #eeeff3;
+        transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+        border-radius: 2px;
+        transform-origin: center;
+    }
+
+    .artifacts-nav-item.active,
+    .artifacts-nav-item:hover {
+        padding-left: 16px;
+    }
+
+    .artifacts-nav-item.active::before {
+        transform: translateY(-50%) scaleY(1);
+    }
 }
 
 @media (max-width: 1024px) {
