@@ -83,3 +83,11 @@ To maintain clean structure and resolve layout issues, the styles have been modu
 * **Styles Modularization:** Split page-specific and component-specific styles into separate files (e.g., `css/global.css`, `css/home_hero.css`, `css/about.css`, `css/project-gemini.css`, and `css/artifacts.css`).
 * **Main Stylesheet Imports:** The monolithic `styles.css` now acts as a central hub importing all these modules via `@import` rules, which avoids the need to dynamically swap stylesheets in `animations.js` and ensures seamless page transitions under Barba.js.
 * **Stand-alone Assets Integration:** Staged and synchronized all SVGs, videos, and images under `assets/artifacts/` to keep the Artifacts section completely independent.
+
+---
+
+## 8. Current Feature Branch & Global Skills (May 2026)
+* **Active Branch:** `feature/new-artifacts` (fresh, clean branch ready for the new Artifacts implementation).
+* **Global Skills Repository:** Installed `antigravity-awesome-skills` globally at `~/.agents/skills`.
+* **Design Direction:** Aligned on implementing a **Bento Grid 2.0** layout for the Artifacts section, strictly following the guidelines from the `@design-taste-frontend` skill (e.g. spring physics, liquid glass borders, off-black/zinc neutral theme, layout asymmetry, and avoiding AI clichés).
+

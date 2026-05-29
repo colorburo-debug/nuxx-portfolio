@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Nuxx | Artifacts</title>
+    <meta name="description" content="Field notes of my design work, a space to the work that usually stays hidden.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Unbounded:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css?v=cachebust105">
+    <link rel="icon" type="image/svg+xml" href="assets/common/favicon.svg">
+</head>
+
+<body class="artifacts-page" data-barba="wrapper">
+    <div id="page-transition-curtain"></div>
+    <div id="cursor-reticle"></div>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <button class="mobile-menu-close" aria-label="Close Mobile Menu" id="mobile-menu-close">
+            <div class="close-line line-1"></div>
+            <div class="close-line line-2"></div>
+        </button>
+        <nav class="mobile-nav-links">
+            <a href="index.html#work" class="mobile-nav-item">
+                <svg class="nav-arrow" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 16L16 6M16 6V15.4286M16 6H6.57143" stroke="#EEF0F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                Work
+            </a>
+            <div class="nav-divider"></div>
+            <a href="about.html" class="mobile-nav-item">
+                <svg class="nav-arrow" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6 16L16 6M16 6V15.4286M16 6H6.57143" stroke="#EEF0F3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                About
+            </a>
+            <!-- Artifacts is hidden from here based on comments, but accessible later -->
+        </nav>
+    </div>
+
+    <div data-barba="container" data-barba-namespace="artifacts" data-body-class="artifacts-page">
+        <main class="main-container">
+            <!-- Navigation / Header Pill (Inverted for dark bg) -->
+            <div class="header-wrapper">
+                <header class="header-pill header-inverted">
+                    <a href="index.html" class="brand">
+                        <img src="assets/common/nuxx-logo.svg" alt="Nuxx Logo" class="nuxx-logo-img">
+                    </a>
+
+                    <!-- Header Controls (Nav + Mobile Menu) -->
+                    <div class="header-controls">
+                        <!-- Desktop Nav -->
+                        <nav class="header-nav-desktop">
+                            <a href="index.html#work" class="nav-link">Work</a>
+                            <a href="about.html" class="nav-link">About</a>
+                        </nav>
+
+                        <!-- Mobile Nav Toggle -->
+                        <button class="mobile-menu-toggle" aria-label="Open Mobile Menu" id="mobile-menu-toggle">
+                            <div class="menu-line"></div>
+                            <div class="menu-line"></div>
+                            <div class="menu-line"></div>
+                        </button>
+                    </div>
+                </header>
+            </div>
+
+            <!-- Artifacts Header Block -->
+            <section class="content-wrapper artifacts-header-block">
+                <h1 class="artifacts-title">Artifacts</h1>
+                <p class="artifacts-description">
+                    Field notes of my design work, a space to the work that usually stays hidden: snapshots, experiments, and fragments of previous solutions that deserve to be mentioned.
+                </p>
+            </section>
+
+            <!-- Content Area (Max width 1400px + padding) -->
+            <section class="content-wrapper artifacts-layout">
+                
+                <aside class="artifacts-sidebar">
+                    <ul class="artifacts-nav-list">
+                        <li class="artifacts-nav-item artifacts-menu-item active" data-target="panel-public-home">Public home</li>
+                        <li class="artifacts-nav-item artifacts-menu-item" data-target="panel-domo-experience">Domo experience</li>
+                    </ul>
+                </aside>
+
+                <!-- Main Content for future blocks -->
+                <div class="artifacts-main-content">
+                    
+                    <div id="panel-public-home" class="artifacts-panel active">
+                        <!-- Block: Platzi Public Home -->
+                        <article class="artifact-block">
+                            <header class="artifact-header">
+                                <h2 class="artifact-block-title">Platzi Public Home</h2>
+                                <p class="artifact-block-subtitle">Searching & Core schools</p>
+                            </header>
+                            
+                            <!-- Media Card 1 (Flush Image) -->
+                            <div class="artifact-media-card-flush">
+                                <img src="assets/artifacts/3ca236779da279f7ff423a546fa7904bc2ac9b57.png" alt="Platzi Public Home Desktop View" loading="lazy" decoding="async">
+                            </div>
+
+                            <!-- Media Card 2 (Centered Video) -->
+                            <div class="artifact-media-card-centered">
+                                <video autoplay loop muted playsinline>
+                                    <source src="assets/artifacts/Desk 1.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </article>
+
+                        <!-- Block: Learning paths -->
+                        <article class="artifact-block">
+                            <header class="artifact-header">
+                                <h2 class="artifact-block-title">Learning paths</h2>
+                                <p class="artifact-block-subtitle">Courses</p>
+                            </header>
+                            
+                            <!-- Media Card 1 (Flush Image, Light Bg) -->
+                            <div class="artifact-media-card-flush card-light">
+                                <img src="assets/artifacts/160095c88f5b7a8f4f9f50d6513ef48b8d22c57a.png" alt="Learning paths desktop 1" loading="lazy" decoding="async">
+                            </div>
+
+                            <!-- Media Card 2 (Centered Video, Light Bg) -->
+                            <div class="artifact-media-card-centered card-light">
+                                <video autoplay loop muted playsinline>
+                                    <source src="assets/artifacts/Desk 2.mp4" type="video/mp4">
+                                </video>
+                            </div>
+
+                            <!-- Media Card 3 (Flex Mobile Screens, Light Bg) -->
+                            <div class="artifact-media-card-flex card-light">
+                                <div class="mobile-screen-wrapper">
+                                    <img src="assets/artifacts/79aad29bbfb010846618fb19ad5be3e82ef3dc61.png" alt="Mobile screen 1" class="mobile-img-1" loading="lazy" decoding="async">
+                                </div>
+                                <div class="mobile-screen-wrapper">
+                                    <img src="assets/artifacts/acd069259d3e644102e01db4b7f208c0246b17cd.png" alt="Mobile screen 2" class="mobile-img-2" loading="lazy" decoding="async">
+                                </div>
+                                <div class="mobile-screen-wrapper">
+                                    <img src="assets/artifacts/5296c3fa08d4616a341b2efbf44e2e24fab60a5a.png" alt="Mobile screen 3" class="mobile-img-3" loading="lazy" decoding="async">
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Block: Video playback status -->
+                        <article class="artifact-block">
+                            <header class="artifact-header">
+                                <h2 class="artifact-block-title">Video playback status</h2>
+                                <p class="artifact-block-subtitle">Learning paths and courses</p>
+                            </header>
+                            
+                            <div class="artifact-media-card-centered">
+                                <img src="assets/artifacts/6161d0e60c244782ce756ece7fa3340c217755ff.png" alt="Video playback status courses" loading="lazy" decoding="async">
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Panel: Domo Experience -->
+                    <div id="panel-domo-experience" class="artifacts-panel">
+                        <!-- Block: Neurons connection -->
+                        <article class="artifact-block">
+                            <header class="artifact-header">
+                                <h2 class="artifact-block-title">Platzi Domo Experience</h2>
+                                <p class="artifact-block-subtitle">Neurons connection</p>
+                            </header>
+                            
+                            <!-- Hero Image (Full Bleed) -->
+                            <div class="artifact-media-full">
+                                <img src="assets/artifacts/domo-hero.png" alt="Domo Experience Hero" loading="lazy" decoding="async">
+                            </div>
+
+                            <!-- Image Gallery (2 items side-by-side) -->
+                            <div class="artifact-gallery-row">
+                                <div class="artifact-gallery-item">
+                                    <img src="assets/artifacts/domo-gallery-1.png" alt="Domo gallery 1" loading="lazy" decoding="async">
+                                </div>
+                                <div class="artifact-gallery-item">
+                                    <img src="assets/artifacts/domo-gallery-2.png" alt="Domo gallery 2" loading="lazy" decoding="async">
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Block: Components / Neurons states -->
+                        <article class="artifact-block">
+                            <header class="artifact-header">
+                                <h2 class="artifact-block-title">Components</h2>
+                                <p class="artifact-block-subtitle">Neurons states</p>
+                            </header>
+                            
+                            <!-- Image Gallery (3 items) -->
+                            <div class="artifact-gallery-row-3">
+                                <div class="artifact-gallery-item-square" style="position: relative; display: block;">
+                                    <img src="assets/artifacts/domo-component-1.png" alt="Neurons state 1" style="position: absolute; width: 120.61%; height: 121.05%; left: -10.17%; top: -9.19%; max-width: none; object-fit: unset;" loading="lazy" decoding="async">
+                                </div>
+                                <div class="artifact-gallery-item-square">
+                                    <img src="assets/artifacts/domo-component-2.png" alt="Neurons state 2" loading="lazy" decoding="async">
+                                </div>
+                                <div class="artifact-gallery-item-square">
+                                    <img src="assets/artifacts/domo-component-3.png" alt="Neurons state 3" loading="lazy" decoding="async">
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Block: Conf Bogotá 2025 -->
+                        <article class="artifact-block">
+                            <header class="artifact-header">
+                                <h2 class="artifact-block-title">Platzi</h2>
+                                <p class="artifact-block-subtitle">Conf Bogotá 2025</p>
+                            </header>
+                            
+                            <!-- Image Gallery (3 items) -->
+                            <div class="artifact-gallery-row-3">
+                                <div class="artifact-gallery-item-landscape">
+                                    <img src="assets/artifacts/domo-conf-1.png" alt="Conf 2025 image 1" loading="lazy" decoding="async">
+                                </div>
+                                <div class="artifact-gallery-item-landscape">
+                                    <img src="assets/artifacts/domo-conf-2.png" alt="Conf 2025 image 2" loading="lazy" decoding="async">
+                                </div>
+                                <div class="artifact-gallery-item-landscape" style="position: relative; display: block;">
+                                    <img src="assets/artifacts/domo-conf-3.png" alt="Conf 2025 image 3" style="position: absolute; width: 100%; height: 205.71%; left: 0; top: -52.65%; max-width: none; object-fit: unset;" loading="lazy" decoding="async">
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Block: Video -->
+                        <article class="artifact-block">
+                            <!-- Video Frame -->
+                            <div class="artifact-video-frame">
+                                <iframe 
+                                    src="https://www.youtube.com/embed/FBLgE6E1mBQ?rel=0&modestbranding=1" 
+                                    title="Domo Experience Video" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        </article>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Footer -->
+            <footer class="site-footer">
+                <div class="footer-divider"></div>
+                <div class="footer-content">
+                    <div class="footer-contact">
+                        <span class="footer-name">Jorge Garcia</span>
+                        <a href="mailto:colorburo@gmail.com" class="footer-email">colorburo@gmail.com</a>
+                    </div>
+                    <div class="footer-links">
+                        <a href="index.html#work" class="footer-link">
+                            <span class="link-arrow">
+                                <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 7.5H16M16 7.5L9.5 1M16 7.5L9.5 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                            <span class="link-text">Work</span>
+                        </a>
+                        <a href="about.html" class="footer-link">
+                            <span class="link-arrow">
+                                <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 7.5H16M16 7.5L9.5 1M16 7.5L9.5 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                            <span class="link-text">About</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/colorburo/" class="footer-link-social" target="_blank" rel="noopener noreferrer">
+                            <span class="link-arrow">
+                                <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 7.5H16M16 7.5L9.5 1M16 7.5L9.5 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                            <span class="link-text">Linkedin</span>
+                        </a>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- GSAP & Barba.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@barba/core"></script>
+    <script src="script.js?v=102"></script>
+    <script src="animations.js"></script>
+</body>
+
+</html>
