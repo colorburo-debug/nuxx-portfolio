@@ -238,6 +238,10 @@ body.home-page {
     background-color: #F7FBF8 !important;
 }
 
+body.home-page.hero-dark-mode {
+    background-color: #1E1E1E !important;
+}
+
 #page-transition-curtain {
     position: fixed;
     top: 0;
