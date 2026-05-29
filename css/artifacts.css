@@ -498,4 +498,8 @@ body.artifacts-page {
     .pull-up-mobile {
         margin-top: -30px;
     }
+    
+    br.desktop-only-br {
+        display: none;
+    }
 }
