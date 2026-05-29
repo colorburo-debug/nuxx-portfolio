@@ -482,3 +482,9 @@ body.artifacts-page {
         padding: 32px 5%;
     }
 }
+
+@media (max-width: 1024px) {
+    .pull-up-mobile {
+        margin-top: -30px;
+    }
+}
