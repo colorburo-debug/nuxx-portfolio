@@ -5,6 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Nuxx | Portfolio Showcase</title>
+    <style>
+        /* Prevent white flash on initial load */
+        html, body { background-color: #1E1E1E; }
+        /* Prevent CSS transitions from firing on load */
+        .preload-transitions * { transition: none !important; }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => { document.body.classList.remove("preload-transitions"); }, 100);
+        });
+    </script>
     <meta name="description" content="Jorge Garcia - Designer & Product Craftsman with a decade and a half of experience scaling impact-driven products and teams.">
     
     <!-- Open Graph / LinkedIn / Facebook -->
@@ -32,7 +43,7 @@
     <link rel="icon" type="image/svg+xml" href="assets/common/favicon.svg">
 </head>
 
-<body class="home-page hero-dark-mode" data-barba="wrapper">
+<body class="home-page hero-dark-mode preload-transitions" data-barba="wrapper">
     <div id="page-transition-curtain"></div>
     <div id="cursor-reticle"></div>
 
