@@ -155,7 +155,9 @@ barba.init({
  
             // Fade out WebGL if leaving home
             if (data.current.namespace === 'home') {
-                gsap.to('#webgl-container', { opacity: 0, duration: 0.3 });
+                gsap.to('#webgl-container', { opacity: 0, duration: 0.3, onComplete: () => {
+                    if (window.pauseWebGL) window.pauseWebGL();
+                }});
             }
  
             // Hide OLD content immediately once covered

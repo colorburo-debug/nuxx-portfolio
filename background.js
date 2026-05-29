@@ -58,26 +58,7 @@ const initWebGL = (explicitContainer) => {
     document.body.classList.toggle('hero-dark-mode', isDarkMode);
 
     if (isInitialized) {
-        if (renderer.domElement.parentElement) renderer.domElement.parentElement.removeChild(renderer.domElement);
-        container.appendChild(renderer.domElement);
-        if (window.updateWebGLSize) window.updateWebGLSize();
-        window.introProgress = 0.0; 
-        
-        // Re-bind the observer to the new container to prevent freezing when returning to the page
-        if (glObserver) {
-            glObserver.disconnect();
-            glObserver.observe(container);
-        }
-        
-        isVisible = true; 
-        window.isWebGLRunning = false; 
-        if (glReqId) cancelAnimationFrame(glReqId);
-        
-        setTimeout(() => { 
-            window.isWebGLRunning = true; 
-            if (glReqId) cancelAnimationFrame(glReqId);
-            if (window.animateWebGL) window.animateWebGL(); 
-        }, 50);
+        window.resumeWebGL(container);
         return;
     }
 
@@ -635,14 +616,49 @@ precomputeSplines();
     isInitialized = true;
 };
 
+window.pauseWebGL = () => {
+    window.isWebGLRunning = false;
+    if (glReqId) cancelAnimationFrame(glReqId);
+    if (glObserver) glObserver.disconnect();
+};
+
+window.resumeWebGL = (container) => {
+    if (container && renderer && renderer.domElement) {
+        if (renderer.domElement.parentElement !== container) {
+            if (renderer.domElement.parentElement) {
+                renderer.domElement.parentElement.removeChild(renderer.domElement);
+            }
+            container.appendChild(renderer.domElement);
+        }
+        if (window.updateWebGLSize) window.updateWebGLSize();
+        
+        if (glObserver) {
+            glObserver.disconnect();
+            glObserver.observe(container);
+        }
+        
+        isVisible = true;
+        window.introProgress = 0.0;
+        
+        if (!window.isWebGLRunning) {
+            window.isWebGLRunning = true;
+            if (window.animateWebGL) window.animateWebGL();
+        }
+    }
+};
+
 window.initPage = (containerParent) => {
     const context = containerParent || document;
     const container = context.querySelector('#webgl-container');
     if (container) {
         window.introProgress = 0.0;
-        initWebGL(container);
+        if (isInitialized) {
+            window.resumeWebGL(container);
+        } else {
+            initWebGL(container);
+        }
     } else {
-        window.isWebGLRunning = false;
+        if (window.pauseWebGL) window.pauseWebGL();
     }
 };
 
