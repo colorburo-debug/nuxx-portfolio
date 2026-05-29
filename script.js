@@ -128,8 +128,8 @@ const initArtifacts = (containerParent) => {
 
     // Helper to switch instantly (used on load)
     const switchPanelInstantly = (targetId) => {
-        const targetPanel = document.getElementById(targetId);
-        const activePanel = document.querySelector('.artifacts-panel.active');
+        const targetPanel = context.querySelector('#' + targetId);
+        const activePanel = context.querySelector('.artifacts-panel.active');
         if (!targetPanel || targetPanel === activePanel) return;
 
         navItems.forEach(nav => {
@@ -151,14 +151,18 @@ const initArtifacts = (containerParent) => {
             const targetHash = targetId.replace('panel-', '');
             
             // Update URL hash without page jump
-            if (window.history.pushState) {
-                window.history.pushState(null, null, `#${targetHash}`);
-            } else {
-                window.location.hash = targetHash;
+            try {
+                if (window.history.pushState) {
+                    window.history.pushState(null, null, `#${targetHash}`);
+                } else {
+                    window.location.hash = targetHash;
+                }
+            } catch (e) {
+                // Ignore DOMException on file:// protocols
             }
 
-            const targetPanel = document.getElementById(targetId);
-            const activePanel = document.querySelector('.artifacts-panel.active');
+            const targetPanel = context.querySelector('#' + targetId);
+            const activePanel = context.querySelector('.artifacts-panel.active');
 
             if (!targetPanel || targetPanel === activePanel) return;
 
@@ -192,7 +196,7 @@ const initArtifacts = (containerParent) => {
     if (window.location.hash) {
         const hash = window.location.hash.substring(1);
         const targetId = `panel-${hash}`;
-        if (document.getElementById(targetId)) {
+        if (context.querySelector('#' + targetId)) {
             switchPanelInstantly(targetId);
         }
     }
