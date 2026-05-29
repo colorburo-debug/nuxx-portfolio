@@ -275,6 +275,16 @@ body.artifacts-page {
     background-color: transparent;
 }
 
+.artifact-media-card-centered.media-fill {
+    padding: 0;
+    overflow: hidden;
+}
+
+.artifact-media-card-centered.media-fill video,
+.artifact-media-card-centered.media-fill img {
+    border-radius: 0;
+}
+
 /* Full Bleed Media Card (No padding) */
 .artifact-media-full {
     width: 100%;
