@@ -278,6 +278,7 @@ body.artifacts-page {
 .artifact-media-card-centered.media-fill {
     padding: 0;
     overflow: hidden;
+    border: 1px solid #3a3a3a;
 }
 
 .artifact-media-card-centered.media-fill video,
