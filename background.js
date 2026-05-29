@@ -25,7 +25,7 @@ let currentMouse = new THREE.Vector3(9999, 9999, 9999);
 let isMouseDown = false;
 
 // Theme State Variables
-let isDarkMode = false;
+let isDarkMode = true;
 Object.defineProperty(window, 'isDarkMode', {
     get: () => isDarkMode,
     set: (val) => { isDarkMode = val; }
