@@ -212,12 +212,12 @@ barba.init({
         beforeEnter(data) {
             if (window.initPage) window.initPage(data.next.container);
         }
-    }/*, {
+    }, {
         namespace: 'artifacts',
         beforeEnter(data) {
             if (window.initPage) window.initPage(data.next.container);
         }
-    }*/]
+    }]
 });
 
 // Initial Load

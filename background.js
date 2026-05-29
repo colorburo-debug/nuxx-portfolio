@@ -12,6 +12,8 @@ let isVisible = true;
 
 // Interaction State
 let currentState = 0; 
+let glObserver = null;
+let glReqId = null;
 let dogMorphFactor = 0.0;
 let frogMorphFactor = 0.0;
 let humanMorphFactor = 0.0;
@@ -60,9 +62,22 @@ const initWebGL = (explicitContainer) => {
         container.appendChild(renderer.domElement);
         if (window.updateWebGLSize) window.updateWebGLSize();
         window.introProgress = 0.0; 
+        
+        // Re-bind the observer to the new container to prevent freezing when returning to the page
+        if (glObserver) {
+            glObserver.disconnect();
+            glObserver.observe(container);
+        }
+        
         isVisible = true; 
         window.isWebGLRunning = false; 
-        setTimeout(() => { window.isWebGLRunning = true; if (window.animateWebGL) window.animateWebGL(); }, 50);
+        if (glReqId) cancelAnimationFrame(glReqId);
+        
+        setTimeout(() => { 
+            window.isWebGLRunning = true; 
+            if (glReqId) cancelAnimationFrame(glReqId);
+            if (window.animateWebGL) window.animateWebGL(); 
+        }, 50);
         return;
     }
 
@@ -147,8 +162,8 @@ const initWebGL = (explicitContainer) => {
     clock = new THREE.Clock();
     isVisible = true;
 
-    const observer = new IntersectionObserver((entries) => { isVisible = entries[0].isIntersecting; }, { rootMargin: "100px" });
-    observer.observe(container);
+    glObserver = new IntersectionObserver((entries) => { isVisible = entries[0].isIntersecting; }, { rootMargin: "100px" });
+    glObserver.observe(container);
 
 // Spline logic for Continuous Line Art
 function getCatmullRomPoint(t, points) {
@@ -322,7 +337,7 @@ precomputeSplines();
         if (!document.getElementById('webgl-container') || !window.isWebGLRunning) {
             window.isWebGLRunning = false; return; 
         }
-        requestAnimationFrame(animate);
+        glReqId = requestAnimationFrame(animate);
         if (!isVisible) return;
 
         const dt = Math.min(clock.getDelta(), 0.1);
