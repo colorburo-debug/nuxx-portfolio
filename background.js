@@ -81,8 +81,10 @@ const initWebGL = (explicitContainer) => {
     const updateSize = () => {
         const currentContainer = document.getElementById('webgl-container');
         if (!currentContainer) return;
-        renderer.setSize(currentContainer.clientWidth, currentContainer.clientHeight);
-        camera.aspect = currentContainer.clientWidth / currentContainer.clientHeight;
+        const width = currentContainer.clientWidth || window.innerWidth;
+        const height = currentContainer.clientHeight || window.innerHeight;
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
         camera.updateProjectionMatrix();
     };
     updateSize();
@@ -315,8 +317,11 @@ precomputeSplines();
 
 
     const animate = () => {
-        if (!document.getElementById('webgl-container') || !window.isWebGLRunning) {
-            window.isWebGLRunning = false; return; 
+        if (!window.isWebGLRunning) return;
+        const currentContainer = document.getElementById('webgl-container');
+        if (!currentContainer) {
+            glReqId = requestAnimationFrame(animate);
+            return;
         }
         glReqId = requestAnimationFrame(animate);
         if (!isVisible) return;
