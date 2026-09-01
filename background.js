@@ -1,5 +1,5 @@
 // WebGL Background with Three.js - True Continuous Vector Lines (Nature & Toucan Topography)
-let renderer, scene, camera, clock, raycaster, hitPlane, hitPlaneUpright;
+let renderer, scene, camera, clock;
 let linesArray = []; // Stores our true THREE.Line objects
 let isInitialized = false;
 
@@ -19,10 +19,6 @@ let birdMorphFactor = 0.0;
 let humanMorphFactor = 0.0;
 let cameraSweep = 0.0;
 let targetCameraSweep = 0.0;
-let mouse2D = new THREE.Vector2(-9999, -9999);
-let targetMouse = new THREE.Vector3(9999, 9999, 9999);
-let currentMouse = new THREE.Vector3(9999, 9999, 9999);
-let isMouseDown = false;
 
 // Theme State Variables
 let isDarkMode = true;
@@ -36,7 +32,6 @@ const darkBgColor = new THREE.Color(0x1E1E1E);
 const lightLineColor = new THREE.Color(0x1E1E1E);
 const darkLineColor = new THREE.Color(0xF7FBF8);
 
-let smoothMouseDown = 0.0;
 // Latches: has this sketch ever reached fully drawn? Drives the un-draw direction.
 let dogDrawn = false, birdDrawn = false, humanDrawn = false;
 
@@ -122,25 +117,6 @@ const initWebGL = (explicitContainer) => {
     updateSize();
     container.appendChild(renderer.domElement);
     window.updateWebGLSize = updateSize;
-
-    // --- Interaction Setup ---
-    raycaster = new THREE.Raycaster();
-    hitPlane = new THREE.Mesh(
-        new THREE.PlaneGeometry(200, 200), 
-        new THREE.MeshBasicMaterial({ visible: false })
-    );
-    hitPlane.rotation.x = -Math.PI / 2;
-    scene.add(hitPlane);
-
-    // The wave field lies flat on y = 0, but the sketches stand upright in the plane
-    // z = 0. Raycasting the flat plane while a sketch is up sends the ray almost
-    // parallel to it, so the hit lands thousands of units away and the cursor never
-    // actually touches the drawing. This upright plane is used for the sketch states.
-    hitPlaneUpright = new THREE.Mesh(
-        new THREE.PlaneGeometry(200, 200),
-        new THREE.MeshBasicMaterial({ visible: false })
-    );
-    scene.add(hitPlaneUpright);
 
     // --- Generate True Continuous Lines ---
     const initialLineColor = isDarkMode ? darkLineColor : lightLineColor;
@@ -417,9 +393,6 @@ precomputeSplines();
         const targetScrollY = window.scrollY || document.documentElement.scrollTop || 0;
         window.smoothedScrollY += (targetScrollY - window.smoothedScrollY) * 5.0 * dt;
 
-        let targetMouseDown = isMouseDown ? 1.0 : 0.0;
-        smoothMouseDown += (targetMouseDown - smoothMouseDown) * damp(0.1, dt);
-
         // Dynamic Brush Speed (Ease-In / Ease-Out)
         // Expressed per second, not per frame, so the stroke takes the same time to
         // travel on a 60Hz and a 120Hz display.
@@ -452,11 +425,6 @@ precomputeSplines();
         // Apply a downward shift of ~10% on desktop specifically for the fabric wave state
         const winW = window.innerWidth;
         const desktopFabricOffset = winW >= 1025 ? -1.0 : 0.0; 
-        const influenceRadius = 4.5 + 2.0 * smoothMouseDown;
-        // Which plane the cursor is being projected onto this frame: upright while a
-        // sketch is up, flat while the wave field is. Measured against the morph
-        // factors so it flips once, halfway through the transition.
-        const sketchSpace = (dogMorphFactor + birdMorphFactor + humanMorphFactor) > 0.5;
 
         // Evaluate viewport scales ONCE per frame instead of 27,500 times inside the loop
         const isMobile = winW < 768;
@@ -597,34 +565,6 @@ precomputeSplines();
                 
                 fY += introRise;
 
-                // --- INTERACTION: Soft Magnetic Lift (Hover) ---
-                if (currentMouse.x !== 9999) {
-                    const dx = fX - currentMouse.x;
-                    // Upright plane while sketching, flat plane under the wave field.
-                    const dOther = sketchSpace ? (fY - currentMouse.y) : (fZ - currentMouse.z);
-                    const distSq = dx*dx + dOther*dOther;
-                    const radiusSq = influenceRadius * influenceRadius;
-
-                    if (distSq < radiusSq) {
-                        // Smooth bell curve (Gaussian) to prevent jagged line distortion
-                        const inf = Math.exp(-distSq / (radiusSq * 0.15));
-                        const sketchness = 1.0 - waveWeight;
-
-                        // Fan the bundle apart under the cursor. Each line already sits at
-                        // its own (nX, nY) offset from the centre of the stroke, so
-                        // amplifying that offset pushes the strands apart sideways - like
-                        // dragging a finger through pencil hairs. This is what makes the
-                        // 85 separate lines legible as separate lines.
-                        const strokeBlend = strokeDog * wDog + strokeBird * wBird + strokeFaces * wHuman;
-                        const fan = inf * (2.6 + smoothMouseDown * 2.2) * sketchness * strokeBlend;
-                        fX += nX * fan;
-                        fY += nY * fan;
-
-                        // Keep a little of the original lift so it still reads as magnetic.
-                        fY += inf * (1.1 + smoothMouseDown * 0.9) * sketchness;
-                    }
-                }
-
                 fY -= window.smoothedScrollY * 0.005;
 
                 positions[c * 3] = fX;
@@ -692,42 +632,13 @@ precomputeSplines();
         scene.fog.color.copy(scene.background);
         material.color.lerp(targetLineColor, damp(0.05, dt));
 
-        if (mouse2D.x !== -9999) {
-            raycaster.setFromCamera(mouse2D, camera);
-            const intersects = raycaster.intersectObject(sketchSpace ? hitPlaneUpright : hitPlane);
-            if (intersects.length > 0) targetMouse.copy(intersects[0].point);
-            else targetMouse.set(9999, 9999, 9999);
-        } else {
-            targetMouse.set(9999, 9999, 9999);
-        }
-
-        currentMouse.lerp(targetMouse, damp(0.08, dt));
         renderer.render(scene, camera);
     };
 
     window.animateWebGL = animate;
     animate();
 
-    const handleMouseMove = (e) => {
-        const currentContainer = document.getElementById('webgl-container');
-        if (!currentContainer) return;
-        const rect = currentContainer.getBoundingClientRect();
-        let clientX = e.clientX ?? e.touches?.[0]?.clientX;
-        let clientY = e.clientY ?? e.touches?.[0]?.clientY;
-        if (clientX === undefined) return;
-        mouse2D.x = ((clientX - rect.left) / rect.width) * 2 - 1;
-        mouse2D.y = -((clientY - rect.top) / rect.height) * 2 + 1;
-    };
-
-    const handleMouseLeave = () => { mouse2D.set(-9999, -9999); isMouseDown = false; };
-
     if (!globalListenersBound) {
-        window.addEventListener('mousemove', handleMouseMove, { passive: true });
-        window.addEventListener('mouseleave', handleMouseLeave, { passive: true });
-        
-        const handleDown = () => { isMouseDown = true; };
-        const handleUp = () => { isMouseDown = false; };
-        
         // True only when the pointer is over the visible hero canvas. The listener has
         // to live on window because #webgl-container is pointer-events:none, so without
         // this check a click on a project card far down the page silently re-morphed a
@@ -795,10 +706,6 @@ precomputeSplines();
         window.addEventListener('mousemove', updateHeroCursor, { passive: true });
 
         window.addEventListener('click', toggleMorph, { passive: true });
-        window.addEventListener('mousedown', handleDown, { passive: true });
-        window.addEventListener('mouseup', handleUp, { passive: true });
-        window.addEventListener('touchstart', (e) => { handleMouseMove(e); handleDown(); }, { passive: true });
-        window.addEventListener('touchend', handleUp, { passive: true });
         window.addEventListener('resize', () => { if (window.updateWebGLSize) window.updateWebGLSize(); });
 
         // Delegated theme toggle listener (survives page transitions)
