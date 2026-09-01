@@ -92,6 +92,138 @@ body.home-page .about-card {
 
 /* --- END ABOUT ME CARD FINALIZED IMPLEMENTATION --- */
 
+/* --- About Me Card: cursor-tracked shine + tilt (see initCardInteraction in script.js) --- */
+
+/* Perspective lives on the parent so the card itself can rotate.
+   No transform-style: preserve-3d - the card's overflow: hidden would flatten it
+   anyway, and the parallax layers inside only translate in 2D. */
+.about-section {
+    perspective: 1200px;
+    /* perspective makes this a stacking context, which traps the card's
+       z-index: 20 inside it. Without a z-index here the whole section would
+       fall behind .webgl-vignette (z-index: 1, a sibling), and the vignette
+       would darken the card's corners. Keep this above the vignette. */
+    position: relative;
+    z-index: 20;
+}
+
+.about-card {
+    transform-origin: center center !important;
+}
+
+.about-card {
+    --shine-x: 50%;
+    --shine-y: 50%;
+    --shine-opacity: 0;
+}
+
+/* Surface specular: soft light pooling under the cursor */
+.about-card::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 0 !important;
+    pointer-events: none !important;
+    border-radius: inherit !important;
+    opacity: var(--shine-opacity) !important;
+    transition: opacity 0.5s ease !important;
+    background: radial-gradient(
+        circle 400px at var(--shine-x) var(--shine-y),
+        rgba(255, 255, 255, 0.15),
+        rgba(255, 255, 255, 0.05) 40%,
+        rgba(255, 255, 255, 0) 72%
+    ) !important;
+}
+
+/* Edge light: 1px rim that catches the light nearest the cursor */
+.about-card::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+    border-radius: inherit !important;
+    padding: 1px !important;
+    opacity: var(--shine-opacity) !important;
+    transition: opacity 0.5s ease !important;
+    background: radial-gradient(
+        circle 320px at var(--shine-x) var(--shine-y),
+        rgba(255, 255, 255, 0.7),
+        rgba(255, 255, 255, 0) 70%
+    ) !important;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0) !important;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0) !important;
+    -webkit-mask-composite: xor !important;
+    mask-composite: exclude !important;
+}
+
+/* --- About card artwork: layered rebuild of about-visuals.png ---
+   The stage is locked to the original 900x658 ratio and every breakpoint is
+   width-bound, so this reproduces the old object-fit: contain exactly.
+   Layer offsets were measured from assets/about-visuals.png; do not hand-tweak
+   them without re-measuring against that file. */
+.visual-stage {
+    position: relative !important;
+    width: 100% !important;
+    aspect-ratio: 900 / 658 !important;
+}
+
+.visual-layer {
+    position: absolute !important;
+    display: block !important;
+    height: auto !important;
+    will-change: transform;
+}
+
+.layer-arrows  { left: 55.778% !important; top: 5.471%  !important; width: 29.543% !important; }
+.layer-control { left: 58.333% !important; top: 37.690% !important; width: 40.514% !important; }
+.layer-cursor  { left: 25.222% !important; top: 72.188% !important; width: 21.645% !important; }
+.layer-tennis  { left: 1.556%  !important; top: 5.927%  !important; width: 40.649% !important; }
+
+/* --- Card vignette -------------------------------------------------------
+   The full-page .webgl-vignette used to fall across this card and darken it.
+   The card now sits above that vignette, so this is a scoped, softened echo
+   of it. --card-vignette is the only dial: 0 = none, 1 = full strength.
+   The colour follows the theme, matching .webgl-vignette in global.css. */
+.about-card {
+    --card-vignette: 0.25;
+    --card-vignette-rgb: 247, 251, 248;   /* light theme, mirrors #F7FBF8 */
+}
+
+body.hero-dark-mode .about-card {
+    --card-vignette-rgb: 30, 30, 30;      /* dark theme, mirrors #1E1E1E */
+}
+
+.card-vignette {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 3 !important;                /* over the artwork and copy, as the page vignette was */
+    pointer-events: none !important;
+    border-radius: inherit !important;
+    opacity: var(--card-vignette) !important;
+    background: radial-gradient(
+        ellipse at 50% 50%,
+        rgba(var(--card-vignette-rgb), 0) 30%,
+        rgba(var(--card-vignette-rgb), 0.55) 78%,
+        rgba(var(--card-vignette-rgb), 0.9) 100%
+    ) !important;
+}
+
+/* Keep artwork and copy above the surface glow */
+.about-card-visuals,
+.about-card-content-wrapper {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Touch devices have no cursor to track - drop the effect entirely */
+@media (hover: none), (pointer: coarse) {
+    .about-card::before,
+    .about-card::after {
+        display: none !important;
+    }
+}
+
 .about-card-visuals {
     width: 38% !important; /* Percentage weight */
     height: 394px !important; /* Fixed height from Figma preserved */
