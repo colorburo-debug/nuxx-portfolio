@@ -16,19 +16,19 @@
             setTimeout(() => { document.body.classList.remove("preload-transitions"); }, 100);
         });
     </script>
-    <meta name="description" content="Jorge Garcia - Designer & Product Craftsman with a decade and a half of experience scaling impact-driven products and teams.">
+    <meta name="description" content="Jorge Garcia - Designer & Product Strategist with a decade and a half of experience scaling impact-driven products and teams.">
     
     <!-- Open Graph / LinkedIn / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.nuxx.co/">
-    <meta property="og:title" content="Jorge Garcia | Designer & Product Craftsman">
+    <meta property="og:title" content="Jorge Garcia | Designer & Product Strategist">
     <meta property="og:description" content="Based in Bogotá, Colombia. Building impact-driven teams focused on interaction, strategy, and the rigor of the craft.">
     <meta property="og:image" content="https://www.nuxx.co/assets/covers/Cover%203.jpg">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://www.nuxx.co/">
-    <meta name="twitter:title" content="Jorge Garcia | Designer & Product Craftsman">
+    <meta name="twitter:title" content="Jorge Garcia | Designer & Product Strategist">
     <meta name="twitter:description" content="Based in Bogotá, Colombia. Building impact-driven teams focused on interaction, strategy, and the rigor of the craft.">
     <meta name="twitter:image" content="https://www.nuxx.co/assets/covers/Cover%203.jpg">
 
@@ -175,13 +175,22 @@
         <section class="about-section">
             <div class="about-card content-wrapper" id="about">
                 <div class="about-card-visuals">
-                    <img src="assets/about-visuals.png" alt="About Visuals" class="vector-image">
+                    <!-- Layered rebuild of assets/about-visuals.png. Layer positions were
+                         measured from that file so the composition is identical at rest;
+                         data-depth drives the parallax in initCardInteraction (script.js). -->
+                    <div class="visual-stage" role="img"
+                        aria-label="Illustration: a winged running shoe, a game controller wearing a crown, and a cursor arrow">
+                        <img src="assets/about-layers/Arrows.png" alt="" class="visual-layer layer-arrows" data-depth="0.30">
+                        <img src="assets/about-layers/Control.png" alt="" class="visual-layer layer-control" data-depth="0.55">
+                        <img src="assets/about-layers/Cursor.png" alt="" class="visual-layer layer-cursor" data-depth="0.78">
+                        <img src="assets/about-layers/Tennis.png" alt="" class="visual-layer layer-tennis" data-depth="1">
+                    </div>
                 </div>
                 <div class="about-card-content-wrapper">
                     <div class="about-card-text">
                         <h2 class="about-card-title">
-                            Amateur runner and <span class="strikethrough">elite video game player</span>
-                            to interaction designer and product craftsman.
+                            From amateur runner and <span class="strikethrough">elite</span> relentless
+                            video game player to interaction designer and product strategist.
                         </h2>
                     </div>
                     <a href="about.html" class="about-cta-pill">
@@ -195,6 +204,9 @@
                         </div>
                     </a>
                 </div>
+                <!-- Softened echo of .webgl-vignette, scoped to the card.
+                     Strength is tuned with --card-vignette in home_hero.css. -->
+                <div class="card-vignette" aria-hidden="true"></div>
             </div>
         </section>
         </div> <!-- End of home-intro-wrapper -->

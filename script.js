@@ -85,6 +85,115 @@ const updateCursorHover = (containerParent) => {
 };
 
 
+// ─── About Card Interaction ─────────────────────────────────
+// One pointer handler driving both card effects:
+//   - a specular shine that follows the cursor (--shine-* custom properties,
+//     consumed by .about-card in home_hero.css)
+//   - a subtle 3D tilt toward the cursor
+// The tilt is written through GSAP rather than CSS because GSAP already owns
+// this element's transform for the hero reveal (see initHeroAnimations in
+// animations.js); going through quickTo lets the two compose instead of fight.
+const MAX_CARD_TILT = 4;      // degrees
+const MAX_CARD_PARALLAX = 14; // px travelled by the frontmost layer (data-depth="1")
+
+const initCardInteraction = (containerParent) => {
+    const context = containerParent || document;
+    const card = context.querySelector('.about-card');
+
+    // Bail on touch/coarse pointers, and avoid double-binding on re-init
+    if (!card || card.dataset.shineBound === 'true') return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    card.dataset.shineBound = 'true';
+
+    // Reduced motion keeps the glow, but pins it to the card centre and drops the tilt
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const canTilt = !reducedMotion && typeof gsap !== 'undefined';
+
+    const tiltX = canTilt ? gsap.quickTo(card, 'rotationX', { duration: 0.6, ease: 'power3.out' }) : null;
+    const tiltY = canTilt ? gsap.quickTo(card, 'rotationY', { duration: 0.6, ease: 'power3.out' }) : null;
+
+    // Artwork layers drift by depth. They ease on the same curve as the tilt so
+    // the whole card settles as one movement rather than snapping into place.
+    const layers = canTilt
+        ? Array.from(card.querySelectorAll('.visual-layer')).map((el) => ({
+            depth: parseFloat(el.dataset.depth) || 0,
+            x: gsap.quickTo(el, 'x', { duration: 0.6, ease: 'power3.out' }),
+            y: gsap.quickTo(el, 'y', { duration: 0.6, ease: 'power3.out' })
+        }))
+        : [];
+
+    let pointerX = 0;
+    let pointerY = 0;
+    let cardW = 1;
+    let cardH = 1;
+    let rafId = null;
+    let pending = false;
+
+    const paint = () => {
+        pending = false;
+        rafId = null;
+
+        card.style.setProperty('--shine-x', `${pointerX}px`);
+        card.style.setProperty('--shine-y', `${pointerY}px`);
+
+        if (canTilt) {
+            // -1..1 from the card centre on each axis
+            const offsetX = (pointerX / cardW) * 2 - 1;
+            const offsetY = (pointerY / cardH) * 2 - 1;
+            // Signs verified in-browser: +rotationY pushes the right edge away,
+            // +rotationX brings the bottom edge forward. We want the surface
+            // *under* the cursor to lean toward the viewer, so the specular
+            // highlight lands on the face that is turned to meet the eye.
+            tiltY(-offsetX * MAX_CARD_TILT);
+            tiltX(offsetY * MAX_CARD_TILT);
+
+            // Nearer layers travel further, and against the pointer - the way
+            // foreground objects shift when your viewing angle changes.
+            layers.forEach((layer) => {
+                const travel = layer.depth * MAX_CARD_PARALLAX;
+                layer.x(-offsetX * travel);
+                layer.y(-offsetY * travel);
+            });
+        }
+    };
+
+    card.addEventListener('mouseenter', () => {
+        card.style.setProperty('--shine-opacity', '1');
+    });
+
+    card.addEventListener('mousemove', (e) => {
+        if (reducedMotion) return;
+        const rect = card.getBoundingClientRect();
+        pointerX = e.clientX - rect.left;
+        pointerY = e.clientY - rect.top;
+        cardW = rect.width;
+        cardH = rect.height;
+        // Coalesce moves to one paint per frame. The flag is raised before
+        // scheduling so it can't be left stuck if paint runs synchronously.
+        if (pending) return;
+        pending = true;
+        rafId = requestAnimationFrame(paint);
+    });
+
+    card.addEventListener('mouseleave', () => {
+        card.style.setProperty('--shine-opacity', '0');
+        if (rafId !== null) cancelAnimationFrame(rafId);
+        rafId = null;
+        pending = false;
+        // Settle back to flat
+        if (canTilt) {
+            tiltX(0);
+            tiltY(0);
+            layers.forEach((layer) => {
+                layer.x(0);
+                layer.y(0);
+            });
+        }
+    });
+};
+
+
 // ─── Header Inversion ───────────────────────────────────────
 // Managed globally to remain active across page transitions
 const handleHeaderScroll = () => {
@@ -281,6 +390,9 @@ const initPage = (containerParent) => {
 
     // Init artifacts page tabs if present
     initArtifacts(containerParent);
+
+    // Bind the About card cursor shine + tilt
+    initCardInteraction(containerParent);
 
 
 
