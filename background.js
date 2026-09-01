@@ -1,5 +1,5 @@
 // WebGL Background with Three.js - True Continuous Vector Lines (Nature & Toucan Topography)
-let renderer, scene, camera, clock, raycaster, hitPlane;
+let renderer, scene, camera, clock, raycaster, hitPlane, hitPlaneUpright;
 let linesArray = []; // Stores our true THREE.Line objects
 let isInitialized = false;
 
@@ -37,6 +37,13 @@ const lightLineColor = new THREE.Color(0x1E1E1E);
 const darkLineColor = new THREE.Color(0xF7FBF8);
 
 let smoothMouseDown = 0.0;
+// Latches: has this sketch ever reached fully drawn? Drives the un-draw direction.
+let dogDrawn = false, birdDrawn = false, humanDrawn = false;
+
+// Exponential smoothing that lands in the same place regardless of refresh rate.
+// At 60fps this reproduces the original per-frame constants exactly, so the feel is
+// unchanged there; on a 120Hz screen it no longer runs at double speed.
+const damp = (rate, dt) => 1 - Math.pow(1 - rate, dt * 60);
 let globalListenersBound = false;
 
 // Fabric Grid Data
@@ -49,8 +56,10 @@ const numLines = isMobileDevice ? 35 : 85;
 // (35 x 150 = 5,250 vertices per frame against 85 x 180 = 15,300).
 const pointsPerLine = isMobileDevice ? 150 : 180;
 
-// Height the camera sees at the sketch distance: 2 * 22 * tan(55deg / 2).
-const SKETCH_VIEW_HEIGHT = 22.9;
+// Height the camera sees at the TIGHTEST sketch framing: 2 * 21 * tan(55deg / 2).
+// The dog pulls the camera in to z = 21, so fitting against that keeps every subject
+// inside the frame at every breakpoint.
+const SKETCH_VIEW_HEIGHT = 21.9;
 // Widest extent of the sketches, ignoring the tails that run off frame.
 // Dog spans 11.45, bird 11.9 - take the wider so neither crops.
 const SKETCH_DESIGN_WIDTH = 11.9;
@@ -122,6 +131,16 @@ const initWebGL = (explicitContainer) => {
     );
     hitPlane.rotation.x = -Math.PI / 2;
     scene.add(hitPlane);
+
+    // The wave field lies flat on y = 0, but the sketches stand upright in the plane
+    // z = 0. Raycasting the flat plane while a sketch is up sends the ray almost
+    // parallel to it, so the hit lands thousands of units away and the cursor never
+    // actually touches the drawing. This upright plane is used for the sketch states.
+    hitPlaneUpright = new THREE.Mesh(
+        new THREE.PlaneGeometry(200, 200),
+        new THREE.MeshBasicMaterial({ visible: false })
+    );
+    scene.add(hitPlaneUpright);
 
     // --- Generate True Continuous Lines ---
     const initialLineColor = isDarkMode ? darkLineColor : lightLineColor;
@@ -399,13 +418,15 @@ precomputeSplines();
         window.smoothedScrollY += (targetScrollY - window.smoothedScrollY) * 5.0 * dt;
 
         let targetMouseDown = isMouseDown ? 1.0 : 0.0;
-        smoothMouseDown += (targetMouseDown - smoothMouseDown) * 0.1;
-        
+        smoothMouseDown += (targetMouseDown - smoothMouseDown) * damp(0.1, dt);
+
         // Dynamic Brush Speed (Ease-In / Ease-Out)
+        // Expressed per second, not per frame, so the stroke takes the same time to
+        // travel on a 60Hz and a 120Hz display.
         const getSpeed = (factor) => {
             const progress = Math.max(0, Math.min(1, factor / 1.2));
             // Slowed down by ~5% for an even more deliberate, majestic pace
-            return 0.003 + Math.sin(progress * Math.PI) * 0.016; 
+            return (0.003 + Math.sin(progress * Math.PI) * 0.016) * 60 * dt;
         };
 
         if (currentState === 1) dogMorphFactor = Math.min(1.2, dogMorphFactor + getSpeed(dogMorphFactor));
@@ -417,11 +438,25 @@ precomputeSplines();
         if (currentState === 3) humanMorphFactor = Math.min(1.2, humanMorphFactor + getSpeed(humanMorphFactor));
         else humanMorphFactor = Math.max(0.0, humanMorphFactor - getSpeed(humanMorphFactor));
 
+        // A sketch only un-draws in the lift-away direction once it actually finished
+        // drawing. Without this latch, clicking through the states fast would flip the
+        // stagger mid-stroke and pop the shape.
+        if (dogMorphFactor   >= 1.19) dogDrawn   = true; else if (dogMorphFactor   <= 0.01) dogDrawn   = false;
+        if (birdMorphFactor  >= 1.19) birdDrawn  = true; else if (birdMorphFactor  <= 0.01) birdDrawn  = false;
+        if (humanMorphFactor >= 1.19) humanDrawn = true; else if (humanMorphFactor <= 0.01) humanDrawn = false;
+        const dogExiting   = dogDrawn   && currentState !== 1;
+        const birdExiting  = birdDrawn  && currentState !== 2;
+        const humanExiting = humanDrawn && currentState !== 3;
+
         const introRise = (1.0 - Math.min(Math.max(window.introProgress, 0), 1)) * -4.0;
         // Apply a downward shift of ~10% on desktop specifically for the fabric wave state
         const winW = window.innerWidth;
         const desktopFabricOffset = winW >= 1025 ? -1.0 : 0.0; 
         const influenceRadius = 4.5 + 2.0 * smoothMouseDown;
+        // Which plane the cursor is being projected onto this frame: upright while a
+        // sketch is up, flat while the wave field is. Measured against the morph
+        // factors so it flips once, halfway through the transition.
+        const sketchSpace = (dogMorphFactor + birdMorphFactor + humanMorphFactor) > 0.5;
 
         // Evaluate viewport scales ONCE per frame instead of 27,500 times inside the loop
         const isMobile = winW < 768;
@@ -500,9 +535,15 @@ precomputeSplines();
                 const anim3Z = 0 + nZ * strokeFaces * 2.0;
 
                 // Convert global linear weights into a tighter, deliberate "Brush Stroke" effect
-                let rawDog = Math.max(0, Math.min(1, (dogMorphFactor - t * 0.8) / 0.4));
-                let rawBird = Math.max(0, Math.min(1, (birdMorphFactor - t * 0.8) / 0.4));
-                let rawHuman = Math.max(0, Math.min(1, (humanMorphFactor - t * 0.8) / 0.4));
+                // Entering, the stroke travels from the start of the spline to the end.
+                // Leaving, it retreats from the start too, so the line flows onward and
+                // off rather than retracing itself backwards.
+                const tDog   = dogExiting   ? 1.0 - t : t;
+                const tBird  = birdExiting  ? 1.0 - t : t;
+                const tHuman = humanExiting ? 1.0 - t : t;
+                let rawDog = Math.max(0, Math.min(1, (dogMorphFactor - tDog * 0.8) / 0.4));
+                let rawBird = Math.max(0, Math.min(1, (birdMorphFactor - tBird * 0.8) / 0.4));
+                let rawHuman = Math.max(0, Math.min(1, (humanMorphFactor - tHuman * 0.8) / 0.4));
 
                 // Apply Quintic "Smootherstep" easing to the vertices. 
                 // This curve has zero acceleration at start/end, making the motion incredibly buttery and fluid.
@@ -531,8 +572,12 @@ precomputeSplines();
                 fZ = fZ * waveWeight + anim1Z * wDog + anim2Z * wBird + anim3Z * wHuman;
                 fY = silkY * waveWeight + anim1Y * wDog + anim2Y * wBird + anim3Y * wHuman;
 
-                // Organic Idle Breathing for Animals
-                const breathingY = Math.sin(window.accumTime * 2.0 + t * Math.PI) * 0.2 * (1.0 - waveWeight);
+                // Organic Idle Breathing. Weighted by height so the parts resting on the
+                // ground barely move and the extremities - the dog's ear, the bird's
+                // wingtip - carry most of it. A uniform amount just bobs the whole figure.
+                const liftFactor = Math.max(0, Math.min(1, (fY + 2.0) / 8.0));
+                const breathingY = Math.sin(window.accumTime * 2.0 + t * Math.PI)
+                                 * 0.28 * liftFactor * (1.0 - waveWeight);
                 
                 // Expanding physical radial ring ripple when theme is toggled
                 let themeRipple = 0;
@@ -555,18 +600,28 @@ precomputeSplines();
                 // --- INTERACTION: Soft Magnetic Lift (Hover) ---
                 if (currentMouse.x !== 9999) {
                     const dx = fX - currentMouse.x;
-                    const dz = fZ - currentMouse.z;
-                    const distSq = dx*dx + dz*dz;
+                    // Upright plane while sketching, flat plane under the wave field.
+                    const dOther = sketchSpace ? (fY - currentMouse.y) : (fZ - currentMouse.z);
+                    const distSq = dx*dx + dOther*dOther;
                     const radiusSq = influenceRadius * influenceRadius;
 
                     if (distSq < radiusSq) {
                         // Smooth bell curve (Gaussian) to prevent jagged line distortion
-                        const inf = Math.exp(-distSq / (radiusSq * 0.15)); 
-                        
-                        // Gently lift the lines UP to meet the cursor, like plucking a string
-                        // Multiply by (1.0 - waveWeight) so hover ONLY works on the animal states, skipping the fabric lines
-                        const liftHeight = (2.5 + smoothMouseDown * 2.0) * (1.0 - waveWeight);
-                        fY += inf * liftHeight;
+                        const inf = Math.exp(-distSq / (radiusSq * 0.15));
+                        const sketchness = 1.0 - waveWeight;
+
+                        // Fan the bundle apart under the cursor. Each line already sits at
+                        // its own (nX, nY) offset from the centre of the stroke, so
+                        // amplifying that offset pushes the strands apart sideways - like
+                        // dragging a finger through pencil hairs. This is what makes the
+                        // 85 separate lines legible as separate lines.
+                        const strokeBlend = strokeDog * wDog + strokeBird * wBird + strokeFaces * wHuman;
+                        const fan = inf * (2.6 + smoothMouseDown * 2.2) * sketchness * strokeBlend;
+                        fX += nX * fan;
+                        fY += nY * fan;
+
+                        // Keep a little of the original lift so it still reads as magnetic.
+                        fY += inf * (1.1 + smoothMouseDown * 0.9) * sketchness;
                     }
                 }
 
@@ -586,22 +641,34 @@ precomputeSplines();
         const lookY_0 = 0.0;
         const lookZ_0 = -5.0;
 
-        // State 1: Eye-level, pulled back to see the entire sweeping sketch
-        const camY_1 = 0.5;
-        const camZ_1 = 22.0; 
-        const lookY_1 = 0.0;
+        // Each subject gets its own framing rather than one shared sketch camera.
+        // The dog is grounded, so the camera sits low and a little closer. The bird is
+        // airborne, so it sits higher, further back and tilted up, and drifts upward
+        // while it holds. SKETCH_VIEW_HEIGHT is derived from the CLOSEST of these
+        // distances so the fit never crops at the tightest framing.
+        const wCamDog   = Math.min(1.0, dogMorphFactor);
+        const wCamBird  = Math.min(1.0, birdMorphFactor);
+        const wCamHuman = Math.min(1.0, humanMorphFactor);
+        const camWeightSum = wCamDog + wCamBird + wCamHuman;
+        const animalWeight = Math.min(1.0, camWeightSum);
+
+        let camY_1 = 0.5, camZ_1 = 22.0, lookY_1 = 0.0;
+        if (camWeightSum > 0.0001) {
+            const birdDrift = Math.sin(window.accumTime * 0.35) * 0.5 * (wCamBird / camWeightSum);
+            camY_1  = (0.2 * wCamDog + 1.3 * wCamBird + 0.5 * wCamHuman) / camWeightSum + birdDrift;
+            camZ_1  = (21.0 * wCamDog + 23.2 * wCamBird + 22.0 * wCamHuman) / camWeightSum;
+            lookY_1 = (0.0 * wCamDog + 0.7 * wCamBird + 0.0 * wCamHuman) / camWeightSum;
+        }
         const lookZ_1 = 0.0;
 
-        // Both animal states use the same camera framing
-        const animalWeight = Math.min(1.0, dogMorphFactor + birdMorphFactor + humanMorphFactor);
         const currentCamY = camY_0 * (1.0 - animalWeight) + camY_1 * animalWeight;
         const currentCamZ = camZ_0 * (1.0 - animalWeight) + camZ_1 * animalWeight;
         const currentLookY = lookY_0 * (1.0 - animalWeight) + lookY_1 * animalWeight;
         const currentLookZ = lookZ_0 * (1.0 - animalWeight) + lookZ_1 * animalWeight;
 
         // Smooth camera velocity: ease outward smoothly, then drift back gracefully
-        cameraSweep += (targetCameraSweep - cameraSweep) * 0.06;
-        targetCameraSweep += (0.0 - targetCameraSweep) * 0.02;
+        cameraSweep += (targetCameraSweep - cameraSweep) * damp(0.06, dt);
+        targetCameraSweep += (0.0 - targetCameraSweep) * damp(0.02, dt);
 
         camera.position.x = Math.sin(window.accumTime * 0.1) * 0.4 + cameraSweep;
         camera.position.y = currentCamY + Math.cos(window.accumTime * 0.1) * 0.2;
@@ -618,23 +685,23 @@ precomputeSplines();
         const targetFogNear = (1.0 - globalAnimalWeight) * 16.0 + globalAnimalWeight * 100.0;
         const targetFogFar = (1.0 - globalAnimalWeight) * 32.0 + globalAnimalWeight * 200.0;
         
-        scene.fog.near += (targetFogNear - scene.fog.near) * 0.1;
-        scene.fog.far += (targetFogFar - scene.fog.far) * 0.1;
+        scene.fog.near += (targetFogNear - scene.fog.near) * damp(0.1, dt);
+        scene.fog.far += (targetFogFar - scene.fog.far) * damp(0.1, dt);
 
-        scene.background.lerp(targetBgColor, 0.05);
+        scene.background.lerp(targetBgColor, damp(0.05, dt));
         scene.fog.color.copy(scene.background);
-        material.color.lerp(targetLineColor, 0.05);
+        material.color.lerp(targetLineColor, damp(0.05, dt));
 
         if (mouse2D.x !== -9999) {
             raycaster.setFromCamera(mouse2D, camera);
-            const intersects = raycaster.intersectObject(hitPlane);
+            const intersects = raycaster.intersectObject(sketchSpace ? hitPlaneUpright : hitPlane);
             if (intersects.length > 0) targetMouse.copy(intersects[0].point);
             else targetMouse.set(9999, 9999, 9999);
         } else {
             targetMouse.set(9999, 9999, 9999);
         }
 
-        currentMouse.lerp(targetMouse, 0.08);
+        currentMouse.lerp(targetMouse, damp(0.08, dt));
         renderer.render(scene, camera);
     };
 
@@ -661,13 +728,71 @@ precomputeSplines();
         const handleDown = () => { isMouseDown = true; };
         const handleUp = () => { isMouseDown = false; };
         
+        // True only when the pointer is over the visible hero canvas. The listener has
+        // to live on window because #webgl-container is pointer-events:none, so without
+        // this check a click on a project card far down the page silently re-morphed a
+        // hero nobody could see.
+        const isOverHero = (e) => {
+            const el = document.getElementById('webgl-container');
+            if (!el) return false;
+            const x = e.clientX ?? e.touches?.[0]?.clientX;
+            const y = e.clientY ?? e.touches?.[0]?.clientY;
+            if (x === undefined || y === undefined) return false;
+            const rect = el.getBoundingClientRect();
+            if (rect.bottom <= 0 || rect.top >= window.innerHeight) return false; // hero scrolled away
+            if (x < rect.left || x > rect.right || y < rect.top || y > rect.bottom) return false;
+            // The container spans the whole wrapper, so the header sits on top of it and
+            // the about card overlays its lower half. Neither is the drawing. Checked via
+            // e.target rather than elementFromPoint to keep mousemove off the layout path.
+            if (e.target && e.target.closest &&
+                e.target.closest('.header-wrapper, .mobile-menu-overlay, .about-section, a, button')) return false;
+            return true;
+        };
+
+        const advanceMorph = () => {
+            currentState = (currentState + 1) % 4; // 0 (Waves), 1 (Dog), 2 (Bird), 3 (Human)
+            targetCameraSweep = 16.0;             // cinematic camera sweep, eased outward
+        };
+
         const toggleMorph = (e) => {
             if (e && e.target && (e.target.closest('a') || e.target.closest('button') || e.target.closest('#theme-toggle'))) return;
-            currentState = (currentState + 1) % 4; // Toggle between 0 (Waves), 1 (Dog), 2 (Bird), 3 (Human)
-            
-            // Trigger cinematic camera sweep on click (eased outward)
-            targetCameraSweep = 16.0; 
+            if (!isOverHero(e)) return;
+            cancelHint();
+            advanceMorph();
         };
+
+        // --- Discoverability -------------------------------------------------
+        // The four-state cycle is the most distinctive thing on the page and nothing
+        // announces it. On a first visit, after a few seconds of stillness, morph once
+        // unprompted so the visitor actually sees the drawing respond. Once only, and
+        // never if they have already found it themselves.
+        let hintTimer = null;
+        const HINT_KEY = 'nuxx-hero-hint-seen';
+        const hintAlreadySeen = () => {
+            try { return localStorage.getItem(HINT_KEY) === '1'; } catch (err) { return false; }
+        };
+        const cancelHint = () => {
+            if (hintTimer) { clearTimeout(hintTimer); hintTimer = null; }
+            try { localStorage.setItem(HINT_KEY, '1'); } catch (err) { /* private mode */ }
+        };
+        const scheduleHint = () => {
+            if (hintTimer || hintAlreadySeen()) return;
+            hintTimer = setTimeout(() => {
+                hintTimer = null;
+                if (currentState !== 0 || !isVisible) return;
+                cancelHint();
+                advanceMorph();
+            }, 4500);
+        };
+        scheduleHint();
+
+        // Grow the custom cursor into a ring over the hero, so the pointer itself says
+        // the drawing is interactive before anyone risks a click.
+        const updateHeroCursor = (e) => {
+            const reticle = document.getElementById('cursor-reticle');
+            if (reticle) reticle.classList.toggle('over-hero', isOverHero(e));
+        };
+        window.addEventListener('mousemove', updateHeroCursor, { passive: true });
 
         window.addEventListener('click', toggleMorph, { passive: true });
         window.addEventListener('mousedown', handleDown, { passive: true });
