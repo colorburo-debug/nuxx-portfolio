@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Spline Lab — hero animal contours</title>
+<style>
+  :root {
+    --bg: #1e1e1e; --fg: #f7fbf8; --dim: #6f6f6f; --line: #2e2e2e;
+    --accent: #0a84ff; --ctrl: #ff3b30; --ghost: #4a4a4a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
+    display: grid; grid-template-columns: 380px 1fr; height: 100vh;
+  }
+  #panel { border-right: 1px solid var(--line); padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; }
+  #stage { position: relative; overflow: hidden; }
+  canvas { display: block; width: 100%; height: 100%; }
+  h1 { font-size: 13px; font-weight: 600; margin: 0; letter-spacing: .04em; text-transform: uppercase; }
+  h2 { font-size: 11px; font-weight: 600; margin: 0 0 6px; color: var(--dim); letter-spacing: .06em; text-transform: uppercase; }
+  .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  button {
+    background: #2a2a2a; color: var(--fg); border: 1px solid var(--line);
+    padding: 5px 10px; border-radius: 5px; cursor: pointer; font: inherit;
+  }
+  button:hover { background: #363636; }
+  button.on { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  label { display: flex; gap: 6px; align-items: center; cursor: pointer; color: var(--dim); }
+  input[type=range] { width: 110px; accent-color: var(--accent); }
+  textarea {
+    width: 100%; height: 320px; background: #161616; color: var(--fg);
+    border: 1px solid var(--line); border-radius: 5px; padding: 8px;
+    font: 12px/1.45 ui-monospace, Menlo, monospace; resize: vertical; tab-size: 2;
+  }
+  #err { color: var(--ctrl); min-height: 1.4em; font-size: 12px; }
+  #stats { color: var(--dim); font-size: 12px; white-space: pre-line; }
+  .hint { color: var(--dim); font-size: 11px; line-height: 1.45; }
+  .legend { display: flex; gap: 12px; font-size: 11px; color: var(--dim); flex-wrap: wrap; }
+  .sw { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 4px; vertical-align: -1px; }
+</style>
+</head>
+<body>
+
+<div id="panel">
+  <h1>Spline Lab</h1>
+  <p class="hint">
+    Control points are loaded live from <code>background.js</code> — this tool never keeps its own copy.
+    Edit below to preview; nothing is written back until you copy it across yourself.
+  </p>
+
+  <div>
+    <h2>Subject</h2>
+    <div class="row" id="subjects"></div>
+  </div>
+
+  <div>
+    <h2>Sampling</h2>
+    <div class="row">
+      <button data-toggle="arcLength">arc-length resample</button>
+      <label>pts <input type="range" id="ptCount" min="40" max="400" step="10" value="180"><span id="ptCountVal">180</span></label>
+    </div>
+  </div>
+
+  <div>
+    <h2>Render</h2>
+    <div class="row">
+      <button data-toggle="bundle" class="on">pencil bundle</button>
+      <button data-toggle="ctrlPts" class="on">control pts</button>
+      <button data-toggle="ghost" class="on">original ghost</button>
+      <button data-toggle="frame" class="on">camera frame</button>
+      <button data-toggle="tailFade">tail fade</button>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <label>noise <input type="range" id="noise" min="0" max="150" step="5" value="100"><span id="noiseVal">1.00&times;</span></label>
+    </div>
+    <div class="row">
+      <label>lines <input type="range" id="lines" min="1" max="85" step="1" value="85"><span id="linesVal">85</span></label>
+    </div>
+  </div>
+
+  <div>
+    <h2>Control points <span id="which"></span></h2>
+    <textarea id="pts" spellcheck="false"></textarea>
+    <div id="err"></div>
+  </div>
+
+  <div>
+    <h2>Measurements</h2>
+    <div id="stats"></div>
+  </div>
+
+  <div class="legend">
+    <span><i class="sw" style="background:#ff3b30"></i>control point</span>
+    <span><i class="sw" style="background:#0a84ff"></i>every 6th sample</span>
+    <span><i class="sw" style="background:#4a4a4a"></i>original</span>
+  </div>
+</div>
+
+<div id="stage"><canvas id="c"></canvas></div>
+
+<script>
+// ─────────────────────────────────────────────────────────────
+// Source of truth: parse the spline arrays straight out of background.js
+// so this lab can never drift from what the site actually renders.
+// ─────────────────────────────────────────────────────────────
+const SUBJECTS = {
+  dog:   { varName: 'animalSpline', yOffset: -2.5 },
+  bird:  { varName: 'birdSpline',   yOffset: -2.5 },
+  faces: { varName: 'humanSpline',  yOffset: -0.5 },
+};
+
+function extractArray(src, varName) {
+  const at = src.indexOf(`const ${varName} = [`);
+  if (at < 0) throw new Error(`${varName} not found in background.js`);
+  const start = src.indexOf('[', at);
+  let depth = 0, i = start;
+  for (; i < src.length; i++) {
+    if (src[i] === '[') depth++;
+    else if (src[i] === ']') { depth--; if (depth === 0) { i++; break; } }
+  }
+  return parsePoints(src.slice(start, i));
+}
+
+function parsePoints(text) {
+  const cleaned = text
+    .replace(/\/\/[^\n]*/g, '')     // strip line comments
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/,(\s*[\]}])/g, '$1'); // strip trailing commas
+  const arr = JSON.parse(cleaned);
+  if (!Array.isArray(arr) || !arr.every(p => Array.isArray(p) && p.length === 2 && p.every(Number.isFinite)))
+    throw new Error('expected an array of [x, z] number pairs');
+  return arr;
+}
+
+// ─── The shipped uniform Catmull-Rom, copied verbatim from background.js ───
+function catmullRom(t, points) {
+  const p = points.length - 1;
+  const tScaled = t * p;
+  const i = Math.floor(tScaled);
+  const frac = tScaled - i;
+  const p0 = points[Math.max(0, i - 1)], p1 = points[i];
+  const p2 = points[Math.min(p, i + 1)], p3 = points[Math.min(p, i + 2)];
+  const t2 = frac * frac, t3 = t2 * frac;
+  const x = 0.5 * ((2*p1[0]) + (-p0[0]+p2[0])*frac + (2*p0[0]-5*p1[0]+4*p2[0]-p3[0])*t2 + (-p0[0]+3*p1[0]-3*p2[0]+p3[0])*t3);
+  const z = 0.5 * ((2*p1[1]) + (-p0[1]+p2[1])*frac + (2*p0[1]-5*p1[1]+4*p2[1]-p3[1])*t2 + (-p0[1]+3*p1[1]-3*p2[1]+p3[1])*t3);
+  return { x, z };
+}
+
+function sampleUniform(points, n) {
+  const out = [];
+  for (let c = 0; c < n; c++) out.push(catmullRom(c / (n - 1), points));
+  return out;
+}
+
+// Even spacing along the curve rather than even spacing in parameter space.
+function sampleArcLength(points, n, dense = 4000) {
+  const raw = [], cum = [0];
+  for (let i = 0; i < dense; i++) raw.push(catmullRom(i / (dense - 1), points));
+  for (let i = 1; i < dense; i++)
+    cum.push(cum[i-1] + Math.hypot(raw[i].x - raw[i-1].x, raw[i].z - raw[i-1].z));
+  const total = cum[dense - 1];
+  const out = [];
+  let j = 0;
+  for (let c = 0; c < n; c++) {
+    const target = (c / (n - 1)) * total;
+    while (j < dense - 2 && cum[j + 1] < target) j++;
+    const span = cum[j + 1] - cum[j];
+    const f = span > 1e-9 ? (target - cum[j]) / span : 0;
+    out.push({ x: raw[j].x + (raw[j+1].x - raw[j].x) * f,
+               z: raw[j].z + (raw[j+1].z - raw[j].z) * f });
+  }
+  return out;
+}
+
+// ─── Scene transform, mirroring background.js at desktop breakpoint ───
+// scale 1.0, mX/mY 0, +1.0 desktopSketchOffset applied while sketching.
+const DESKTOP_SKETCH_OFFSET = 1.0;
+const toWorld = (pt, yOffset) => ({
+  x: pt.x + 1.0,
+  y: -pt.z + yOffset + DESKTOP_SKETCH_OFFSET,
+});
+const noiseX = (r, c) => Math.sin(r * 12.3 + c * 0.1) * 0.135;
+const noiseY = (r, c) => Math.cos(r * 8.7  - c * 0.1) * 0.135;
+
+// Camera: position (0, 0.5, 22) looking at origin, fov 55.
+const CAM_Z = 22, CAM_Y = 0.5, FOV = 55;
+const frustumHeight = 2 * CAM_Z * Math.tan(FOV * Math.PI / 360);
+// #webgl-container is landscape (it measured 1440x1274 at a 1440x900 window).
+// The lab's own stage is portrait, so letterbox to the real aspect — otherwise
+// every judgement about framing and horizontal crop is wrong.
+let siteAspect = 1440 / 1274;
+
+// ─── State ───
+const state = {
+  subject: 'dog', arcLength: false, ptCount: 180,
+  bundle: true, ctrlPts: true, ghost: true, frame: true, tailFade: false,
+  noise: 1, lines: 85,
+};
+let originals = {};
+let edited = null;
+
+// ─── Draw ───
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  const { clientWidth: w, clientHeight: h } = canvas;
+  canvas.width = w * dpr; canvas.height = h * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  draw();
+}
+
+function draw() {
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  ctx.clearRect(0, 0, w, h);
+  ctx.fillStyle = '#1e1e1e'; ctx.fillRect(0, 0, w, h);
+  if (!edited) return;
+
+  const { yOffset } = SUBJECTS[state.subject];
+  // Letterbox the real landscape frame inside whatever shape the stage happens to be.
+  const frustumWidth = frustumHeight * siteAspect;
+  const unit = Math.min(w / frustumWidth, h / frustumHeight);
+  const px = (wx) => w / 2 + wx * unit;
+  const py = (wy) => h / 2 - (wy - CAM_Y) * unit;
+  const frameL = px(-frustumWidth / 2), frameR = px(frustumWidth / 2);
+  const frameT = py(CAM_Y + frustumHeight / 2), frameB = py(CAM_Y - frustumHeight / 2);
+
+  // Dim everything the camera cannot actually see.
+  ctx.save();
+  ctx.beginPath(); ctx.rect(frameL, frameT, frameR - frameL, frameB - frameT); ctx.clip();
+
+  // ground + centre guides
+  ctx.strokeStyle = '#282828'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(frameL, py(0)); ctx.lineTo(frameR, py(0)); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(px(0), frameT); ctx.lineTo(px(0), frameB); ctx.stroke();
+
+  const sampler = state.arcLength ? sampleArcLength : sampleUniform;
+
+  const stroke = (pts, color, width, alphaFn) => {
+    ctx.lineWidth = width; ctx.strokeStyle = color;
+    ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+    if (!alphaFn) {
+      ctx.beginPath();
+      pts.forEach((p, i) => i ? ctx.lineTo(px(p.x), py(p.y)) : ctx.moveTo(px(p.x), py(p.y)));
+      ctx.stroke();
+      return;
+    }
+    for (let i = 1; i < pts.length; i++) {
+      const a = alphaFn((Math.abs(pts[i].x) + Math.abs(pts[i-1].x)) / 2);
+      if (a <= 0.01) continue;
+      ctx.globalAlpha = a;
+      ctx.beginPath();
+      ctx.moveTo(px(pts[i-1].x), py(pts[i-1].y));
+      ctx.lineTo(px(pts[i].x),   py(pts[i].y));
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  };
+
+  // Matches the shader in background.js: smoothstep(far, near, |worldX|)
+  const smoothstep = (e0, e1, x) => {
+    const t = Math.max(0, Math.min(1, (x - e0) / (e1 - e0)));
+    return t * t * (3 - 2 * t);
+  };
+  const alphaFn = state.tailFade ? (x => smoothstep(14, 8, Math.abs(x)))
+                                 : (x => smoothstep(36, 16, Math.abs(x)));
+
+  // original, dimmed, for comparison
+  if (state.ghost) {
+    const g = sampleUniform(originals[state.subject], 180).map(p => toWorld(p, yOffset));
+    stroke(g, '#4a4a4a', 1);
+  }
+
+  const base = sampler(edited, state.ptCount);
+
+  if (state.bundle) {
+    const n = state.lines;
+    // Row indices spread across the real 0..84 range so the noise pattern matches.
+    for (let k = 0; k < n; k++) {
+      const r = n === 1 ? 42 : Math.round(k * 84 / (n - 1));
+      const pts = base.map((p, c) => {
+        const wp = toWorld(p, yOffset);
+        return { x: wp.x + noiseX(r, c) * state.noise, y: wp.y + noiseY(r, c) * state.noise };
+      });
+      stroke(pts, 'rgba(247,251,248,0.30)', 0.7, alphaFn);
+    }
+  } else {
+    stroke(base.map(p => toWorld(p, yOffset)), '#f7fbf8', 1.4, alphaFn);
+  }
+
+  if (state.ctrlPts) {
+    ctx.fillStyle = '#ff3b30';
+    edited.forEach(p => {
+      const wp = toWorld({ x: p[0], z: p[1] }, yOffset);
+      ctx.beginPath(); ctx.arc(px(wp.x), py(wp.y), 3, 0, 7); ctx.fill();
+    });
+    ctx.fillStyle = '#0a84ff';
+    base.forEach((p, i) => {
+      if (i % 6) return;
+      const wp = toWorld(p, yOffset);
+      ctx.beginPath(); ctx.arc(px(wp.x), py(wp.y), 1.6, 0, 7); ctx.fill();
+    });
+  }
+
+  ctx.restore();
+
+  if (state.frame) {
+    ctx.strokeStyle = '#3a3a3a'; ctx.lineWidth = 1; ctx.setLineDash([5, 5]);
+    ctx.strokeRect(frameL, frameT, frameR - frameL, frameB - frameT);
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#555'; ctx.font = '11px ui-monospace, monospace';
+    ctx.fillText(`camera frame @ z=${CAM_Z}  ·  ${frustumWidth.toFixed(1)} × ${frustumHeight.toFixed(1)} units`,
+                 frameL, Math.max(12, frameT - 8));
+  }
+
+  reportStats(base, yOffset);
+}
+
+function reportStats(samples, yOffset) {
+  const world = samples.map(p => toWorld(p, yOffset));
+  // Ignore the long off-screen entry/exit tails when measuring the subject.
+  const body = world.filter(p => Math.abs(p.x) < 10);
+  const ys = body.map(p => p.y), xs = body.map(p => p.x);
+  const segs = [];
+  for (let i = 1; i < world.length; i++)
+    segs.push(Math.hypot(world[i].x - world[i-1].x, world[i].y - world[i-1].y));
+  const nz = segs.filter(s => s > 1e-6);
+  const ratio = nz.length ? Math.max(...nz) / Math.min(...nz) : 0;
+  const height = Math.max(...ys) - Math.min(...ys);
+  const width = Math.max(...xs) - Math.min(...xs);
+  const frustumWidth = frustumHeight * siteAspect;
+  const top = Math.max(...ys), frameTop = CAM_Y + frustumHeight / 2;
+  document.getElementById('stats').textContent =
+    `subject height   ${height.toFixed(2)} units (${(height / frustumHeight * 100).toFixed(0)}% of frame)
+subject width    ${width.toFixed(2)} units (${(width / frustumWidth * 100).toFixed(0)}% of frame)
+headroom above   ${(frameTop - top).toFixed(2)} units
+sample spacing   ${Math.min(...nz).toFixed(3)} – ${Math.max(...nz).toFixed(2)}  (${ratio.toFixed(0)}× spread)
+control points   ${edited.length}`;
+}
+
+// ─── Wiring ───
+function setSubject(name) {
+  state.subject = name;
+  edited = originals[name].map(p => p.slice());
+  document.getElementById('pts').value = serialize(edited);
+  document.getElementById('which').textContent = '— ' + name;
+  document.querySelectorAll('#subjects button')
+    .forEach(b => b.classList.toggle('on', b.dataset.subject === name));
+  document.getElementById('err').textContent = '';
+  draw();
+}
+
+const serialize = (pts) => '[\n' + pts.map(p => `  [${p[0]}, ${p[1]}]`).join(',\n') + '\n]';
+
+document.getElementById('pts').addEventListener('input', (e) => {
+  try {
+    edited = parsePoints(e.target.value);
+    document.getElementById('err').textContent = '';
+    draw();
+  } catch (err) {
+    document.getElementById('err').textContent = err.message;
+  }
+});
+
+document.querySelectorAll('[data-toggle]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const k = btn.dataset.toggle;
+    state[k] = !state[k];
+    btn.classList.toggle('on', state[k]);
+    draw();
+  });
+});
+
+const bindRange = (id, key, fmt, transform = Number) => {
+  const el = document.getElementById(id), out = document.getElementById(id + 'Val');
+  el.addEventListener('input', () => {
+    state[key] = transform(el.value);
+    out.textContent = fmt(state[key]);
+    draw();
+  });
+};
+bindRange('ptCount', 'ptCount', v => v);
+bindRange('noise', 'noise', v => v.toFixed(2) + '×', v => Number(v) / 100);
+bindRange('lines', 'lines', v => v);
+
+addEventListener('resize', resize);
+
+fetch('../background.js')
+  .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+  .then(src => {
+    for (const [name, cfg] of Object.entries(SUBJECTS))
+      originals[name] = extractArray(src, cfg.varName);
+    document.getElementById('subjects').innerHTML = Object.keys(SUBJECTS)
+      .map(n => `<button data-subject="${n}">${n}</button>`).join('');
+    document.querySelectorAll('#subjects button').forEach(b =>
+      b.addEventListener('click', () => setSubject(b.dataset.subject)));
+    setSubject('dog');
+    resize();
+  })
+  .catch(err => {
+    document.getElementById('err').textContent =
+      'Could not load background.js — serve this over http, not file://  (' + err.message + ')';
+  });
+</script>
+</body>
+</html>
