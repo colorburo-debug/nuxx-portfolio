@@ -310,71 +310,55 @@ const initArtifacts = (containerParent) => {
         }
     }
 
-    // Video auto-playback & interaction controller
-    const videos = context.querySelectorAll('.artifact-video');
-    videos.forEach(video => {
-        const container = video.closest('.video-player-mockup');
-        const progressBar = container ? container.querySelector('.progress-filled') : null;
+    // Videos play only while in view, then loop
+    initInViewVideos(context);
+};
 
-        // Prevent autoplay from fighting with manual pauses
-        let userPaused = false;
+// ─── initInViewVideos ───────────────────────────────────────
+// Plays .artifact-inview-video elements while they are on screen and
+// pauses them once they scroll away. The `loop` attribute keeps them
+// cycling for as long as they stay visible.
+let inViewVideoObserver = null;
 
-        const updatePlayStateClass = () => {
-            if (video.paused) {
-                container.classList.remove('playing');
-            } else {
-                container.classList.add('playing');
-            }
-        };
+const initInViewVideos = (containerParent) => {
+    const context = containerParent || document;
+    const videos = context.querySelectorAll('.artifact-inview-video');
+    if (!videos.length) return;
 
-        if (container) {
-            container.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (video.paused) {
-                    userPaused = false;
-                    video.play().catch(err => console.warn("Video play error:", err));
-                } else {
-                    userPaused = true;
-                    video.pause();
-                }
-                updatePlayStateClass();
-            });
+    // Drop any observer left over from a previous Barba container
+    if (inViewVideoObserver) {
+        inViewVideoObserver.disconnect();
+        inViewVideoObserver = null;
+    }
+
+    const playVideo = (video) => {
+        // Muted playback is required for autoplay without a user gesture
+        video.muted = true;
+        const attempt = video.play();
+        if (attempt && attempt.catch) {
+            attempt.catch(err => console.warn('Video autoplay blocked:', err));
         }
+    };
 
-        video.addEventListener('timeupdate', () => {
-            if (progressBar && video.duration) {
-                const percent = (video.currentTime / video.duration) * 100;
-                progressBar.style.width = `${percent}%`;
+    if (!('IntersectionObserver' in window)) {
+        videos.forEach(playVideo);
+        return;
+    }
+
+    inViewVideoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const video = entry.target;
+            if (entry.isIntersecting) {
+                playVideo(video);
+            } else if (!video.paused) {
+                video.pause();
             }
         });
-
-        video.addEventListener('play', updatePlayStateClass);
-        video.addEventListener('pause', updatePlayStateClass);
-
-        // Play/Pause when entering/leaving viewport
-        if ('IntersectionObserver' in window) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        if (!userPaused) {
-                            video.play().catch(err => {
-                                console.warn("Autoplay blocked by browser policy:", err);
-                            });
-                        }
-                    } else {
-                        video.pause();
-                    }
-                });
-            }, {
-                threshold: 0.3 // Play when 30% visible
-            });
-            observer.observe(video);
-        } else {
-            // Autoplay fallback
-            video.autoplay = true;
-            video.play().catch(err => console.warn("Autoplay fallback blocked:", err));
-        }
+    }, {
+        threshold: 0.25 // Start once a quarter of the video is on screen
     });
+
+    videos.forEach(video => inViewVideoObserver.observe(video));
 };
 
 // ─── initPage ───────────────────────────────────────────────
