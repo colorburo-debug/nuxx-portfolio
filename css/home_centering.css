@@ -76,12 +76,13 @@
 }
 
 .hero-intro-left {
-    width: 30% !important; /* Percentage weight for fluidity */
+    width: 22% !important; /* Percentage weight for fluidity */
     max-width: none !important;
 }
 
 .hero-intro-right {
-    width: 62% !important; /* Percentage weight for fluidity */
+    flex: 0 1 70% !important; /* flex-basis must be overridden too — an earlier rule pins it to 670px */
+    width: 70% !important; /* Percentage weight for fluidity */
     max-width: none !important;
 }
 
