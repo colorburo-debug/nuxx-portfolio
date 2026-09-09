@@ -1,5 +1,51 @@
 @import url('../utilities.css');
 
+/* Roobert — self-hosted, licensed webfont (Displaay Type Foundry) */
+@font-face {
+    font-family: 'Roobert';
+    src: url('../assets/fonts/Roobert/Roobert-Light.woff2') format('woff2'),
+         url('../assets/fonts/Roobert/Roobert-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roobert';
+    src: url('../assets/fonts/Roobert/Roobert-Regular.woff2') format('woff2'),
+         url('../assets/fonts/Roobert/Roobert-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roobert';
+    src: url('../assets/fonts/Roobert/Roobert-Medium.woff2') format('woff2'),
+         url('../assets/fonts/Roobert/Roobert-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roobert';
+    src: url('../assets/fonts/Roobert/Roobert-SemiBold.woff2') format('woff2'),
+         url('../assets/fonts/Roobert/Roobert-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roobert';
+    src: url('../assets/fonts/Roobert/Roobert-Bold.woff2') format('woff2'),
+         url('../assets/fonts/Roobert/Roobert-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     /* Colors */
     --color-bg-primary: #F7FBF8;
@@ -22,7 +68,7 @@
     /* Fonts */
     --font-heading: 'Unbounded', sans-serif;
     --font-body: 'Outfit', sans-serif;
-    /* Substitution for Roobert */
+    /* Fallback while Roobert loads (font-display: swap) or if it fails */
 
     /* Typography Scale */
     --text-xs: 14px;
