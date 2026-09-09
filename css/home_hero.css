@@ -66,7 +66,7 @@ body.home-page .about-card {
 .hero-main-description {
     font-family: 'Roobert', var(--font-body);
     font-weight: 400; /* Regular */
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1.68;
     color: #1E1E1E;
     margin: 0;
