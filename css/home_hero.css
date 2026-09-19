@@ -54,7 +54,7 @@ body.home-page .about-card {
     font-weight: 500; /* Medium */
     font-size: 22px;
     line-height: 1.4;
-    color: #6F6F6F;
+    color: #898989;
     margin: 0;
 }
 
@@ -453,7 +453,7 @@ body.hero-dark-mode .about-card {
         font-size: 22px;
         line-height: 1.4;
         font-weight: 500;
-        color: #6f6f6f;
+        color: #898989;
     }
 
     .hero-intro-right {
@@ -785,7 +785,7 @@ body.hero-dark-mode .about-card {
 }
 
 .action-btn:hover .action-text-bottom {
-    color: #6F6F6F !important;
+    color: #898989 !important;
 }
 
 .action-btn:hover .action-arrow svg {
@@ -808,7 +808,7 @@ body.hero-dark-mode .about-card {
     font-weight: 500;
     font-size: 14px;
     line-height: 1.2;
-    color: #6F6F6F !important;
+    color: #898989 !important;
 }
 
 .action-arrow {
@@ -987,7 +987,7 @@ body.hero-dark-mode .about-card {
     font-weight: 500;
     font-size: 16px;
     line-height: 32px;
-    color: #6F6F6F;
+    color: #898989;
     margin: 0;
 }
 
@@ -1059,7 +1059,7 @@ body.hero-dark-mode .about-card {
 }
 
 .action-btn:hover .action-text-bottom {
-    color: #6F6F6F;
+    color: #898989;
 }
 
 .action-btn:hover .action-arrow svg {
@@ -1082,7 +1082,7 @@ body.hero-dark-mode .about-card {
     font-weight: 500;
     font-size: 14px;
     line-height: 1.2;
-    color: #6F6F6F;
+    color: #898989;
 }
 
 .action-arrow {

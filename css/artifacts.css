@@ -233,8 +233,8 @@ body.artifacts-page {
 .artifact-block-subtitle {
     font-family: 'Roobert', var(--font-body);
     font-weight: 300;
-    font-size: 14px;
-    color: #6f6f6f;
+    font-size: 16px;
+    color: #898989;
     line-height: 1.77;
     margin: 0;
 }
